@@ -36,6 +36,7 @@ export const RecommendationsList = styled.div`
   width: fit-content;
   margin-inline: auto;
   flex-wrap: wrap;
+  padding-block: 2px;
 
   &::-webkit-scrollbar {
     display: none;
