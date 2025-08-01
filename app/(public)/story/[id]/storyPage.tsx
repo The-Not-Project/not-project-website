@@ -6,8 +6,7 @@ import { useStore } from "@/app/zustand/store";
 import { Story } from "@/app/types/types";
 import { usePublicServerActions } from "@/app/contexts/public-server-actions";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import LoadingPage from "../../shared/components/loadingPage/loadingPage.component";
-import { CategoriesContainer, StoryContainer, SaveButton } from "./style";
+import { CategoriesContainer, StoryContainer, SaveButton, SkeletonContainer, Skeleton, NotFound } from "./style";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import Image from "next/image";
 import { StoryReader } from "./storyReader";
@@ -17,8 +16,9 @@ export default function StoryPage({ id }: { id: string }) {
     usePublicServerActions();
 
   const [story, setStory] = useState<Story | null>(null);
-  const [isSaved, setIsSaved] = useState(false);
-  const [clicked, setClicked] = useState(false);
+  const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [clicked, setClicked] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const { user } = useUser();
 
   const setIsMobile = useStore((state) => state.mobileLayout.setIsMobile);
@@ -27,6 +27,7 @@ export default function StoryPage({ id }: { id: string }) {
   const fetchStory = useCallback(async () => {
     const story = await getStory(id);
     setStory(story);
+    setLoading(false);
   }, [id, getStory]);
 
   const handleSave = async () => {
@@ -36,15 +37,15 @@ export default function StoryPage({ id }: { id: string }) {
     }
 
     if (isSaved) {
-      await deleteStorySave(id, user.sub);
       setIsSaved(false);
+      await deleteStorySave(id, user.sub);
     } else {
       setClicked(true);
+      setIsSaved(true);
       setTimeout(() => {
         setClicked(false);
       }, 2000);
       await createStorySave(id, user.sub);
-      setIsSaved(true);
     }
   };
 
@@ -69,7 +70,20 @@ export default function StoryPage({ id }: { id: string }) {
     fetchStory();
   }, [fetchStory]);
 
-  if (!story) return <LoadingPage isLoading={true} isHome={false} />;
+  if (loading) return (
+    <SkeletonContainer>
+      <Skeleton className="title"/>
+      <Skeleton className="title half"/>
+      <Skeleton className="thumbnail"/>
+      <Skeleton className="paragraph"/>
+      <Skeleton className="paragraph"/>
+      <Skeleton className="paragraph"/>
+      <Skeleton className="paragraph"/>
+      <Skeleton className="paragraph half"/>
+    </SkeletonContainer>
+  );
+
+  if (!story) return <NotFound>We couldn&apos;t find the story you&apos;re looking for :&apos;(</NotFound>;
 
   const thumbnail = story.media.find((media) => media.isThumbnail)?.url;
   const author = story.author.firstName + " " + story.author.lastName;
@@ -98,7 +112,11 @@ export default function StoryPage({ id }: { id: string }) {
     }
   });
 
-  return (
+  return loading ? (
+    <SkeletonContainer>
+
+    </SkeletonContainer>
+  ) : story ? (
     <StoryContainer className={clsx("page-wrapper", { shifted: isMenuOpen })}>
       {story.categories.length > 0 && (
         <CategoriesContainer>
@@ -131,5 +149,5 @@ export default function StoryPage({ id }: { id: string }) {
         <StoryReader value={story.content} />
       </div>
     </StoryContainer>
-  );
+  ) : null;
 }

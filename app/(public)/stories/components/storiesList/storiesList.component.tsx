@@ -6,15 +6,35 @@ import {
   StoriesListContainer,
 } from "./storiesList.styles";
 import Link from "next/link";
+import StoryPlaceholder from "../storyPlaceholder/storyPlaceholder.component";
 
-export default function StoriesList({ stories, borough }: { stories: StoryType[], borough?: string }) {
+interface StoriesListProps {
+  stories: StoryType[];
+  borough?: string;
+  loading: boolean;
+}
+
+export default function StoriesList({
+  stories,
+  borough,
+  loading,
+}: StoriesListProps) {
   return (
     <StoriesListContainer>
-      {stories.length > 0 ? (
+      {loading ? (
+        <>
+        <StoryPlaceholder />
+        <StoryPlaceholder />
+        <StoryPlaceholder />
+        </>
+      ) : stories.length > 0 ? (
         stories.map((story) => <Story key={story.id} story={story} />)
       ) : (
         <>
-          <NoStoriesMessage>No stories from {(borough ? borough.toLowerCase() : 'new york')}... yet.</NoStoriesMessage>
+          <NoStoriesMessage>
+            No stories from {borough ? borough.toLowerCase() : "new york"}...
+            yet.
+          </NoStoriesMessage>
           <FollowupMessage>
             <Link href="/contact">Want to help change that?</Link>
           </FollowupMessage>

@@ -46,13 +46,15 @@ export async function getStories(
   return processStories(stories, compression);
 }
 
-export async function getStory(id: string, compression?: number): Promise<Story> {
+export async function getStory(id: string, compression?: number): Promise<Story | null> {
   'use server'
 
   const story = await prisma.story.findUnique({
     where: { id },
     include: STORY_INCLUDE,
   });
+
+  if (!story) return null;
 
   return processStory(story as RawStory, compression);
 }

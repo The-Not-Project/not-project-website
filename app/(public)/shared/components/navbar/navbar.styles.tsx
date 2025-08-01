@@ -190,6 +190,7 @@ export const Dropdown = styled.div`
   padding-bottom: 5px;
   transition: 0.2s;
   transition-property: opacity, translate, rotate;
+  z-index: 1;
 
   @media (max-width: 850px) {
     position: unset;

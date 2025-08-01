@@ -5,8 +5,7 @@ import { usePublicServerActions } from "@/app/contexts/public-server-actions";
 import { Filters, Story } from "@/app/types/types";
 import StoriesList from "../storiesList/storiesList.component";
 import StoriesSearch from "../storiesSearch/storiesSearch.component";
-import { StoriesContainer } from "./storiesPage.styles";
-import LoadingPage from "@/app/(public)/shared/components/loadingPage/loadingPage.component";
+import { BoroughTitle, StoriesContainer } from "./storiesPage.styles";
 import Header from "../header/header.component";
 import { BoroughSummaries } from "@/app/constants/boroughs";
 import { useStore } from "@/app/zustand/store";
@@ -38,7 +37,6 @@ export default function StoriesPageComponent({
   const [loading, setLoading] = useState(true);
   const [stories, setStories] = useState<Story[]>([]);
   const [filters, setFilters] = useState<Filters>(defaultFilters);
-  const [showLoader, setShowLoader] = useState(true);
   const isMenuOpen = useStore((state) => state.mobileLayout.isMenuOpen);
   const setIsMobile = useStore((state) => state.mobileLayout.setIsMobile);
 
@@ -52,12 +50,6 @@ export default function StoriesPageComponent({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (!loading) {
-      const timer = setTimeout(() => setShowLoader(false), 300);
-      return () => clearTimeout(timer);
-    }
-  }, [loading]);
   const fetchStories = useCallback(
     async (appliedFilters: Filters = defaultFilters) => {
       const finalFilters = boroughParam
@@ -77,14 +69,13 @@ export default function StoriesPageComponent({
 
   return (
     <div className={clsx("page-wrapper", { shifted: isMenuOpen })}>
-      {showLoader && <LoadingPage isLoading={loading} isHome={false} />}
       <Header borough={currentBorough} />
-      {/* {boroughParam && (
+      {boroughParam && (
         <BoroughTitle>Our {currentBorough.boroughName} Stories</BoroughTitle>
-      )} */}
+      )}
       <StoriesContainer>
         <StoriesSearch filters={filters} setFilters={setFilters} />
-        <StoriesList stories={stories} borough={currentBorough.boroughName} />
+        <StoriesList stories={stories} borough={currentBorough.boroughName} loading={loading} />
       </StoriesContainer>
     </div>
   );

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StoryContainer = styled.div`
   max-width: 1200px;
@@ -17,7 +17,7 @@ export const StoryContainer = styled.div`
 
   .title {
     font-weight: normal;
-    font-size: 4rem
+    font-size: 4rem;
   }
 
   img {
@@ -39,7 +39,7 @@ export const CategoriesContainer = styled.div`
   gap: 5px;
   position: relative;
   margin-bottom: 20px;
-  
+
   .divider {
     scale: 0.7;
     color: gray;
@@ -64,7 +64,7 @@ export const SaveButton = styled.div`
     font-size: 1rem;
     margin-right: 5px;
     opacity: 0;
-    transition: .1s;  
+    transition: 0.1s;
     pointer-events: none;
     &.visible {
       opacity: 1;
@@ -76,4 +76,42 @@ export const SaveButton = styled.div`
     top: 5px;
     right: 0;
   }
-`
+`;
+
+export const SkeletonContainer = styled(StoryContainer)`
+  margin-top: 30px;
+`;
+
+export const Skeleton = styled.div`
+  opacity: 0.5;
+  background: linear-gradient(90deg, #e0e0e0 25%, #f2f2f2 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+  border-radius: 4px;
+  width: 100%;
+
+  &.title {
+    height: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  &.half {
+    width: 70%;
+  }
+
+  &.thumbnail {
+    aspect-ratio: 16 / 11;
+    height: 100%;
+    margin-block: 50px;
+  }
+
+  &.paragraph {
+    height: 1.5rem;
+    margin-bottom: 10px;
+  }
+`;
+
+export const NotFound = styled.h1`
+  text-align: center;
+  margin-block: 400px;
+`;

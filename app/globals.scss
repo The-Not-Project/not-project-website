@@ -166,3 +166,12 @@ select {
     margin-block: 0.3rem;
   }
 }
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
