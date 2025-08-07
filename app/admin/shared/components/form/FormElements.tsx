@@ -162,5 +162,5 @@ export const AdditionalFilesContainer = styled.div`
 
 export const EditorContainer = styled.div`
   position: relative;
-  margin-top: 15px;
+  margin-block: 15px;
 `;

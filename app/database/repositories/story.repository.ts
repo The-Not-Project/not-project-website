@@ -23,17 +23,18 @@ export async function getStories(
 
   const { search, boroughs, categories } = filters || {};
 
-  await prisma.story.deleteMany({  // Clean up stories with empty fields
-    where: {
-      title: '',
-      content: '',
-      borough: '',
-      summary: '',
-    },
-  })
+  // await prisma.story.deleteMany({  // Clean up stories with empty fields
+  //   where: {
+  //     title: '',
+  //     content: '',
+  //     borough: '',
+  //     summary: '',
+  //   },
+  // })
 
   const stories = await prisma.story.findMany({
     where: {
+      title: { not: '' },
       ...(search ? { title: { contains: search } } : {}),
       ...(boroughs && boroughs.length > 0 ? { borough: { in: boroughs } } : {}),
       ...(categories && categories.length > 0
