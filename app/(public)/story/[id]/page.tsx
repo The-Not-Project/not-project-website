@@ -23,9 +23,7 @@ export async function generateMetadata({
     };
   }
 
-  const thumbnail =
-    story.media?.find((media) => media.isThumbnail)?.url ||
-    "/media/LoAndDavid.png";
+  const thumbnail = story.thumbnail;
 
   const cleanSummary =
     story.summary?.slice(0, 160).replace(/\n/g, " ") ||

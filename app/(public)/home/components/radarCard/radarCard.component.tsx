@@ -33,7 +33,7 @@ export default function RadarCard({ setLoadingAction }: RadarCardProps) {
       }
 
       const img = new Image();
-      img.src = story.media.find(media => media.isThumbnail)?.url || "";
+      img.src = story.thumbnail
 
       img.onload = () => {
         setLoadingAction(false);
@@ -46,7 +46,6 @@ export default function RadarCard({ setLoadingAction }: RadarCardProps) {
 
   if (!radarStory) return null;
 
-  const thumbnail = radarStory.media.find(media => media.isThumbnail)?.url || "";
   const date = new Date(radarStory.createdAt).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
@@ -56,7 +55,7 @@ export default function RadarCard({ setLoadingAction }: RadarCardProps) {
   return (
     <RadarCardContainer onClick={() => router.push(`story/${radarStory.id}`)}>
       <>
-        <RadarDescription $isVisible={isVisible} $url={thumbnail} ref={ref}>
+        <RadarDescription $isVisible={isVisible} $url={radarStory.thumbnail} ref={ref}>
           <CategoriesContainer>
             {radarStory.categories.map((category) => (
               <Category key={category.id}>{category.name}</Category>
@@ -67,7 +66,7 @@ export default function RadarCard({ setLoadingAction }: RadarCardProps) {
           <p className="date">{date}</p>
           <div className="overlay"></div>
         </RadarDescription>
-        <RadarPhoto $url={thumbnail} />
+        <RadarPhoto $url={radarStory.thumbnail} />
       </>
     </RadarCardContainer>
   );

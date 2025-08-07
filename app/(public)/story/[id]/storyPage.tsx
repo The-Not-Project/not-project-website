@@ -1,14 +1,13 @@
 "use client";
 
 import clsx from "clsx";
-import { Fragment, JSX, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { useStore } from "@/app/zustand/store";
 import { Story } from "@/app/types/types";
 import { usePublicServerActions } from "@/app/contexts/public-server-actions";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { CategoriesContainer, StoryContainer, SaveButton, SkeletonContainer, Skeleton, NotFound } from "./style";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
-import Image from "next/image";
 import { StoryReader } from "./storyReader";
 
 export default function StoryPage({ id }: { id: string }) {
@@ -85,31 +84,11 @@ export default function StoryPage({ id }: { id: string }) {
 
   if (!story) return <NotFound>We couldn&apos;t find the story you&apos;re looking for :&apos;(</NotFound>;
 
-  const thumbnail = story.media.find((media) => media.isThumbnail)?.url;
   const author = story.author.firstName + " " + story.author.lastName;
   const date = new Date(story.createdAt).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
-  });
-  const additionalMedia = story.media.filter((media) => !media.isThumbnail);
-  const contentParts = story.content.split("[photo]");
-  const contentElements: JSX.Element[] = [];
-  contentParts.forEach((part, index) => {
-    if (part.trim()) {
-      contentElements.push(<p key={`text-${index}`}>{part}</p>);
-    }
-    if (index < contentParts.length - 1 && additionalMedia[index]) {
-      contentElements.push(
-        <Image
-          key={`media-${index}`}
-          src={additionalMedia[index].url}
-          alt="additional media"
-          width={600}
-          height={400}
-        />
-      );
-    }
   });
 
   return loading ? (
@@ -139,7 +118,7 @@ export default function StoryPage({ id }: { id: string }) {
       )}
       <h1 className="title">{story.title}</h1>
       {/* <p className="summary">{story.summary}</p> */}
-      <img src={thumbnail || ""} alt="thumbnail" />
+      <img src={story.thumbnail || ""} alt="thumbnail" />
       <hr />
       <div className="info">
         <p>By {author}</p>

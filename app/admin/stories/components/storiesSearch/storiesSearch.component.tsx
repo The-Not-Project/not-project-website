@@ -51,7 +51,7 @@ export default function RecommendationSearch({
                     By {`${story.author.firstName} ${story.author.lastName}`}
                   </h4>
                   <ImageContainer
-                    src={story.media.find(media => media.isThumbnail)?.url || '/placeholder.jpg'}
+                    src={story.thumbnail}
                     alt='Photo'
                     width={150}
                     height={100}

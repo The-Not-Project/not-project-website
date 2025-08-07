@@ -7,7 +7,6 @@ export default function SavedStory({ story }: { story: Story }) {
 
     const router = useRouter();
     
-  const thumbnail = story.media.find((media) => media.isThumbnail)?.url;
   const date = new Date(story.createdAt).toLocaleDateString("en-US", {
     month: "short",
     year: "numeric",
@@ -30,7 +29,7 @@ export default function SavedStory({ story }: { story: Story }) {
             </div>
             
       </StoryContent>
-      <img src={thumbnail} alt="thumbnail" />
+      <img src={story.thumbnail} alt="thumbnail" />
 
     </StoryContainer>
   );

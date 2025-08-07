@@ -37,8 +37,8 @@ export const Button = styled.button`
 
 export const CloseButton = styled(FaXmark)`
   position: absolute;
-  right: 30px;
-  top: 30px;
+  right: 0;
+  top: 0;
   cursor: pointer;
   font-size: 2rem;
   padding: 5px;

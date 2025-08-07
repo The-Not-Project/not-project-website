@@ -22,16 +22,13 @@ export default function RecommendationCard({
     [recommendation.createdAt]
   );
 
-  const thumbnail =
-    recommendation.media.find((media) => media.isThumbnail)?.url || "";
-
   return (
     <RecommendationCardContainer>
       <div className="first-row">
         <span className="date">{formattedDate}</span>
         <span className="category">{recommendation.categories[0].name}</span>
       </div>
-      <img src={thumbnail} alt="thumbnail" />
+      <img src={recommendation.thumbnail} alt="thumbnail" />
       <div className="content">
         <h3 className="title">{recommendation.title}</h3>
         <p className="summary">

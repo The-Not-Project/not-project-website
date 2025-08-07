@@ -6,10 +6,10 @@ import { Story, Filters, User, Category } from '@/app/types/types';
 type PublicServerActions = {
   getUser: (id: string) => Promise<User | null>;
   UpdateUser: (data: FormData, user: User) => Promise<void>;
-  getStories: (filters?: Filters, compression?: number) => Promise<Story[]>;
-  getStory: (id: string, compression?: number) => Promise<Story | null>;
-  getRadarStory : (compression?: number) => Promise<Story | null>;
-  getRecommendations: (compression?: number) => Promise<Story[]>;
+  getStories: (filters?: Filters) => Promise<Story[]>;
+  getStory: (id: string) => Promise<Story | null>;
+  getRadarStory: () => Promise<Story | null>;
+  getRecommendations: () => Promise<Story[]>;
   getCategories: () => Promise<Category[]>;
   getSavedStories: (userId: string) => Promise<Story[]>;
   createStorySave: (storyId: string, userId: string) => Promise<void>;

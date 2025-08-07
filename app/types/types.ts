@@ -19,9 +19,10 @@ export type Story = {
   borough: string;
   author: Author;
   categories: Category[];
-  media: Media[];
   createdAt: Date;
   updatedAt?: Date;
+  thumbnail: string;
+  isPublished: boolean;
 };
 
 export type Media = {
@@ -56,19 +57,20 @@ export type RawStory = {
     lastName: string;
   };
   categories: { category: Category }[];
-  media: RawMedia[];
   createdAt: Date;
-}
+  thumbnail: string;
+  isPublished: boolean;
+};
 
 export type RawMedia = {
   id: string;
   cid: string;
   storyId: string;
   isThumbnail: boolean;
-}
+};
 export type StorySave = {
   id: string;
   storyId: string;
   userId: string;
   createdAt: Date;
-}
+};

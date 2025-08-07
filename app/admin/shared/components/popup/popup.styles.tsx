@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 export const PopupContainer = styled.div`
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
   margin: 0;
+  overflow: hidden;
 `;
 
 export const Popup = styled.div`
@@ -21,7 +22,7 @@ export const Popup = styled.div`
   top: 50%;
   translate: -50% -50%;
   border-radius: 20px;
-  padding: 1px;
+  padding: 3px;
   border: 30px solid #f7f7f7;
 
 

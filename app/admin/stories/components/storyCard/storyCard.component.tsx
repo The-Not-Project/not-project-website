@@ -20,8 +20,6 @@ export default function Story({ story, onDelete, onEdit }: StoryProps) {
     year: 'numeric',
   });  
 
-  const url = story.media.find(media => media.isThumbnail)?.url || "/media/logo-inverted.png";
-
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure?')) {
       try {
@@ -35,7 +33,7 @@ export default function Story({ story, onDelete, onEdit }: StoryProps) {
   return (
     <StoryContainer>
       <StoryImageContainer
-        src={url}
+        src={story.thumbnail}
         alt='Photo'
         width={150}
         height={100}

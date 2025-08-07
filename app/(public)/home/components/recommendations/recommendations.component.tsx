@@ -16,7 +16,7 @@ export default function Recommendations() {
   const [recommendations, setRecommendations] = useState<Story[]>([]);
 
   const fetchRecommendations = useCallback(async () => {
-    const recommendations = await getRecommendations(600);
+    const recommendations = await getRecommendations();
     setRecommendations(recommendations);
   }, [getRecommendations]);
 

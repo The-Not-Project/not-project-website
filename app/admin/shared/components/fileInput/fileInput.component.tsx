@@ -3,11 +3,9 @@ import {
   FileInputLabel,
 } from "@/app/admin/shared/components/form/FormElements";
 import { useEffect, useState } from "react";
-import {
-  FaPlus as IconAdd,
-} from "react-icons/fa6";
+import { FaPlus as IconAdd } from "react-icons/fa6";
 
-export default function FileInputContainer({ id, onFileUpload, url }: { id: string, onFileUpload: (file: File) => void, url?: string }) {
+export default function FileInputContainer({ url }: { url?: string }) {
   const [URL, setURL] = useState<string | ArrayBuffer | null>(null);
 
   useEffect(() => {
@@ -24,23 +22,13 @@ export default function FileInputContainer({ id, onFileUpload, url }: { id: stri
         setURL(reader.result);
       };
       reader.readAsDataURL(file);
-      onFileUpload(file);
-    }
-  };
-
-  const addAdditionalFilesAction = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      onFileUpload(file);
-    } else {
-      console.error("No file selected");
     }
   };
 
   return (
     <>
-      <FileInputLabel htmlFor={id}>
-        {URL && id === "thumbnail" ? (
+      <FileInputLabel htmlFor="thumbnail">
+        {URL ? (
           <div className="file-preview">
             <img src={URL as string} alt="Preview" />
           </div>
@@ -50,11 +38,11 @@ export default function FileInputContainer({ id, onFileUpload, url }: { id: stri
           </div>
         )}
         <FileInput
-          id={id}
+          id="thumbnail"
           type="file"
-          name="files"
+          name="thumbnail"
           accept="image/*"
-          onChange={id === "thumbnail" ? addThumbnailAction : addAdditionalFilesAction}
+          onChange={addThumbnailAction}
         />
       </FileInputLabel>
     </>

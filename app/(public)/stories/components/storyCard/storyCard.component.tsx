@@ -16,7 +16,6 @@ export default function Story({ story }: { story: StoryType }) {
   const isMobile = useStore((state) => state.mobileLayout.isMobile);
   const router = useRouter();
 
-  const thumbnail = story.media.find((media) => media.isThumbnail)?.url;
   const date = new Date(story.createdAt).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
@@ -30,7 +29,7 @@ export default function Story({ story }: { story: StoryType }) {
       {isMobile ? (
         <MobileStoryBody>
           <div className="first-row">
-            <img src={thumbnail} alt="thumbnail" />
+            <img src={story.thumbnail} alt="thumbnail" />
             <div className="content">
               <h2>{story.title}</h2>
               <p>{story.summary.slice(0, 150 - story.title.length)}...</p>
@@ -70,7 +69,7 @@ export default function Story({ story }: { story: StoryType }) {
             <p>{story.summary}</p>
             <p className="createdAt">{date}</p>
           </StoryContent>
-          <img src={thumbnail} className="desktop-thumbnail" alt="thumbnail" />
+          <img src={story.thumbnail} className="desktop-thumbnail" alt="thumbnail" />
         </>
       )}
     </StoryContainer>

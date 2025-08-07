@@ -39,6 +39,8 @@ model Story {
   Recommendation Recommendation?
   Radar          Radar?
   saves          Save[]
+  thumbnail      String @default("/media/its_in_motion.png")
+  isPublished    Boolean @default(false)
 
   @@map("story")
 }

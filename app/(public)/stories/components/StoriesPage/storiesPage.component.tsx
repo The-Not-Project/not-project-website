@@ -56,7 +56,7 @@ export default function StoriesPageComponent({
         ? { ...appliedFilters, boroughs: [boroughParam.toLowerCase()] }
         : appliedFilters;
 
-      const data = await getStories(finalFilters, 500);
+      const data = await getStories(finalFilters);
       setStories(data);
       setLoading(false);
     },

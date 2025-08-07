@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { PageSection, SectionTitle } from '../shared/components/layout/Section';
-import { useAdminServerActions } from '@/app/contexts/admin-server-actions';
-import { Filters, Story } from '@/app/types/types';
-import { useState, useEffect, useCallback } from 'react';
-import RecommendationsList from './components/recommendationsList/recommendationsList.component';
-import RecommendationSearch from '../stories/components/storiesSearch/storiesSearch.component';
+import { PageSection, SectionTitle } from "../shared/components/layout/Section";
+import { useAdminServerActions } from "@/app/contexts/admin-server-actions";
+import { Filters, Story } from "@/app/types/types";
+import { useState, useEffect, useCallback } from "react";
+import RecommendationsList from "./components/recommendationsList/recommendationsList.component";
+import RecommendationSearch from "../stories/components/storiesSearch/storiesSearch.component";
 
 const defaultFilters = {
-  search: '',
+  search: "",
   boroughs: [],
   categories: [],
 };
@@ -30,7 +30,7 @@ export default function RecommendationsPage() {
   const fetchRecommendations = useCallback(async () => {
     setIsLoading(true);
     try {
-      const data = await getRecommendations(600);
+      const data = await getRecommendations();
       setRecommendations(data);
     } finally {
       setIsLoading(false);
@@ -48,11 +48,11 @@ export default function RecommendationsPage() {
       const data = await getStories({
         ...filters,
         search: searchValue,
-      }, 600);
+      });
 
-      const recommendedIds = new Set(recommendations.map(rec => rec.id));
+      const recommendedIds = new Set(recommendations.map((rec) => rec.id));
 
-      setSearchResults(data.filter(story => !recommendedIds.has(story.id)));
+      setSearchResults(data.filter((story) => !recommendedIds.has(story.id)));
       setsearchIsLoading(false);
     },
     [filters, getStories, recommendations]
@@ -93,8 +93,8 @@ export default function RecommendationsPage() {
           searchValue={filters.search}
           results={searchResults}
           isLoading={searchIsLoading}
-          onSearchChangeAction={value => {
-            setFilters(prev => ({ ...prev, search: value }));
+          onSearchChangeAction={(value) => {
+            setFilters((prev) => ({ ...prev, search: value }));
             handleSearch(value);
           }}
           onAddAction={handleAddRecommendation}

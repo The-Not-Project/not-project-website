@@ -29,12 +29,12 @@ export default function RecommendationsList({
       {recommendations.map(rec => (
         <RecommendationContainer key={rec.id}>
           <h3>
-            {rec.title.slice(0, 18)}
-            {rec.title.length > 18 && '...'}
+            {rec.title.slice(0, 15)}
+            {rec.title.length > 15 && '...'}
           </h3>
           <h4>By {`${rec.author.firstName} ${rec.author.lastName}`}</h4>
           <ImageContainer
-            src={rec.media.find(media => media.isThumbnail)?.url || '/placeholder.jpg'}
+            src={rec.thumbnail}
             alt='Photo'
             width={150}
             height={100}

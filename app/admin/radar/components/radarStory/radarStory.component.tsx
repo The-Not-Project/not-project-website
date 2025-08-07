@@ -7,7 +7,6 @@ import {
 
 
 export default function RadarCard({ story }: { story: Story }) {
-  const thumbnail = story.media.find((media) => media.isThumbnail)?.url || "";
 
   return (
     <>
@@ -19,7 +18,7 @@ export default function RadarCard({ story }: { story: Story }) {
             By {`${story.author.firstName} ${story.author.lastName}`}
           </p>
         </RadarDescription>
-        <RadarPhoto $url={thumbnail} />
+        <RadarPhoto $url={story.thumbnail} />
       </RadarCardContainer>
       {/* <DeleteButton onClick={() => onDeleteAction()}>Delete</DeleteButton> */}
     </>

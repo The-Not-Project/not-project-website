@@ -63,7 +63,6 @@ import { LinkIcon } from "@/app/tiptap/components/tiptap-icons/link-icon";
 import { useMobile } from "@/app/tiptap/hooks/use-mobile";
 import { useWindowSize } from "@/app/tiptap/hooks/use-window-size";
 import { useCursorVisibility } from "@/app/tiptap/hooks/use-cursor-visibility";
-import { useAdminServerActions } from "@/app/contexts/admin-server-actions";
 
 // --- Components ---
 // import { ThemeToggle } from "@/components/tiptap-templates/simple/theme-toggle"
@@ -73,6 +72,7 @@ import { MAX_FILE_SIZE } from "@/app/tiptap/lib/tiptap-utils";
 
 // --- Styles ---
 import "@/app/tiptap/components/tiptap-templates/simple/simple-editor.scss";
+import { uploadToS3WithCompression } from "@/app/utils/media";
 
 // import content from "@/components/tiptap-templates/simple/data/content.json";
 
@@ -184,11 +184,9 @@ const MobileToolbarContent = ({
 export function SimpleEditor({
   value,
   onChange,
-  storyId,
 }: {
   value: string;
   onChange: (html: string) => void;
-  storyId: string;
 }) {
   const isMobile = useMobile();
   const windowSize = useWindowSize();
@@ -196,7 +194,6 @@ export function SimpleEditor({
     "main" | "highlighter" | "link"
   >("main");
   const toolbarRef = React.useRef<HTMLDivElement>(null);
-  const { processMediaFile, getMediaSignedUrl } = useAdminServerActions();
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -224,13 +221,8 @@ export function SimpleEditor({
         accept: "image/*",
         maxSize: MAX_FILE_SIZE,
         limit: 3,
-        upload: async (file) => {
-          const cid = await processMediaFile(storyId, file);
-          const signedUrl = await getMediaSignedUrl(cid);
-          return signedUrl;
-        },
+        upload: uploadToS3WithCompression,
         onError: (error) => console.error("Upload failed:", error),
-        
       }),
       Link.configure({ openOnClick: false }),
     ],

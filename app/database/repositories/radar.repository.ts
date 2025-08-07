@@ -1,12 +1,10 @@
-import { RawStory, Story } from '../../types/types';
-import { processStory, STORY_INCLUDE } from '../helpers/story.helpers';
+import { RawStory, Story } from "../../types/types";
+import { processStory, STORY_INCLUDE } from "../helpers/story.helpers";
 
-import { prisma } from '../prisma';
+import { prisma } from "../prisma";
 
-export async function getRadarStory(
-  compression?: number
-): Promise<Story | null> {
-  'use server';
+export async function getRadarStory(): Promise<Story | null> {
+  "use server";
 
   const radarStory = await prisma.radar.findFirst();
 
@@ -21,11 +19,11 @@ export async function getRadarStory(
     include: STORY_INCLUDE,
   });
 
-  return processStory(story as RawStory, compression);
+  return processStory(story as RawStory);
 }
 
 export async function updateRadarStory(id: string) {
-  'use server';
+  "use server";
 
   await prisma.radar.deleteMany();
 
@@ -35,9 +33,3 @@ export async function updateRadarStory(id: string) {
     },
   });
 }
-
-export const deleteRadarStory = async () => {
-  'use server';
-
-  await prisma.radar.deleteMany();
-};

@@ -18,7 +18,6 @@ type FormState = {
   isEditing: boolean;
   currentStory: Story | null;
   selectedCategories: Category[];
-  storyId: string;
 };
 
 const defaultFilters = {
@@ -34,7 +33,6 @@ export default function StoriesPage() {
     getStories,
     deleteStory,
     editStory,
-    createEmptyStory,
   } = useAdminServerActions();
 
   const [stories, setStories] = useState<Story[]>([]);
@@ -45,7 +43,6 @@ export default function StoriesPage() {
     isEditing: false,
     currentStory: null,
     selectedCategories: [],
-    storyId: '',
   });
   
   const [filters, setFilters] = useState<Filters>(defaultFilters);
@@ -54,7 +51,7 @@ export default function StoriesPage() {
     async (appliedFilters: Filters = defaultFilters) => {
       setIsLoading(true);
       try {
-        const data = await getStories(appliedFilters, 300);
+        const data = await getStories(appliedFilters);
         setStories(data);
       } finally {
         setIsLoading(false);
@@ -68,33 +65,24 @@ export default function StoriesPage() {
   }, [filters, fetchStories]);
 
   const handleOpenCreate = async () => {
-    window.scrollTo(0, 0);
-    const newStoryId = await createEmptyStory();
     setFormState({
       isOpen: true,
       isEditing: false,
       currentStory: null,
       selectedCategories: [],
-      storyId: newStoryId,
     });
   };
 
   const handleOpenEdit = (story: Story) => {
-    window.scrollTo(0, 0);
     setFormState({
       isOpen: true,
       isEditing: true,
       currentStory: story,
       selectedCategories: story.categories,
-      storyId: story.id,
     });
   };
 
-  const handleClosePopup = async (isSaved: boolean) => {
-    if (!formState.isEditing && !isSaved) {
-      await deleteStory(formState.storyId);
-      await fetchStories();
-    }
+  const handleClosePopup = async () => {
     setFormState(prev => ({
       ...prev,
       isOpen: false,
@@ -105,7 +93,7 @@ export default function StoriesPage() {
 
   const handleSubmitSuccess = async () => {
     await fetchStories();
-    handleClosePopup(true);
+    handleClosePopup();
   };
 
   const handleDeleteStory = async (id: string) => {
@@ -131,7 +119,6 @@ export default function StoriesPage() {
             isOpen={formState.isOpen}
             isEditing={formState.isEditing}
             story={formState.currentStory}
-            storyId={formState.storyId}
             selectedCategories={formState.selectedCategories}
             onCloseAction={handleClosePopup}
             onSubmitSuccessAction={handleSubmitSuccess}

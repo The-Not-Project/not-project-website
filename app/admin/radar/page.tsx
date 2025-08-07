@@ -26,7 +26,7 @@ export default function Page() {
   const fetchRadarStory = useCallback(async () => {
     setIsLoading(true);
     try {
-      const data = await getRadarStory(1000);
+      const data = await getRadarStory();
 
       setRadarStory(data);
     } finally {
@@ -50,8 +50,7 @@ export default function Page() {
         {
           ...filters,
           search: searchValue,
-        },
-        600
+        }
       );
 
       const radarId = radarStory?.id;

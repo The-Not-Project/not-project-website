@@ -1,26 +1,26 @@
-import { prisma } from '../prisma';
-import { Category, RawMedia, RawStory, Story } from '@/app/types/types';
-import { transformMedia, uploadFileToPinata } from './media.helpers';
+import { uploadToS3WithCompression } from "@/app/utils/media";
+import { prisma } from "../prisma";
+import { Category, RawStory, Story } from "@/app/types/types";
 
 export function getStoryData(formData: FormData) {
-  const [id, title, content, borough, summary] = [
-    'id',
-    'title',
-    'content',
-    'borough',
-    'summary',
-  ].map(field => formData.get(field)?.toString());
+  const [title, content, borough, summary] = [
+    "title",
+    "content",
+    "borough",
+    "summary",
+  ].map((field) => formData.get(field)?.toString());
 
-  const categoryIds = formData.getAll('categories').map(val => val.toString());
+  const categoryIds = formData
+    .getAll("categories")
+    .map((val) => val.toString());
 
-  const thumbnail = formData.get('thumbnail');
-  const additionalFiles = formData.getAll('additionalFiles')
+  const thumbnail = formData.get("thumbnail");
 
   if (!title || !content || !borough || !summary) {
-    throw new Error('Missing required story fields');
+    throw new Error("Missing required story fields");
   }
 
-  return { id, title, content, borough, summary, categoryIds, thumbnail, additionalFiles };
+  return { title, content, borough, summary, categoryIds, thumbnail };
 }
 
 export async function processCategories(
@@ -38,7 +38,7 @@ export async function processCategories(
 }
 
 export async function deleteStoryCategories(id: string) {
-  'use server';
+  "use server";
 
   await prisma.storyCategory.deleteMany({
     where: {
@@ -47,65 +47,27 @@ export async function deleteStoryCategories(id: string) {
   });
 }
 
-export async function processAdditionalFiles(storyId: string, files: File[]) {
-  for (let i = 0; i < files.length; i++) {
-    const cid = await uploadFileToPinata(files[i]);
-    await prisma.media.create({
-      data: {
-        cid,
-        storyId,
-        isThumbnail: false,
-      },
-    });
-  }
+
+export async function processThumbnail(file: File): Promise<string> {
+  const url = await uploadToS3WithCompression(file);
+  return url;
 }
 
-export async function processThumbnail(storyId: string, file: File) {
-  const cid = await uploadFileToPinata(file);
-  await prisma.media.create({
-    data: {
-      cid,
-      storyId,
-      isThumbnail: true,
-    },
-  });
-}
-
-export async function processMediaFile(stotyId: string, file: File) {
-  'use server';
-  const cid = await uploadFileToPinata(file);
-  await prisma.media.create({
-    data: {
-      cid,
-      storyId: stotyId,
-      isThumbnail: false,
-    },
-  });
-
-  return cid;
-}
 
 export async function processStories(
   stories: RawStory[],
-  compression?: number
 ): Promise<Story[]> {
-  return Promise.all(stories.map(story => processStory(story, compression)));
+  return Promise.all(stories.map((story) => processStory(story)));
 }
 
 export async function processStory(
   story: RawStory,
-  compression?: number
 ): Promise<Story> {
-  const mediaWithUrls = await Promise.all(
-    story.media.map((media: RawMedia) => transformMedia(media, compression))
-  );
-
   return {
     ...story,
     categories: story.categories.map(
       (sc: { category: Category }) => sc.category
     ),
-    media: mediaWithUrls,
   };
 }
 
@@ -115,7 +77,6 @@ export const STORY_INCLUDE = {
       category: true,
     },
   },
-  media: true,
   author: {
     select: {
       id: true,
