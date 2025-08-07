@@ -225,12 +225,25 @@ export function SimpleEditor({
         maxSize: MAX_FILE_SIZE,
         limit: 3,
         upload: async (file) => {
-          const cid = await processMediaFile(storyId, file);
-          const signedUrl = await getMediaSignedUrl(cid);
-          return signedUrl;
+          // Step 1: Ask your backend for a pre-signed S3 upload URL
+          const res = await fetch(
+            `/api/upload?filename=${encodeURIComponent(file.name)}&filetype=${file.type}`
+          );
+
+          if (!res.ok) throw new Error("Failed to get upload URL");
+
+          const { uploadUrl, publicUrl } = await res.json();
+
+          await fetch(uploadUrl, {
+            method: "PUT",
+            headers: { "Content-Type": file.type },
+            body: file,
+          });
+
+          // Step 3: Return the public S3 URL to insert in the editor
+          return publicUrl;
         },
         onError: (error) => console.error("Upload failed:", error),
-        
       }),
       Link.configure({ openOnClick: false }),
     ],

@@ -25,7 +25,7 @@ export async function getMediaSignedUrl(cid: string, compression?: number): Prom
     const signedUrl = await pinata.gateways
       .createSignedURL({
         cid,
-        expires: 3600 * 24 * 60, // 60 days
+        expires: 60, 
       })
       .optimizeImage({
         width: compression ?? undefined,
@@ -44,7 +44,7 @@ export async function transformMedia(media: RawMedia, compression?: number): Pro
     const signedUrl = await pinata.gateways
       .createSignedURL({
         cid: media.cid,
-        expires: 3600,
+        expires: 60,
       })
       .optimizeImage({
         width: compression ?? undefined,
@@ -108,4 +108,18 @@ export async function deleteMediaByStoryId(storyId: string) {
       },
     });
   }
+}
+
+export async function processMediaFile(stotyId: string, file: File) {
+  'use server';
+  const cid = await uploadFileToPinata(file);
+  await prisma.media.create({
+    data: {
+      cid,
+      storyId: stotyId,
+      isThumbnail: false,
+    },
+  });
+
+  return cid;
 }

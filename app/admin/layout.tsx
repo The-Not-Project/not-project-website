@@ -26,8 +26,7 @@ import {
   getRadarStory,
   updateRadarStory,
 } from '../database/repositories/radar.repository';
-import { getMediaSignedUrl } from '../database/helpers/media.helpers';
-import { processMediaFile } from '../database/helpers/story.helpers';
+import { getMediaSignedUrl, processMediaFile } from '../database/helpers/media.helpers';
 
 export default async function AdminLayout({
   children,

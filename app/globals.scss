@@ -132,40 +132,7 @@ select {
     padding-bottom: 20px;
   }
 }
-.prose {
 
-  .simple-editor-content {
-    max-width: none !important;
-    padding: 0 !important;
-  }
-
-  h1 {
-    font-size: 2.5rem !important;
-
-    @media (max-width: 850px) {
-      font-size: 1.8rem !important;
-    }
-  }
-  
-  h2 {
-    font-size: 1.8rem !important;
-    @media (max-width: 850px) {
-      font-size: 1.5rem !important;
-    }
-  }
-
-  p {
-    font-size: large !important;
-  }
-
-  blockquote {
-    font-style: italic;
-  }
-
-  li {
-    margin-block: 0.3rem;
-  }
-}
 
 @keyframes shimmer {
   0% {

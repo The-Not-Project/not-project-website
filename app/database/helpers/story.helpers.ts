@@ -71,20 +71,6 @@ export async function processThumbnail(storyId: string, file: File) {
   });
 }
 
-export async function processMediaFile(stotyId: string, file: File) {
-  'use server';
-  const cid = await uploadFileToPinata(file);
-  await prisma.media.create({
-    data: {
-      cid,
-      storyId: stotyId,
-      isThumbnail: false,
-    },
-  });
-
-  return cid;
-}
-
 export async function processStories(
   stories: RawStory[],
   compression?: number
