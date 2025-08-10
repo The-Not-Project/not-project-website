@@ -20,7 +20,7 @@ export async function getStories(filters?: Filters): Promise<Story[]> {
 
   const stories = await prisma.story.findMany({
     where: {
-      title: { not: "" },
+      isPublished: true,
       ...(search ? { title: { contains: search } } : {}),
       ...(boroughs && boroughs.length > 0 ? { borough: { in: boroughs } } : {}),
       ...(categories && categories.length > 0
