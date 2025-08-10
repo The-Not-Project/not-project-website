@@ -25,13 +25,13 @@ export type Story = {
   isPublished: boolean;
 };
 
-export type Media = {
-  id: string;
-  cid: string;
-  url: string;
-  storyId: string;
-  isThumbnail: boolean;
-};
+// export type Media = {
+//   id: string;
+//   cid: string;
+//   url: string;
+//   storyId: string;
+//   isThumbnail: boolean;
+// };
 
 type Author = {
   id: string;
@@ -62,12 +62,13 @@ export type RawStory = {
   isPublished: boolean;
 };
 
-export type RawMedia = {
-  id: string;
-  cid: string;
-  storyId: string;
-  isThumbnail: boolean;
-};
+// export type RawMedia = {
+//   id: string;
+//   cid: string;
+//   storyId: string;
+//   isThumbnail: boolean;
+// };
+
 export type StorySave = {
   id: string;
   storyId: string;

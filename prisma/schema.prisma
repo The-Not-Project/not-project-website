@@ -1,99 +1,109 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Prisma Schema for the application database
+// Docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
+// Generate Prisma Client (JavaScript)
 generator client {
   provider = "prisma-client-js"
 }
 
+// Database connection (MySQL)
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL") // Keep credentials in env vars
 }
 
+//
+// User model: application users
+//
 model User {
-  id        String  @id @unique
-  firstName String
-  lastName  String
-  email     String  @unique
-  stories   Story[]
-  saves     Save[]
+  id        String  @id @unique             // Stable external ID (string)
+  firstName String                          // First name
+  lastName  String                          // Last name
+  email     String  @unique                 // Unique email
+  stories   Story[]                         // Stories authored by this user
+  saves     Save[]                          // Stories this user saved
 
-  @@map("user")
+  @@map("user") // DB table name
 }
 
+//
+// Story model: the main content entity displayed across the site
+//
 model Story {
-  id             String          @id @default(uuid())
-  title          String
-  borough        String
-  content        String          @db.Text
-  summary        String          @db.Text
-  author         User            @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId       String
-  categories     StoryCategory[]
-  media          Media[]
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  Recommendation Recommendation?
-  Radar          Radar?
-  saves          Save[]
-  thumbnail      String @default("/media/its_in_motion.png")
-  isPublished    Boolean @default(false)
+  id          String    @id @default(uuid())        // Primary key
+  title       String                                // Story title
+  borough     String                                // NYC borough / location tag
+  content     String    @db.Text                    // Full HTML/stringified content
+  summary     String    @db.Text                    // Short excerpt for previews/cards
+  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId    String                                // FK to User
+  categories  StoryCategory[]                       // Many-to-many categories
+  // media    Media[]                               // (disabled for now)
+  createdAt   DateTime  @default(now())             // Creation timestamp
+  updatedAt   DateTime  @updatedAt                  // Auto-updated on change
+  saves       Save[]                                // Users who saved this story
+  thumbnail   String    @default("/media/its_in_motion.png") // Fallback image
+  isPublished Boolean   @default(false)             // Draft vs published
+
+  // --- Homepage flags moved here (no separate tables) ---
+  isRadar        Boolean  @default(false)           // At most one story should be true (enforce in app)
+  isRecommended  Boolean  @default(false)           // Up to 4 stories should be true (enforce in app)
+  // Optional: if you ever want manual ordering for recommended cards, uncomment:
+  // recommendedRank Int?                             // 1..4 preferred order (nulls sort last)
+
+  // Indexes keep homepage queries fast even with hundreds/thousands of rows.
+  @@index([isRadar, updatedAt(sort: Desc)])         // Fast single radar fetch
+  @@index([isRecommended, updatedAt(sort: Desc)])   // Fast top-4 recommended
+  // If using recommendedRank, prefer this index instead:
+  // @@index([isRecommended, recommendedRank, updatedAt(sort: Desc)])
 
   @@map("story")
 }
 
+//
+// Category model: taxonomy for stories
+//
 model Category {
-  id          String          @id @default(uuid())
-  name        String          @unique
-  description String
-  stories     StoryCategory[]
+  id          String          @id @default(uuid()) // PK
+  name        String          @unique              // Unique category name
+  description String                               // Human-friendly description
+  stories     StoryCategory[]                      // Join rows to stories
 
   @@map("category")
 }
 
+//
+// StoryCategory model: many-to-many join between Story and Category
+//
 model StoryCategory {
   storyId    String
   categoryId String
   story      Story    @relation(fields: [storyId], references: [id], onDelete: Cascade)
   category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
-  @@id([storyId, categoryId])
+  @@id([storyId, categoryId])   // Composite PK to prevent duplicates
   @@map("storycategory")
 }
 
-model Media {
-  id          String  @id @default(uuid())
-  cid         String
-  story       Story   @relation(fields: [storyId], references: [id])
-  storyId     String
-  isThumbnail Boolean
+// Media model (currently disabled)
+// model Media {
+//   id          String  @id @default(uuid())
+//   cid         String
+//   story       Story   @relation(fields: [storyId], references: [id])
+//   storyId     String
+//   isThumbnail Boolean
+//   @@map("media")
+// }
 
-  @@map("media")
-}
-
-model Recommendation {
-  storyId String @id @unique
-  story   Story  @relation(fields: [storyId], references: [id], onDelete: Cascade)
-
-  @@map("recommendations")
-}
-
-model Radar {
-  storyId String @id @unique
-  story   Story  @relation(fields: [storyId], references: [id], onDelete: Cascade)
-
-  @@map("radar")
-}
-
+//
+// Save model: which user saved which story
+//
 model Save {
-  id        String   @id @default(uuid())
-  userId    String
-  storyId   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String   @id @default(uuid())  // PK
+  userId    String                         // FK to User
+  storyId   String                         // FK to Story
+  createdAt DateTime @default(now())       // Created time
+  updatedAt DateTime @updatedAt            // Updated time
 
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   story Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
@@ -101,10 +111,13 @@ model Save {
   @@map("save")
 }
 
+//
+// Subscribers model: newsletter/notifications
+//
 model Subscribers {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  phone     String?
+  id        String   @id @default(uuid()) // PK
+  email     String   @unique              // Unique email
+  phone     String?                        // Optional phone (SMS, etc.)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

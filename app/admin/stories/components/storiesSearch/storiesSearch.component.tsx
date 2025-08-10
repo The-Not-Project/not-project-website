@@ -46,7 +46,7 @@ export default function RecommendationSearch({
             <RecommendationsListContainer>
               {results.map(story => (
                 <RecommendationContainer key={story.id}>
-                  <h3>{story.title.slice(0, 18)}...</h3>
+                  <h3>{story.title.slice(0, 15)}...</h3>
                   <h4>
                     By {`${story.author.firstName} ${story.author.lastName}`}
                   </h4>

@@ -5,15 +5,13 @@ import { prisma } from "../prisma";
 export async function getRecommendations(): Promise<Story[]> {
   "use server";
 
-  const recommendedStoriesIds = await prisma.recommendation.findMany();
 
   const recommendedStories = await prisma.story.findMany({
     where: {
-      id: {
-        in: recommendedStoriesIds.map((rec) => rec.storyId),
-      },
+      isRecommended: true
     },
     include: STORY_INCLUDE,
+    take: 4
   });
 
   return processStories(recommendedStories);
@@ -22,19 +20,23 @@ export async function getRecommendations(): Promise<Story[]> {
 export async function addRecommendation(id: string) {
   "use server";
 
-  await prisma.recommendation.create({
-    data: {
-      storyId: id,
-    },
-  });
+  await prisma.story.update({
+    where: {
+      id
+    }, data: {
+      isRecommended: true
+    }
+  })
 }
 
 export async function removeRecommendation(id: string) {
   "use server";
 
-  await prisma.recommendation.delete({
+  await prisma.story.update({
     where: {
-      storyId: id,
-    },
-  });
+      id
+    }, data: {
+      isRecommended: false
+    }
+  })
 }
