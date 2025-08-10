@@ -19,6 +19,9 @@ type AdminServerActions = {
   removeRecommendation: (id: string) => Promise<void>;
   updateRadarStory: (id: string) => Promise<void>;
   getRadarStory: () => Promise<Story | null>;
+  unpublishStory: (id: string) => Promise<void>;
+  republishStory: (id: string) => Promise<void>;
+  getHiddenStories: () => Promise<Story[]>;
 };
 
 const AdminServerActionsContext = createContext<AdminServerActions | null>(null);

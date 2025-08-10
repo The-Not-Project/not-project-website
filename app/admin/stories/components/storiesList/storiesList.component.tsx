@@ -1,4 +1,4 @@
-import Story from '../storyCard/storyCard.component';
+import StoryCard from '../storyCard/storyCard.component';
 import { StoriesContainer, NoStoriesMessage } from './storiesList.styles';
 import LoadingPage from '@/app/admin/shared/components/loadingPage/loadingPage.component'; 
 import type { Story as StoryType } from '@/app/types/types';
@@ -8,6 +8,8 @@ type StoriesListProps = {
   isLoading: boolean;
   onEdit: (story: StoryType) => void;
   onDelete: (id: string) => Promise<void>;
+  onHide: (id: string) => Promise<void>;
+  onShow: (id: string) => Promise<void>;
 };
 
 export default function StoriesList({
@@ -15,6 +17,8 @@ export default function StoriesList({
   stories,
   onDelete,
   onEdit,
+  onHide,
+  onShow
 }: StoriesListProps) {
   if (isLoading) {
     return <LoadingPage />;
@@ -27,11 +31,13 @@ export default function StoriesList({
       ) : (
         <StoriesContainer>
           {stories.map((story, index) => (
-            <Story
+            <StoryCard
               key={index}
               story={story}
               onDelete={onDelete}
               onEdit={onEdit}
+              onHide={onHide}
+              onShow={onShow}
             />
           ))}
         </StoriesContainer>

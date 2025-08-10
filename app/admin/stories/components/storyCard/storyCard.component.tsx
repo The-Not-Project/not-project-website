@@ -1,31 +1,39 @@
-import { Story as StoryType } from '@/app/types/types';
+import { Story as StoryType } from "@/app/types/types";
 import {
   ActionsContainer,
   StoryContainer,
   StoryContentContainer,
   StoryImageContainer,
-} from './storyCard.styles';
-import { Button } from '../../../shared/components/button/button';
+} from "./storyCard.styles";
+import { Button } from "../../../shared/components/button/button";
 
 type StoryProps = {
   story: StoryType;
   onDelete: (id: string) => Promise<void>;
+  onHide: (id: string) => Promise<void>;
+  onShow: (id: string) => Promise<void>;
   onEdit: (story: StoryType) => void;
 };
 
-export default function Story({ story, onDelete, onEdit }: StoryProps) {
-  const date = new Date(story.createdAt).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  });  
+export default function Story({
+  story,
+  onDelete,
+  onEdit,
+  onHide,
+  onShow,
+}: StoryProps) {
+  const date = new Date(story.createdAt).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 
   const handleDelete = async (id: string) => {
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm("Are you sure?")) {
       try {
         await onDelete(id);
       } catch (error) {
-        console.error('Failed to delete story:', error);
+        console.error("Failed to delete story:", error);
       }
     }
   };
@@ -34,7 +42,7 @@ export default function Story({ story, onDelete, onEdit }: StoryProps) {
     <StoryContainer>
       <StoryImageContainer
         src={story.thumbnail}
-        alt='Photo'
+        alt="Photo"
         width={150}
         height={100}
       />
@@ -44,10 +52,19 @@ export default function Story({ story, onDelete, onEdit }: StoryProps) {
         <p>Created At {date}</p>
       </StoryContentContainer>
       <ActionsContainer>
-        <Button className='inverted' onClick={() => onEdit(story)}>
-          Edit
-        </Button>
-        <Button onClick={() => handleDelete(story.id)}>Delete</Button>
+        {story.isPublished ? (
+          <>
+            <Button className="inverted" onClick={() => onEdit(story)}>
+              Edit
+            </Button>
+            <Button onClick={() => onHide(story.id)}>Hide</Button>
+          </>
+        ) : (
+          <>
+            <Button className="inverted" onClick={() => onShow(story.id)}>Publish</Button>
+            <Button onClick={() => handleDelete(story.id)}>Delete</Button>
+          </>
+        )}
       </ActionsContainer>
     </StoryContainer>
   );

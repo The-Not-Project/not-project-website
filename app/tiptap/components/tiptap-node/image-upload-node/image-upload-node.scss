@@ -167,6 +167,8 @@
         height: 2rem;
         color: var(--tt-button-default-icon-color);
         transition: color 200ms ease;
+        background: none;
+        border: none;
 
         svg {
           width: 1rem;

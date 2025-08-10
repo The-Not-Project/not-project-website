@@ -5,6 +5,7 @@ export const PageSection = styled.div`
   padding: 20px 30px;
   margin-top: 20px;
   border-radius: 7px;
+  position: relative;
 `;
 
 export const SectionTitle = styled.h2`

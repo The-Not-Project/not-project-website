@@ -13,7 +13,10 @@ import {
   createStory,
   deleteStory,
   editStory,
+  getHiddenStories,
   getStories,
+  republishStory,
+  unpublishStory,
 } from '../database/repositories/story.repository';
 import {
   addRecommendation,
@@ -47,6 +50,9 @@ export default async function AdminLayout({
     removeRecommendation,
     getRadarStory,
     updateRadarStory,
+    unpublishStory,
+    republishStory,
+    getHiddenStories
   };
 
   return (

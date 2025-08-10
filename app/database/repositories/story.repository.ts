@@ -75,6 +75,7 @@ export async function createStory(formData: FormData) {
       summary: summary,
       author: { connect: { id: user.id } },
       thumbnail: thumbnailUrl,
+      isPublished: true,
     },
   });
 
@@ -127,6 +128,14 @@ export async function editStory(id: string, formData: FormData) {
 export async function deleteStory(id: string) {
   "use server";
 
+  const radarId = await prisma.radar.findUnique({
+    where: { storyId: id },
+  });
+
+  if (radarId != null) {
+    throw new Error("Cannot delete radar story");
+  }
+
   await deleteStoryCategories(id);
 
   await prisma.story.delete({
@@ -134,4 +143,41 @@ export async function deleteStory(id: string) {
       id,
     },
   });
+}
+
+export async function unpublishStory(id: string) {
+  "use server";
+
+  const radarId = await prisma.radar.findUnique({
+    where: { storyId: id },
+  });
+
+  if (radarId != null) {
+    throw new Error("Cannot delete radar story");
+  }
+
+  await prisma.story.update({
+    where: { id },
+    data: { isPublished: false },
+  });
+}
+
+export async function republishStory(id: string) {
+  "use server";
+
+  await prisma.story.update({
+    where: { id },
+    data: { isPublished: true },
+  });
+}
+
+export async function getHiddenStories(): Promise<Story[]> {
+  "use server";
+
+  const stories = await prisma.story.findMany({
+    where: { isPublished: false },
+    include: STORY_INCLUDE,
+  });
+
+  return processStories(stories);
 }
