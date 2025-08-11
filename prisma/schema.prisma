@@ -112,9 +112,9 @@ model Save {
 }
 
 //
-// Subscribers model: newsletter/notifications
+// Subscriber model: newsletter/notifications
 //
-model Subscribers {
+model Subscriber {
   id        String   @id @default(uuid()) // PK
   email     String   @unique              // Unique email
   phone     String?                        // Optional phone (SMS, etc.)

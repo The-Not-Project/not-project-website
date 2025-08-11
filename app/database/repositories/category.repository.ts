@@ -1,13 +1,28 @@
 import { prisma } from '../prisma';
 
+/**
+ * Fetch all categories from the database.
+ * 
+ * @returns Promise resolving to an array of Category objects.
+ * 
+ * Note: No filtering or ordering is applied here — this will return all categories in any order.
+ */
 export async function getCategories() {
   'use server';
 
   const categories = await prisma.category.findMany();
-
   return categories;
 }
 
+/**
+ * Create a new category in the database.
+ * 
+ * @param data - FormData object containing:
+ *   - name: The category name (required)
+ *   - description: A short description of the category (required)
+ * 
+ * If either field is missing, the function exits without creating anything.
+ */
 export async function createCategory(data: FormData) {
   'use server';
 
@@ -26,6 +41,14 @@ export async function createCategory(data: FormData) {
   });
 }
 
+/**
+ * Delete a category from the database by ID.
+ * 
+ * @param id - The category's unique ID (string).
+ * 
+ * Warning: This will permanently remove the category.
+ * If there are related StoryCategory records, Prisma's referential actions will apply (check schema).
+ */
 export async function deleteCategory(id: string) {
   'use server';
 
@@ -36,6 +59,16 @@ export async function deleteCategory(id: string) {
   });
 }
 
+/**
+ * Update an existing category's name and description.
+ * 
+ * @param id - The category's unique ID.
+ * @param data - FormData object containing:
+ *   - name: Updated category name (required)
+ *   - description: Updated category description (required)
+ * 
+ * If either field is missing, the update is skipped.
+ */
 export async function editCategory(id: string, data: FormData) {
   'use server';
 
