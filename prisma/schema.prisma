@@ -44,6 +44,7 @@ model Story {
   saves       Save[]                                // Users who saved this story
   thumbnail   String    @default("/media/its_in_motion.png") // Fallback image
   isPublished Boolean   @default(false)             // Draft vs published
+  isTrashed   Boolean   @default(false)             // Soft delete flag
 
   // --- Homepage flags moved here (no separate tables) ---
   isRadar        Boolean  @default(false)           // At most one story should be true (enforce in app)

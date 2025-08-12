@@ -61,8 +61,7 @@ export default function Story({
           </>
         ) : (
           <>
-            <Button className="inverted" onClick={() => onShow(story.id)}>Publish</Button>
-            <Button onClick={() => handleDelete(story.id)}>Delete</Button>
+            <Button className="inverted" onClick={() => onShow(story.id)}>Restore</Button>
           </>
         )}
       </ActionsContainer>
