@@ -22,3 +22,9 @@ export const StoriesSection = styled(PageSection)`
   border: none;
   padding: 0;
 `
+
+export const Separator =styled.hr`
+  margin: 30px 0;
+  border: none;
+  border-top: 1px solid lightgray;
+`

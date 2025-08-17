@@ -14,7 +14,7 @@ import {
 import { CloseButton } from "../../../shared/components/button/button";
 import FileInputContainer from "@/app/admin/shared/components/fileInput/fileInput.component";
 import CategoriesSearch from "../categoriesSearch/categoriesSearch.component";
-import { SectionTitle } from "../../../shared/components/layout/Section";
+import { SectionTitle, Separator } from "../../../shared/components/layout/Section";
 import { CreateStoryButton } from "../../../shared/components/button/button"; 
 
 interface StoryFormPopupProps {
@@ -97,6 +97,7 @@ export default function StoryFormPopup({
         <EditorContainer>
           <SimpleEditor value={editorContent} onChange={setEditorContent} />
         </EditorContainer>
+        <Separator />
 
         <FormLabel htmlFor="summary">Summary</FormLabel>
         <FormTextArea

@@ -32,6 +32,12 @@ export const StoryContainer = styled.div`
     justify-content: space-between;
     margin-block: 5px 20px;
   }
+
+  sup, sub {
+    display: block;
+    translate: 0 -20px;
+    color: #3a3a3a;
+  }
 `;
 
 export const CategoriesContainer = styled.div`

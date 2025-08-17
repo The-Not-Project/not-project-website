@@ -23,7 +23,7 @@ export const Popup = styled.div`
   translate: -50% -50%;
   border-radius: 20px;
   padding: 3px;
-  border: 30px solid #f7f7f7;
+  border: 30px solid transparent;
 
 
   &::-webkit-scrollbar {
