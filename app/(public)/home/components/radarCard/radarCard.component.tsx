@@ -13,11 +13,7 @@ import { useEffect, useState } from "react";
 import { Story } from "@/app/types/types";
 import { useRouter } from "next/navigation";
 
-type RadarCardProps = {
-  setLoadingAction: (value: boolean) => void;
-};
-
-export default function RadarCard({ setLoadingAction }: RadarCardProps) {
+export default function RadarCard() {
   const { getRadarStory } = usePublicServerActions();
   const [radarStory, setRadarStory] = useState<Story | null>(null);
   const { ref, isVisible } = useRadarVisibility({ threshold: 0.9 });
@@ -26,25 +22,21 @@ export default function RadarCard({ setLoadingAction }: RadarCardProps) {
   useEffect(() => {
     async function fetchRadarStory() {
       const story = await getRadarStory();
-
-      if (!story) {
-        setLoadingAction(true);
-        return null;
-      }
-
-      const img = new Image();
-      img.src = story.thumbnail
-
-      img.onload = () => {
-        setLoadingAction(false);
-        setRadarStory(story);
-      };
+      setRadarStory(story);
     }
 
     fetchRadarStory();
-  }, [getRadarStory, setLoadingAction]);
+  }, [getRadarStory]);
 
-  if (!radarStory) return null;
+  if (!radarStory) return (
+    <>
+    <RadarCardContainer>
+      <RadarDescription $isVisible={false} $url={""}>
+        <div className="overlay"></div>
+      </RadarDescription>
+    </RadarCardContainer>
+    </>
+  );
 
   const date = new Date(radarStory.createdAt).toLocaleDateString("en-US", {
     month: "short",

@@ -10,6 +10,7 @@ import {
   RecommendationsList,
 } from "./recommendations.styles";
 import RecommendationCard from "./recommendationCard.component";
+import RecommendationPlaceholder from "./recommendation.placeholder";
 
 export default function Recommendations() {
   const { getRecommendations } = usePublicServerActions();
@@ -24,21 +25,23 @@ export default function Recommendations() {
     fetchRecommendations();
   }, [fetchRecommendations]);
 
-  if (recommendations.length === 0) {
-    return null; 
-  }
-
   return (
     <RecommendationsContainer>
       <BigTitle>Stories we think you&apos;ll like</BigTitle>
       <SecondaryTitle>Our recommended stories below</SecondaryTitle>
       <RecommendationsList>
-          {recommendations.map((recommendation) => (
+          {recommendations.length > 0 ? recommendations.map((recommendation) => (
             <RecommendationCard
               key={recommendation.id}
               recommendation={recommendation}
             />
-          ))}
+          )) : (
+            <>
+              <RecommendationPlaceholder />
+              <RecommendationPlaceholder />
+              <RecommendationPlaceholder />
+            </>
+          )}
       </RecommendationsList>
     </RecommendationsContainer>
   );

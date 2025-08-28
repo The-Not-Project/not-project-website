@@ -1,7 +1,11 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import { Story } from "@/app/types/types";
-import { RecommendationCardContainer } from "./recommendations.styles";
+import {
+  ImageContainer,
+  RecommendationCardContainer,
+} from "./recommendations.styles";
+import Image from "next/image";
 
 export default function RecommendationCard({
   recommendation,
@@ -28,7 +32,14 @@ export default function RecommendationCard({
         <span className="date">{formattedDate}</span>
         <span className="category">{recommendation.categories[0].name}</span>
       </div>
-      <img src={recommendation.thumbnail} alt="thumbnail" />
+      <ImageContainer>
+        <Image
+          src={recommendation.thumbnail}
+          alt="thumbnail"
+          fill
+          className="object-cover"
+        />
+      </ImageContainer>
       <div className="content">
         <h3 className="title">{recommendation.title}</h3>
         <p className="summary">

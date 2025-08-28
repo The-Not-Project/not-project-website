@@ -13,6 +13,7 @@ import MapSVG from "./MapSVG";
 import CompactMap from "./MapSGVCompact";
 import { IoChevronForwardSharp } from "react-icons/io5";
 import Link from "next/link";
+import NextImage from "next/image";
 
 const formatBoroughName = (slug: string) => {
   switch (slug) {
@@ -92,10 +93,9 @@ export default function Boroughs() {
   };
 
   return (
-    <BoroughsSectionContainer key={activeBorough} $fileName={fileName}>
+    <BoroughsSectionContainer key={activeBorough} className={fileName === "nyc" && isMobile ? 'secondary' : ''}>
       <Background>
-        <img src={`/media/boroughBackdrops/${fileName}.jpg`} alt={fileName}/>
-        lol
+        <NextImage src={`/media/boroughBackdrops/${fileName}.jpg`} alt={fileName} className="object-cover" fill unoptimized/>
       </Background>
 
       {isMobile ? (

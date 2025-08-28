@@ -10,8 +10,8 @@ type PathElementProps = {
   $scatterrotate: number;
 };
 
-export const BoroughsSectionContainer = styled.section<{ $fileName: string }>`
-font-family: 'Oswald', sans-serif;
+export const BoroughsSectionContainer = styled.section`
+  font-family: "Oswald", sans-serif;
   height: calc(100vh - 80px);
   max-height: 60vw;
   position: relative;
@@ -20,22 +20,19 @@ font-family: 'Oswald', sans-serif;
   overflow: hidden;
   background: linear-gradient(var(--bg-color), transparent);
 
-  @media (max-width: 600px) {
-    /* --faded: ${({ $fileName }) => ($fileName === "nyc" ? 0.5 : 0.3)}; */
+  @media (max-width: 850px) {
     height: max-content;
     max-height: unset;
+    background: none;
 
-    ${({ $fileName }) =>
-      $fileName === "nyc"
-        ? `
-        background: linear-gradient(
-          var(--bg-color),
-          hsl(35, 46%, 95%, 0.5) 20%,
-          hsl(35, 46%, 95%, 0.5) 80%,
-          var(--bg-color)
-        );
-      `
-        : `background: none`}
+    &.secondary {
+      background: linear-gradient(
+        var(--bg-color),
+        hsl(35, 46%, 95%, 0.5) 20%,
+        hsl(35, 46%, 95%, 0.5) 80%,
+        var(--bg-color)
+      );
+    }
   }
 
   h1 {
@@ -69,24 +66,15 @@ font-family: 'Oswald', sans-serif;
 `;
 
 export const Background = styled.div`
-background: #000;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
   animation: fadepulsatefast 0.66s;
 
   @media (max-width: 600px) {
-    z-index: -1;
     animation: none;
   }
 `;
@@ -128,36 +116,36 @@ export const DesktopPath = styled.path`
 `;
 
 export const MobilePath = styled.path<PathElementProps>`
-    stroke: hsl(0, 0%, 0%, 0);
-    fill: var(--bg-color);
-    transition: 0.2s;
-    transition-property: scale, translate, fill, stroke;
+  stroke: hsl(0, 0%, 0%, 0);
+  fill: var(--bg-color);
+  transition: 0.2s;
+  transition-property: scale, translate, fill, stroke;
 
-    &.active,
-    &.shrinking {
-      scale: 1.1;
-      translate: ${({ x, y }) => `${x}% ${y}%`};
-      fill: hsl(0, 0%, 0%, 0.2);
-      stroke: white;
-      stroke-width: 4px;
-    }
+  &.active,
+  &.shrinking {
+    scale: 1.1;
+    translate: ${({ x, y }) => `${x}% ${y}%`};
+    fill: hsl(0, 0%, 0%, 0.2);
+    stroke: white;
+    stroke-width: 4px;
+  }
 
-    &.scatter {
-      transform: ${({
-        $scatteroffsetx,
-        $scatteroffsety,
-        $scatterprogress,
-        $scatterrotate,
-      }) =>
-        `translate(${$scatteroffsetx * $scatterprogress}px, ${
-          $scatteroffsety * $scatterprogress
-        }px) rotate(${$scatterrotate * $scatterprogress}deg)`};
-      opacity: ${({ $scatterprogress }) => 1 - $scatterprogress};
-    }
+  &.scatter {
+    transform: ${({
+      $scatteroffsetx,
+      $scatteroffsety,
+      $scatterprogress,
+      $scatterrotate,
+    }) =>
+      `translate(${$scatteroffsetx * $scatterprogress}px, ${
+        $scatteroffsety * $scatterprogress
+      }px) rotate(${$scatterrotate * $scatterprogress}deg)`};
+    opacity: ${({ $scatterprogress }) => 1 - $scatterprogress};
+  }
 
-    &.hidden {
-      display: none;
-    }
+  &.hidden {
+    display: none;
+  }
 `;
 
 export const BoroughPopup = styled.div`
@@ -172,7 +160,7 @@ export const BoroughPopup = styled.div`
   justify-content: space-between;
   padding: 0 10px 30px 20px;
   h2 a {
-    font-size: 14vw;
+    font-size: 13vw;
     font-weight: 500;
     text-transform: uppercase;
     color: white;
@@ -182,7 +170,6 @@ export const BoroughPopup = styled.div`
     .icon {
       scale: 0.8;
       translate: 0 2px;
-      /* display: none; */
     }
   }
 

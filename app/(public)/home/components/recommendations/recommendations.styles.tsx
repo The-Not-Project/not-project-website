@@ -72,7 +72,7 @@ export const RecommendationCardContainer = styled.div`
     margin-bottom: 25px;
     font-size: 0.8rem;
     color: #454545;
-    
+
     .category {
       border: 1.5px solid #454545;
       text-transform: uppercase;
@@ -82,24 +82,10 @@ export const RecommendationCardContainer = styled.div`
     }
   }
 
-  img {
-    width: 100%;
-    aspect-ratio: 16 / 11;
-    height: auto;
-    object-fit: cover;
-    margin-bottom: 15px;
-  }
-
-
   @media (max-width: 850px) {
     scroll-snap-align: center;
     flex: 0 0 100%;
     padding: 25px 25px;
-
-    img {
-      aspect-ratio: 16 / 10;
-      margin-bottom: 10px;
-    }
   }
 
   .content {
@@ -123,5 +109,55 @@ export const RecommendationCardContainer = styled.div`
     font-size: 0.8em;
     text-decoration: none;
     border-bottom: 1.3px solid #454545;
+  }
+`;
+
+export const ImageContainer = styled.figure`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 15px;
+
+  @media (max-width: 850px) {
+    aspect-ratio: 16 / 10;
+    margin-bottom: 10px;
+  }
+`;
+
+export const PlaceholderContainer = styled(RecommendationCardContainer)`
+
+  .skeleton {
+    opacity: 0.5;
+    background: linear-gradient(90deg, #e0e0e0 25%, #f2f2f2 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+    border-radius: 4px;
+    width: 100%;
+
+    &.category-skeleton {
+      height: 16px;
+      width: 30%;
+      padding-block: 5px;
+    }
+
+    &.image {
+      height: 225px;
+      margin-bottom: 15px;
+    }
+
+    &.title {
+      height: 30px;
+      margin-block: 10px;
+    }
+    &.summary {
+      height: 20px;
+      margin-bottom: 5px;
+
+      &.half {
+        width: 50%;
+      }
+    }
   }
 `;

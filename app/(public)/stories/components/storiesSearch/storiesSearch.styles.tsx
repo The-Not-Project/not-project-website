@@ -61,7 +61,7 @@ export const SearchInput = styled.input`
   font-size: 1.1rem;
 `;
 
-export const SearchTitle = styled.h3`
+export const SearchTitle = styled.h2`
   font-weight: normal;
   font-size: 1.3rem;
   margin-bottom: 10px;
@@ -73,7 +73,7 @@ export const SearchTitle = styled.h3`
   }
 `;
 
-export const SecondaryTitle = styled.h4`
+export const SecondaryTitle = styled.h3`
   font-size: 1.2rem;
   font-weight: normal;
   margin-bottom: 10px;
