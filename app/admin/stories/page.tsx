@@ -31,7 +31,7 @@ export default function StoriesPage() {
   const {
     createStory,
     getStories,
-    deleteStory,
+    // deleteStory,
     editStory,
     getHiddenStories,
     unpublishStory,
@@ -132,14 +132,14 @@ export default function StoriesPage() {
     }
   };
 
-  const handleDeleteStory = async (id: string) => {
-    try {
-      await deleteStory(id);
-      await fetchHiddenStories();
-    } catch (error) {
-      alert("Error deleting story: " + error);
-    }
-  };
+  // const handleDeleteStory = async (id: string) => {
+  //   try {
+  //     await deleteStory(id);
+  //     await fetchHiddenStories();
+  //   } catch (error) {
+  //     alert("Error deleting story: " + error);
+  //   }
+  // };
 
   return (
     <PageSection>
@@ -152,7 +152,7 @@ export default function StoriesPage() {
             isLoading={isLoading}
             stories={stories}
             onEdit={handleOpenEdit}
-            onDelete={handleDeleteStory}
+            // onDelete={handleDeleteStory}
             onHide={handleHideStory}
             onShow={handleRepublishStory}
           />

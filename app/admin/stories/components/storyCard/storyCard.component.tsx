@@ -9,7 +9,7 @@ import { Button } from "../../../shared/components/button/button";
 
 type StoryProps = {
   story: StoryType;
-  onDelete: (id: string) => Promise<void>;
+  // onDelete: (id: string) => Promise<void>;
   onHide: (id: string) => Promise<void>;
   onShow: (id: string) => Promise<void>;
   onEdit: (story: StoryType) => void;
@@ -17,7 +17,7 @@ type StoryProps = {
 
 export default function Story({
   story,
-  onDelete,
+  // onDelete,
   onEdit,
   onHide,
   onShow,
@@ -28,15 +28,15 @@ export default function Story({
     year: "numeric",
   });
 
-  const handleDelete = async (id: string) => {
-    if (window.confirm("Are you sure?")) {
-      try {
-        await onDelete(id);
-      } catch (error) {
-        console.error("Failed to delete story:", error);
-      }
-    }
-  };
+  // const handleDelete = async (id: string) => {
+  //   if (window.confirm("Are you sure?")) {
+  //     try {
+  //       await onDelete(id);
+  //     } catch (error) {
+  //       console.error("Failed to delete story:", error);
+  //     }
+  //   }
+  // };
 
   return (
     <StoryContainer>

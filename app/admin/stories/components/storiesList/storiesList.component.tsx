@@ -7,7 +7,7 @@ type StoriesListProps = {
   stories: StoryType[];
   isLoading: boolean;
   onEdit: (story: StoryType) => void;
-  onDelete: (id: string) => Promise<void>;
+  // onDelete: (id: string) => Promise<void>;
   onHide: (id: string) => Promise<void>;
   onShow: (id: string) => Promise<void>;
 };
@@ -15,7 +15,7 @@ type StoriesListProps = {
 export default function StoriesList({
   isLoading,
   stories,
-  onDelete,
+  // onDelete,
   onEdit,
   onHide,
   onShow
@@ -34,7 +34,7 @@ export default function StoriesList({
             <StoryCard
               key={index}
               story={story}
-              onDelete={onDelete}
+              // onDelete={onDelete}
               onEdit={onEdit}
               onHide={onHide}
               onShow={onShow}

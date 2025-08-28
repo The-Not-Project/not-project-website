@@ -23,10 +23,10 @@ export default function Page({userId}: { userId: string }) {
 
   useEffect(() => {
     getUser(userId)
-      .then((dbUsed) => {
+      .then(dbUsed => {
         setCurrentUser(dbUsed);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("Failed to fetch user:", error);
       })
   }, [userId]);

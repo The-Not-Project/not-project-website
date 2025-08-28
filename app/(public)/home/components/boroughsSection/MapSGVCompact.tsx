@@ -114,7 +114,7 @@ export default function SVG({
         y={-3}
         // shrinkx={30}
         // shrinky={15}
-        scale={9}
+        // scale={9}
         onClick={() => onClickAction("bronx")}
         className={clsx({
           active: transitionReady && activeBorough === "bronx",
@@ -135,7 +135,7 @@ export default function SVG({
         y={-3}
         // shrinkx={22}
         // shrinky={22}
-        scale={20}
+        // scale={20}
         onClick={() => onClickAction("manhattan")}
         className={clsx({
           active: transitionReady && activeBorough === "manhattan",
@@ -153,7 +153,7 @@ export default function SVG({
       <Path
         x={-8}
         y={-5}
-        scale={6}
+        // scale={6}
         // shrinkx={35}
         // shrinky={20}
         onClick={() => handleClick("queens")}
@@ -178,7 +178,7 @@ export default function SVG({
         y={-7}
         // shrinkx={27}
         // shrinky={28}
-        scale={7}
+        // scale={7}
         onClick={() => onClickAction("brooklyn")}
         className={clsx({
           active: transitionReady && activeBorough === "brooklyn",
@@ -199,7 +199,7 @@ export default function SVG({
         y={-10}
         // shrinkx={12}
         // shrinky={32}
-        scale={9}
+        // scale={9}
         onClick={() => onClickAction("statenisland")}
         className={clsx({
           active: transitionReady && activeBorough === "statenisland",
