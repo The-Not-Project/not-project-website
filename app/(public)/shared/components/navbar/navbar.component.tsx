@@ -28,11 +28,7 @@ export default function NavBar() {
   const pathname = usePathname();
 
   const { transparency } = useHeaderScroll();
-  const isSpecialPage =
-    pathname === "/" ||
-    pathname.startsWith("/stories") ||
-    pathname === "/about" ||
-    pathname === "/contact";
+  const isSpecialPage = !pathname.startsWith("/story")
 
   const isBgSolid = isSpecialPage && transparency;
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LoadingPageContainer = styled.div<{ $isLoading: boolean, $isHome: boolean }>`
+export const LoadingPageContainer = styled.div`
     position: fixed;
     top: 0;
     left: 0;
@@ -12,6 +12,7 @@ export const LoadingPageContainer = styled.div<{ $isLoading: boolean, $isHome: b
     background: #1c1c1c;
     color: white;
     z-index: 999;
-    ${({ $isLoading }) => !$isLoading && "transition: translate .3s ease;"};
-    translate: 0 ${({ $isLoading, $isHome }) => ($isLoading ? "0" : $isHome ? "-100%" : "100%")};
+    transition: translate .3s ease;
+    transition-delay: 700ms;
+    translate: 0 -100%;
 `
