@@ -39,7 +39,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className={clsx("page-wrapper", { shifted: isMenuOpen })}>
+    <div className={clsx("page-wrapper max-height", { shifted: isMenuOpen })}>
       {showLoader  && <LoadingPage />}
       {showContent && (
         <>

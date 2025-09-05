@@ -29,11 +29,13 @@ body {
 
 .page-wrapper {
   transition: .18s ease-in !important;
-  min-height: 100vh;
-  // background: #1c1c1c;
 
   &.shifted {
     translate: -80%;
+  }
+
+  &.max-height {
+    min-height: 100vh;
   }
 }
 
