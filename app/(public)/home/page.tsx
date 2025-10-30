@@ -25,7 +25,7 @@ export default function HomePage() {
     window.scrollTo(0, 0);
     setTimeout(() => {
       setShowContent(true);
-    }, 500);
+    }, 100);
 
     setTimeout(() => {
       setShowLoader(false);

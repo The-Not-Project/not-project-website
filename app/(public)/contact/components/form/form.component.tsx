@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FormContainer } from "./form.styles";
 
 export default function ContactForm() {
-  const [type, setType] = useState("feedback");
+  const [type, setType] = useState<"feedback" | "collab">("collab");
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
   const [anonymous, setAnonymous] = useState(false);
@@ -37,7 +37,7 @@ export default function ContactForm() {
   }
 
   function handleChangeType(e: React.ChangeEvent<HTMLSelectElement>) {
-    setType(e.target.value);
+    setType(e.target.value as "feedback" | "collab");
     if (e.target.value === "collab") {
       setAnonymous(false);
     }
