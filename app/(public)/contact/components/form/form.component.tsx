@@ -14,19 +14,22 @@ export default function ContactForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setStatus("sending");
+    alert("Form submission is currently disabled.");
+    setStatus("idle");
+    return;
+    // setStatus("sending");
 
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message,
-        email: anonymous ? "" : email,
-        type: type === "collab" ? "collab" : "feedback",
-      }),
-    });
+    // const res = await fetch("/api/contact", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     message,
+    //     email: anonymous ? "" : email,
+    //     type: type === "collab" ? "collab" : "feedback",
+    //   }),
+    // });
 
-    setStatus(res.ok ? "sent" : "error");
+    // setStatus(res.ok ? "sent" : "error");
   }
 
   function handleChangeAnonymous(e: React.ChangeEvent<HTMLInputElement>) {
