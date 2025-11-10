@@ -33,6 +33,11 @@ export const Button = styled.button`
     display: block;
     margin: 20px 10px 0 auto;
   }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 `;
 
 export const CloseButton = styled(FaXmark)`

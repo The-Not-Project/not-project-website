@@ -6,7 +6,6 @@ import type { Story as StoryType } from '@/app/types/types';
 type StoriesListProps = {
   stories: StoryType[];
   isLoading: boolean;
-  onEdit: (story: StoryType) => void;
   // onDelete: (id: string) => Promise<void>;
   onHide: (id: string) => Promise<void>;
   onShow: (id: string) => Promise<void>;
@@ -16,7 +15,6 @@ export default function StoriesList({
   isLoading,
   stories,
   // onDelete,
-  onEdit,
   onHide,
   onShow
 }: StoriesListProps) {
@@ -35,7 +33,6 @@ export default function StoriesList({
               key={index}
               story={story}
               // onDelete={onDelete}
-              onEdit={onEdit}
               onHide={onHide}
               onShow={onShow}
             />

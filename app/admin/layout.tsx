@@ -15,6 +15,7 @@ import {
   editStory,
   getHiddenStories,
   getStories,
+  getStory,
   republishStory,
   unpublishStory,
 } from '../database/repositories/story.repository';
@@ -43,6 +44,7 @@ export default async function AdminLayout({
     deleteCategory,
     createStory,
     getStories,
+    getStory,
     editStory,
     deleteStory,
     getRecommendations,

@@ -69,8 +69,9 @@ export const FileInput = styled.input`
 
 export const FileInputLabel = styled.label`
   display: block;
-  width: 200px;
-  height: 120px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
   margin-block: 5px 10px;
   border-radius: 5px;
   overflow: hidden;

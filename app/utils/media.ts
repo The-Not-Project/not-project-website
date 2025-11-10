@@ -173,6 +173,6 @@ export async function uploadToS3(file: File): Promise<string> {
  * @returns Public URL string to the uploaded (possibly compressed) image.
  */
 export async function uploadToS3WithCompression(file: File): Promise<string> {
-  const compressed = await compressImage(file); // uses defaults unless opts passed
-  return uploadToS3(compressed);
+  // const compressed = await compressImage(file); // uses defaults unless opts passed
+  return uploadToS3(file);
 }

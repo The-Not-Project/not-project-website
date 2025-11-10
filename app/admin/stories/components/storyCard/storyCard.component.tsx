@@ -6,19 +6,18 @@ import {
   StoryImageContainer,
 } from "./storyCard.styles";
 import { Button } from "../../../shared/components/button/button";
+import Link from "next/link";
 
 type StoryProps = {
   story: StoryType;
   // onDelete: (id: string) => Promise<void>;
   onHide: (id: string) => Promise<void>;
   onShow: (id: string) => Promise<void>;
-  onEdit: (story: StoryType) => void;
 };
 
 export default function Story({
   story,
   // onDelete,
-  onEdit,
   onHide,
   onShow,
 }: StoryProps) {
@@ -54,8 +53,10 @@ export default function Story({
       <ActionsContainer>
         {story.isPublished ? (
           <>
-            <Button className="inverted" onClick={() => onEdit(story)}>
-              Edit
+            <Button className="inverted">
+              <Link href={`/admin/story/edit/${story.id}`}>
+                Edit
+              </Link>
             </Button>
             <Button onClick={() => onHide(story.id)}>Hide</Button>
           </>

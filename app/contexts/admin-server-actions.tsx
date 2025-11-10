@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { createContext, useContext } from 'react';
-import { User, Category, Story, Filters } from '@/app/types/types';
+import { createContext, useContext } from "react";
+import { User, Category, Story, Filters } from "@/app/types/types";
 
 type AdminServerActions = {
   getUser: (id: string) => Promise<User | null>;
@@ -12,6 +12,7 @@ type AdminServerActions = {
   deleteCategory: (id: string) => Promise<void>;
   createStory: (data: FormData) => Promise<void>;
   getStories: (filters?: Filters) => Promise<Story[]>;
+  getStory: (id: string) => Promise<Story | null>;
   editStory: (id: string, data: FormData) => Promise<void>;
   deleteStory: (id: string) => Promise<void>;
   getRecommendations: () => Promise<Story[]>;
@@ -24,7 +25,9 @@ type AdminServerActions = {
   getHiddenStories: () => Promise<Story[]>;
 };
 
-const AdminServerActionsContext = createContext<AdminServerActions | null>(null);
+const AdminServerActionsContext = createContext<AdminServerActions | null>(
+  null
+);
 
 export function AdminServerActionsProvider({
   children,
@@ -42,7 +45,9 @@ export function AdminServerActionsProvider({
 export function useAdminServerActions() {
   const context = useContext(AdminServerActionsContext);
   if (!context) {
-    throw new Error('useAdminServerActions must be used within a AdminServerActionsProvider');
+    throw new Error(
+      "useAdminServerActions must be used within a AdminServerActionsProvider"
+    );
   }
   return context;
 }

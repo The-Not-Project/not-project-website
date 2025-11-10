@@ -1,7 +1,7 @@
 "use client";
 
 import { useAdminServerActions } from "@/app/contexts/admin-server-actions";
-import { Category, Filters, Story } from "@/app/types/types";
+import { Filters, Story } from "@/app/types/types";
 import { useState, useEffect, useCallback } from "react";
 import {
   PageSection,
@@ -9,17 +9,18 @@ import {
   StoriesSection,
 } from "../shared/components/layout/Section";
 import StoriesList from "./components/storiesList/storiesList.component";
-import StoryFormPopup from "./components/storyFormPopup/storyFormPopup.component";
+// import StoryFormPopup from "./components/storyFormPopup/storyFormPopup.component";
 import StoriesSearch from "./components/storiesFilteredSearch/storiesFilteredSearch.component";
 import { Button } from "../shared/components/button/button";
 import StoriesToggle from "./components/StoriesToggle/storiesToggle.component";
+import Link from "next/link";
 
-type FormState = {
-  isOpen: boolean;
-  isEditing: boolean;
-  currentStory: Story | null;
-  selectedCategories: Category[];
-};
+// type FormState = {
+//   isOpen: boolean;
+//   isEditing: boolean;
+//   currentStory: Story | null;
+//   selectedCategories: Category[];
+// };
 
 const defaultFilters = {
   search: "",
@@ -29,10 +30,8 @@ const defaultFilters = {
 
 export default function StoriesPage() {
   const {
-    createStory,
     getStories,
     // deleteStory,
-    editStory,
     getHiddenStories,
     unpublishStory,
     republishStory,
@@ -42,12 +41,12 @@ export default function StoriesPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [showHidden, setShowHidden] = useState(false);
 
-  const [formState, setFormState] = useState<FormState>({
-    isOpen: false,
-    isEditing: false,
-    currentStory: null,
-    selectedCategories: [],
-  });
+  // const [formState, setFormState] = useState<FormState>({
+  //   isOpen: false,
+  //   isEditing: false,
+  //   currentStory: null,
+  //   selectedCategories: [],
+  // });
 
   const [filters, setFilters] = useState<Filters>(defaultFilters);
 
@@ -82,37 +81,19 @@ export default function StoriesPage() {
     }
   }, [filters, fetchStories, showHidden]);
 
-  const handleOpenCreate = async () => {
-    setFormState({
-      isOpen: true,
-      isEditing: false,
-      currentStory: null,
-      selectedCategories: [],
-    });
-  };
+  // const handleClosePopup = async () => {
+  //   setFormState((prev) => ({
+  //     ...prev,
+  //     isOpen: false,
+  //     currentStory: null,
+  //     selectedCategories: [],
+  //   }));
+  // };
 
-  const handleOpenEdit = (story: Story) => {
-    setFormState({
-      isOpen: true,
-      isEditing: true,
-      currentStory: story,
-      selectedCategories: story.categories,
-    });
-  };
-
-  const handleClosePopup = async () => {
-    setFormState((prev) => ({
-      ...prev,
-      isOpen: false,
-      currentStory: null,
-      selectedCategories: [],
-    }));
-  };
-
-  const handleSubmitSuccess = async () => {
-    await fetchStories();
-    handleClosePopup();
-  };
+  // const handleSubmitSuccess = async () => {
+  //   await fetchStories();
+  //   handleClosePopup();
+  // };
 
   const handleHideStory = async (id: string) => {
     try {
@@ -132,15 +113,6 @@ export default function StoriesPage() {
     }
   };
 
-  // const handleDeleteStory = async (id: string) => {
-  //   try {
-  //     await deleteStory(id);
-  //     await fetchHiddenStories();
-  //   } catch (error) {
-  //     alert("Error deleting story: " + error);
-  //   }
-  // };
-
   return (
     <PageSection>
       <SectionTitle>Stories</SectionTitle>
@@ -151,13 +123,12 @@ export default function StoriesPage() {
           <StoriesList
             isLoading={isLoading}
             stories={stories}
-            onEdit={handleOpenEdit}
             // onDelete={handleDeleteStory}
             onHide={handleHideStory}
             onShow={handleRepublishStory}
           />
 
-          {formState.isOpen && (
+          {/* {formState.isOpen && (
             <StoryFormPopup
               isOpen={formState.isOpen}
               isEditing={formState.isEditing}
@@ -174,10 +145,14 @@ export default function StoriesPage() {
               createStoryAction={createStory}
               editStoryAction={editStory}
             />
-          )}
+          )} */}
 
-          <Button className="cornered" onClick={handleOpenCreate}>
-            Add
+          <Button className="cornered" 
+          // onClick={handleOpenCreate}
+          >
+            <Link href="/admin/story/create">
+              Add
+            </Link>
           </Button>
         </div>
       </StoriesSection>
