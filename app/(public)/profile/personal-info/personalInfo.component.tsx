@@ -29,6 +29,7 @@ export default function Page({userId}: { userId: string }) {
       .catch(error => {
         console.error("Failed to fetch user:", error);
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

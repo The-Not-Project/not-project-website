@@ -20,6 +20,7 @@ export default function SavedStories({ userId }: { userId: string }) {
       }
     };
     fetchSavedStories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   return (

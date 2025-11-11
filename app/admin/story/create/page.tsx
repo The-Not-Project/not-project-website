@@ -7,7 +7,6 @@ import {
   FormInput,
   FormLabel,
   FormTextArea,
-  FormSelect,
   EditorContainer,
 } from "../../shared/components/form/FormElements";
 import FileInputContainer from "@/app/admin/shared/components/fileInput/fileInput.component";
@@ -20,6 +19,10 @@ import {
 import { CreateStoryButton } from "../../shared/components/button/button";
 import { useAdminServerActions } from "@/app/contexts/admin-server-actions";
 import { redirect } from "next/navigation";
+import {
+  FilterOptionsContainer as BoroughsContainer,
+  FilterOption as BoroughOption,
+} from "../../stories/components/storiesFilteredSearch/storiesFilteredSearch.styles";
 
 export default function CreateStoryPage() {
   const { createStory } = useAdminServerActions();
@@ -27,6 +30,13 @@ export default function CreateStoryPage() {
   const [submitting, setSubmitting] = useState(false);
   const [editorContent, setEditorContent] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+  const [selectedBorough, setSelectedBorough] = useState<string>("new york");
+
+    const handleBoroughClick = (borough: string) => {
+    if (selectedBorough !== borough) {
+      setSelectedBorough(borough);
+    }
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,6 +45,7 @@ export default function CreateStoryPage() {
     const formData = new FormData(event.currentTarget);
 
     formData.append("content", editorContent);
+    formData.append("borough", selectedBorough);
 
     selectedCategories.forEach((category) => {
       formData.append("categories", category.id);
@@ -78,7 +89,7 @@ export default function CreateStoryPage() {
         <FormTextArea height="100" name="summary" required />
 
         <FormLabel htmlFor="borough">Borough</FormLabel>
-        <FormSelect name="borough" required>
+        <BoroughsContainer>
           {[
             "new york",
             "brooklyn",
@@ -87,11 +98,15 @@ export default function CreateStoryPage() {
             "queens",
             "staten island",
           ].map((borough) => (
-            <option key={borough} value={borough}>
+            <BoroughOption
+              key={borough}
+              className={selectedBorough === borough ? "selected" : ""}
+              onClick={() => handleBoroughClick(borough)}
+            >
               {capitalizeWords(borough)}
-            </option>
+            </BoroughOption>
           ))}
-        </FormSelect>
+        </BoroughsContainer>
 
         <FormLabel>Categories</FormLabel>
         <CategoriesSearch

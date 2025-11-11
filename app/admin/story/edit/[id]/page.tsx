@@ -8,7 +8,6 @@ import {
   FormInput,
   FormLabel,
   FormTextArea,
-  FormSelect,
   EditorContainer,
 } from "../../../shared/components/form/FormElements";
 import FileInputContainer from "@/app/admin/shared/components/fileInput/fileInput.component";
@@ -21,6 +20,7 @@ import {
 import { CreateStoryButton } from "../../../shared/components/button/button";
 import { useAdminServerActions } from "@/app/contexts/admin-server-actions";
 import { redirect } from "next/navigation";
+import {FilterOptionsContainer as BoroughsContainer, FilterOption as BoroughOption} from "../../../stories/components/storiesFilteredSearch/storiesFilteredSearch.styles"
 
 export default function EditStoryPage() {
   const { id } = useParams();
@@ -30,6 +30,13 @@ export default function EditStoryPage() {
   const [submitting, setSubmitting] = useState(false);
   const [editorContent, setEditorContent] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+  const [selectedBorough, setSelectedBorough] = useState<string>("");
+
+  const handleBoroughClick = (borough: string) => {
+    if (selectedBorough !== borough) {
+      setSelectedBorough(borough);
+    }
+  };
 
   useEffect(() => {
     async function fetchStory() {
@@ -43,6 +50,7 @@ export default function EditStoryPage() {
         setStory(fetchedStory);
         setEditorContent(fetchedStory.content);
         setSelectedCategories(fetchedStory.categories);
+        setSelectedBorough(fetchedStory.borough);
       } catch (error) {
         console.error(error);
         alert("There was an error fetching the story.");
@@ -60,6 +68,7 @@ export default function EditStoryPage() {
     const formData = new FormData(event.currentTarget);
 
     formData.append("content", editorContent);
+    formData.append("borough", selectedBorough);
 
     selectedCategories.forEach((category) => {
       formData.append("categories", category.id);
@@ -117,11 +126,7 @@ export default function EditStoryPage() {
         />
 
         <FormLabel htmlFor="borough">Borough</FormLabel>
-        <FormSelect
-          name="borough"
-          required
-          defaultValue={story.borough}
-        >
+        <BoroughsContainer>
           {[
             "new york",
             "brooklyn",
@@ -130,18 +135,21 @@ export default function EditStoryPage() {
             "queens",
             "staten island",
           ].map((borough) => (
-            <option key={borough} value={borough}>
+            <BoroughOption
+              key={borough}
+              className={selectedBorough === borough ? "selected" : ""}
+              onClick={() => handleBoroughClick(borough)}
+            >
               {capitalizeWords(borough)}
-            </option>
+            </BoroughOption>
           ))}
-        </FormSelect>
+        </BoroughsContainer>
 
         <FormLabel>Categories</FormLabel>
         <CategoriesSearch
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
         />
-
 
         <CreateStoryButton type="submit" disabled={submitting}>
           {submitting ? "Saving..." : "Save"}

@@ -79,7 +79,7 @@ export default function StoriesPage() {
     } else {
       fetchStories(filters);
     }
-  }, [filters, fetchStories, showHidden]);
+  }, [filters, fetchStories, showHidden, fetchHiddenStories]);
 
   // const handleClosePopup = async () => {
   //   setFormState((prev) => ({
