@@ -41,7 +41,11 @@ export async function compressImage(
     throw new Error("Provided file is not an image");
   }
 
-  const { maxSizeMB = 1, maxDimension = 1920, initialQuality = 0.8 } = opts;
+  const {
+    maxSizeMB = 1,
+    maxDimension = 1920,
+    initialQuality = 0.8,
+  } = opts;
 
   // SERVER path (Node): use sharp (skipped on Edge)
   if (typeof window === "undefined") {
@@ -52,10 +56,7 @@ export async function compressImage(
     try {
       const { default: sharp } = await import("sharp");
       const input = Buffer.from(await file.arrayBuffer());
-      const quality = Math.max(
-        1,
-        Math.min(100, Math.round(initialQuality * 100))
-      );
+      const quality = Math.max(1, Math.min(100, Math.round(initialQuality * 100)));
 
       const output = await sharp(input)
         .rotate()
@@ -88,9 +89,7 @@ export async function compressImage(
   }
 
   // Client-side path (browser)
-  const { default: imageCompression } = await import(
-    "browser-image-compression"
-  );
+  const { default: imageCompression } = await import("browser-image-compression");
   return imageCompression(file, {
     maxSizeMB,
     maxWidthOrHeight: maxDimension,
@@ -98,6 +97,8 @@ export async function compressImage(
     useWebWorker: true,
   });
 }
+
+
 
 /**
  * Build an API URL for the current environment.
@@ -147,11 +148,8 @@ function uploadEndpoint(file: File) {
  * @returns Public URL string to the uploaded object.
  */
 export async function uploadToS3(file: File): Promise<string> {
-  console.log("Uploading to S3:", file.name);
   const res = await fetch(uploadEndpoint(file));
   if (!res.ok) throw new Error("Failed to get upload URL");
-
-  console.log("Got upload URL");
 
   const { uploadUrl, publicUrl } = await res.json();
 
@@ -160,10 +158,7 @@ export async function uploadToS3(file: File): Promise<string> {
     headers: { "Content-Type": file.type || "application/octet-stream" },
     body: file,
   });
-
   if (!put.ok) throw new Error("S3 upload failed");
-
-  console.log("Uploaded to S3:", publicUrl);
 
   return publicUrl as string;
 }
@@ -178,7 +173,6 @@ export async function uploadToS3(file: File): Promise<string> {
  * @returns Public URL string to the uploaded (possibly compressed) image.
  */
 export async function uploadToS3WithCompression(file: File): Promise<string> {
-  // const compressed = await compressImage(file); // uses defaults unless opts passed
-  console.log("Skipping compression for now");
-  return uploadToS3(file);
+  const compressed = await compressImage(file); // uses defaults unless opts passed
+  return uploadToS3(compressed);
 }
