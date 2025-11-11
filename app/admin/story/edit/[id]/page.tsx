@@ -24,9 +24,6 @@ import { redirect } from "next/navigation";
 
 export default function EditStoryPage() {
   const { id } = useParams();
-
-  console.log(id);
-
   const { getStory, editStory } = useAdminServerActions();
 
   const [story, setStory] = useState<Story | null>(null);
