@@ -71,7 +71,7 @@ export default function StoriesPageComponent({
     <div className={clsx("page-wrapper", { shifted: isMenuOpen })}>
       <Header borough={currentBorough} />
       {boroughParam && (
-        <BoroughTitle>Our {currentBorough.boroughName} Stories</BoroughTitle>
+        <BoroughTitle>{currentBorough.boroughName}&apos;s Stories</BoroughTitle>
       )}
       <StoriesContainer>
         <StoriesSearch filters={filters} setFilters={setFilters} />

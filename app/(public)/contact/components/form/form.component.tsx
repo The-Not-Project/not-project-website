@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FormContainer } from "./form.styles";
 
 export default function ContactForm() {
-  const [type, setType] = useState<"feedback" | "collab">("collab");
+  const [type, setType] = useState<"feedback" | "collab">("feedback");
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
   const [anonymous, setAnonymous] = useState(false);

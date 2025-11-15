@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
 export const BoroughTitle = styled.h1`
-  /* font-family: "Rubik Glitch Pop", system-ui; */
+  font-family: "Rubik Glitch Pop", system-ui;
   text-align: center;
   font-size: 2.5rem;
   margin-block: 40px;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 `
 
 export const StoriesContainer = styled.div`
