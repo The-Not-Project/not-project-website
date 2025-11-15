@@ -1,4 +1,11 @@
 import type { NextConfig } from 'next';
+import withPWAInit from 'next-pwa';
+
+const withPWA = withPWAInit({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+});
 
 const nextConfig: NextConfig = {
   compiler: {
@@ -13,12 +20,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'gray-certain-lungfish-417.mypinata.cloud',
-        port: '',
-        pathname: '/files/**',
-      },
-      {
-        protocol: 'https',
         hostname: 'd14sc23dxgzlmj.cloudfront.net',
         port: '',
         pathname: '/images/**',
@@ -27,4 +28,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPWA(nextConfig);

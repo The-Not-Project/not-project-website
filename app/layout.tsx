@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Outfit as Font } from "next/font/google";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import seoKeywords from "./constants/seoKeywords";
-import "./globals.scss";
+import './globals.scss';
 import "./tiptap/styles/_keyframe-animations.scss";
 import "./tiptap/styles/_variables.scss";
 import AuthSyncer from "./(public)/shared/components/auth/AuthSyncer";
@@ -52,8 +52,8 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <meta name="theme-color" content="#1c1c1c" />
+        <link rel="icon" href="/favicon.ico" media="(prefers-color-scheme: dark)"/>
+        <meta name="apple-mobile-web-app-title" content="Not Project" />
       </head>
       <body className={oswald.className}>
         <UserProvider>

@@ -20,7 +20,10 @@ import {
 import { CreateStoryButton } from "../../../shared/components/button/button";
 import { useAdminServerActions } from "@/app/contexts/admin-server-actions";
 import { redirect } from "next/navigation";
-import {FilterOptionsContainer as BoroughsContainer, FilterOption as BoroughOption} from "../../../stories/components/storiesFilteredSearch/storiesFilteredSearch.styles"
+import {
+  FilterOptionsContainer as BoroughsContainer,
+  FilterOption as BoroughOption,
+} from "../../../stories/components/storiesFilteredSearch/storiesFilteredSearch.styles";
 
 export default function EditStoryPage() {
   const { id } = useParams();

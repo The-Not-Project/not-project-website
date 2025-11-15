@@ -32,7 +32,7 @@ export default function CreateStoryPage() {
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
   const [selectedBorough, setSelectedBorough] = useState<string>("new york");
 
-    const handleBoroughClick = (borough: string) => {
+  const handleBoroughClick = (borough: string) => {
     if (selectedBorough !== borough) {
       setSelectedBorough(borough);
     }
