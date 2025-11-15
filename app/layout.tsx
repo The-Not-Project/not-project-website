@@ -53,7 +53,7 @@ export default async function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" media="(prefers-color-scheme: dark)"/>
-        <meta name="apple-mobile-web-app-title" content="Not Project" />
+        <link rel="preload" as="video" href="video.webm" type="video/webm"></link>
       </head>
       <body className={oswald.className}>
         <UserProvider>

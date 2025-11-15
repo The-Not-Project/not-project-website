@@ -19,8 +19,9 @@ export default function HomePageHeader() {
           loop
           muted
           playsInline
+          poster="/media/firstframe.png"
         >
-          <source src="/media/not a test.mp4" type="video/mp4" />
+          <source src="/media/output.webm" type="video/webm" />
         </HeaderVideo>
       </HeaderBackground>
       {/* <div className='quote'>“Not who they expected, exactly who I am”</div> */}
