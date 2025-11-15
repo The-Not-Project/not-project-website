@@ -27,10 +27,24 @@ export default function HomePage() {
       setShowContent(true);
     }, 100);
 
+    const isPWA = window.matchMedia("(display-mode: standalone)").matches;
+
+    const viewportMeta = document.querySelector<HTMLMetaElement>(
+      'meta[name="viewport"]'
+    );
+
+    if (viewportMeta) {
+      if (isPWA) {
+        viewportMeta.content =
+          "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no";
+      } else {
+        viewportMeta.content = "width=device-width, initial-scale=1";
+      }
+    }
+
     setTimeout(() => {
       setShowLoader(false);
     }, 1000);
-
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -40,7 +54,7 @@ export default function HomePage() {
 
   return (
     <div className={clsx("page-wrapper max-height", { shifted: isMenuOpen })}>
-      {showLoader  && <LoadingPage />}
+      {showLoader && <LoadingPage />}
       {showContent && (
         <>
           <Header />
