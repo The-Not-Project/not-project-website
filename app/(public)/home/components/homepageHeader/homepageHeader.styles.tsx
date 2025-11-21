@@ -15,13 +15,6 @@ export const HeaderContainer = styled.header`
     max-height: none;
   }
 
-  .quote {
-    position: absolute;
-    margin: 20px;
-    font-size: 2rem;
-    width: 300px;
-  }
-
   .center-title {
     font-family: "Oswald", sans-serif;
     text-align: center;

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import ContactForm from "./components/form/form.component";
 import { ContactContainer, HeaderContainer, HeaderImage } from "./styles";
 import { useStore } from "@/app/zustand/store";
+import CaptchaWrapper from "./components/form/captcha-wrapper";
 
 export default function ContactPage() {
   const setIsMobile = useStore((state) => state.mobileLayout.setIsMobile);
@@ -38,7 +39,9 @@ export default function ContactPage() {
       <ContactContainer
         className={clsx("page-wrapper", { shifted: isMenuOpen })}
       >
-        <ContactForm />
+        <CaptchaWrapper>
+          <ContactForm />
+        </CaptchaWrapper>
       </ContactContainer>
     </>
   );

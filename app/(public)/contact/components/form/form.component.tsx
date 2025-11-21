@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FormContainer } from "./form.styles";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function ContactForm() {
   const [type, setType] = useState<"feedback" | "collab">("feedback");
@@ -12,24 +13,28 @@ export default function ContactForm() {
     "idle"
   );
 
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    alert("Form submission is currently disabled.");
-    setStatus("idle");
-    return;
-    // setStatus("sending");
+    setStatus("sending");
 
-    // const res = await fetch("/api/contact", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     message,
-    //     email: anonymous ? "" : email,
-    //     type: type === "collab" ? "collab" : "feedback",
-    //   }),
-    // });
+    const token = executeRecaptcha
+      ? await executeRecaptcha("contact_form")
+      : null;
 
-    // setStatus(res.ok ? "sent" : "error");
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message,
+        email: anonymous ? "" : email,
+        type: type === "collab" ? "collab" : "feedback",
+        token,
+      }),
+    });
+
+    setStatus(res.ok ? "sent" : "error");
   }
 
   function handleChangeAnonymous(e: React.ChangeEvent<HTMLInputElement>) {
@@ -50,11 +55,7 @@ export default function ContactForm() {
     <FormContainer onSubmit={handleSubmit}>
       <h2>We’d love to hear from you</h2>
       <label htmlFor="subject">Subject</label>
-      <select
-        id="subject"
-        value={type}
-        onChange={(e) => handleChangeType(e)}
-      >
+      <select id="subject" value={type} onChange={(e) => handleChangeType(e)}>
         <option value="feedback">Feedback</option>
         <option value="collab">Collaboration</option>
       </select>
@@ -77,7 +78,7 @@ export default function ContactForm() {
         <input
           type="checkbox"
           checked={anonymous}
-          onChange={e => handleChangeAnonymous(e)}
+          onChange={(e) => handleChangeAnonymous(e)}
           disabled={type === "collab" ? true : false}
         />
         {"I'd rather stay anonymous"}
