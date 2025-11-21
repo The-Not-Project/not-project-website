@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FormContainer } from "./form.styles";
+import { CaptchaNotice, FormContainer } from "./form.styles";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function ContactForm() {
@@ -59,7 +59,6 @@ export default function ContactForm() {
         <option value="feedback">Feedback</option>
         <option value="collab">Collaboration</option>
       </select>
-
       <label htmlFor="email">
         {type == "feedback"
           ? "Your email (optional)"
@@ -73,7 +72,6 @@ export default function ContactForm() {
         required
         disabled={anonymous ? true : false}
       />
-
       <label>
         <input
           type="checkbox"
@@ -93,11 +91,14 @@ export default function ContactForm() {
             : "Tell us about your idea, project, or how you'd like to work together."
         }
       ></textarea>
-
+      <CaptchaNotice>
+      This site is protected by reCAPTCHA and the Google{" "}
+        <a href="https://policies.google.com/privacy">Privacy Policy</a> and{" "}
+        <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+      </CaptchaNotice>
       <button type="submit" disabled={status === "sending"}>
         {status === "sending" ? "Sending..." : "Send"}
       </button>
-
       {status === "sent" && <p>Message sent!</p>}
       {status === "error" && <p>Something went wrong.</p>}
     </FormContainer>

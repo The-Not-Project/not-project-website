@@ -42,7 +42,7 @@ export const FormContainer = styled.form`
   }
 
   textarea {
-    margin-block: 15px 20px;
+    margin-top: 15px;
     width: 100%;
     height: 200px;
     font-size: 1.1rem;
@@ -62,7 +62,7 @@ export const FormContainer = styled.form`
     color: white;
     outline: none;
     border: none;
-    border-radius: 6px;
+    border-radius: 3px;
   }
 
   select {
@@ -75,3 +75,13 @@ export const FormContainer = styled.form`
     margin-bottom: 20px;
   }
 `;
+
+export const CaptchaNotice = styled.p`
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 20px;
+
+  a {
+   text-decoration: none;
+  }
+`

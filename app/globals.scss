@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Abyssinica+SIL&family=Manufacturing+Consent&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Abyssinica+SIL&family=Manufacturing+Consent&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
 
 :root {
   --text-color: rgb(0, 0, 0);
@@ -28,7 +28,7 @@ body {
 }
 
 .page-wrapper {
-  transition: .18s ease-in !important;
+  transition: 0.18s ease-in !important;
 
   &.shifted {
     translate: -80%;
@@ -137,7 +137,6 @@ select {
   }
 }
 
-
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
@@ -149,4 +148,8 @@ select {
 
 .object-cover {
   object-fit: cover;
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
 }
