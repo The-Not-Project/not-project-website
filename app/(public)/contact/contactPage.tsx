@@ -30,7 +30,7 @@ export default function ContactPage() {
     <>
       <HeaderContainer>
         <HeaderImage
-          src="/media/tariq&IceCream.jpg"
+          src="/media/tariqWIceCream.JPG"
           alt="About Us"
           width={1920}
           height={1080}
