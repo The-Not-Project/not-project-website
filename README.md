@@ -22,7 +22,7 @@ This repository contains the complete source code for the web platform. It is bu
 - **Backend:** MySQL with Prisma ORM  
 - **Hosting:** Vercel (frontend) and AWS RDS (database)  
 - **Auth & State:** Auth0 for authentication, Zustand for global state  
-- **Media Storage:** Pinata (IPFS)  
+- **Media Storage:** AWS S3
 - **Email:** Resend  
 - **Version Control:** Git (private repo)
 

@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Abyssinica+SIL&family=Manufacturing+Consent&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
 
 :root {
@@ -23,8 +22,10 @@
 }
 
 body {
-  background: #f9faf9;
+  background: #000000;
   color: var(--text-color);
+  // font-family: "GeorgiaWeb", Georgia, serif !important;
+  font-weight:normal;
 }
 
 .page-wrapper {
