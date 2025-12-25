@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import {
+  CenterTitle,
   HeaderBackground,
   HeaderContainer,
   HeaderVideo,
@@ -25,7 +27,15 @@ export default function HomePageHeader() {
         </HeaderVideo>
       </HeaderBackground>
       {/* <div className='quote'>“Not who they expected, exactly who I am”</div> */}
-      <div className="center-title">Unbridled Stories, Untamed Voices.</div>
+      <CenterTitle>
+        <h2>Unbridled Stories, Untamed Voices.</h2>
+        <h1>THE NOT</h1>
+        <div>
+          <Image src="/media/knot-separator.png" alt="Logo" fill />
+        </div>
+        <h1>PROJECT</h1>
+        <p>Explore meaningful stories from New York City, told without constraint or agenda.</p>
+      </CenterTitle>
     </HeaderContainer>
   );
 }

@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import ReactDOMServer from "react-dom/server";
 import { usePublicServerActions } from "@/app/contexts/public-server-actions";
-import { ConsentText, SignUp, SignUpForm, SignUpSection } from "./form.styles";
+import { SignUpForm, SignUpSection } from "./form.styles";
 import PrivacyPolicy from "@/app/constants/privacyPolicy";
 import TermsAndConditions from "@/app/constants/termsConditions";
 
@@ -86,29 +86,19 @@ export default function Form() {
 
   return (
     <SignUpSection>
-      <h2>Never Miss Out</h2>
       <SignUpForm onSubmit={(e) => handleSignUp(e)}>
         <p>Be the first to know about our new stories.</p>
-        <SignUp>
-          <input type="email" name="email" placeholder="Email address" />
+     
+          <input type="email" name="email" placeholder="example@domain.com" required />
           <input
             type="tel"
             name="phone"
             placeholder="Phone number (optional)"
           />
           <button type="submit">Sign Up</button>
-        </SignUp>
+      
       </SignUpForm>
-      <ConsentText>
-        By entering your phone number and submitting this form, you consent to
-        receive marketing text messages from The Not Project at the number
-        provided, including messages sent by autodialer. Message and data rates
-        may apply. Message frequency varies. You can unsubscribe at any time by
-        replying STOP or clicking the unsubscribe link (where available) in one
-        of our messages. View our{" "}
-        <span onClick={() => handleClick("privacy")}>Privacy Policies</span> and{" "}
-        <span onClick={() => handleClick("terms")}>Terms & Conditions</span>.
-      </ConsentText>
+      
     </SignUpSection>
   );
 }

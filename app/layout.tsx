@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { Outfit as Font } from "next/font/google";
+import { Manrope as Font } from "next/font/google";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import seoKeywords from "./constants/seoKeywords";
 import './globals.scss';

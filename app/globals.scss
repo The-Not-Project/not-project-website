@@ -22,7 +22,7 @@
 }
 
 body {
-  background: #000000;
+  background: #0d0d0d;
   color: var(--text-color);
   // font-family: "GeorgiaWeb", Georgia, serif !important;
   font-weight:normal;
@@ -45,24 +45,6 @@ input,
 textarea,
 select {
   font-family: "DM Sans", sans-serif;
-}
-
-@keyframes fadepulsatefast {
-  50% {
-    filter: blur(1000px);
-  }
-  100% {
-    filter: none;
-  }
-}
-
-@keyframes fadepulsateslow {
-  33% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 @keyframes scroll {

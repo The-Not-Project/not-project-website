@@ -1,70 +1,52 @@
 import styled from "styled-components";
 
 export const SignUpSection = styled.div`
-  h2 {
-    font-size: 1.5rem;
-    font-weight: normal;
-    margin-bottom: 0.5rem;
-  }
 
   p {
-    margin-bottom: 0.5rem;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
   }
 `;
 
 export const SignUpForm = styled.form`
-  display: flex;
-  flex-direction: column;
 
   input {
-    padding: 0.25rem 1rem;
-    border: 1px solid white;
-    border-radius: 2rem;
+    display: block;
+    border: none;
+    border-bottom: 1px solid black;
     background: transparent;
-    color: white;
     font-size: 0.85rem;
     width: 250px;
-    height: 40px;
+    height: 25px;
+    margin-bottom: 15px;
     outline: none;
+
 
     @media (max-width: 1000px) {
       width: 100%;
     }
 
     &::placeholder {
-      color: #ccc;
+      color: #00000090;
     }
   }
 
   button {
+    margin-top: 15px;
     padding: 0.25rem 1rem;
-    border: 1px solid rgba(255, 255, 255, 255);
+    border: 1px solid black;
     border-radius: 2rem;
     background: transparent;
-    color: white;
+    color: black;
     font-size: 0.85rem;
     width: 100px;
     height: 40px;
     cursor: pointer;
     transition: all 0.2s;
     align-self: flex-start;
-
-    &:hover {
-      background: white;
-      color: #454c42;
-    }
   }
 `;
 
-export const SignUp = styled.div`
-  display: flex;
-  gap: 10px;
-  padding: 0.5rem 0;
-
-  @media (max-width: 1000px) {
-    flex-direction: column;
-  }
-`;
 
 export const ConsentText = styled.p`
   font-size: 0.85rem;

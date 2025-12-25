@@ -8,9 +8,14 @@ import {
   BigTitle,
   SecondaryTitle,
   RecommendationsList,
+  StoriesPageLinkContainer,
+  StoriesPageLink,
+  LinkLabel,
 } from "./recommendations.styles";
 import RecommendationCard from "./recommendationCard.component";
 import RecommendationPlaceholder from "./recommendation.placeholder";
+import { FiArrowUpRight as Arrow } from "react-icons/fi";
+
 
 export default function Recommendations() {
   const { getRecommendations } = usePublicServerActions();
@@ -27,11 +32,11 @@ export default function Recommendations() {
 
   return (
     <RecommendationsContainer>
-      <BigTitle>Stories we think you&apos;ll like</BigTitle>
-      <SecondaryTitle>Our recommended stories below</SecondaryTitle>
+      <BigTitle>The collection</BigTitle>
+      <SecondaryTitle>Stories we think you&apos;ll like.</SecondaryTitle>
       <RecommendationsList>
           {recommendations.length > 0 ? recommendations.map((recommendation) => (
-            <RecommendationCard
+            <RecommendationCard``
               key={recommendation.id}
               recommendation={recommendation}
             />
@@ -40,8 +45,15 @@ export default function Recommendations() {
               <RecommendationPlaceholder />
               <RecommendationPlaceholder />
               <RecommendationPlaceholder />
+              <RecommendationPlaceholder />
             </>
           )}
+          <StoriesPageLinkContainer>
+            <StoriesPageLink href='/stories'>
+                <Arrow />
+            </StoriesPageLink>
+            <LinkLabel>View All Stories</LinkLabel>
+          </StoriesPageLinkContainer>
       </RecommendationsList>
     </RecommendationsContainer>
   );

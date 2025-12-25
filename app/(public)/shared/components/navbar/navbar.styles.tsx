@@ -7,12 +7,9 @@ export const NavBarContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding-inline: 40px;
-  height: 70px;
-  border-bottom: 2px solid var(--bg-color);
-  transition: background 0.3s, color 0.3s, border-color 0.3s,
-    translate 0.18s ease-in;
-  background: var(--bg-color);
-  color: black;
+  height: 100px;
+  transition: 0.3s;
+  color: white;
   position: relative;
 
   @media (max-width: 850px) {
@@ -25,6 +22,11 @@ export const NavBarContainer = styled.nav`
     }
   }
 
+  img {
+    filter: invert(0.1);
+    flex-grow: 1;
+  }
+
   &.isSpecialPage {
     position: fixed;
     width: 100%;
@@ -33,12 +35,12 @@ export const NavBarContainer = styled.nav`
   }
 
   &.solid {
-    border-color: #ddd;
-    background: transparent;
-    color: white;
+    background: rgb(13, 13, 13, 0.75);
+    backdrop-filter: blur(10px);
+    height: 70px;
 
     img {
-      filter: invert(1);
+      filter: none;
     }
   }
 
@@ -47,13 +49,12 @@ export const NavBarContainer = styled.nav`
   }
 
   .title-lg {
-    font-family: "Oswald", sans-serif;
     font-size: 2.5rem;
     font-weight: normal;
-    text-align: center;
+    /* text-align: center;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); */
     cursor: pointer;
 
     @media (max-width: 850px) {
@@ -63,41 +64,62 @@ export const NavBarContainer = styled.nav`
   }
 `;
 
+export const ImageLink = styled(NextLink)`
+  flex-grow: 1;
+`;
+
 export const DonateButton = styled.button`
   background: transparent;
-  color: black;
+  color: white;
   outline: none;
-  border: 2px solid black;
+  border: 2px solid white;
   padding: 1px 10px;
   border-radius: 100px;
   font-size: 1.2rem;
   cursor: pointer;
 
   &.solid {
-    color: white;
-    border-color: white;
   }
 `;
 
 export const Link = styled(NextLink)`
-  color: black;
+  color: hsl(0, 0%, 90%);
   text-decoration: none;
-  margin-inline: 10px;
+  margin-inline: 20px;
   display: inline-flex;
   align-items: center;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: .2s;
 
   &.solid {
     color: white;
   }
+
+  &:hover {
+    color: #d5a840;
+  }
+`;
+
+export const AuthContainer = styled.div`
+  flex-grow: 1;
+  text-align: right;
 `;
 
 export const AuthLink = styled.a`
-  color: black;
+  color: white;
   text-decoration: none;
-  margin-inline: 10px;
+  text-transform: capitalize;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding: 5px 20px;
+  border-radius: 100px;
+  border: 1.4px solid hsl(0, 0%, 70%);
+  flex-grow: 1;
 
   &.solid {
-    color: white;
   }
 
   @media (max-width: 850px) {
@@ -121,7 +143,9 @@ export const MenuIcon = styled.div`
 export const Menu = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 100%;
+  flex-grow: 1;
 
   @media (max-width: 850px) {
     align-items: flex-start;

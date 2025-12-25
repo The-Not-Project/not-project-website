@@ -1,68 +1,60 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useStore } from "@/app/zustand/store";
 import SubscribeForm from "./components/subscribeForm/form.component";
 import BottomBar from "./components/bottomBar/bottomBar.component";
 
 import {
-  Footer,
-  MainContent,
-  NavSection,
-  Instagram,
-  Youtube,
-  X,
+  FooterContainer,
+  FooterContent,
+  FooterSection,
+  Headline,
+  SectionTitle,
 } from "./footer.styles";
 import clsx from "clsx";
 
-export default function FooterComponent() {
+export default function Footer() {
   const isMenuOpen = useStore((state) => state.mobileLayout.isMenuOpen);
   const isMobile = useStore((state) => state.mobileLayout.isMobile);
 
-  const footerSections = [
-    {
-      title: "Company",
-      items: [
-        { label: "Contact Us", href: "/contact" },
-        { label: "Collaborations", href: "/contact" },
-        { label: "FAQ", href: "/about" },
-      ],
-    },
-    {
-      title: "Our Socials",
-      items: [
-        {
-          href: "https://www.instagram.com/_thenotproject",
-          icon: <Instagram />,
-          ariaLabel: "Instagram",
-        },
-        {
-          href: "https://www.youtube.com/@thenotproject",
-          icon: <Youtube />,
-          ariaLabel: "YouTube",
-        },
-        {
-          href: "https://x.com/TheNotProject",
-          icon: <X />,
-          ariaLabel: "X",
-        },
-      ],
-    },
-  ];
-
   return (
-    <Footer className={clsx("page-wrapper", { shifted: isMenuOpen })}>
-      <MainContent>
-        <div className="logoSection">
-          <Image
-            src="/media/logo.png"
-            alt="The Not Project Logo"
-            width={120}
-            height={68}
-          />
-        </div>
-
+    <FooterContainer className={clsx("page-wrapper", { shifted: isMenuOpen })}>
+      <Headline>
+        Join <br /> Us.
+      </Headline>
+      <hr />
+      <FooterContent>
+        <FooterSection>
+          <SectionTitle>Contact</SectionTitle>
+          <Link
+            href="mailto:contact@thenotproject.com"
+            target="_blank"
+            className="bold no-underline"
+          >
+            contact@thenotproject.com
+          </Link>
+          <Link className="bold" href="/contact">
+            Or visit our contact page
+          </Link>
+        </FooterSection>
+        <FooterSection>
+          <SectionTitle>Socials</SectionTitle>
+          <Link href="https://www.instagram.com/_thenotproject/" className="no-underline" target="_blank">
+            Instagram ↗
+          </Link>
+          <Link href="https://x.com/TheNotProject" className="no-underline" target="_blank">
+            Twitter ↗
+          </Link>
+          <Link href="https://www.youtube.com/@thenotproject" className="no-underline" target="_blank">
+            YouTube ↗
+          </Link>
+        </FooterSection>
+        <FooterSection>
+          <SectionTitle>Subscribe</SectionTitle>
+        <SubscribeForm />
+        </FooterSection>
+        {/* 
         {footerSections.map(({ title, items }) => (
           <NavSection key={title}>
             <h2>{title}</h2>
@@ -85,12 +77,11 @@ export default function FooterComponent() {
               ))}
             </ul>
           </NavSection>
-        ))}
+        ))} */}
 
-        <SubscribeForm />
-      </MainContent>
+      </FooterContent>
 
       <BottomBar isMobile={isMobile} />
-    </Footer>
+    </FooterContainer>
   );
 }

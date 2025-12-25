@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 type HeaderBackgroundProps = { $position: number };
 
@@ -14,21 +14,51 @@ export const HeaderContainer = styled.header`
   @media (max-width: 600px) {
     max-height: none;
   }
+`;
 
-  .center-title {
-    font-family: "Oswald", sans-serif;
-    text-align: center;
-    position: absolute;
-    font-size: 3vw;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
+export const CenterTitle = styled.div`
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: min-content;
+  
+  h1 {
+    font-family: "GeorgiaWeb", sans-serif;
+    font-size: 6rem;
+    letter-spacing: 5px;
+  }
 
-    @media (max-width: 850px) {
-      font-size: 8vw;
-      width: 100%;
-      text-wrap: balance;
-    }
+  h2 {
+    font-weight: normal;
+    font-size: 1rem;
+    margin-bottom: 25px;
+    color: hsl(45.859872611464965, 30%, 52.352941176470594%);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  p {
+    margin-top: 30px;
+    font-size: 1.2rem;
+    text-wrap: balance;
+    color: #dedede;
+  }
+
+  div {
+    position: relative; 
+    height: 20px;
+  }
+
+  img {
+    display: block;
+  }
+
+  @media (max-width: 850px) {
+    font-size: 8vw;
+    width: 100%;
+    text-wrap: balance;
   }
 `;
 
@@ -40,6 +70,22 @@ export const HeaderBackground = styled.div`
   height: 100%;
   translate: 0;
   overflow: hidden;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgba(13, 13, 13, 0.4),
+      rgba(13, 13, 13, 0.6) 75%,
+      rgba(13, 13, 13, 0.9) 95%,
+      rgba(13, 13, 13, 1) 100%
+    );
+  }
 `;
 
 export const HeaderVideo = styled.video.attrs<HeaderBackgroundProps>(

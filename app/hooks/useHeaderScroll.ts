@@ -9,7 +9,7 @@ export default function useHeaderScroll() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
 
-      setTransparency(scrollY <= 50);
+      setTransparency(scrollY <= 150);
       
       setBackgroundPosition(scrollY * 0.5);
     };

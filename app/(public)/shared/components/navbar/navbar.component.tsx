@@ -13,6 +13,8 @@ import {
   Dropdown,
   ProfileIcon,
   ProfileDropdown,
+  AuthContainer,
+  ImageLink,
 } from "./navbar.styles";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import clsx from "clsx";
@@ -28,9 +30,9 @@ export default function NavBar() {
   const pathname = usePathname();
 
   const { transparency } = useHeaderScroll();
-  const isSpecialPage = !pathname.startsWith("/story")
+  const isSpecialPage = !pathname.startsWith("/story");
 
-  const isBgSolid = isSpecialPage && transparency;
+  const isBgSolid = isSpecialPage && !transparency;
 
   const isMobile = useStore((state) => state.mobileLayout.isMobile);
   const isMenuOpen = useStore((state) => state.mobileLayout.isMenuOpen);
@@ -81,20 +83,21 @@ export default function NavBar() {
     <NavBarContainer
       className={`${navContainerClass} ${isMenuOpen && "shifted"}`}
     >
-      <h1 className="title-lg" onClick={() => router.push("/")}>
+      {/* <h1 className="title-lg" onClick={() => router.push("/")}>
         THE NOT PROJECT
-      </h1>
+      </h1> */}
       {!isMobile && (
-        <Link href="/">
+
+        <ImageLink href="/" className="grow">
           <Image
-            src="/media/logo.png"
+            src="/media/logo-inverted.png"
             alt="The Not Project Logo"
             width={120}
             height={68}
           />
-        </Link>
+        </ImageLink>
       )}
-      {isMobile && (
+      {/* {isMobile && (
         <>
           <MenuIcon
             className={!isMenuOpen ? solidClass : "solid"}
@@ -103,10 +106,10 @@ export default function NavBar() {
             {!isMenuOpen && <FaBars />}
           </MenuIcon>
         </>
-      )}
+      )} */}
 
       <Menu className={isMenuOpen ? "open" : undefined}>
-        {isMobile && (
+        {/* {isMobile && (
           <>
             <Image
               src="/media/logo.png"
@@ -128,7 +131,7 @@ export default function NavBar() {
               </Link>
             )}
           </>
-        )}
+        )} */}
 
         <Link
           href="/stories"
@@ -142,10 +145,17 @@ export default function NavBar() {
           className={solidClass}
           onClick={() => setIsMenuOpen(false)}
         >
-          About Us
+          About
+        </Link>
+        <Link
+          href="/contact"
+          className={solidClass}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Contact
         </Link>
 
-        {authenticated ? (
+        {/* {authenticated ? (
           <ProfileDropdown
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
@@ -179,11 +189,8 @@ export default function NavBar() {
               </Dropdown>
             )}
           </ProfileDropdown>
-        ) : (
-          <AuthLink href="/api/auth/login" className={`${solidClass} bottom`}>
-            Sign In
-          </AuthLink>
-        )}
+        ) : ( */}
+        {/* )} */}
 
         {/* <DonateButton
           className={solidClass}
@@ -192,6 +199,11 @@ export default function NavBar() {
           DONATE
           </DonateButton> */}
       </Menu>
+      <AuthContainer>
+        <AuthLink href="/api/auth/login" className={`${solidClass} bottom`}>
+          {!authenticated ? "Sign Out" : "Sign In"}
+        </AuthLink>
+      </AuthContainer>
     </NavBarContainer>
   );
 }

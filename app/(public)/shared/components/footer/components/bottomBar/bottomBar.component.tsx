@@ -35,12 +35,8 @@ export default function BottomBar({ isMobile }: { isMobile: boolean }) {
         </>
       ) : (
         <>
-          <p>© The Not Project</p>
-          <LegalLinks>
-            <p onClick={() => handleClick("privacy")}>Privacy Policies</p>
-            <p onClick={() => handleClick("terms")}>Terms & Conditions</p>
-          </LegalLinks>
-          <p>2025</p>
+          <p>2025 © The Not Project</p>
+          <p onClick={() => handleClick("privacy")}>Privacy Policy</p>
         </>
       )}
     </BottomBarContainer>

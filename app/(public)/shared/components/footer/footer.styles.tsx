@@ -1,89 +1,62 @@
 import { FaInstagram, FaYoutube, FaXTwitter } from "react-icons/fa6";
 import styled from "styled-components";
 
-export const Footer = styled.footer`
-  height: auto;
-  background-color: var(--footer-bg);
-  color: var(--footer-text);
+export const FooterContainer = styled.footer`
+  height: 100vh;
+  background-color: #d4af37;
+  color: black;
   width: 100%;
   position: relative;
+  padding: 150px 200px;
+
+  hr {
+    border: none;
+    background: #00000036;
+    height: 1px;
+    margin-block: 35px;
+  }
 `;
 
-export const MainContent = styled.div`
-  padding: 2rem;
+export const Headline = styled.h1`
+  font-family: "GeorgiaWeb", serif;
+  font-size: 8rem;
+  font-weight: normal;
+`;
+
+export const FooterContent = styled.div`
+  padding-top: 10px;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-  img {
-    filter: invert(1);
-  }
-
-  @media (max-width: 1000px) {
-    img {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 50px;
-      height: auto;
-    }
-  }
+  gap: 80px;
 `;
 
-export const LogoSection = styled.div``;
-
-export const NavSection = styled.div`
-  @media (max-width: 1000px) {
-    text-align: center;
-    width: 50%;
-    margin-block: 20px;
-  }
-  h2 {
-    font-size: 1.5rem;
-    font-weight: normal;
-    margin-bottom: 0.5rem;
-  }
-
-  ul {
-    list-style: none;
-
-    li {
-      margin-bottom: 1rem;
-
-      a {
-        color: inherit;
-        text-decoration: none;
-        transition: opacity 0.2s;
-
-        &:hover {
-          opacity: 0.8;
-        }
-      }
-    }
-  }
-`;
-
-export const SocialLinks = styled.div`
-  display: flex;
-  gap: 10px;
-
+export const FooterSection = styled.div`
+  flex-grow: 1;
+  width: 33%;
+  font-size: 1.2rem;
+  
   a {
-    transition: opacity 0.2s;
-
-    &:hover {
-      opacity: 0.8;
+    margin-block: 8px;
+    color: black;
+    display: block;
+    
+    &.no-underline {
+      text-decoration: none;
     }
+  }
+  
+  .bold {
+    font-size: 1.3rem;
+    font-family: 'GeorgiaWeb', serif;
   }
 `;
 
-export const Youtube = styled(FaYoutube)`
-  font-size: 1.2rem;
-`;
-
-export const Instagram = styled(FaInstagram)`
-  font-size: 1.2rem;
-`;
-
-export const X = styled(FaXTwitter)`
-  font-size: 1.2rem;
+export const SectionTitle = styled.h3`
+  font-weight: normal;
+  font-family: "GeorgiaWeb", serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #00000036;
+  padding-bottom: 16px;
+  margin-bottom: 50px;
 `;
