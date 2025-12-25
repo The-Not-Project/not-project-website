@@ -12,7 +12,6 @@ import {
 import { useEffect, useState } from "react";
 import { Story } from "@/app/types/types";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 export default function RadarCard() {
   const { getRadarStory } = usePublicServerActions();
@@ -62,13 +61,9 @@ export default function RadarCard() {
           <h2 className="title">{radarStory.title}</h2>
           <p className="summary">“{radarStory.summary}”</p>
           <p className="date">{date}</p>
-          <div className="overlay">
-            <Image src={radarStory.thumbnail} fill alt="thumbnail"  className="object-cover" />
-          </div>
+          <div className="overlay" />
         </RadarDescription>
-        <RadarPhoto $url={radarStory.thumbnail}>
-          <Image src={radarStory.thumbnail} fill alt="thumbnail" className="object-cover" />
-        </RadarPhoto>
+        <RadarPhoto $url={radarStory.thumbnail} />
       </>
     </RadarCardContainer>
   );

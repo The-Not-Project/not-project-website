@@ -3,7 +3,7 @@ import styled from "styled-components";
 type RadarDescriptionProps = { $isVisible: boolean; $url: string };
 
 export const RadarCardContainer = styled.section`
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   display: flex;
   max-width: 180vh;
   height: calc(50vw - 80px);
@@ -98,6 +98,8 @@ export const RadarDescription = styled.div<RadarDescriptionProps>`
   }
 
   .overlay {
+    background: url("${({ $url }) => $url}") no-repeat center center/cover;
+
     background-size: 100vw;
     position: absolute;
     top: 0;
@@ -130,6 +132,7 @@ export const RadarDescription = styled.div<RadarDescriptionProps>`
 `;
 
 export const RadarPhoto = styled.div<{ $url: string }>`
+  background: url("${({ $url }) => $url}") no-repeat center center/cover;
   flex-grow: 1;
   transition: 0.3s ease-out;
   position: relative;

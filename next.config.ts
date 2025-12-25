@@ -1,10 +1,13 @@
 import type { NextConfig } from 'next';
 import withPWAInit from 'next-pwa';
 
+const isDev = process.env.NODE_ENV === 'development';
+
 const withPWA = withPWAInit({
   dest: 'public',
   register: true,
   skipWaiting: true,
+  disable: isDev, // This disables PWA in development mode
 });
 
 const nextConfig: NextConfig = {
@@ -28,4 +31,6 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withPWA(nextConfig);
+// Only wrap with PWA if we are not in development, 
+// or accept that Webpack will be used instead of Turbopack.
+export default isDev ? nextConfig : withPWA(nextConfig);
