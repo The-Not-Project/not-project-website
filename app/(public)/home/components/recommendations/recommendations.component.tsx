@@ -36,7 +36,7 @@ export default function Recommendations() {
       <SecondaryTitle>Stories we think you&apos;ll like.</SecondaryTitle>
       <RecommendationsList>
           {recommendations.length > 0 ? recommendations.map((recommendation) => (
-            <RecommendationCard``
+            <RecommendationCard
               key={recommendation.id}
               recommendation={recommendation}
             />
