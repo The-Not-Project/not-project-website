@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from "react";
 import { Story } from "@/app/types/types";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function RadarCard() {
   const { getRadarStory } = usePublicServerActions();
@@ -28,15 +29,16 @@ export default function RadarCard() {
     fetchRadarStory();
   }, [getRadarStory]);
 
-  if (!radarStory) return (
-    <>
-    <RadarCardContainer>
-      <RadarDescription $isVisible={false} $url={""}>
-        <div className="overlay"></div>
-      </RadarDescription>
-    </RadarCardContainer>
-    </>
-  );
+  if (!radarStory)
+    return (
+      <>
+        <RadarCardContainer>
+          <RadarDescription $isVisible={false} $url={""}>
+            <div className="overlay"></div>
+          </RadarDescription>
+        </RadarCardContainer>
+      </>
+    );
 
   const date = new Date(radarStory.createdAt).toLocaleDateString("en-US", {
     month: "short",
@@ -47,7 +49,11 @@ export default function RadarCard() {
   return (
     <RadarCardContainer onClick={() => router.push(`story/${radarStory.id}`)}>
       <>
-        <RadarDescription $isVisible={isVisible} $url={radarStory.thumbnail} ref={ref}>
+        <RadarDescription
+          $isVisible={isVisible}
+          $url={radarStory.thumbnail}
+          ref={ref}
+        >
           <CategoriesContainer>
             {radarStory.categories.map((category) => (
               <Category key={category.id}>{category.name}</Category>
@@ -56,9 +62,13 @@ export default function RadarCard() {
           <h2 className="title">{radarStory.title}</h2>
           <p className="summary">“{radarStory.summary}”</p>
           <p className="date">{date}</p>
-          <div className="overlay"></div>
+          <div className="overlay">
+            <Image src={radarStory.thumbnail} fill alt="thumbnail"  className="object-cover" />
+          </div>
         </RadarDescription>
-        <RadarPhoto $url={radarStory.thumbnail} />
+        <RadarPhoto $url={radarStory.thumbnail}>
+          <Image src={radarStory.thumbnail} fill alt="thumbnail" className="object-cover" />
+        </RadarPhoto>
       </>
     </RadarCardContainer>
   );
