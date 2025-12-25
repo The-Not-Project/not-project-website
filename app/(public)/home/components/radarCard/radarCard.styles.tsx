@@ -98,7 +98,7 @@ export const RadarDescription = styled.div<RadarDescriptionProps>`
   }
 
   .overlay {
-    background: url("${({ $url }) => $url}") no-repeat center center/cover;
+    background: url(${({ $url }) => $url}) no-repeat center center/cover;
 
     background-size: 100vw;
     position: absolute;
@@ -132,7 +132,7 @@ export const RadarDescription = styled.div<RadarDescriptionProps>`
 `;
 
 export const RadarPhoto = styled.div<{ $url: string }>`
-  background: url("${({ $url }) => $url}") no-repeat center center/cover;
+  background: url(${({ $url }) => $url}) no-repeat center center/cover;
   flex-grow: 1;
   transition: 0.3s ease-out;
   position: relative;

@@ -50,7 +50,7 @@ export default function RadarCard() {
       <>
         <RadarDescription
           $isVisible={isVisible}
-          $url={radarStory.thumbnail}
+          $url={encodeURI(radarStory.thumbnail)}
           ref={ref}
         >
           <CategoriesContainer>
@@ -63,7 +63,7 @@ export default function RadarCard() {
           <p className="date">{date}</p>
           <div className="overlay" />
         </RadarDescription>
-        <RadarPhoto $url={radarStory.thumbnail} />
+        <RadarPhoto $url={encodeURI(radarStory.thumbnail)} />
       </>
     </RadarCardContainer>
   );
