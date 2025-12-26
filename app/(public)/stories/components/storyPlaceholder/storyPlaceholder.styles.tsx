@@ -51,7 +51,6 @@ export const StoryContent = styled.div`
 
 export const MobileStoryBody = styled.div`
   width: 100%;
-  background: white;
   padding: 15px;
   border-radius: 5px;
   box-shadow: 0 0 100px -40px rgba(0, 0, 0, 0.3);

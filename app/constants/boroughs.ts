@@ -63,7 +63,7 @@ export const BoroughSummaries: Record<string, Borough> = {
   },
   nyc: {
     fileName: "nyc",
-    boroughName: "New York City",
+    boroughName: "New York",
     description:
       "NYC is more than just five boroughs—it’s an idea, a heartbeat, a movement. It’s where cultures collide, resilience thrives, and history is made every single day. This is New York, the greatest city in the world.",
     quote: {

@@ -67,6 +67,7 @@ export const SearchTitle = styled.h2`
   margin-bottom: 10px;
   display: inline-flex;
   align-items: center;
+  color: white;
 
   @media (max-width: 1600px) {
     cursor: pointer;
@@ -81,6 +82,7 @@ export const SecondaryTitle = styled.h3`
   align-items: center;
   transition: 0.2s;
   cursor: pointer;
+  color: white;
 
   &:hover {
     color: #454c42;
@@ -109,7 +111,7 @@ export const ArrowIcon = styled(FaAngleDown)`
 
 export const FilterIcon = styled(FaFilter)`
   margin-right: 5px;
-  color: #5a5a5a;
+  color: #fff;
   font-size: 1rem;
   translate: 0 2px;
 `;
@@ -144,6 +146,7 @@ export const FilterLabel = styled.label`
   cursor: pointer;
   display: inline-flex;
   transition: 0.25s all ease;
+  color: white;
 
   &:before {
     box-sizing: border-box;

@@ -46,17 +46,3 @@ export const SignUpForm = styled.form`
     align-self: flex-start;
   }
 `;
-
-
-export const ConsentText = styled.p`
-  font-size: 0.85rem;
-  line-height: 1.5;
-  margin: 0;
-  padding: 0;
-  max-width: 700px;
-  width: 100%;
-
-  span {
-    text-decoration: underline;
-  }
-`;

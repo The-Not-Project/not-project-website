@@ -6,7 +6,15 @@ import { useStore } from "@/app/zustand/store";
 import { Story } from "@/app/types/types";
 import { usePublicServerActions } from "@/app/contexts/public-server-actions";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { CategoriesContainer, StoryContainer, SaveButton, SkeletonContainer, Skeleton, NotFound } from "./style";
+import {
+  CategoriesContainer,
+  StoryContainer,
+  SaveButton,
+  SkeletonContainer,
+  Skeleton,
+  NotFound,
+  StoryWrapper,
+} from "./style";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import { StoryReader } from "./storyReader";
 
@@ -69,20 +77,26 @@ export default function StoryPage({ id }: { id: string }) {
     fetchStory();
   }, [fetchStory]);
 
-  if (loading) return (
-    <SkeletonContainer>
-      <Skeleton className="title"/>
-      <Skeleton className="title half"/>
-      <Skeleton className="thumbnail"/>
-      <Skeleton className="paragraph"/>
-      <Skeleton className="paragraph"/>
-      <Skeleton className="paragraph"/>
-      <Skeleton className="paragraph"/>
-      <Skeleton className="paragraph half"/>
-    </SkeletonContainer>
-  );
+  if (loading)
+    return (
+      <SkeletonContainer>
+        <Skeleton className="title" />
+        <Skeleton className="title half" />
+        <Skeleton className="thumbnail" />
+        <Skeleton className="paragraph" />
+        <Skeleton className="paragraph" />
+        <Skeleton className="paragraph" />
+        <Skeleton className="paragraph" />
+        <Skeleton className="paragraph half" />
+      </SkeletonContainer>
+    );
 
-  if (!story) return <NotFound>We couldn&apos;t find the story you&apos;re looking for :&apos;(</NotFound>;
+  if (!story)
+    return (
+      <NotFound>
+        We couldn&apos;t find the story you&apos;re looking for :&apos;(
+      </NotFound>
+    );
 
   const author = story.author.firstName + " " + story.author.lastName;
   const date = new Date(story.createdAt).toLocaleDateString("en-US", {
@@ -92,41 +106,41 @@ export default function StoryPage({ id }: { id: string }) {
   });
 
   return loading ? (
-    <SkeletonContainer>
-
-    </SkeletonContainer>
+    <SkeletonContainer />
   ) : story ? (
-    <StoryContainer className={clsx("page-wrapper", { shifted: isMenuOpen })}>
-      {story.categories.length > 0 && (
-        <CategoriesContainer>
-          <SaveButton
-            className={clsx("save-button", { saved: isSaved })}
-            onClick={handleSave}
-          >
-            <span className={clsx({ visible: clicked })}>Saved!</span>
-            {isSaved ? <FaBookmark /> : <FaRegBookmark />}
-          </SaveButton>
-          {story.categories.map((category, index) => (
-            <Fragment key={category.id}>
-              <span>{category.name}</span>
-              {index < story.categories.length - 1 && (
-                <span className="divider">|</span>
-              )}
-            </Fragment>
-          ))}
-        </CategoriesContainer>
-      )}
-      <h1 className="title">{story.title}</h1>
-      {/* <p className="summary">{story.summary}</p> */}
-      <img src={story.thumbnail || ""} alt="thumbnail" />
-      <hr />
-      <div className="info">
-        <p>By {author}</p>
-        <p>{date}</p>
-      </div>
-      <div className="prose">
-        <StoryReader value={story.content} />
-      </div>
-    </StoryContainer>
+    <StoryWrapper>
+      <StoryContainer className={clsx("page-wrapper", { shifted: isMenuOpen })}>
+        {story.categories.length > 0 && (
+          <CategoriesContainer>
+            <SaveButton
+              className={clsx("save-button", { saved: isSaved })}
+              onClick={handleSave}
+            >
+              <span className={clsx({ visible: clicked })}>Saved!</span>
+              {isSaved ? <FaBookmark /> : <FaRegBookmark />}
+            </SaveButton>
+            {story.categories.map((category, index) => (
+              <Fragment key={category.id}>
+                <span>{category.name}</span>
+                {index < story.categories.length - 1 && (
+                  <span className="divider">|</span>
+                )}
+              </Fragment>
+            ))}
+          </CategoriesContainer>
+        )}
+        <h1 className="title">{story.title}</h1>
+        {/* <p className="summary">{story.summary}</p> */}
+        <img src={story.thumbnail || ""} alt="thumbnail" />
+        <hr />
+        <div className="info">
+          <p>By {author}</p>
+          <p>{date}</p>
+        </div>
+        <div className="prose">
+          <StoryReader value={story.content} />
+        </div>
+      </StoryContainer>
+    </StoryWrapper>
   ) : null;
 }

@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { useEffect } from "react";
 import ContactForm from "./components/form/form.component";
-import { ContactContainer, HeaderContainer, HeaderImage } from "./styles";
+import { ContactContainer, HeaderContainer, HeaderImage, PageContainer } from "./styles";
 import { useStore } from "@/app/zustand/store";
 import CaptchaWrapper from "./components/form/captcha-wrapper";
 
@@ -27,7 +27,7 @@ export default function ContactPage() {
   }, []);
 
   return (
-    <>
+    <PageContainer>
       <HeaderContainer>
         <HeaderImage
           src="/media/tariqWIceCream.JPG"
@@ -43,6 +43,6 @@ export default function ContactPage() {
           <ContactForm />
         </CaptchaWrapper>
       </ContactContainer>
-    </>
+    </PageContainer>
   );
 }

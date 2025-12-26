@@ -7,40 +7,50 @@ export const NavBarContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding-inline: 40px;
-  height: 100px;
-  transition: 0.3s;
+  transition:
+    height 0.3s,
+    background 0.3s,
+    translate 0.18s ease-in;
   color: white;
-  position: relative;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 70px;
+  background: rgb(13, 13, 13, 0.9);
+  z-index: 3;
+  backdrop-filter: blur(10px);
 
   @media (max-width: 850px) {
-    padding-inline: 20px;
-    height: 60px;
+    padding-inline: 25px;
+    height: 60px !important;
+    justify-content: center;
 
     img {
-      width: 80px;
+      width: 70px;
       height: auto;
     }
   }
 
-  img {
-    filter: invert(0.1);
-    flex-grow: 1;
-  }
-
   &.isSpecialPage {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 3;
-  }
-
-  &.solid {
-    background: rgb(13, 13, 13, 0.75);
-    backdrop-filter: blur(10px);
-    height: 70px;
+    height: 100px;
+    background: none;
+    backdrop-filter: none;
 
     img {
-      filter: none;
+      filter: invert(0.1);
+      flex-grow: 1;
+    }
+    &.solid {
+      background: rgb(13, 13, 13, 0.9);
+      backdrop-filter: blur(10px);
+      height: 70px;
+      
+      img {
+        filter: invert(0.25);
+        @media (max-width: 850px) {
+          filter: invert(0.1);
+  }
+      }
     }
   }
 
@@ -89,12 +99,12 @@ export const Link = styled(NextLink)`
   display: inline-flex;
   align-items: center;
   text-transform: uppercase;
-  font-size: 13px;
-  letter-spacing: 1px;
-  transition: .2s;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  transition: 0.2s;
 
   &.solid {
-    color: white;
+    color: #dbdbdb;
   }
 
   &:hover {
@@ -105,6 +115,11 @@ export const Link = styled(NextLink)`
 export const AuthContainer = styled.div`
   flex-grow: 1;
   text-align: right;
+
+  @media (max-width: 850px) {
+    margin-top: auto;
+    flex-grow: 0;
+  }
 `;
 
 export const AuthLink = styled.a`
@@ -112,91 +127,72 @@ export const AuthLink = styled.a`
   text-decoration: none;
   text-transform: capitalize;
   text-transform: uppercase;
-  font-size: 13px;
-  letter-spacing: 1px;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
   padding: 5px 20px;
   border-radius: 100px;
   border: 1.4px solid hsl(0, 0%, 70%);
-  flex-grow: 1;
 
   &.solid {
+    color: #dbdbdb;
   }
 
   @media (max-width: 850px) {
-    &.bottom {
-      margin-top: auto;
-    }
+    margin-top: auto;
+    border: none;
   }
 `;
 
-export const MenuIcon = styled.div`
-  color: black;
-  display: block;
-  margin-left: auto;
-  z-index: 4;
-
-  &.solid {
-    color: white;
-  }
+export const MenuIcon = styled.svg`
 `;
 
-export const Menu = styled.div`
+export const LinksList = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   flex-grow: 1;
+`;
 
-  @media (max-width: 850px) {
-    align-items: flex-start;
-    position: fixed;
+export const MobileMenu = styled.aside`
+  align-items: flex-start;
+  position: fixed;
+  top: 0;
+  right: -80%;
+  height: 100dvh;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  background: url("/media/boroughBackdrops/nyc.jpg") no-repeat center
+    center/cover;
+  backdrop-filter: blur(15px);
+  padding: 150px 20px 50px 30px;
+
+  &::before {
+    content: "";
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px) saturate(0.3);
+    position: absolute;
     top: 0;
-    right: -80%;
-    height: 100dvh;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background: url("/media/experimental-sidebar-backdrop.jpg") no-repeat center
-      center/cover;
-    background: url("/media/experimental-sidebar-backdrop.jpg") no-repeat center
-      center/cover;
-    backdrop-filter: blur(15px);
-    padding: 100px 20px 30px 20px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  a {
+    color: white;
+    text-shadow: 0 0 2px black;
+    font-size: 1.2rem;
+  }
+
+  & .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
     font-size: 2rem;
-
-    &::before {
-      content: "";
-      content: "";
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(20px) saturate(0.3);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    a {
-      color: white;
-      text-shadow: 0 0 2px black;
-    }
-
-    img {
-      position: absolute;
-      top: 15px;
-      scale: 0.8;
-      filter: invert(1);
-    }
-
-    & .close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 1.6rem;
-      color: #eaeaea;
-    }
+    color: #eaeaea;
   }
 `;
 

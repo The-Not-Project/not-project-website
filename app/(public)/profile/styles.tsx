@@ -1,12 +1,18 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.main`
+  background: #e7e0d6;
+  padding: 40px;
+`;
+
+export const ProfileContainer = styled.div`
   max-width: 1000px;
   margin: 40px auto;
   padding: 20px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
+
   hr {
     margin-block: 50px 40px;
     margin-inline: 40px;
@@ -32,7 +38,8 @@ export const PageSection = styled.section`
 `;
 
 export const PageSectionTitle = styled.h1`
-margin-bottom: 40px;`;
+  margin-bottom: 40px;
+`;
 
 export const SectionDescription = styled.div`
   width: 40%;

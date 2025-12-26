@@ -24,7 +24,7 @@ export const TeamBanner = styled.div`
   justify-content: center;
   align-items: center;
   padding: 50px 60px;
-  background-color: var(--bg-color);
+  background-color: #e7e0d6;
 
   @media (max-width: 1100px) {
     padding: 40px 10px;
@@ -58,6 +58,8 @@ export const TeamMemberCard = styled.div`
   }
   h2 {
     font-size: 1.8rem;
+    font-family: 'GeorgiaWeb', serif;
+    font-weight: normal;
   }
 
   p {

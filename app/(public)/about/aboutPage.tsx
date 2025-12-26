@@ -13,6 +13,7 @@ import {
   WhatWeDoDifferentImage,
   WhoIsItForContainer,
   WhoIsItForContent,
+  PageContainer,
 } from "./styles";
 import { useStore } from "@/app/zustand/store";
 import clsx from "clsx";
@@ -39,6 +40,7 @@ export default function About() {
 
   return (
     <div className={clsx("page-wrapper", { shifted: isMenuOpen })}>
+      <PageContainer>
       <HeaderContainer>
         <HeaderImage
           src="/media/LorenzoInflushing.jpg"
@@ -96,7 +98,7 @@ export default function About() {
 
       <WhoIsItForContainer>
         <WhoIsItForContent>
-          <h1>WHO IS IT FOR ?</h1>
+          <h1>WHO IS IT FOR?</h1>
           <p>
             This is for the underdogs, the dreamers, the hustlers, the artists,
             the storytellers, the ones who refuse to be defined by labels. This
@@ -107,6 +109,7 @@ export default function About() {
         </WhoIsItForContent>
       </WhoIsItForContainer>
       <Team />
+      </PageContainer>
     </div>
   );
 }

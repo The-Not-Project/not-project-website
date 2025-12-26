@@ -53,7 +53,7 @@ export default function ContactForm() {
 
   return (
     <FormContainer onSubmit={handleSubmit}>
-      <h2>We’d love to hear from you</h2>
+      <h2>We’d love to hear from you.</h2>
       <label htmlFor="subject">Subject</label>
       <select id="subject" value={type} onChange={(e) => handleChangeType(e)}>
         <option value="feedback">Feedback</option>

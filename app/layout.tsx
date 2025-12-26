@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   keywords: seoKeywords.home,
 };
 
-const oswald = Font({ weight: "400", subsets: ["latin"] });
+const manrope = Font({ weight: "400", subsets: ["latin"] });
 
 export default async function RootLayout({
   children,
@@ -56,7 +56,7 @@ export default async function RootLayout({
         <link rel="icon" href="/favicon.ico" media="(prefers-color-scheme: dark)"/>
         <link rel="preload" as="video" href="video.webm" type="video/webm"></link>
       </head>
-      <body className={oswald.className}>
+      <body className={manrope.className}>
         <UserProvider>
           <AuthSyncer />
           {children}

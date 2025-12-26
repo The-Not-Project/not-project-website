@@ -16,7 +16,6 @@ import clsx from "clsx";
 
 export default function Footer() {
   const isMenuOpen = useStore((state) => state.mobileLayout.isMenuOpen);
-  const isMobile = useStore((state) => state.mobileLayout.isMobile);
 
   return (
     <FooterContainer className={clsx("page-wrapper", { shifted: isMenuOpen })}>
@@ -40,19 +39,31 @@ export default function Footer() {
         </FooterSection>
         <FooterSection>
           <SectionTitle>Socials</SectionTitle>
-          <Link href="https://www.instagram.com/_thenotproject/" className="no-underline" target="_blank">
+          <Link
+            href="https://www.instagram.com/_thenotproject/"
+            className="no-underline"
+            target="_blank"
+          >
             Instagram ↗
           </Link>
-          <Link href="https://x.com/TheNotProject" className="no-underline" target="_blank">
+          <Link
+            href="https://x.com/TheNotProject"
+            className="no-underline"
+            target="_blank"
+          >
             Twitter ↗
           </Link>
-          <Link href="https://www.youtube.com/@thenotproject" className="no-underline" target="_blank">
+          <Link
+            href="https://www.youtube.com/@thenotproject"
+            className="no-underline"
+            target="_blank"
+          >
             YouTube ↗
           </Link>
         </FooterSection>
         <FooterSection>
           <SectionTitle>Subscribe</SectionTitle>
-        <SubscribeForm />
+          <SubscribeForm />
         </FooterSection>
         {/* 
         {footerSections.map(({ title, items }) => (
@@ -78,10 +89,9 @@ export default function Footer() {
             </ul>
           </NavSection>
         ))} */}
-
       </FooterContent>
 
-      <BottomBar isMobile={isMobile} />
+      <BottomBar />
     </FooterContainer>
   );
 }

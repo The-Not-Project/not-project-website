@@ -7,14 +7,12 @@ export const RadarCardContainer = styled.section`
   height: auto;
   aspect-ratio: 21 / 9;
   margin: 100px auto;
-  /* padding-inline: 40px; */
   position: relative;
   color: #040605;
 
   @media (max-width: 600px) {
-    margin-block: 20px 0;
-    padding: 5px;
-    height: 70vw;
+    margin-block: 30px;
+    aspect-ratio: 3 / 4;
   }
 `;
 
@@ -28,6 +26,17 @@ export const RadarDescription = styled.div<RadarCardProps>`
       rgba(13, 13, 13, 0.8) 40%,
       rgba(0, 0, 0, 0.3) 100%
     );
+  }
+
+  @media (max-width: 850px) {
+    &.is-visible {
+      background: linear-gradient(
+        to right,
+        rgba(13, 13, 13) 10%,
+        rgba(13, 13, 13, 0.8) 70%,
+        rgba(0, 0, 0, 0.3) 100%
+      );
+    }
   }
 
   .main-info-container {
@@ -48,28 +57,18 @@ export const RadarDescription = styled.div<RadarCardProps>`
       &.is-visible {
         opacity: 1;
         filter: blur(0);
+
+        @media (max-width: 850px) {
+          &.summary {
+            opacity: 0.8;
+          }
+        }
       }
     }
 
     @media (max-width: 850px) {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: none;
-      padding: 15px 17px;
-      align-items: flex-start;
-      justify-content: flex-end;
-      gap: 0;
-      text-align: left;
-      z-index: 2;
-
-      transition:
-        opacity 0.3s ease-out 0.3s,
-        translate 0.3s ease-out 0.3s;
-      opacity: ${({ $isVisible }) => ($isVisible ? "1" : "0")};
-      translate: 0 ${({ $isVisible }) => ($isVisible ? "0" : "10px")};
+      padding-top: 100px;
+      gap: 20px;
     }
 
     .title {
@@ -83,18 +82,21 @@ export const RadarDescription = styled.div<RadarCardProps>`
       -webkit-text-stroke: 2px #eae0d5;
 
       @media (max-width: 850px) {
-        transition: none;
-        opacity: 1;
-        font-weight: normal;
-        font-size: 1.3rem;
+        -webkit-text-stroke: unset;
+        color: #eae0d5;
+        font-size: 3rem;
+        /* margin-bottom: 20px; */
+        width: 100%;
       }
     }
 
     .summary {
       font-size: 1.2rem;
       width: 80%;
+
       @media (max-width: 850px) {
-        display: none;
+        font-size: 0.8rem;
+        width: 100%;
       }
     }
 
@@ -106,29 +108,26 @@ export const RadarDescription = styled.div<RadarCardProps>`
     }
     font-size: 1.5rem;
     transition: opacity 0.3s ease-out 0.5s;
-    @media (max-width: 850px) {
-      transition: none;
-
-      opacity: 1;
-      position: static;
-      font-size: 0.9rem;
-      color: #e5e5e5;
-    }
   }
 
   .secondary-info-container {
-    min-width: max-content;
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: flex-end;
     padding-right: 50px;
-    width: max-content;
+    min-width: fit-content;
     overflow: hidden;
+
+    @media (max-width: 850px) {
+      padding-right: 10px;
+    }
 
     .slide-on-scroll {
       translate: 200px;
-      transition: translate 0.3s ease-out 1s, color 0.2s;
+      transition:
+        translate 0.3s ease-out 1s,
+        color 0.2s;
 
       &.is-visible {
         translate: 0;
@@ -137,31 +136,18 @@ export const RadarDescription = styled.div<RadarCardProps>`
   }
 `;
 
-export const CategoriesContainer = styled.div`
-  display: flex;
-  gap: 5px;
-
-  @media (min-width: 850px) {
-    display: none;
-  }
-`;
-
-export const Category = styled.div`
-  background: maroon;
-  font-size: 0.8rem;
-  padding: 10px 4px;
-  line-height: 0;
-  border-radius: 1px;
-`;
-
 export const ArrowLink = styled(Link)`
-  color: #ac5521;
+  color: #d4af37;
   font-size: 3rem;
   transition: 0.2s;
   margin-top: auto;
 
   &:hover {
     color: beige;
+  }
+
+  @media (max-width: 850px) {
+    font-size: 2rem;
   }
 `;
 
@@ -176,7 +162,7 @@ to {
 
 export const LocationContainer = styled.div`
   margin-top: auto;
-  color: #ac5521;
+  color: #d7b74d;
   height: 100px;
   width: 100px;
   display: grid;
@@ -184,10 +170,25 @@ export const LocationContainer = styled.div`
   background-color: black;
   border-radius: 50%;
   font-size: 1.5rem;
-  margin-bottom: 50px;
-  border: 1.5px solid #ac5521;
+  margin-bottom: 20px;
+  border: 1.5px solid #e7d086;
   text-transform: uppercase;
   cursor: pointer;
+
+  @media (max-width: 850px) {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+
+    .circle {
+      text {
+        font-size: 2.2rem;
+      }
+    }
+
+    .pin {
+    }
+  }
 
   .circle {
     width: 105%;
@@ -243,6 +244,19 @@ export const RadarPhoto = styled.div<{ $url: string }>`
     font-size: 4rem;
     backdrop-filter: blur(5px) contrast(1.5);
     transition: 0.5s ease-out;
+
+    @media (max-width: 850px) {
+      font-size: 2rem;
+      background: linear-gradient(
+      to bottom,
+      rgba(13, 13, 13) 0%,
+      rgba(13, 13, 13, 0.8) 30%,
+      rgba(13, 13, 13, 0.7) 40%,
+      rgba(13, 13, 13, 0.7) 60%,
+      rgba(13, 13, 13, 0.8) 70%,
+      rgba(13, 13, 13) 100%
+    );
+    }
   }
 
   &.is-visible {
@@ -252,19 +266,10 @@ export const RadarPhoto = styled.div<{ $url: string }>`
     }
   }
   @media (max-width: 850px) {
-    transition: none;
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0.5) 100%
-      );
+    &.is-visible {
+      &::after {
+        scale: 1.3;
+      }
     }
   }
 `;

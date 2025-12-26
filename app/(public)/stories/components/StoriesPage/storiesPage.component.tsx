@@ -4,8 +4,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { usePublicServerActions } from "@/app/contexts/public-server-actions";
 import { Filters, Story } from "@/app/types/types";
 import StoriesList from "../storiesList/storiesList.component";
-import StoriesSearch from "../storiesSearch/storiesSearch.component";
-import { BoroughTitle, StoriesContainer } from "./storiesPage.styles";
+import {
+  SectionTitle,
+  StoriesContainer,
+} from "./storiesPage.styles";
 import Header from "../header/header.component";
 import { BoroughSummaries } from "@/app/constants/boroughs";
 import { useStore } from "@/app/zustand/store";
@@ -36,7 +38,7 @@ export default function StoriesPageComponent({
   const { getStories } = usePublicServerActions();
   const [loading, setLoading] = useState(true);
   const [stories, setStories] = useState<Story[]>([]);
-  const [filters, setFilters] = useState<Filters>(defaultFilters);
+  // const [filters, setFilters] = useState<Filters>(defaultFilters);
   const isMenuOpen = useStore((state) => state.mobileLayout.isMenuOpen);
   const setIsMobile = useStore((state) => state.mobileLayout.setIsMobile);
 
@@ -64,18 +66,24 @@ export default function StoriesPageComponent({
   );
 
   useEffect(() => {
-    fetchStories(filters);
-  }, [filters, fetchStories]);
+    fetchStories();
+  }, [fetchStories]);
 
   return (
     <div className={clsx("page-wrapper", { shifted: isMenuOpen })}>
       <Header borough={currentBorough} />
-      {boroughParam && (
-        <BoroughTitle>{currentBorough.boroughName}&apos;s Stories</BoroughTitle>
-      )}
+      
+      <SectionTitle>
+        <h2>OUR ORIGINAL WORK</h2>
+        <h3>Stories Of {currentBorough.boroughName}</h3>
+      </SectionTitle>
       <StoriesContainer>
-        <StoriesSearch filters={filters} setFilters={setFilters} />
-        <StoriesList stories={stories} borough={currentBorough.boroughName} loading={loading} />
+        {/* <StoriesSearch filters={filters} setFilters={setFilters} /> */}
+        <StoriesList
+          stories={stories}
+          borough={currentBorough.boroughName}
+          loading={loading}
+        />
       </StoriesContainer>
     </div>
   );

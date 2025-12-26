@@ -10,35 +10,10 @@ export const BottomBarContainer = styled.div`
   font-size: 0.8rem;
   text-transform: uppercase;
   margin-top: 40px;
-
+  
   @media (max-width: 1000px) {
-    height: auto;
+    margin-top: 20px;
     padding: 1rem;
-    gap: 25px;
-    
-    p {
-      text-align: center;
-      width: 100%;
-    }
-  }
-`;
-
-export const LegalLinks = styled.div`
-  display: flex;
-  gap: 25px;
-
-  @media (max-width: 1000px) {
-    flex: 1 100%;
-    justify-content: center;
-  }
-
-  p {
-    color: white;
-    cursor: pointer;
-    transition: opacity 0.2s;
-
-    &:hover {
-      opacity: 0.8;
-    }
+    height: auto;
   }
 `;

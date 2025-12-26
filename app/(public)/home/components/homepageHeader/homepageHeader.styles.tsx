@@ -8,13 +8,12 @@ export const HeaderContainer = styled.header`
   max-height: 70vw;
   color: white;
   position: relative;
-  text-shadow: 0 0 20px black;
   padding-top: 80px;
-
+  
   @media (max-width: 600px) {
     max-height: none;
   }
-`;
+  `;
 
 export const CenterTitle = styled.div`
   text-align: center;
@@ -23,6 +22,7 @@ export const CenterTitle = styled.div`
   left: 50%;
   translate: -50% -50%;
   width: min-content;
+  text-shadow: 0 0 10px black;
   
   h1 {
     font-family: "GeorgiaWeb", sans-serif;
@@ -56,9 +56,23 @@ export const CenterTitle = styled.div`
   }
 
   @media (max-width: 850px) {
-    font-size: 8vw;
-    width: 100%;
-    text-wrap: balance;
+    h1 {
+      font-size: 3rem;
+    }
+
+    h2 {
+      font-size: 0.7rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+
+    div {
+      height: 10px;
+    }
   }
 `;
 

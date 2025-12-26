@@ -1,4 +1,3 @@
-import { FaInstagram, FaYoutube, FaXTwitter } from "react-icons/fa6";
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
@@ -8,12 +7,19 @@ export const FooterContainer = styled.footer`
   width: 100%;
   position: relative;
   padding: 150px 200px;
-
+  @media (max-width: 850px) {
+    padding: 50px 30px 20px 30px;
+    height: auto;
+  }
+  
   hr {
     border: none;
     background: #00000036;
     height: 1px;
     margin-block: 35px;
+    @media (max-width: 850px) {
+      margin-block: 25px;
+    }
   }
 `;
 
@@ -21,12 +27,20 @@ export const Headline = styled.h1`
   font-family: "GeorgiaWeb", serif;
   font-size: 8rem;
   font-weight: normal;
+
+  @media (max-width: 850px) {
+    font-size: 4rem;
+  }
 `;
 
 export const FooterContent = styled.div`
   padding-top: 10px;
   display: flex;
   gap: 80px;
+  @media (max-width: 850px) {
+    flex-direction: column;
+    gap: 50px;
+  }
 `;
 
 export const FooterSection = styled.div`
@@ -34,19 +48,23 @@ export const FooterSection = styled.div`
   width: 33%;
   font-size: 1.2rem;
   
+  @media (max-width: 850px) {
+    width: 100%;
+  }
+
   a {
     margin-block: 8px;
     color: black;
     display: block;
-    
+
     &.no-underline {
       text-decoration: none;
     }
   }
-  
+
   .bold {
     font-size: 1.3rem;
-    font-family: 'GeorgiaWeb', serif;
+    font-family: "GeorgiaWeb", serif;
   }
 `;
 
@@ -59,4 +77,7 @@ export const SectionTitle = styled.h3`
   border-bottom: 1px solid #00000036;
   padding-bottom: 16px;
   margin-bottom: 50px;
+  @media (max-width: 850px) {
+    margin-bottom: 20px;
+  }
 `;

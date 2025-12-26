@@ -4,14 +4,15 @@ export const StoryContainer = styled.div`
   display: flex;
   width: 100%;
   gap: 30px;
-  padding-block: 5px;
-  border-bottom: 1px solid gray;
+  padding-block: 10px;
+  border-bottom: 1px solid #8e8e8e50;
+  margin-bottom: 10px;
 
   @media (max-width: 850px) {
     border: none;
     padding: 0;
   }
-  
+
   .desktop-thumbnail {
     object-fit: cover;
     width: 300px;
@@ -19,7 +20,7 @@ export const StoryContainer = styled.div`
     height: 180px;
     margin-block: 10px;
   }
-  `;
+`;
 
 export const StoryContent = styled.div`
   flex-grow: 1;
@@ -29,75 +30,116 @@ export const StoryContent = styled.div`
 
   .createdAt {
     margin-top: auto;
-    color: #3b3b3b;
+    color: #e7e0d6;
   }
 
   .title {
-    font-size: 1.7rem;
+    font-size: 2rem;
     font-weight: normal;
+    font-family: "eorgiaWeb", serif;
+    margin-block: 5px 10px;
+    color: #e7e0d6;
 
     a {
-      color: black;
+      color: unset;
       text-decoration: none;
-      
+
       &:hover {
         text-decoration: underline;
       }
     }
+  }
+
+  p {
+    color: rgb(231, 224, 214, 0.7);
+    font-size: 0.9rem;
   }
 `;
 
 export const CategoriesContainer = styled.div`
   display: flex;
   gap: 5px;
-  font-size: 0.9rem;
-  text-decoration: underline;
+  font-size: 0.8rem;
+  color: #e5d295;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 
   .divider {
     scale: 0.7;
     color: gray;
   }
-  `;
+`;
 
 export const MobileStoryBody = styled.div`
-  background: white;
-  padding: 15px;
+  padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 0 100px -40px rgba(0,0,0,0.3);
+  position: relative;
+  color: white;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  img {
+    /* width: 33%;
+    aspect-ratio: 4 / 5;
+    height: 100%;
+    border-radius: 5px; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  &::after {
+    content: "";
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgb(13, 13, 13, 0.5) 20%,
+      rgb(13, 13, 13, 0.7) 50%,
+      rgb(13, 13, 13, 0.9) 70%
+    );
+    z-index: -1;
+  }
   .first-row {
     display: flex;
     gap: 20px;
-    
-    img {
-      width: 33%;
-      aspect-ratio: 4 / 5;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 5px;
-    }
 
     .content {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 15px;
       padding-bottom: 5px;
 
       h2 {
-        font-size: 1.1rem;
+        font-size: 1.5rem;
+        font-family: 'GeorgiaWeb', serif;
+        font-weight: normal;
       }
 
       p {
-        font-size: 0.9rem;
-        color: gray;
+        font-size: 0.8rem;
+        color: #ffffffc1;
       }
     }
   }
 
   .second-row {
-    color: gray;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     padding-top: 15px;
-    padding-inline: 50px;
+    padding-inline: 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -107,6 +149,5 @@ export const MobileStoryBody = styled.div`
       align-items: center;
       gap: 5px;
     }
-
   }
 `;

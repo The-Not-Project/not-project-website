@@ -6,8 +6,6 @@ import {
   RadarDescription,
   RadarPhoto,
   RadarCardContainer,
-  CategoriesContainer,
-  Category,
   ArrowLink,
   LocationContainer,
 } from "./radarCard.styles";
@@ -15,7 +13,6 @@ import { useEffect, useState } from "react";
 import { Story } from "@/app/types/types";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
-// import { FaArrowRight as Arrow } from "react-icons/fa6";
 import { FiArrowRight as Arrow } from "react-icons/fi";
 
 import { BiMap as Location } from "react-icons/bi";
@@ -46,21 +43,12 @@ export default function RadarCard() {
       </>
     );
 
-  const date = new Date(radarStory.createdAt).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-
   return (
-    <RadarCardContainer
-      ref={ref}
-      //  onClick={() => router.push(`story/${radarStory.id}`)}
-    >
+    <RadarCardContainer>
       <>
         <RadarDescription
           $isVisible={isVisible}
-          $url={radarStory.thumbnail}
+          $url={encodeURI(radarStory.thumbnail)}
           ref={ref}
           className={clsx({ "is-visible": isVisible })}
         >
@@ -140,7 +128,7 @@ export default function RadarCard() {
           {/* <p className="date">{date}</p> */}
         </RadarDescription>
         <RadarPhoto
-          $url={radarStory.thumbnail}
+          $url={encodeURI(radarStory.thumbnail)}
           className={clsx({ "is-visible": isVisible })}
         />
       </>

@@ -1,6 +1,15 @@
 import Image from "next/image";
 import styled from "styled-components";
 
+export const PageContainer = styled.main`
+  background: #e7e0d6;
+
+  h1 {
+    /* font-weight: normal; */
+    font-family: "GeorgiaWeb", serif;
+  }
+`;
+
 export const HeaderContainer = styled.div`
   display: block;
   max-height: auto;
@@ -156,7 +165,7 @@ export const WhoIsItForContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--bg-color);
+  background-color: #e7e0d6;
   height: 50vh;
   width: 50vh;
   padding: 3rem;

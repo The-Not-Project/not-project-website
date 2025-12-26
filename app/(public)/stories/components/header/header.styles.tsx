@@ -1,72 +1,134 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const HeaderContainer = styled.header<{ $filename: string }>`
-font-family: "Oswald", sans-serif;
+export const HeaderContainer = styled.header`
   height: 100dvh;
-  max-height: 1000px;
-  background: url(${({ $filename }) => `../media/boroughBackdrops/${$filename}.jpg`})
-    center center no-repeat;
-  background-size: cover;
-  position: relative;
-  margin-bottom: 20px;
-  padding-top: 90px;
-  &:before {
-    content: '';
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(hsl(0, 0%, 0%, 0.2) 40%, var(--bg-color));
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-  }
+  display: flex;
+  padding-top: 70px;
+  background: #e3e0d8;
 
   @media (max-width: 850px) {
-    height: 80vh;
-    &:before {
-      background: none;
-      backdrop-filter: brightness(0.5) blur(3px);
-
-    }
+    padding-top: 60px;
+    flex-direction: column;
+    height: auto;
   }
 `;
 
-export const BoroughDescription = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
-  color: white;
-  font-size: clamp(1.5rem, 2vw, 2.2rem);
-  text-wrap: balance;
-  text-align: center;
+export const HeaderPhotoContainer = styled.div`
   width: 50%;
-  text-shadow: 0 0 20px black;
-  z-index: 1;
+  padding: 70px;
+  padding-bottom: 0;
+  display: flex;
+
+  background: #d9d3c8;
+  @media (max-width: 850px) {
+    width: 100%;
+    height: 60vh;
+    padding: 30px;
+  }
+`;
+
+export const HeaderPhoto = styled.div`
+  height: 100%;
+  flex-grow: 1;
+  position: relative;
+  border-radius: 100px 100px 0 0;
+  overflow: hidden;
+  @media (max-width: 850px) {
+    border-radius: 150px 150px 0 0;
+    filter: saturate(0.7);
+  }
+`;
+
+export const HeaderDescriptionContainer = styled.div`
+  width: 50%;
+  padding: 150px;
 
   @media (max-width: 850px) {
     width: 100%;
-    padding-inline: 5px;
-    /* top: auto;
-    bottom: 0;
-    translate: -50% -20%; */
-    font-size: 1.5rem;
-    color: #e6e6e6;
+    padding: 30px;
+    padding-top: 50px;
+  }
+
+  h1 {
+    font-family: "GeorgiaWeb", serif;
+    font-weight: normal;
+    font-size: 4rem;
+    margin-bottom: 20px;
+    @media (max-width: 850px) {
+      font-size: 2.5rem;
+    }
 
     span {
       font-style: italic;
+      color: #8b5e34;
+    }
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #2a2a2ab3;
+    @media (max-width: 850px) {
+      font-size: 0.9rem;
+      color: #2a2a2aa4;
     }
   }
 `;
 
-export const MenuButton = styled.p`
-  color: #f7deb1;
-  position: absolute;
-  left: 50%;
-  translate: -50%;
-  bottom: 20px;
-  font-size: 1.2rem;
-  width: max-content;
-  text-decoration: underline;
-  
-  `
+export const BoroughSelectionContainer = styled.div`
+  margin-top: 150px;
+  padding-left: 30px;
+  border-left: #00000050 1px solid;
+  @media (max-width: 850px) {
+    margin-top: 50px;
+    padding-left: 20px;
+  }
+
+  h2 {
+    font-family: "GeorgiaWeb", serif;
+    font-weight: normal;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    @media (max-width: 850px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+
+    @media (max-width: 850px) {
+      font-size: 0.9rem;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+
+      a {
+        text-decoration: none;
+        color: unset;
+      }
+
+      span {
+        color: #8b5e34;
+      }
+
+      &::before {
+        content: "";
+        margin-right: 10px;
+        display: inline-block;
+        height: 7px;
+        width: 7px;
+        border-radius: 7px;
+        background: #8b5e34;
+        @media (max-width: 850px) {
+          height: 5px;
+          width: 5px;
+        }
+      }
+    }
+  }
+`;

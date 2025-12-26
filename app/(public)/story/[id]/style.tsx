@@ -1,23 +1,27 @@
 import styled from "styled-components";
 
+export const StoryWrapper = styled.main`
+  background: #e7e0d6;
+`;
+
 export const StoryContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 100px 70px;
+  padding: 100px 100px 70px;
 
   @media (max-width: 850px) {
     width: 100%;
     padding: 10px 20px 20px;
-
-    .title {
-      margin-top: 10px;
-      font-size: 2.4rem !important;
-    }
   }
 
   .title {
     font-weight: normal;
     font-size: 4rem;
+    font-family: "GeorgiaWeb", serif;
+    @media (max-width: 850px) {
+      margin-top: 70px;
+      font-size: 2.4rem;
+    }
   }
 
   img {
@@ -31,12 +35,21 @@ export const StoryContainer = styled.div`
     display: flex;
     justify-content: space-between;
     margin-block: 5px 20px;
+    @media (max-width: 850px) {
+       margin-block: 3px 30px;
+      font-size: 0.8rem;
+    }
   }
 
-  sup, sub {
+  sup,
+  sub {
     display: block;
     translate: 0 -20px;
     color: #3a3a3a;
+  }
+
+  a {
+    color: #5a3a2a !important;
   }
 `;
 

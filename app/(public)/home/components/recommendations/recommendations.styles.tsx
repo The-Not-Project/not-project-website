@@ -5,7 +5,8 @@ export const RecommendationsContainer = styled.section`
   width: 90%;
   margin: 100px auto;
   @media (max-width: 600px) {
-    padding-inline: 0;
+    margin-block: 50px;
+    width: 100%;
   }
 `;
 
@@ -17,29 +18,28 @@ export const BigTitle = styled.h2`
   font-size: 0.9rem;
   font-weight: bold;
   letter-spacing: 2px;
-
-  @media (max-width: 600px) {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
+  @media (max-width: 850px) {
+    margin-left: 20px;
   }
 `;
 
 export const SecondaryTitle = styled.h3`
-  font-weight: 300;
+  font-weight: normal;
   color: white;
   font-family: "GeorgiaWeb", serif;
   font-size: 2rem;
   margin-top: 10px;
 
   @media (max-width: 600px) {
-    font-size: 1.5rem;
-    text-wrap: balance;
+    font-size: 1.8rem;
+    margin-left: 20px;
+    margin-top: 0;
   }
 `;
 
 export const RecommendationsList = styled.div`
   display: flex;
-  margin-block: 40px;
+  margin-block: 30px;
   margin-inline: auto;
   overflow: overlay;
   gap: 50px;
@@ -51,9 +51,7 @@ export const RecommendationsList = styled.div`
   @media (max-width: 850px) {
     gap: 20px;
     overflow-x: scroll;
-    max-width: 100vw;
-    flex-wrap: nowrap;
-    scroll-snap-type: x mandatory;
+    /* scroll-snap-type: x mandatory; */
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     justify-content: flex-start;
@@ -77,6 +75,8 @@ export const RecommendationCardContainer = styled.div`
     scroll-snap-align: center;
     flex: 0 0 100%;
     padding: 25px 25px;
+    width: 90%;
+    min-width: unset;
   }
 
   .content {
@@ -121,7 +121,7 @@ export const RecommendationCardContainer = styled.div`
 
       a {
         width: fit-content;
-        color:  #e7e0d6;
+        color: #e7e0d6;
         border: #e7e0d6 1px solid;
         margin-top: auto;
         font-size: 0.9em;
@@ -131,7 +131,7 @@ export const RecommendationCardContainer = styled.div`
         display: flex;
         gap: 3px;
         align-items: center;
-        transition: .2s;
+        transition: 0.2s;
 
         &:hover {
           color: black;

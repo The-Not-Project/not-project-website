@@ -1,15 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import NextLink from "next/link";
 
-type PathElementProps = {
-  x: number;
-  y: number;
-  $scatterprogress: number;
-  $scatteroffsetx: number;
-  $scatteroffsety: number;
-  $scatterrotate: number;
-};
-
 const fadepulsateslow = keyframes`
   33% {
     opacity: 0;
@@ -34,18 +25,9 @@ export const BoroughsSectionContainer = styled.section`
   background: #1b1917;
 
   @media (max-width: 850px) {
-    height: max-content;
-    max-height: unset;
-    background: none;
-
-    &.secondary {
-      background: linear-gradient(
-        var(--bg-color),
-        hsl(35, 46%, 95%, 0.5) 20%,
-        hsl(35, 46%, 95%, 0.5) 80%,
-        var(--bg-color)
-      );
-    }
+    flex-flow: column;
+    aspect-ratio: 3/4;
+    border-radius: 10px;
   }
 
   h1 {
@@ -57,7 +39,6 @@ export const BoroughsSectionContainer = styled.section`
     width: 100%;
     text-align: center;
     z-index: -1;
-    animation: ${fadepulsateslow} 1s;
   }
 
   .description {
@@ -68,6 +49,14 @@ export const BoroughsSectionContainer = styled.section`
     justify-content: center;
     padding: 50px;
     color: #e7e0d6;
+    animation: ${fadepulsateslow} 1s;
+
+    @media (max-width: 850px) {
+      width: 100%;
+      height: 50%;
+      padding: 0 50px 20px 30px;
+      justify-content: flex-start;
+    }
 
     h2 {
       font-family: "GeorgiaWeb", serif;
@@ -76,24 +65,25 @@ export const BoroughsSectionContainer = styled.section`
       text-transform: uppercase;
       font-size: 3rem;
       margin-top: auto;
-      animation: ${fadepulsateslow} 1s;
+      @media (max-width: 850px) {
+        font-size: 1.6rem;
+      }
     }
 
     hr {
       height: 3px;
       width: 40px;
-      background: #cf6b31;
+      background: #8b5e34;
       margin-block: 10px 15px;
       border: none;
       border-radius: 2px;
-      animation: ${fadepulsateslow} 1s;
+      margin-top: 5px;
     }
 
     p {
       font-size: 1rem;
       color: rgb(231, 224, 214, 0.7);
       font-size: 0.9rem;
-      animation: ${fadepulsateslow} 1s;
     }
 
     a {
@@ -112,6 +102,10 @@ export const BoroughsSectionContainer = styled.section`
       letter-spacing: 1px;
       font-size: 0.8rem;
       transition: 0.2s;
+      @media (max-width: 850px) {
+        font-size: 0.7rem;
+        padding-inline: 15px;
+      }
 
       &:hover {
         color: #e7e0d6;
@@ -138,9 +132,10 @@ export const Background = styled.div`
   animation: ${fadepulsatefast} 0.66s;
   position: relative;
 
-
-  @media (max-width: 600px) {
-    animation: none;
+  @media (max-width: 850px) {
+    width: 100%;
+    height: 50%;
+    border-radius: 0;
   }
 `;
 
@@ -152,97 +147,6 @@ export const SVGContainer = styled.div`
   bottom: 0;
   translate: -50%;
   z-index: 2;
-
-  @media (max-width: 600px) {
-    position: unset;
-    margin: 0 auto;
-    height: 100%;
-    width: 100%;
-    translate: -50%;
-    translate: none;
-  }
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-export const DesktopPath = styled.path`
-  cursor: pointer;
-  fill: var(--bg-color);
-  opacity: 0.8;
-
-  &.active {
-    stroke: hsl(0, 0%, 0%, 0.5);
-    filter: drop-shadow(0 0 20px hsl(36, 47%, 0%, 0.5));
-    opacity: 1;
-  }
-`;
-
-export const MobilePath = styled.path<PathElementProps>`
-  stroke: hsl(0, 0%, 0%, 0);
-  fill: var(--bg-color);
-  transition: 0.2s;
-  transition-property: scale, translate, fill, stroke;
-
-  &.active,
-  &.shrinking {
-    scale: 1.1;
-    translate: ${({ x, y }) => `${x}% ${y}%`};
-    fill: hsl(0, 0%, 0%, 0.2);
-    stroke: white;
-    stroke-width: 4px;
-  }
-
-  &.scatter {
-    transform: ${({
-      $scatteroffsetx,
-      $scatteroffsety,
-      $scatterprogress,
-      $scatterrotate,
-    }) =>
-      `translate(${$scatteroffsetx * $scatterprogress}px, ${
-        $scatteroffsety * $scatterprogress
-      }px) rotate(${$scatterrotate * $scatterprogress}deg)`};
-    opacity: ${({ $scatterprogress }) => 1 - $scatterprogress};
-  }
-
-  &.hidden {
-    display: none;
-  }
-`;
-
-export const BoroughPopup = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(transparent, black);
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  padding: 0 10px 30px 20px;
-  h2 a {
-    font-size: 13vw;
-    font-weight: 500;
-    text-transform: uppercase;
-    color: white;
-    display: flex;
-    align-items: center;
-
-    .icon {
-      scale: 0.8;
-      translate: 0 2px;
-    }
-  }
-
-  a {
-    color: white;
-    font-size: 1.8rem;
-    text-decoration: none;
-  }
 `;
 
 export const Link = styled(NextLink)`
@@ -267,6 +171,15 @@ export const BoroughButton = styled.button`
   transition: 0.2s;
   position: relative;
 
+  @media (max-width: 850px) {
+    height: 6px;
+    width: 20px;
+
+    &.active {
+      width: 35px;
+    }
+  }
+
   &::after {
     content: "";
     position: absolute;
@@ -287,6 +200,9 @@ export const BoroughButton = styled.button`
 
   &.active {
     width: 30px;
+    @media (max-width: 850px) {
+      width: 35px;
+    }
 
     &::after {
       transition: transform 10s linear;

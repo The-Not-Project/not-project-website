@@ -25,7 +25,7 @@ export const FormInput = styled.input`
   border: 1px solid #ccc;
 
   &:focus {
-    border: 1px solid hsl(103.63636363636368, 30%, 35%);
+    border: 1px solid hsl(103, 30%, 35%);
   }
 
   &:disabled {
@@ -51,9 +51,7 @@ export const FormButton = styled.button`
     font-size: 1.1rem;
     border-radius: 5px;
     outline: none;
-    background: hsl(204, 45%, 30%);
-    border: hsl(204, 45%, 30%) 1px solid;
-    color: white;
+    border: black 1.5px solid;
     `;
 
 export const FormButtonOutlined = styled(FormButton)`

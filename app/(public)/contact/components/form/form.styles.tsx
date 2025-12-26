@@ -6,6 +6,8 @@ export const FormContainer = styled.form`
     font-size: 2.3rem;
     margin-bottom: 40px;
     text-align: center;
+    font-family: 'GeorgiaWeb', serif;
+
   }
   @media (max-width: 850px) {
     h2 {
@@ -58,11 +60,10 @@ export const FormContainer = styled.form`
     display: block;
     font-size: 1.1rem;
     padding: 7px 10px;
-    background: hsl(204, 45%, 30%);
-    color: white;
     outline: none;
     border: none;
-    border-radius: 3px;
+    border-radius: 8px;
+    border: 1.5px black solid;
   }
 
   select {

@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
-
 :root {
   --text-color: rgb(0, 0, 0);
   --bg-color: #f9faf9;
@@ -29,7 +27,7 @@ body {
 }
 
 .page-wrapper {
-  transition: 0.18s ease-in !important;
+  transition: translate 0.18s ease-in !important;
 
   &.shifted {
     translate: -80%;
@@ -131,6 +129,7 @@ select {
 
 .object-cover {
   object-fit: cover;
+  // z-index: 0;
 }
 
 .grecaptcha-badge {

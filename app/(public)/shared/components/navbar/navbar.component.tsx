@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import useHeaderScroll from "@/app/hooks/useHeaderScroll";
 import { useStore } from "@/app/zustand/store";
 import {
@@ -9,15 +9,12 @@ import {
   AuthLink,
   Link,
   MenuIcon,
-  Menu,
-  Dropdown,
-  ProfileIcon,
-  ProfileDropdown,
+  LinksList,
   AuthContainer,
   ImageLink,
+  MobileMenu,
 } from "./navbar.styles";
-import { FaBars, FaXmark } from "react-icons/fa6";
-import clsx from "clsx";
+import { FiX as X } from "react-icons/fi";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function NavBar() {
@@ -26,11 +23,10 @@ export default function NavBar() {
   const [authenticated, setAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const router = useRouter();
   const pathname = usePathname();
 
   const { transparency } = useHeaderScroll();
-  const isSpecialPage = !pathname.startsWith("/story");
+  const isSpecialPage = pathname == "/";
 
   const isBgSolid = isSpecialPage && !transparency;
 
@@ -38,7 +34,7 @@ export default function NavBar() {
   const isMenuOpen = useStore((state) => state.mobileLayout.isMenuOpen);
   const setIsMenuOpen = useStore((state) => state.mobileLayout.setIsMenuOpen);
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     if (isLoading) return;
@@ -83,41 +79,31 @@ export default function NavBar() {
     <NavBarContainer
       className={`${navContainerClass} ${isMenuOpen && "shifted"}`}
     >
-      {/* <h1 className="title-lg" onClick={() => router.push("/")}>
-        THE NOT PROJECT
-      </h1> */}
-      {!isMobile && (
-
-        <ImageLink href="/" className="grow">
-          <Image
-            src="/media/logo-inverted.png"
-            alt="The Not Project Logo"
-            width={120}
-            height={68}
-          />
-        </ImageLink>
-      )}
-      {/* {isMobile && (
+      <ImageLink href="/" className="grow">
+        <Image
+          src="/media/logo-inverted.png"
+          alt="The Not Project Logo"
+          width={120}
+          height={68}
+        />
+      </ImageLink>
+      {isMobile ? (
         <>
-          <MenuIcon
-            className={!isMenuOpen ? solidClass : "solid"}
-            onClick={() => setIsMenuOpen(true)}
-          >
-            {!isMenuOpen && <FaBars />}
-          </MenuIcon>
-        </>
-      )} */}
-
-      <Menu className={isMenuOpen ? "open" : undefined}>
-        {/* {isMobile && (
-          <>
-            <Image
-              src="/media/logo.png"
-              alt="The Not Project Logo"
-              width={120}
-              height={68}
-            />
-            <FaXmark className="close" onClick={() => setIsMenuOpen(false)} />
+          {!isMenuOpen && (
+            <MenuIcon
+              onClick={() => setIsMenuOpen(true)}
+              width="18"
+              height="8"
+              viewBox="0 0 18 8"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
+              <line x1="0" y1="1" x2="18" y2="1"></line>
+              <line x1="0" y1="7" x2="18" y2="7"></line>
+            </MenuIcon>
+          )}
+          <MobileMenu>
+            <X className="close" onClick={() => setIsMenuOpen(false)} />
             <Link
               href="/"
               className={solidClass}
@@ -130,32 +116,89 @@ export default function NavBar() {
                 Admin
               </Link>
             )}
-          </>
-        )} */}
+            {authenticated && (
+              <Link
+                href="/profile"
+                className={solidClass}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Profile
+              </Link>
+            )}
+            <Link
+              href="/stories"
+              className={solidClass}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Stories
+            </Link>
+            <Link
+              href="/about"
+              className={solidClass}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              className={solidClass}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact
+            </Link>
+            <AuthContainer>
+              <AuthLink
+                href="/api/auth/login"
+                className={`${solidClass} bottom`}
+              >
+                {authenticated ? "Sign Out" : "Sign In"}
+              </AuthLink>
+            </AuthContainer>
+          </MobileMenu>
+        </>
+      ) : (
+        <>
+          <LinksList className={isMenuOpen ? "open" : undefined}>
+            <Link
+              href="/stories"
+              className={solidClass}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Stories
+            </Link>
+            <Link
+              href="/about"
+              className={solidClass}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              className={solidClass}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contact
+            </Link>
+            {authenticated && (
+              <Link
+                href="/profile"
+                className={solidClass}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Profile
+              </Link>
+            )}
+          </LinksList>
+          <AuthContainer>
+            <AuthLink href="/api/auth/login" className={`${solidClass} bottom`}>
+              {authenticated ? "Sign Out" : "Sign In"}
+            </AuthLink>
+          </AuthContainer>
+        </>
+      )}
 
-        <Link
-          href="/stories"
-          className={solidClass}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Stories
-        </Link>
-        <Link
-          href="/about"
-          className={solidClass}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          About
-        </Link>
-        <Link
-          href="/contact"
-          className={solidClass}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Contact
-        </Link>
-
-        {/* {authenticated ? (
+      {/* {authenticated ? (
           <ProfileDropdown
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
@@ -190,20 +233,13 @@ export default function NavBar() {
             )}
           </ProfileDropdown>
         ) : ( */}
-        {/* )} */}
 
-        {/* <DonateButton
+      {/* <DonateButton
           className={solidClass}
           onClick={() => router.push('/donate')}
           >
           DONATE
           </DonateButton> */}
-      </Menu>
-      <AuthContainer>
-        <AuthLink href="/api/auth/login" className={`${solidClass} bottom`}>
-          {!authenticated ? "Sign Out" : "Sign In"}
-        </AuthLink>
-      </AuthContainer>
     </NavBarContainer>
   );
 }
