@@ -74,7 +74,7 @@ export const BoroughsSectionContainer = styled.section`
       height: 3px;
       width: 40px;
       background: #8b5e34;
-      margin-block: 10px 15px;
+      margin-block: 10px 25px;
       border: none;
       border-radius: 2px;
       margin-top: 5px;
@@ -84,6 +84,7 @@ export const BoroughsSectionContainer = styled.section`
       font-size: 1rem;
       color: rgb(231, 224, 214, 0.7);
       font-size: 0.9rem;
+      width: 90%;
     }
 
     a {

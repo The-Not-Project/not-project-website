@@ -26,7 +26,7 @@ export const BoroughSummaries: Record<string, Borough> = {
       "The pulse of the world beats strongest in Manhattan. A global stage where history and innovation meet, shaping culture that echoes worldwide. Each street holds stories of ambition, resilience, and reinvention. This borough is a testament to New York’s enduring spirit and influence. Manhattan is NYC’s relentless heart, always evolving, always iconic.",
 
     quote: {
-      text: "Manhattan is the capital of the world.",
+      text: "Manhattan is the capital of the world, a skyline of endless ambition.",
       author: "Wallace Stevens",
     },
   },
@@ -37,7 +37,7 @@ export const BoroughSummaries: Record<string, Borough> = {
       "A borough defined by resilience, diversity, and ambition. Home to The Not Project, and countless voices that shape NYC’s culture. Queens bridges legacies and dreams, where every street corner holds a promise. It’s where the world comes together, a story waiting to be told.",
 
     quote: {
-      text: "Queens is the future of New York City.",
+      text: "Queens is the future of New York, a global tapestry in every corner.",
       author: "Andrew Cuomo",
     },
   },

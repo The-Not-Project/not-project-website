@@ -23,7 +23,6 @@ export const NavBarContainer = styled.nav`
   @media (max-width: 850px) {
     padding-inline: 25px;
     height: 60px !important;
-    justify-content: center;
 
     img {
       width: 70px;
@@ -76,6 +75,9 @@ export const NavBarContainer = styled.nav`
 
 export const ImageLink = styled(NextLink)`
   flex-grow: 1;
+  @media (max-width: 850px) {
+    flex-grow: 0;
+  }
 `;
 
 export const DonateButton = styled.button`

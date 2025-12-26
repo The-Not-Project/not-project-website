@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useStore } from "@/app/zustand/store";
 import Link from "next/link";
 import NextImage from "next/image";
@@ -12,101 +12,90 @@ import {
 } from "./boroughs.styles";
 import { FiArrowUpRight as Arrow } from "react-icons/fi";
 import clsx from "clsx";
+import { BoroughSummaries } from "@/app/constants/boroughs";
+
+const BOROUGHS = ["queens", "brooklyn", "manhattan", "bronx", "statenisland"];
 
 const formatBoroughName = (slug: string) => {
-  switch (slug) {
-    case "bronx":
-      return "The Bronx";
-    case "statenisland":
-      return "Staten Island";
-    default:
-      return slug;
-  }
+  const overrides: Record<string, string> = { bronx: "The Bronx", statenisland: "Staten Island" };
+  return overrides[slug] || slug.charAt(0).toUpperCase() + slug.slice(1);
 };
-
-const boroughs = ["queens", "brooklyn", "manhattan", "bronx", "statenisland"];
 
 export default function Boroughs() {
   const isMobile = useStore((state) => state.mobileLayout.isMobile);
-  const [fileName, setFileName] = useState<string>("queens");
-  const [visibleName, setVisibleName] = useState<string>("queens");
-  const [activeBorough, setActiveBorough] = useState<string | undefined>();
-  const [boroughIndex, setBoroughIndex] = useState<number>(0);
 
-  const switchBorough = () => {
-    setBoroughIndex((prevIndex) => {
-      const newIndex = (prevIndex + 1) % boroughs.length;
-      setTimeout(() => setFileName(boroughs[newIndex]), 100);
-      setTimeout(
-        () => setVisibleName(formatBoroughName(boroughs[newIndex])),
-        333
-      );
-      return newIndex;
-    });
-  };
+  const [data, setData] = useState({
+    index: 0,
+    file: "queens",
+    active: "queens",
+    visibleName: "Queens",
+  });
+
+  const transitionTo = useCallback((nextIndex: number) => {
+    const nextSlug = BOROUGHS[nextIndex];
+
+    setData((prev) => ({ ...prev, index: nextIndex }));
+
+    setTimeout(() => {
+      setData((prev) => ({ ...prev, file: nextSlug }));
+    }, 100);
+
+    setTimeout(() => {
+      setData((prev) => ({
+        ...prev,
+        active: nextSlug,
+        visibleName: formatBoroughName(nextSlug),
+      }));
+    }, 333);
+  }, []);
 
   useEffect(() => {
-    const images = boroughs.map((name) => {
+    BOROUGHS.forEach((name) => {
       const img = new Image();
       img.src = `/media/boroughBackdrops/${name}.jpg`;
-      return img;
     });
 
-    const Interval = setInterval(() => switchBorough(), 10 * 1000);
+    const interval = setInterval(() => {
+      transitionTo((data.index + 1) % BOROUGHS.length);
+    }, 10000);
 
-    return () => {
-      images.forEach((img) => {
-        img.src = "";
-      });
-      clearInterval(Interval);
-    };
-  }, [boroughIndex]);
+    return () => clearInterval(interval);
+  }, [data.index, transitionTo]);
 
-  const handleButtonClick = (index: number) => {
-    setBoroughIndex(index);
-    const borough = boroughs[index];
-    setActiveBorough(borough);
-    setTimeout(() => setFileName(borough), 100);
-    setTimeout(() => setVisibleName(formatBoroughName(borough)), 333);
-  };
+  const summary = BoroughSummaries[data.active.toLowerCase() as keyof typeof BoroughSummaries];
 
   return (
     <>
       <BoroughsSectionContainer
-        key={activeBorough}
-        className={fileName === "nyc" && isMobile ? "secondary" : ""}
+        className={clsx(data.file === "nyc" && isMobile && "secondary")}
       >
-        <div className="description" key={boroughIndex}>
-          <h2>{visibleName}</h2>
+        <div className="description" key={data.index}>
+          <h2>{data.visibleName}</h2>
           <hr />
-          <p key={boroughIndex}>
-            {isMobile
-              ? "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut doloribus."
-              : "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut doloribus, laboriosam exercitationem error saepe voluptatum."}
-          </p>
-          <Link href={`stories/${activeBorough}`}>
+          <p>{isMobile ? summary.quote.text : summary.description}</p>
+          <Link href={`stories/${data.active}`}>
             Visit <Arrow />
           </Link>
         </div>
 
-        <Background key={boroughIndex + 1}>
+        <Background key={data.index + 1}>
           <NextImage
-            src={`/media/boroughBackdrops/${fileName}.jpg`}
-            alt={fileName}
+            src={`/media/boroughBackdrops/${data.file}.jpg`}
+            alt={data.visibleName}
             className="object-cover"
             fill
             unoptimized
           />
         </Background>
       </BoroughsSectionContainer>
-      <BoroughSelector>
 
-        {boroughs.map((borough, index) => (
+      <BoroughSelector>
+        {BOROUGHS.map((borough, idx) => (
           <BoroughButton
-          key={index}
-          className={clsx({ active: boroughIndex === index })}
-          onClick={() => handleButtonClick(index)}
-        />
+            key={borough}
+            className={clsx({ active: data.index === idx })}
+            onClick={() => transitionTo(idx)}
+          />
         ))}
       </BoroughSelector>
     </>
