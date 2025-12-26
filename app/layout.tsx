@@ -7,6 +7,7 @@ import './globals.scss';
 import "./tiptap/styles/_keyframe-animations.scss";
 import "./tiptap/styles/_variables.scss";
 import AuthSyncer from "./(public)/shared/components/auth/AuthSyncer";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "The Not Project",
@@ -61,6 +62,7 @@ export default async function RootLayout({
           <AuthSyncer />
           {children}
           <Analytics />
+          <SpeedInsights />
         </UserProvider>
       </body>
     </html>
