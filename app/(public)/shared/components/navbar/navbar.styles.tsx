@@ -30,7 +30,7 @@ export const NavBarContainer = styled.nav`
     }
   }
 
-  &.isSpecialPage {
+  &.isHomePage {
     height: 100px;
     background: none;
     backdrop-filter: none;

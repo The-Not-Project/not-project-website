@@ -19,12 +19,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "The Not Project",
     description:
-      "Explore meaningful stories from New York City, told without constraint or commercial pressure.",
+      "Explore meaningful stories from New York City, told without constraint or agenda.",
     url: "https://www.thenotproject.com",
     siteName: "The Not Project",
     images: [
       {
-        url: "/media/LoAndDavid.png",
+        url: "/media/preview-card.jpeg",
         width: 1200,
         height: 630,
         alt: "The Not Project Cover Image",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "The Not Project",
     description: "NYC stories with soul. Told raw and unfiltered.",
-    images: ["/media/LoAndDavid.png"],
+    images: ["/media/preview-card.jpeg"],
   },
   keywords: seoKeywords.home,
 };
@@ -55,7 +55,7 @@ export default async function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" media="(prefers-color-scheme: dark)"/>
-        <link rel="preload" as="video" href="video.webm" type="video/webm"></link>
+        <link rel="preload" as="video" href="/media/output.webm" type="video/webm"></link>
       </head>
       <body className={manrope.className}>
         <UserProvider>

@@ -26,15 +26,14 @@ export default function NavBar() {
   const pathname = usePathname();
 
   const { transparency } = useHeaderScroll();
-  const isSpecialPage = pathname == "/";
+  const isHomePage = pathname == "/";
 
-  const isBgSolid = isSpecialPage && !transparency;
+  const isBgSolid = isHomePage && !transparency;
 
   const isMobile = useStore((state) => state.mobileLayout.isMobile);
   const isMenuOpen = useStore((state) => state.mobileLayout.isMenuOpen);
   const setIsMenuOpen = useStore((state) => state.mobileLayout.setIsMenuOpen);
 
-  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     if (isLoading) return;
@@ -69,9 +68,9 @@ export default function NavBar() {
   }, [user, isLoading]);
 
   const navContainerClass = isBgSolid
-    ? "solid isSpecialPage"
-    : isSpecialPage
-      ? "isSpecialPage"
+    ? "solid isHomePage"
+    : isHomePage
+      ? "isHomePage"
       : undefined;
   const solidClass = isBgSolid ? "solid" : undefined;
 
@@ -112,7 +111,11 @@ export default function NavBar() {
               Home
             </Link>
             {isAdmin && (
-              <Link href="/admin" onClick={() => setIsMenuOpen(false)}>
+              <Link
+                href="/admin"
+                onClick={() => setIsMenuOpen(false)}
+                className={solidClass}
+              >
                 Admin
               </Link>
             )}
@@ -197,49 +200,6 @@ export default function NavBar() {
           </AuthContainer>
         </>
       )}
-
-      {/* {authenticated ? (
-          <ProfileDropdown
-            onMouseEnter={() => setIsDropdownOpen(true)}
-            onMouseLeave={() => setIsDropdownOpen(false)}
-          >
-            {!isMobile ? (
-              <>
-                <ProfileIcon />
-                <Dropdown className={clsx({ closed: !isDropdownOpen })}>
-                  <p>My Account</p>
-                  {isAdmin && <Link href="/admin">Admin</Link>}
-                  <Link href="/profile" onClick={() => setIsMenuOpen(false)}>
-                    Profile
-                  </Link>
-                  <AuthLink href="/api/auth/logout">Log Out</AuthLink>
-                </Dropdown>
-              </>
-            ) : (
-              <Dropdown>
-                <Link
-                  href="/profile"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <ProfileIcon />
-                </Link>
-                <AuthLink
-                  href="/api/auth/logout"
-                  className={clsx(solidClass, "mobile")}
-                >
-                  Log Out
-                </AuthLink>
-              </Dropdown>
-            )}
-          </ProfileDropdown>
-        ) : ( */}
-
-      {/* <DonateButton
-          className={solidClass}
-          onClick={() => router.push('/donate')}
-          >
-          DONATE
-          </DonateButton> */}
     </NavBarContainer>
   );
 }

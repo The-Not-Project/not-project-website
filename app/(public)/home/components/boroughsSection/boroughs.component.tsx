@@ -72,7 +72,7 @@ export default function Boroughs() {
         <div className="description" key={data.index}>
           <h2>{data.visibleName}</h2>
           <hr />
-          <p>{isMobile ? summary.quote.text : summary.description}</p>
+          <p>{summary.description}</p>
           <Link href={`stories/${data.active}`}>
             Visit <Arrow />
           </Link>

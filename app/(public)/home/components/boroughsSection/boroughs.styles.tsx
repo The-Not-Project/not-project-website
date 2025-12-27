@@ -26,7 +26,7 @@ export const BoroughsSectionContainer = styled.section`
 
   @media (max-width: 850px) {
     flex-flow: column;
-    aspect-ratio: 3/4;
+    aspect-ratio: 3 / 5;
     border-radius: 10px;
   }
 
@@ -85,6 +85,9 @@ export const BoroughsSectionContainer = styled.section`
       color: rgb(231, 224, 214, 0.7);
       font-size: 0.9rem;
       width: 90%;
+      @media (max-width: 850px) {
+        width: 100%;
+      }
     }
 
     a {
