@@ -6,12 +6,18 @@ export const FooterContainer = styled.footer`
   color: black;
   width: 100%;
   position: relative;
-  padding: 150px 200px;
+  padding: 150px 5%;
+  margin: 0 auto;
+
+  h1, section, hr, aside {
+    max-width: 1300px;
+    margin-inline: auto;
+  }
   @media (max-width: 850px) {
     padding: 50px 30px 20px 30px;
     height: auto;
   }
-  
+
   hr {
     border: none;
     background: #00000036;
@@ -33,7 +39,7 @@ export const Headline = styled.h1`
   }
 `;
 
-export const FooterContent = styled.div`
+export const FooterContent = styled.section`
   padding-top: 10px;
   display: flex;
   gap: 80px;
@@ -47,7 +53,7 @@ export const FooterSection = styled.div`
   flex-grow: 1;
   width: 33%;
   font-size: 1.2rem;
-  
+
   @media (max-width: 850px) {
     width: 100%;
   }

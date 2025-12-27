@@ -1,13 +1,4 @@
 :root {
-  --text-color: rgb(0, 0, 0);
-  --bg-color: #f9faf9;
-  --radar-bg: #233f56;
-  --radar-overlay: #33464d83;
-  --footer-bg: #233f56;
-  --footer-text: #f9faf9;
-  --accent-text: #000000;
-  --cards-bg: #dfe8e2;
-  --cards-text: unset;
   interpolate-size: allow-keywords;
 }
 
@@ -23,7 +14,7 @@ body {
   background: #0d0d0d;
   color: var(--text-color);
   // font-family: "GeorgiaWeb", Georgia, serif !important;
-  font-weight:normal;
+  font-weight: normal;
 }
 
 .page-wrapper {
@@ -73,36 +64,22 @@ select {
 }
 
 .popup-button {
-  display: inline-block;
-  outline: none;
-  cursor: pointer;
-  font-weight: 500;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  height: 36px;
-  line-height: 34px;
-  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
   color: #ffffff;
   background-color: #007c89;
-  transition:
-    background-color 0.2s ease-in-out 0s,
-    opacity 0.2s ease-in-out 0s;
-  padding: 0 18px;
+  padding: 10px 18px;
 }
 
-.popup-button :hover {
-  color: #ffffff;
-  background-color: #006570;
-}
-
-.swal2-popup.custom-swal-popup {
-  width: 90vw !important;
+.swal2-popup.privacy-popup {
+  width: 90vw;
   max-width: 800px;
   border-radius: 20px;
-  padding: 2rem;
+  font-size: 0.8rem;
 
   h3 {
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin-top: 10px;
   }
 
@@ -129,7 +106,7 @@ select {
 
 .object-cover {
   object-fit: cover;
-  // z-index: 0;
+  // z-index: -1;
 }
 
 .grecaptcha-badge {

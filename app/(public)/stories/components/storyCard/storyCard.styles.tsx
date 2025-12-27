@@ -13,12 +13,12 @@ export const StoryContainer = styled.div`
     padding: 0;
   }
 
-  .desktop-thumbnail {
-    object-fit: cover;
-    width: 300px;
-    min-width: 300px;
-    height: 180px;
+  .image-container {
+    min-width: 350px;
+    height: auto;
+    aspect-ratio: 16 / 9;
     margin-block: 10px;
+    position: relative;
   }
 `;
 
@@ -76,24 +76,11 @@ export const MobileStoryBody = styled.div`
   position: relative;
   color: white;
   height: 200px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   img {
-    /* width: 33%;
-    aspect-ratio: 4 / 5;
-    height: 100%;
-    border-radius: 5px; */
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
     z-index: -1;
   }
 
@@ -125,7 +112,7 @@ export const MobileStoryBody = styled.div`
 
       h2 {
         font-size: 1.5rem;
-        font-family: 'GeorgiaWeb', serif;
+        font-family: "GeorgiaWeb", serif;
         font-weight: normal;
       }
 

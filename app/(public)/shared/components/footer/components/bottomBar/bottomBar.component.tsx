@@ -2,23 +2,19 @@ import Swal from "sweetalert2";
 import ReactDOMServer from "react-dom/server";
 import { BottomBarContainer } from "./bottomBar.styles";
 import PrivacyPolicy from "@/app/constants/privacyPolicy";
-import TermsAndConditions from "@/app/constants/termsConditions";
 
 export default function BottomBar() {
-  const handleClick = (type: "privacy" | "terms") => {
-    const content =
-      type === "privacy"
-        ? ReactDOMServer.renderToString(<PrivacyPolicy />)
-        : ReactDOMServer.renderToString(<TermsAndConditions />);
+  const handleClick = () => {
+    const content = ReactDOMServer.renderToString(<PrivacyPolicy />)
 
     Swal.fire({
-      title: type === "privacy" ? "Privacy Policy" : "Terms & Conditions",
-      html: `<div style="max-height: 70vh; overflow-y: auto; text-align: left;">${content}</div>`,
+      title: "Privacy Policy",
+      html: content,
       showCloseButton: true,
       showConfirmButton: false,
       allowOutsideClick: true,
       customClass: {
-        popup: "custom-swal-popup",
+        popup: "privacy-popup",
       },
     });
   };
@@ -26,7 +22,7 @@ export default function BottomBar() {
   return (
     <BottomBarContainer>
       <p>2025 © The Not Project</p>
-      <p onClick={() => handleClick("privacy")}>Privacy Policy</p>
+      <p onClick={() => handleClick()}>Privacy Policy</p>
     </BottomBarContainer>
   );
 }

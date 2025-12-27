@@ -1,6 +1,7 @@
 export default function PrivacyPolicy() {
   return (
-    <section>
+    // <section style={style="max-height: 70vh; overflow-y: auto; text-align: left;"}>
+    <section style={{textAlign: 'left', maxHeight: '70vh'}}>
       <h3>1. Introduction</h3>
       <p>
         We are committed to protecting your privacy. This policy outlines how we
@@ -52,7 +53,7 @@ export default function PrivacyPolicy() {
       <h3>9. Contact Us</h3>
       <p>
         If you have any questions about this privacy policy, please contact us
-        at info@thenotproject.org
+        at contact@thenotproject.com
       </p>
 
       <p className="last-updated">Last updated: June 9, 2025</p>

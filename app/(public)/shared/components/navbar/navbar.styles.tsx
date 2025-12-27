@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import NextLink from "next/link";
-import { FaRegCircleUser } from "react-icons/fa6";
 
 export const NavBarContainer = styled.nav`
   display: flex;
@@ -19,6 +18,13 @@ export const NavBarContainer = styled.nav`
   background: rgb(13, 13, 13, 0.9);
   z-index: 3;
   backdrop-filter: blur(10px);
+
+  @media (max-width: 1000px) {
+     img {
+      width: 100px;
+      height: auto;
+    }
+  }
 
   @media (max-width: 850px) {
     padding-inline: 25px;
@@ -75,6 +81,7 @@ export const NavBarContainer = styled.nav`
 
 export const ImageLink = styled(NextLink)`
   flex-grow: 1;
+
   @media (max-width: 850px) {
     flex-grow: 0;
   }
@@ -97,7 +104,6 @@ export const DonateButton = styled.button`
 export const Link = styled(NextLink)`
   color: hsl(0, 0%, 90%);
   text-decoration: none;
-  margin-inline: 20px;
   display: inline-flex;
   align-items: center;
   text-transform: uppercase;
@@ -139,6 +145,10 @@ export const AuthLink = styled.a`
     color: #dbdbdb;
   }
 
+  @media (max-width: 1000px) {
+    padding-inline: 10px;
+  }
+
   @media (max-width: 850px) {
     margin-top: auto;
     border: none;
@@ -154,6 +164,11 @@ export const LinksList = styled.div`
   justify-content: center;
   height: 100%;
   flex-grow: 1;
+  gap: 40px;
+
+  @media (max-width: 1000px) {
+    gap: 20px;
+  }
 `;
 
 export const MobileMenu = styled.aside`
@@ -195,79 +210,5 @@ export const MobileMenu = styled.aside`
     right: 20px;
     font-size: 2rem;
     color: #eaeaea;
-  }
-`;
-
-export const Dropdown = styled.div`
-  position: absolute;
-  bottom: 15px;
-  right: 20px;
-  translate: 0 100%;
-  display: flex;
-  flex-direction: column;
-  background: white;
-  color: black;
-  border-radius: 10px;
-  overflow: hidden;
-  padding-bottom: 5px;
-  transition: 0.2s;
-  transition-property: opacity, translate, rotate;
-  z-index: 1;
-
-  @media (max-width: 850px) {
-    position: unset;
-    margin-top: auto;
-    background: none;
-    flex-direction: row;
-    translate: 0;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0;
-    color: white;
-  }
-
-  &.closed {
-    opacity: 0;
-    rotate: x 90deg;
-    translate: 0 60%;
-    pointer-events: none;
-  }
-
-  p {
-    color: #ccc;
-    padding: 10px 20px 5px 10px;
-    margin-inline: 10px;
-    border-bottom: #ccc solid 1px;
-  }
-
-  a {
-    margin: 0;
-    padding: 5px 20px;
-
-    @media (min-width: 850px) {
-      &:hover {
-        background: #f0f0f0;
-      }
-    }
-  }
-`;
-
-export const ProfileDropdown = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-
-  @media (max-width: 850px) {
-    width: 100%;
-  }
-`;
-
-export const ProfileIcon = styled(FaRegCircleUser)`
-  scale: 1.3;
-  margin-left: 10px;
-
-  @media (max-width: 850px) {
-    margin-left: 15px;
   }
 `;

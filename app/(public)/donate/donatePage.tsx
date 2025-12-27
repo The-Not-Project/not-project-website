@@ -10,10 +10,10 @@ export default function DonatePage() {
         <input type='number' placeholder='minimun $46' defaultValue={donation || ''} onChange={e => setDonation(Number(e.target.value))} />
         <button onClick={() => {
           if (donation < 46) {
-            alert('You fucking blind or something?');
+            alert('You blind or something?');
             return;
           }
-          alert('I wish nigga');
+          alert('I wish');
         }}>take my money</button>
       </DonateContainer>
   );

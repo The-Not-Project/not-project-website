@@ -9,8 +9,13 @@ import {
   CategoriesContainer,
   MobileStoryBody,
 } from "./storyCard.styles";
-import {FaShare as ShareIcon, FaCalendar as CalenderIcon, FaTags as InfoIcon} from 'react-icons/fa6'
+import {
+  FaShare as ShareIcon,
+  FaCalendar as CalenderIcon,
+  FaTags as InfoIcon,
+} from "react-icons/fa6";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Story({ story }: { story: StoryType }) {
   const isMobile = useStore((state) => state.mobileLayout.isMobile);
@@ -29,23 +34,35 @@ export default function Story({ story }: { story: StoryType }) {
       {isMobile ? (
         <MobileStoryBody>
           <div className="first-row">
-            <img src={story.thumbnail} alt="thumbnail" />
+            <Image
+              src={story.thumbnail}
+              alt="thumbnail"
+              fill
+              className="object-cover"
+            />
             <div className="content">
               <h2>{story.title}</h2>
               <p>{story.summary.slice(0, 150 - story.title.length)}...</p>
             </div>
           </div>
           <div className="second-row">
-            <span> <CalenderIcon />{" "}
+            <span>
+              {" "}
+              <CalenderIcon />{" "}
               {new Date(story.createdAt).toLocaleDateString("en-US", {
                 month: "short",
                 year: "numeric",
               })}
             </span>
             {story.categories.length > 0 && (
-              <span> <InfoIcon /> {story.categories[0].name}</span>
+              <span>
+                {" "}
+                <InfoIcon /> {story.categories[0].name}
+              </span>
             )}
-            <span><ShareIcon /> Share</span>
+            <span>
+              <ShareIcon /> Share
+            </span>
           </div>
         </MobileStoryBody>
       ) : (
@@ -69,7 +86,14 @@ export default function Story({ story }: { story: StoryType }) {
             <p>{story.summary}</p>
             <p className="createdAt">{date}</p>
           </StoryContent>
-          <img src={story.thumbnail} className="desktop-thumbnail" alt="thumbnail" />
+          <div className="image-container">
+            <Image
+              src={story.thumbnail}
+              className="object-cover"
+              alt="thumbnail"
+              fill
+            />
+          </div>
         </>
       )}
     </StoryContainer>

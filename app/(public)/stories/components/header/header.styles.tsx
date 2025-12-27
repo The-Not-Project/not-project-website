@@ -2,14 +2,16 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
   height: 100dvh;
+  max-height: 80vw;
   display: flex;
   padding-top: 70px;
   background: #e3e0d8;
-
-  @media (max-width: 850px) {
+  
+  @media (max-width: 1100px) {
     padding-top: 60px;
     flex-direction: column;
     height: auto;
+    max-height: none;
   }
 `;
 
@@ -20,7 +22,7 @@ export const HeaderPhotoContainer = styled.div`
   display: flex;
 
   background: #d9d3c8;
-  @media (max-width: 850px) {
+  @media (max-width: 1100px) {
     width: 100%;
     height: 60vh;
     padding: 30px;
@@ -33,18 +35,23 @@ export const HeaderPhoto = styled.div`
   position: relative;
   border-radius: 100px 100px 0 0;
   overflow: hidden;
-  @media (max-width: 850px) {
+  @media (max-width: 1100px) {
     border-radius: 150px 150px 0 0;
     filter: saturate(0.7);
+    max-width: 800px;
   }
 `;
 
 export const HeaderDescriptionContainer = styled.div`
   width: 50%;
   padding: 150px;
+  padding: 8vw;
+
+  @media (max-width: 1100px) {
+    width: 100%;
+  }
 
   @media (max-width: 850px) {
-    width: 100%;
     padding: 30px;
     padding-top: 50px;
   }
@@ -78,7 +85,7 @@ export const BoroughSelectionContainer = styled.div`
   margin-top: 150px;
   padding-left: 30px;
   border-left: #00000050 1px solid;
-  @media (max-width: 850px) {
+  @media (max-width: 1100px) {
     margin-top: 50px;
     padding-left: 20px;
   }

@@ -65,30 +65,6 @@ export default function Footer() {
           <SectionTitle>Subscribe</SectionTitle>
           <SubscribeForm />
         </FooterSection>
-        {/* 
-        {footerSections.map(({ title, items }) => (
-          <NavSection key={title}>
-            <h2>{title}</h2>
-            <ul>
-              {items.map((item, i) => (
-                <li key={i}>
-                  {"icon" in item ? (
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={item.ariaLabel}
-                    >
-                      {item.icon}
-                    </a>
-                  ) : (
-                    <Link href={item.href}>{item.label}</Link>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </NavSection>
-        ))} */}
       </FooterContent>
 
       <BottomBar />

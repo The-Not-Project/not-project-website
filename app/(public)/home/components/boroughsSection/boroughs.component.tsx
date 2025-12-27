@@ -17,7 +17,10 @@ import { BoroughSummaries } from "@/app/constants/boroughs";
 const BOROUGHS = ["queens", "brooklyn", "manhattan", "bronx", "statenisland"];
 
 const formatBoroughName = (slug: string) => {
-  const overrides: Record<string, string> = { bronx: "The Bronx", statenisland: "Staten Island" };
+  const overrides: Record<string, string> = {
+    bronx: "The Bronx",
+    statenisland: "Staten Island",
+  };
   return overrides[slug] || slug.charAt(0).toUpperCase() + slug.slice(1);
 };
 
@@ -50,11 +53,6 @@ export default function Boroughs() {
   }, []);
 
   useEffect(() => {
-    BOROUGHS.forEach((name) => {
-      const img = new Image();
-      img.src = `/media/boroughBackdrops/${name}.jpg`;
-    });
-
     const interval = setInterval(() => {
       transitionTo((data.index + 1) % BOROUGHS.length);
     }, 10000);
@@ -62,7 +60,10 @@ export default function Boroughs() {
     return () => clearInterval(interval);
   }, [data.index, transitionTo]);
 
-  const summary = BoroughSummaries[data.active.toLowerCase() as keyof typeof BoroughSummaries];
+  const summary =
+    BoroughSummaries[
+      data.active.toLowerCase() as keyof typeof BoroughSummaries
+    ];
 
   return (
     <>
@@ -84,7 +85,6 @@ export default function Boroughs() {
             alt={data.visibleName}
             className="object-cover"
             fill
-            unoptimized
           />
         </Background>
       </BoroughsSectionContainer>

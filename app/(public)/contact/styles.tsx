@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export const PageContainer = styled.main`
   background: #e7e0d6;
-`
+`;
 
 export const HeaderContainer = styled.div`
   display: block;
@@ -26,7 +26,6 @@ export const ContactContainer = styled.main`
   max-width: 850px;
   padding: 40px;
   margin: 0 auto;
-
 
   @media (max-width: 850px) {
     padding: 20px;

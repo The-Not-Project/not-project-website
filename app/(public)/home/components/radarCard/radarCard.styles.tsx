@@ -94,7 +94,7 @@ export const RadarDescription = styled.div<RadarCardProps>`
       font-size: 1.2rem;
       width: 80%;
 
-      @media (max-width: 850px) {
+      @media (max-width: 950px) {
         font-size: 0.8rem;
         width: 100%;
       }

@@ -21,7 +21,7 @@ export default function HomePageHeader() {
           loop
           muted
           playsInline
-          poster="/media/firstframe.png"
+          poster="/media/firstframe.jpg"
         >
           <source src="/media/output.webm" type="video/webm" />
         </HeaderVideo>

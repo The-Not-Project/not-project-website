@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const BottomBarContainer = styled.div`
+export const BottomBarContainer = styled.aside`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,6 +10,10 @@ export const BottomBarContainer = styled.div`
   font-size: 0.8rem;
   text-transform: uppercase;
   margin-top: 40px;
+
+  p {
+    cursor: pointer;
+  }
   
   @media (max-width: 1000px) {
     margin-top: 20px;

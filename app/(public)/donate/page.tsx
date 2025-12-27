@@ -1,12 +1,8 @@
+import { Metadata } from "next";
 import DonatePage from "./donatePage";
+import { donatePageMetadata } from "@/app/constants/metadata";
 
-import seoKeywords from "@/app/constants/seoKeywords";
-
-export const metadata = {
-  title: 'Donate | The Not Project',
-  description: 'Support The Not Project by making a donation. Your contribution helps us continue our mission of sharing stories and fostering community.',
-  keywords: seoKeywords.donate
-}
+export const metadata : Metadata = donatePageMetadata
 
 export default function Page() {
   return <DonatePage />

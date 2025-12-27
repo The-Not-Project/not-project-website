@@ -5,15 +5,15 @@ type HeaderBackgroundProps = { $position: number };
 export const HeaderContainer = styled.header`
   display: block;
   height: 100vh;
-  max-height: 70vw;
+  max-height: 60vw;
   color: white;
   position: relative;
   padding-top: 80px;
-  
-  @media (max-width: 600px) {
+
+  @media (max-width: 850px) {
     max-height: none;
   }
-  `;
+`;
 
 export const CenterTitle = styled.div`
   text-align: center;
@@ -23,11 +23,12 @@ export const CenterTitle = styled.div`
   translate: -50% -50%;
   width: min-content;
   text-shadow: 0 0 10px black;
-  
+
   h1 {
     font-family: "GeorgiaWeb", sans-serif;
     font-size: 6rem;
     letter-spacing: 5px;
+    transition: .3s;
   }
 
   h2 {
@@ -38,21 +39,37 @@ export const CenterTitle = styled.div`
     text-transform: uppercase;
     letter-spacing: 2px;
   }
-
+  
   p {
     margin-top: 30px;
     font-size: 1.2rem;
     text-wrap: balance;
     color: #dedede;
   }
-
+  
   div {
-    position: relative; 
+    position: relative;
     height: 20px;
   }
 
   img {
     display: block;
+  }
+  
+  @media (max-width: 1200px) {
+    h1 {
+      font-size: 3.5rem;
+    }
+    
+    h2 {
+      font-size: 0.8rem;
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-top: 10px;
+    }
   }
 
   @media (max-width: 850px) {
@@ -67,7 +84,6 @@ export const CenterTitle = styled.div`
 
     p {
       font-size: 0.9rem;
-      margin-top: 10px;
     }
 
     div {
