@@ -1,6 +1,12 @@
 import { Story } from "../types/types";
 import seoKeywords from "./seoKeywords";
 
+const getImageUrl = (path: string) => {
+  const version = "v=2.0"; 
+  const BASE_URL = "https://www.thenotproject.com";
+  return `${BASE_URL}${path}?${version}`;
+};
+
 const projectMetadata = {
   title: "The Not Project",
   description:
@@ -15,11 +21,11 @@ const projectMetadata = {
     title: "The Not Project",
     description:
       "Explore meaningful stories from New York City, told without constraint or agenda.",
-    url: "https://www.thenotprojnot Lorenzoect.com",
+    url: "https://www.thenotproject.com",
     siteName: "The Not Project",
     images: [
       {
-        url: "/media/preview-card.jpeg",
+        url: getImageUrl("/media/preview-card.jpeg"),
         width: 1200,
         height: 630,
         alt: "The Not Project Cover Image",
@@ -32,7 +38,7 @@ const projectMetadata = {
     card: "summary_large_image",
     title: "The Not Project",
     description: "NYC stories with soul. Told raw and unfiltered.",
-    images: ["/media/preview-card.jpeg"],
+    images: [getImageUrl("/media/preview-card.jpeg")],
   },
   keywords: seoKeywords.home,
 };
@@ -49,7 +55,7 @@ const aboutPageMetadata = {
     type: "website",
     images: [
       {
-        url: "/media/LoAndDavid.png",
+        url: getImageUrl("/media/preview-card.jpeg"),
         width: 1200,
         height: 630,
         alt: "The Not Project About",
@@ -61,7 +67,7 @@ const aboutPageMetadata = {
     title: "About | The Not Project",
     description:
       "Learn more about the people and purpose behind The Not Project.",
-    images: ["/media/LoAndDavid.png"],
+    images: [getImageUrl("/media/preview-card.jpeg")],
   },
   keywords: seoKeywords.about,
 };
@@ -78,7 +84,7 @@ const contactPageMetadata = {
     type: "website",
     images: [
       {
-        url: "/media/LoAndDavid.png",
+        url: getImageUrl("/media/preview-card.jpeg"),
         width: 1200,
         height: 630,
         alt: "The Not Project Contact",
@@ -90,7 +96,7 @@ const contactPageMetadata = {
     title: "Contact | The Not Project",
     description:
       "Get in touch with The Not Project team for collaborations, feedback, or inquiries.",
-    images: ["/media/LoAndDavid.png"],
+    images: [getImageUrl("/media/preview-card.jpeg")],
   },
   keywords: seoKeywords.contact,
 };
@@ -114,7 +120,7 @@ const profilePageMetadata = {
     type: "website",
     images: [
       {
-        url: "/media/LoAndDavid.png",
+        url: getImageUrl("/media/preview-card.jpeg"),
         width: 1200,
         height: 630,
         alt: "The Not Project Profile",
@@ -126,7 +132,7 @@ const profilePageMetadata = {
     title: "Profile | The Not Project",
     description:
       "Manage your personal information and saved stories on The Not Project.",
-    images: ["/media/LoAndDavid.png"],
+    images: [getImageUrl("/media/preview-card.jpeg")],
   },
   keywords: seoKeywords.profile,
 };
@@ -143,7 +149,7 @@ const storiesPageMetadata = {
     type: "website",
     images: [
       {
-        url: "/media/preview-card.jpeg",
+        url: getImageUrl("/media/boroughBackdrops/nyc.jpg"),
         width: 1200,
         height: 630,
         alt: "The Not Project Stories",
@@ -155,7 +161,7 @@ const storiesPageMetadata = {
     title: "Stories | The Not Project",
     description:
       "Discover inspiring stories from diverse communities on The Not Project.",
-    images: ["/media/preview-card.jpeg"],
+    images: [getImageUrl("/media/boroughBackdrops/nyc.jpg")],
   },
   keywords: seoKeywords.stories,
 };
@@ -187,7 +193,7 @@ function getBoroughMetadata(borough: string) {
       type: "website",
       images: [
         {
-          url: `/media/boroughBackdrops/${borough}.jpg`,
+          url: getImageUrl(`/media/boroughBackdrops/${borough}.jpg`),
           width: 1200,
           height: 630,
           alt: `Stories from ${properBorough}`,
@@ -198,7 +204,7 @@ function getBoroughMetadata(borough: string) {
       card: "summary_large_image",
       title,
       description,
-      images: [`/media/boroughBackdrops/${borough}.jpg`],
+      images: [getImageUrl(`/media/boroughBackdrops/${borough}.jpg`)],
     },
     keywords: [...seoKeywords.stories, properBorough],
   };
