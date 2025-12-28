@@ -27,6 +27,7 @@ export default function RadarCard() {
     async function fetchRadarStory() {
       const story = await getRadarStory();
       setRadarStory(story);
+      console.log(radarStory?.borough);
     }
 
     fetchRadarStory();
@@ -94,7 +95,13 @@ export default function RadarCard() {
               <Arrow />
             </ArrowLink>
             <LocationContainer
-              onClick={() => router.push(`stories/${radarStory.borough}`)}
+              onClick={() =>
+                router.push(
+                  radarStory.borough == "new york"
+                    ? "/stories"
+                    : `/stories/${radarStory.borough}`
+                )
+              }
               className={clsx("slide-on-scroll", isVisible && "is-visible")}
             >
               <Location className="pin" />
