@@ -18,7 +18,7 @@ export default function RadarCard({ story }: { story: Story }) {
             By {`${story.author.firstName} ${story.author.lastName}`}
           </p>
         </RadarDescription>
-        <RadarPhoto $url={story.thumbnail} />
+        <RadarPhoto $url={encodeURI(story.thumbnail)} />
       </RadarCardContainer>
       {/* <DeleteButton onClick={() => onDeleteAction()}>Delete</DeleteButton> */}
     </>

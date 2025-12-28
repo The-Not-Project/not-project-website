@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color: #d4af37;
   color: black;
   width: 100%;
   position: relative;
-  padding: 150px 5%;
+  padding: 5% 100px 20px;
   margin: 0 auto;
 
   h1, section, hr, aside {
