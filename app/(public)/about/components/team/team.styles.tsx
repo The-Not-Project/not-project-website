@@ -27,7 +27,7 @@ export const TeamBanner = styled.div`
   background-color: #e7e0d6;
 
   @media (max-width: 1100px) {
-    padding: 40px 10px;
+    padding: 30px 0px;
   }
 
   h1 {
@@ -46,6 +46,8 @@ export const TeamList = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 30px;
+    margin-top: 2rem;
   }
 `;
 export const TeamMemberCard = styled.div`
@@ -58,7 +60,7 @@ export const TeamMemberCard = styled.div`
   }
   h2 {
     font-size: 1.8rem;
-    font-family: 'GeorgiaWeb', serif;
+    font-family: "GeorgiaWeb", serif;
     font-weight: normal;
   }
 

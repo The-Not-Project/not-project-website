@@ -21,6 +21,28 @@ export default function Story({ story }: { story: StoryType }) {
   const isMobile = useStore((state) => state.mobileLayout.isMobile);
   const router = useRouter();
 
+  async function handleShare() {
+    const url = `https://www.thenotproject.com/story/${story.id}`
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: story.title,
+          text: `Story written by ${story.author.firstName + story.author.lastName}`,
+          url
+        })
+      } catch (err) {
+        console.log('Error sharing:', err)
+      }
+    } else {
+      alert('Link copied to clipboard!')
+      navigator.clipboard.writeText(url)
+    }
+  }
+
+  function openStory() {
+    router.push(`/story/${story.id}`)
+  }
+
   const date = new Date(story.createdAt).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
@@ -28,12 +50,13 @@ export default function Story({ story }: { story: StoryType }) {
   });
 
   return (
-    <StoryContainer
-      onClick={() => isMobile && router.push(`/story/${story.id}`)}
-    >
+    <StoryContainer>
       {isMobile ? (
         <MobileStoryBody>
-          <div className="first-row">
+          <div
+            className="first-row"
+            onClick={openStory}
+          >
             <Image
               src={story.thumbnail}
               alt="thumbnail"
@@ -47,20 +70,14 @@ export default function Story({ story }: { story: StoryType }) {
           </div>
           <div className="second-row">
             <span>
-              {" "}
-              <CalenderIcon />{" "}
-              {new Date(story.createdAt).toLocaleDateString("en-US", {
-                month: "short",
-                year: "numeric",
-              })}
+              <CalenderIcon /> {date}
             </span>
             {story.categories.length > 0 && (
               <span>
-                {" "}
                 <InfoIcon /> {story.categories[0].name}
               </span>
             )}
-            <span>
+            <span onClick={handleShare}>
               <ShareIcon /> Share
             </span>
           </div>
