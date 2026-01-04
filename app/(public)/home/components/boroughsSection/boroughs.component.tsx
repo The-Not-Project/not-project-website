@@ -40,14 +40,11 @@ export default function Boroughs() {
     setData((prev) => ({ ...prev, index: nextIndex }));
 
     setTimeout(() => {
-      setData((prev) => ({ ...prev, file: nextSlug }));
-    }, 100);
-
-    setTimeout(() => {
       setData((prev) => ({
         ...prev,
         active: nextSlug,
         visibleName: formatBoroughName(nextSlug),
+        file: nextSlug
       }));
     }, 333);
   }, []);

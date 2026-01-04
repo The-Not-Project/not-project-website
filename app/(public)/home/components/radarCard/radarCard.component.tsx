@@ -27,7 +27,6 @@ export default function RadarCard() {
     async function fetchRadarStory() {
       const story = await getRadarStory();
       setRadarStory(story);
-      console.log(radarStory?.borough);
     }
 
     fetchRadarStory();

@@ -26,23 +26,23 @@ export const CenterTitle = styled.div`
 
   h1 {
     font-family: "GeorgiaWeb", sans-serif;
-    font-size: 6rem;
+    font-size: 5.5vw;
     letter-spacing: 5px;
     transition: .3s;
   }
 
   h2 {
     font-weight: normal;
-    font-size: 1rem;
-    margin-bottom: 25px;
+    font-size: 1vw;
+    margin-bottom: 1vw;
     color: hsl(45.859872611464965, 30%, 52.352941176470594%);
     text-transform: uppercase;
     letter-spacing: 2px;
   }
   
   p {
-    margin-top: 30px;
-    font-size: 1.2rem;
+    margin-top: 1.1vw;
+    font-size: 1vw;
     text-wrap: balance;
     color: #dedede;
   }
@@ -57,14 +57,6 @@ export const CenterTitle = styled.div`
   }
   
   @media (max-width: 1200px) {
-    h1 {
-      font-size: 3.5rem;
-    }
-    
-    h2 {
-      font-size: 0.8rem;
-      margin-bottom: 5px;
-    }
 
     p {
       font-size: 1rem;

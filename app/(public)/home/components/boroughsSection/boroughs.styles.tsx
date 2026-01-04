@@ -26,7 +26,7 @@ export const BoroughsSectionContainer = styled.section`
 
   @media (max-width: 850px) {
     flex-flow: column;
-    aspect-ratio: 3 / 5;
+    aspect-ratio: 4 / 7;
     border-radius: 10px;
   }
 
@@ -87,6 +87,7 @@ export const BoroughsSectionContainer = styled.section`
       width: 90%;
       @media (max-width: 850px) {
         width: 100%;
+        font-size: 0.8rem;
       }
     }
 
@@ -121,10 +122,12 @@ export const BoroughsSectionContainer = styled.section`
 
 const fadepulsatefast = keyframes`
   50% {
-    filter: blur(500px);
+    filter: blur(50px);
+    opacity: 0;
   }
   100% {
     filter: none;
+    opacity: 1;
   }
 `;
 

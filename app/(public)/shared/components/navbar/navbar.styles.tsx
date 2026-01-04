@@ -19,8 +19,8 @@ export const NavBarContainer = styled.nav`
   z-index: 3;
   backdrop-filter: blur(10px);
 
-  @media (max-width: 1000px) {
-     img {
+  @media (max-width: 1400px) {
+    img {
       width: 100px;
       height: auto;
     }
@@ -32,7 +32,6 @@ export const NavBarContainer = styled.nav`
 
     img {
       width: 70px;
-      height: auto;
     }
   }
 
@@ -49,33 +48,18 @@ export const NavBarContainer = styled.nav`
       background: rgb(13, 13, 13, 0.9);
       backdrop-filter: blur(10px);
       height: 70px;
-      
+
       img {
         filter: invert(0.25);
         @media (max-width: 850px) {
           filter: invert(0.1);
-  }
+        }
       }
     }
   }
 
   &.shifted {
     translate: -80%;
-  }
-
-  .title-lg {
-    font-size: 2.5rem;
-    font-weight: normal;
-    /* text-align: center;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%); */
-    cursor: pointer;
-
-    @media (max-width: 850px) {
-      font-size: 1.5rem;
-      width: max-content;
-    }
   }
 `;
 
@@ -111,6 +95,10 @@ export const Link = styled(NextLink)`
   letter-spacing: 2px;
   transition: 0.2s;
 
+  @media (max-width: 1400px) {
+    font-size: 0.7rem;
+  }
+
   &.solid {
     color: #dbdbdb;
   }
@@ -145,8 +133,9 @@ export const AuthLink = styled.a`
     color: #dbdbdb;
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1400px) {
     padding-inline: 10px;
+    font-size: 0.7rem;
   }
 
   @media (max-width: 850px) {
@@ -155,8 +144,7 @@ export const AuthLink = styled.a`
   }
 `;
 
-export const MenuIcon = styled.svg`
-`;
+export const MenuIcon = styled.svg``;
 
 export const LinksList = styled.div`
   display: flex;

@@ -6,14 +6,14 @@ type Borough = {
     text: string;
     author: string;
   };
-}
+};
 
 export const BoroughSummaries: Record<string, Borough> = {
   bronx: {
     fileName: "bronx",
     boroughName: "The Bronx",
     description:
-      "The birthplace of hip-hop. The Bronx pulses with unmatched energy and pride. A borough where creativity and community come together to shape a distinct identity. Its streets echo stories of resilience, strength, and unwavering spirit. The Bronx stands as a living testament to the power of culture and perseverance.",
+      "The birthplace of hip-hop, the Bronx pulses with unmatched energy and pride. Here, creativity and community shape a distinct identity. Its streets echo stories of resilience and unwavering spirit. The Bronx stands as a living testament to the power of culture and perseverance.",
     quote: {
       text: "The Bronx is the birthplace of hip-hop, a culture that changed the world.",
       author: "Unknown",
@@ -23,8 +23,7 @@ export const BoroughSummaries: Record<string, Borough> = {
     fileName: "manhattan",
     boroughName: "Manhattan",
     description:
-      "The pulse of the world beats strongest in Manhattan. A global stage where history and innovation meet, shaping culture that echoes worldwide. Each street holds stories of ambition, resilience, and reinvention. This borough is a testament to New York’s enduring spirit and influence. Manhattan is NYC’s relentless heart, always evolving, always iconic.",
-
+      "The pulse of the world beats in Manhattan, a global stage where history and innovation meet. Each street holds stories of ambition and resilience. This borough is a testament to New York’s spirit and influence. Manhattan is NYC’s relentless heart, always evolving, always iconic.",
     quote: {
       text: "Manhattan is the capital of the world, a skyline of endless ambition.",
       author: "Wallace Stevens",

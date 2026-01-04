@@ -29,6 +29,7 @@ export const RadarDescription = styled.div<RadarCardProps>`
   }
 
   @media (max-width: 850px) {
+    flex-flow: column;
     &.is-visible {
       background: linear-gradient(
         to right,
@@ -67,8 +68,9 @@ export const RadarDescription = styled.div<RadarCardProps>`
     }
 
     @media (max-width: 850px) {
-      padding-top: 100px;
-      gap: 20px;
+      padding-top: 30px;
+      padding-inline: 30px;
+      gap: 30px;
     }
 
     .title {
@@ -85,7 +87,6 @@ export const RadarDescription = styled.div<RadarCardProps>`
         -webkit-text-stroke: unset;
         color: #eae0d5;
         font-size: 3rem;
-        /* margin-bottom: 20px; */
         width: 100%;
       }
     }
@@ -94,8 +95,8 @@ export const RadarDescription = styled.div<RadarCardProps>`
       font-size: 1.2rem;
       width: 80%;
 
-      @media (max-width: 950px) {
-        font-size: 0.8rem;
+      @media (max-width: 850px) {
+        font-size: 0.9rem;
         width: 100%;
       }
     }
@@ -105,6 +106,10 @@ export const RadarDescription = styled.div<RadarCardProps>`
       font-style: italic;
       margin-top: auto;
       font-size: 1rem;
+      @media (max-width: 850px) {
+        order: -1;
+        margin-block: 0 20px;
+      }
     }
     font-size: 1.5rem;
     transition: opacity 0.3s ease-out 0.5s;
@@ -120,7 +125,11 @@ export const RadarDescription = styled.div<RadarCardProps>`
     overflow: hidden;
 
     @media (max-width: 850px) {
-      padding-right: 10px;
+      flex-flow: row-reverse;
+      align-items: center;
+      justify-content: space-between;
+      padding-inline: 30px;
+      padding-bottom: 20px;
     }
 
     .slide-on-scroll {
@@ -128,6 +137,10 @@ export const RadarDescription = styled.div<RadarCardProps>`
       transition:
         translate 0.3s ease-out 1s,
         color 0.2s;
+
+      @media (max-width: 850px) {
+        translate: 0 100px;
+      }
 
       &.is-visible {
         translate: 0;
@@ -147,7 +160,9 @@ export const ArrowLink = styled(Link)`
   }
 
   @media (max-width: 850px) {
-    font-size: 2rem;
+    font-size: 2.2rem;
+    margin: 0;
+    display: flex;
   }
 `;
 
@@ -179,6 +194,7 @@ export const LocationContainer = styled.div`
     width: 50px;
     height: 50px;
     font-size: 1rem;
+    margin: 0;
 
     .circle {
       text {
@@ -248,14 +264,14 @@ export const RadarPhoto = styled.div<{ $url: string }>`
     @media (max-width: 850px) {
       font-size: 2rem;
       background: linear-gradient(
-      to bottom,
-      rgba(13, 13, 13) 0%,
-      rgba(13, 13, 13, 0.8) 30%,
-      rgba(13, 13, 13, 0.7) 40%,
-      rgba(13, 13, 13, 0.7) 60%,
-      rgba(13, 13, 13, 0.8) 70%,
-      rgba(13, 13, 13) 100%
-    );
+        to bottom,
+        rgba(13, 13, 13) 0%,
+        rgba(13, 13, 13, 0.8) 30%,
+        rgba(13, 13, 13, 0.7) 40%,
+        rgba(13, 13, 13, 0.7) 60%,
+        rgba(13, 13, 13, 0.8) 70%,
+        rgba(13, 13, 13) 100%
+      );
     }
   }
 

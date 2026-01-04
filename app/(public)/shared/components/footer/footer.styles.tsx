@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
-  /* min-height: 100vh; */
   background-color: #d4af37;
   color: black;
   width: 100%;
