@@ -27,7 +27,7 @@ export default function Story({ story }: { story: StoryType }) {
       try {
         await navigator.share({
           title: story.title,
-          text: `Story written by ${story.author.firstName + story.author.lastName}`,
+          // text: `Story written by ${story.author.firstName} ${story.author.lastName}`,
           url
         })
       } catch (err) {
