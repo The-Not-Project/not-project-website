@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StoriesListContainer = styled.div`
   flex-grow: 1;
@@ -9,17 +9,18 @@ export const StoriesListContainer = styled.div`
   height: max-content;
 
   @media (max-width: 850px) {
-      gap: 20px;
-    }
+    gap: 20px;
+  }
 `;
 
 export const NoStoriesMessage = styled.p`
-margin-top: 50px;
+  margin-top: 50px;
   font-size: 1.5rem;
   height: 100%;
   display: flex;
   align-items: center;
-  `
+  color: white;
+`;
 
 export const FollowupMessage = styled.p`
   font-size: 1.2rem;
@@ -27,7 +28,6 @@ export const FollowupMessage = styled.p`
   text-align: center;
   
   a {
-    color: #333;
-
+    color: #cacaca;
   }
-`
+`;

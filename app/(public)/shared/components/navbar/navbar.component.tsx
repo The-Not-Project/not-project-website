@@ -34,7 +34,6 @@ export default function NavBar() {
   const isMenuOpen = useStore((state) => state.mobileLayout.isMenuOpen);
   const setIsMenuOpen = useStore((state) => state.mobileLayout.setIsMenuOpen);
 
-
   useEffect(() => {
     if (isLoading) return;
 
@@ -151,7 +150,7 @@ export default function NavBar() {
             </Link>
             <AuthContainer>
               <AuthLink
-                href="/api/auth/login"
+                href={`/api/auth/${authenticated ? "logout" : "login"}`}
                 className={`${solidClass} bottom`}
               >
                 {authenticated ? "Sign Out" : "Sign In"}
@@ -194,7 +193,10 @@ export default function NavBar() {
             )}
           </LinksList>
           <AuthContainer>
-            <AuthLink href="/api/auth/login" className={`${solidClass} bottom`}>
+            <AuthLink
+              href={`/api/auth/${authenticated ? "logout" : "login"}`}
+              className={`${solidClass} bottom`}
+            >
               {authenticated ? "Sign Out" : "Sign In"}
             </AuthLink>
           </AuthContainer>
