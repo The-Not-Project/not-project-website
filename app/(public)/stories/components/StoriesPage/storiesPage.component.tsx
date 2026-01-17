@@ -4,14 +4,9 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { usePublicServerActions } from "@/app/contexts/public-server-actions";
 import { Filters, Story } from "@/app/types/types";
 import StoriesList from "../storiesList/storiesList.component";
-import {
-  SectionTitle,
-  StoriesContainer,
-} from "./storiesPage.styles";
+import { SectionTitle, StoriesContainer } from "./storiesPage.styles";
 import Header from "../header/header.component";
 import { BoroughSummaries } from "@/app/constants/boroughs";
-import { useStore } from "@/app/zustand/store";
-import clsx from "clsx";
 
 interface StoriesPageProps {
   boroughParam?: string;
@@ -39,18 +34,6 @@ export default function StoriesPageComponent({
   const [loading, setLoading] = useState(true);
   const [stories, setStories] = useState<Story[]>([]);
   // const [filters, setFilters] = useState<Filters>(defaultFilters);
-  const isMenuOpen = useStore((state) => state.mobileLayout.isMenuOpen);
-  const setIsMobile = useStore((state) => state.mobileLayout.setIsMobile);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 850);
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const fetchStories = useCallback(
     async (appliedFilters: Filters = defaultFilters) => {
@@ -70,9 +53,8 @@ export default function StoriesPageComponent({
   }, [fetchStories]);
 
   return (
-    <div className={clsx("page-wrapper", { shifted: isMenuOpen })}>
+    <main>
       <Header borough={currentBorough} />
-      
       <SectionTitle>
         <h2>OUR ORIGINAL WORK</h2>
         <h3>Stories Of {currentBorough.boroughName}</h3>
@@ -85,6 +67,6 @@ export default function StoriesPageComponent({
           loading={loading}
         />
       </StoriesContainer>
-    </div>
+    </main>
   );
 }

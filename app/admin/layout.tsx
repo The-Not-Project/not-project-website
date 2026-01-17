@@ -28,6 +28,8 @@ import {
   getRadarStory,
   updateRadarStory,
 } from '../database/repositories/radar.repository';
+import "@/app/tiptap/styles/_variables.scss";
+
 
 export default async function AdminLayout({
   children,

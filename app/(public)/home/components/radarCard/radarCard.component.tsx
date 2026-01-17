@@ -1,7 +1,5 @@
 "use client";
-
 import { usePublicServerActions } from "@/app/contexts/public-server-actions";
-import useRadarVisibility from "@/app/hooks/useRadarVisibility";
 import {
   RadarDescription,
   RadarPhoto,
@@ -9,28 +7,46 @@ import {
   ArrowLink,
   LocationContainer,
 } from "./radarCard.styles";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { Story } from "@/app/types/types";
-import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import { FiArrowRight as Arrow } from "react-icons/fi";
 
-import { BiMap as Location } from "react-icons/bi";
+import { BiMap as LocationPin } from "react-icons/bi";
+import Link from "next/link";
+import RotatingTextSVG from "./assets/rotatingTextSVG.component";
 
 export default function RadarCard() {
   const { getRadarStory } = usePublicServerActions();
   const [radarStory, setRadarStory] = useState<Story | null>(null);
-  const { ref, isVisible } = useRadarVisibility({ threshold: 1 });
-  const router = useRouter();
+  const [isVisible, setIsVisible] = useState(false);
+  const observer = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    async function fetchRadarStory() {
+    async function fetchStory() {
       const story = await getRadarStory();
       setRadarStory(story);
     }
-
-    fetchRadarStory();
+    fetchStory();
   }, [getRadarStory]);
+
+  const containerRef = useCallback((node: HTMLElement | null) => {
+    if (node !== null) {
+      if (observer.current) observer.current.disconnect();
+
+      observer.current = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 1) {
+            setIsVisible(true);
+            observer.current?.disconnect();
+          }
+        },
+        { threshold: 1.0 }
+      );
+
+      observer.current.observe(node);
+    }
+  }, []);
 
   if (!radarStory)
     return (
@@ -44,19 +60,12 @@ export default function RadarCard() {
     );
 
   return (
-    <RadarCardContainer>
-      <>
+    <RadarCardContainer ref={containerRef}>
         <RadarDescription
           $isVisible={isVisible}
           $url={encodeURI(radarStory.thumbnail)}
-          ref={ref}
           className={clsx({ "is-visible": isVisible })}
         >
-          {/* <CategoriesContainer>
-            {radarStory.categories.map((category) => (
-              <Category key={category.id}>{category.name}</Category>
-            ))}
-          </CategoriesContainer> */}
           <div className="main-info-container">
             <h2
               className={clsx(
@@ -93,51 +102,27 @@ export default function RadarCard() {
             >
               <Arrow />
             </ArrowLink>
-            <LocationContainer
-              onClick={() =>
-                router.push(
-                  radarStory.borough == "new york"
-                    ? "/stories"
-                    : `/stories/${radarStory.borough}`
-                )
+            <Link
+              href={
+                radarStory.borough == "new york"
+                  ? "/stories"
+                  : `/stories/${radarStory.borough}`
               }
-              className={clsx("slide-on-scroll", isVisible && "is-visible")}
             >
-              <Location className="pin" />
-              <svg viewBox="0 0 300 300" aria-hidden="true" className="circle">
-                <defs>
-                  <path
-                    id="circlePath"
-                    d="
-          M 150,150
-          m -100,0
-          a 100,100 0 1,1 200,0
-          a 100,100 0 1,1 -200,0
-        "
-                  />
-                </defs>
-
-                <text>
-                  <textPath
-                    href="#circlePath"
-                    // text-anchor="middle"
-                  >
-                    • {radarStory.borough} • New York •
-                  </textPath>
-                </text>
-              </svg>
-            </LocationContainer>
-
-            {/* <p className="date">{date}</p> */}
+              <LocationContainer
+                className={clsx("slide-on-scroll", isVisible && "is-visible")}
+              >
+                <LocationPin className="pin" />
+                <RotatingTextSVG borough={radarStory.borough} />
+              </LocationContainer>
+            </Link>
           </div>
 
-          {/* <p className="date">{date}</p> */}
         </RadarDescription>
         <RadarPhoto
           $url={encodeURI(radarStory.thumbnail)}
           className={clsx({ "is-visible": isVisible })}
         />
-      </>
     </RadarCardContainer>
   );
 }

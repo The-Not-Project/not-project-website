@@ -5,8 +5,7 @@ export const PageContainer = styled.main`
   background: #e7e0d6;
 
   h1 {
-    /* font-weight: normal; */
-    font-family: "GeorgiaWeb", serif;
+    font-family: var(--font-georgia), serif;
   }
 `;
 

@@ -12,7 +12,6 @@ import { Subscript } from "@tiptap/extension-subscript";
 import { Superscript } from "@tiptap/extension-superscript";
 
 // --- Custom Extensions ---
-import { Link } from "@/app/tiptap/components/tiptap-extension/link-extension";
 import { Selection } from "@/app/tiptap/components/tiptap-extension/selection-extension";
 
 // --- Tiptap Node ---
@@ -55,7 +54,6 @@ export function StoryReader({
       Superscript,
       Subscript,
       Selection,
-      Link.configure({ openOnClick: false }),
     ],
     content: value,
     editable: false

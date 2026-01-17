@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.main`
+export const ProfileWrapper = styled.main`
   background: #e7e0d6;
   padding: 40px;
+
+  @media (max-width: 850px) {
+    padding: 50px 5px 20px 5px;
+  }
 `;
 
 export const ProfileContainer = styled.div`

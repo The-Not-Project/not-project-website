@@ -16,7 +16,7 @@ import {
   isStorySaved,
 } from "../database/repositories/storySaves.repository";
 import { createSubscriber } from "../database/repositories/subscriber.repository";
-import { preload } from "react-dom";
+import StyledComponentsRegistry from "../utils/registry";
 
 export default async function PublicLayout({
   children,
@@ -38,13 +38,14 @@ export default async function PublicLayout({
     createSubscriber,
   };
 
-  preload("/media/output.webm", { as: "video", type: "video/webm" });
 
   return (
     <PublicServerActionsProvider {...groupedActions}>
-      <NavBar />
-      {children}
-      <Footer />
+      <StyledComponentsRegistry>
+        <NavBar />
+        {children}
+        <Footer />
+      </StyledComponentsRegistry>
     </PublicServerActionsProvider>
   );
 }

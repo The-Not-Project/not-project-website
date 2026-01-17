@@ -57,7 +57,7 @@ export const HeaderDescriptionContainer = styled.div`
   }
 
   h1 {
-    font-family: "GeorgiaWeb", serif;
+    font-family: var(--font-georgia), serif;
     font-weight: normal;
     font-size: 4rem;
     margin-bottom: 20px;
@@ -91,7 +91,7 @@ export const BoroughSelectionContainer = styled.div`
   }
 
   h2 {
-    font-family: "GeorgiaWeb", serif;
+    font-family: var(--font-georgia), serif;
     font-weight: normal;
     font-size: 2rem;
     margin-bottom: 20px;

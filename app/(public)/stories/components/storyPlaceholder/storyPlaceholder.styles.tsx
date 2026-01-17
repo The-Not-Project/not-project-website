@@ -33,67 +33,25 @@ export const StoryContainer = styled.div`
     border: none;
     padding: 0;
   }
-
-  .desktop-thumbnail {
+  
+  .thumbnail {
     width: 300px;
     min-width: 300px;
     height: 180px;
+    @media (max-width: 850px) {
+      width: 100%;
+      height: 210px;
+    }
   }
-`;
+  `;
 
 export const StoryContent = styled.div`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   min-height: 100%;
-
-`;
-
-export const MobileStoryBody = styled.div`
-  width: 100%;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 0 100px -40px rgba(0, 0, 0, 0.3);
-  .first-row {
-    display: flex;
-    gap: 20px;
-
-    .thumbnail {
-      width: 33%;
-      aspect-ratio: 4 / 5;
-      height: 100%;
-      border-radius: 5px;
-    }
-
-    .title {
-      margin: 0;
-      height: 20px;
-      margin-bottom: 5px;
-
-      &.half {
-        width: 70%;
-      }
-    }
-
-    .summary {
-      height: 17px;
-      width: 100%;
-    }
-
-    .content {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      padding-bottom: 5px;
-    }
-  }
-
-  .second-row {
-    padding-top: 15px;
-    padding-inline: 50px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  
+  @media (max-width: 850px) {
+    display: none;
   }
 `;

@@ -76,7 +76,7 @@ export const RadarDescription = styled.div<RadarCardProps>`
     .title {
       /* text-wrap: balance; */
       color: transparent;
-      font-family: "GeorgiaWeb", serif;
+      font-family: var(--font-georgia), serif;
       text-transform: uppercase;
       font-size: 4rem;
       letter-spacing: 2px;
@@ -102,7 +102,7 @@ export const RadarDescription = styled.div<RadarCardProps>`
     }
 
     .author {
-      font-family: "GeorgiaWeb", serif;
+      font-family: var(--font-georgia), serif;
       font-style: italic;
       margin-top: auto;
       font-size: 1rem;
@@ -123,6 +123,10 @@ export const RadarDescription = styled.div<RadarCardProps>`
     padding-right: 50px;
     min-width: fit-content;
     overflow: hidden;
+
+    a {
+      margin-top: auto;
+    }
 
     @media (max-width: 850px) {
       flex-flow: row-reverse;
@@ -190,20 +194,17 @@ export const LocationContainer = styled.div`
   text-transform: uppercase;
   cursor: pointer;
 
+  @media (max-width: 1200px) {
+    width: 70px;
+    height: 70px;
+    font-size: 1.2rem;
+  }
+
   @media (max-width: 850px) {
     width: 50px;
     height: 50px;
     font-size: 1rem;
     margin: 0;
-
-    .circle {
-      text {
-        font-size: 2.2rem;
-      }
-    }
-
-    .pin {
-    }
   }
 
   .circle {
@@ -238,7 +239,7 @@ export const RadarPhoto = styled.div<{ $url: string }>`
 
   &::after {
     content: "Our Radar";
-    font-family: "GeorgiaWeb", serif;
+    font-family: var(--font-georgia), serif;
     background: linear-gradient(
       to bottom,
       rgba(13, 13, 13) 0%,

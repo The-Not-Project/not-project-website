@@ -1,11 +1,11 @@
-import styled from "styled-components";
-
-type HeaderBackgroundProps = { $position: number };
+import styled, { keyframes } from "styled-components";
 
 export const HeaderContainer = styled.header`
   display: block;
   height: 100vh;
   max-height: 60vw;
+  max-width: 100vw;
+  overflow: hidden;
   color: white;
   position: relative;
   padding-top: 80px;
@@ -25,12 +25,12 @@ export const CenterTitle = styled.div`
   text-shadow: 0 0 10px black;
 
   h1 {
-    font-family: "GeorgiaWeb", sans-serif;
+    font-family: var(--font-georgia), sans-serif;
     font-size: 5.5vw;
     letter-spacing: 5px;
-    transition: .3s;
+    transition: 0.3s;
   }
-
+  
   h2 {
     font-weight: normal;
     font-size: 1vw;
@@ -39,25 +39,15 @@ export const CenterTitle = styled.div`
     text-transform: uppercase;
     letter-spacing: 2px;
   }
-  
+
   p {
     margin-top: 1.1vw;
     font-size: 1vw;
     text-wrap: balance;
     color: #dedede;
   }
-  
-  div {
-    position: relative;
-    height: 20px;
-  }
 
-  img {
-    display: block;
-  }
-  
   @media (max-width: 1200px) {
-
     p {
       font-size: 1rem;
       margin-top: 10px;
@@ -82,6 +72,12 @@ export const CenterTitle = styled.div`
       height: 10px;
     }
   }
+`;
+
+export const SeperatorContainer = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1181 / 41;
 `;
 
 export const HeaderBackground = styled.div`
@@ -110,14 +106,18 @@ export const HeaderBackground = styled.div`
   }
 `;
 
-export const HeaderVideo = styled.video.attrs<HeaderBackgroundProps>(
-  ({ $position }) => ({
-    style: {
-      translate: `0 ${$position}px`,
-    },
-  })
-)`
+export const parallaxScroll = keyframes`
+from {
+  transform: translateY(0%);
+}
+to {
+  transform: translateY(50vh);
+}
+`;
+
+export const HeaderVideo = styled.video`
   object-fit: cover;
   width: 100%;
   height: 100%;
+  will-change: transform;
 `;

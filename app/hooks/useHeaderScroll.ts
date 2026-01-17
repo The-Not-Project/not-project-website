@@ -1,22 +1,15 @@
-"use client";
-import { useState, useEffect } from 'react';
+import { useEffect } from "react";
 
-export default function useHeaderScroll() {
-  const [transparency, setTransparency] = useState(true);
-  const [backgroundPosition, setBackgroundPosition] = useState(0);
-
+export default function useHeaderScroll(ref: React.RefObject<HTMLVideoElement | null>) {
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
+    const video = ref.current;
+    if (!video) return;
 
-      setTransparency(scrollY <= 150);
-      
-      setBackgroundPosition(scrollY * 0.5);
+    const handleScroll = () => {
+      video.style.transform = `translate3d(0, ${window.scrollY * 0.5}px, 0)`;
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return { transparency, backgroundPosition };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [ref]);
 }

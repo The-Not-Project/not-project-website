@@ -6,8 +6,7 @@ export const FormContainer = styled.form`
     font-size: 2.3rem;
     margin-bottom: 40px;
     text-align: center;
-    font-family: 'GeorgiaWeb', serif;
-
+    font-family: var(--font-georgia), serif;
   }
   @media (max-width: 850px) {
     h2 {
@@ -50,6 +49,7 @@ export const FormContainer = styled.form`
     font-size: 1.1rem;
     padding: 5px;
     outline: none;
+    font-family: inherit;
 
     &:focus {
       border-color: #3c5544;
@@ -57,13 +57,18 @@ export const FormContainer = styled.form`
   }
 
   button {
-    display: block;
-    font-size: 1.1rem;
-    padding: 7px 10px;
-    outline: none;
+    background-color: #282218;
     border: none;
-    border-radius: 8px;
-    border: 1.5px black solid;
+    border-radius: 0.75rem;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.75rem 1.2rem;
+    transition: 0.2s;
+    &:hover {
+      background-color: #4e4535;
+    }
   }
 
   select {
@@ -83,6 +88,6 @@ export const CaptchaNotice = styled.p`
   margin-bottom: 20px;
 
   a {
-   text-decoration: none;
+    text-decoration: none;
   }
-`
+`;

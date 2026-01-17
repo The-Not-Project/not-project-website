@@ -17,7 +17,7 @@ export const StoryContainer = styled.div`
   .title {
     font-weight: normal;
     font-size: 4rem;
-    font-family: "GeorgiaWeb", serif;
+    font-family: var(--font-georgia), serif;
     @media (max-width: 850px) {
       margin-top: 70px;
       font-size: 2.4rem;
@@ -31,16 +31,6 @@ export const StoryContainer = styled.div`
     margin-block: 20px;
   }
 
-  .info {
-    display: flex;
-    justify-content: space-between;
-    margin-block: 5px 20px;
-    @media (max-width: 850px) {
-       margin-block: 3px 30px;
-      font-size: 0.8rem;
-    }
-  }
-
   sup,
   sub {
     display: block;
@@ -50,6 +40,34 @@ export const StoryContainer = styled.div`
 
   a {
     color: #5a3a2a !important;
+  }
+`;
+
+export const ThumbnailContainer = styled.div`
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 3;
+  position: relative;
+  margin-block:40px 20px;
+
+  img {
+    margin: 0;
+  }
+
+    @media (max-width: 850px) {
+    margin-block: 20px 15px;
+  }
+`;
+
+export const InfoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding-top: 5px;
+  border-top: 1px solid black;
+  @media (max-width: 850px) {
+    margin-block: 3px 30px;
+    font-size: 0.8rem;
   }
 `;
 

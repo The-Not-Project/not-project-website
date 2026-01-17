@@ -22,35 +22,32 @@ export const StoryContainer = styled.div`
     justify-content: end;
     padding: 20px;
 
-    
-      &:after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.3);
-        border-radius: 3px;
-        z-index: -1;
-      }
-  }
-
-  img {
-    object-fit: cover;
-    width: 40%;
-    min-width: 40%;
-    height: 100%;
-    border-radius: 3px;
-
-    @media (max-width: 850px) {
+    &:after {
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 3px;
+      z-index: 0;
     }
+  }
+`;
+
+export const ThumbnailContainer = styled.div`
+  position: relative;
+  width: 200px;
+  height: 100%;
+  border-radius: 3px;
+
+  @media (max-width: 850px) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -62,6 +59,7 @@ export const StoryContent = styled.div`
   order: 1;
   justify-content: center;
   gap: 10px;
+  z-index: 1;
 
   .title {
     font-size: 1.5rem;

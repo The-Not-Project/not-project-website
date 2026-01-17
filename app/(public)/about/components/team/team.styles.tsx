@@ -60,7 +60,7 @@ export const TeamMemberCard = styled.div`
   }
   h2 {
     font-size: 1.8rem;
-    font-family: "GeorgiaWeb", serif;
+    font-family: var(--font-georgia), serif;
     font-weight: normal;
   }
 

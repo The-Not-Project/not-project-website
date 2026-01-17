@@ -41,25 +41,34 @@ export const FormLabel = styled.label`
   margin-bottom: 5px;
   padding-left: 2px;
 
-    @media (max-width: 850px) {
-   font-size: 1rem;
-  } 
+  @media (max-width: 850px) {
+    font-size: 1rem;
+  }
 `;
 
 export const FormButton = styled.button`
-    padding: 6px 10px;
-    font-size: 1.1rem;
-    border-radius: 5px;
-    outline: none;
-    border: black 1.5px solid;
-    `;
+  font-size: 1rem;
+  background: none;
+  border: 0 solid #94979b;
+  border-radius: 2rem;
+  color: #0d172a;
+  cursor: pointer;
+  padding: 0.8rem 1.6rem;
+  transition: 0.2s;
+  box-shadow: 0px 1px 2px rgba(166, 175, 195);
+
+  &:hover {
+    background-color: #383425;
+    color: #fff;
+  }
+`;
 
 export const FormButtonOutlined = styled(FormButton)`
-    background: transparent;
-    color: hsl(204, 45%, 20%);
-    background: var(--bg-color);
-    border-width: 1.5px;
-    padding-inline: 7px;
+  background: transparent;
+  color: hsl(204, 45%, 20%);
+  background: var(--bg-color);
+  border-width: 1.5px;
+  padding-inline: 7px;
 `;
 
 export const ButtonsContainer = styled.div`
@@ -71,5 +80,5 @@ export const ButtonsContainer = styled.div`
 
   @media (max-width: 850px) {
     margin-top: 5px;
-  } 
+  }
 `;

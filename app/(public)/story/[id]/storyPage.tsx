@@ -2,7 +2,6 @@
 
 import clsx from "clsx";
 import { Fragment, useCallback, useEffect, useState } from "react";
-import { useStore } from "@/app/zustand/store";
 import { Story } from "@/app/types/types";
 import { usePublicServerActions } from "@/app/contexts/public-server-actions";
 import { useUser } from "@auth0/nextjs-auth0/client";
@@ -14,9 +13,12 @@ import {
   Skeleton,
   NotFound,
   StoryWrapper,
+  ThumbnailContainer,
+  InfoContainer,
 } from "./style";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import { StoryReader } from "./storyReader";
+import Image from "next/image";
 
 export default function StoryPage({ id }: { id: string }) {
   const { getStory, createStorySave, deleteStorySave, isStorySaved } =
@@ -27,9 +29,6 @@ export default function StoryPage({ id }: { id: string }) {
   const [clicked, setClicked] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const { user } = useUser();
-
-  const setIsMobile = useStore((state) => state.mobileLayout.setIsMobile);
-  const isMenuOpen = useStore((state) => state.mobileLayout.isMenuOpen);
 
   const fetchStory = useCallback(async () => {
     const story = await getStory(id);
@@ -57,21 +56,12 @@ export default function StoryPage({ id }: { id: string }) {
   };
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 850);
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
     (async () => {
       if (!user?.sub) return;
       const saved = await isStorySaved(id, user.sub);
       setIsSaved(saved);
     })();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [id, isStorySaved, setIsMobile, user?.sub]);
+  }, [id, isStorySaved, user?.sub]);
 
   useEffect(() => {
     fetchStory();
@@ -98,49 +88,58 @@ export default function StoryPage({ id }: { id: string }) {
       </NotFound>
     );
 
-  const author = story.author.firstName + " " + story.author.lastName;
+  const author = `${story.author.firstName} ${story.author.lastName}`;
   const date = new Date(story.createdAt).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
   });
 
-  return loading ? (
-    <SkeletonContainer />
-  ) : story ? (
+  return (
     <StoryWrapper>
-      <StoryContainer className={clsx("page-wrapper", { shifted: isMenuOpen })}>
-        {story.categories.length > 0 && (
-          <CategoriesContainer>
-            <SaveButton
-              className={clsx("save-button", { saved: isSaved })}
-              onClick={handleSave}
-            >
-              <span className={clsx({ visible: clicked })}>Saved!</span>
-              {isSaved ? <FaBookmark /> : <FaRegBookmark />}
-            </SaveButton>
-            {story.categories.map((category, index) => (
-              <Fragment key={category.id}>
-                <span>{category.name}</span>
-                {index < story.categories.length - 1 && (
-                  <span className="divider">|</span>
-                )}
-              </Fragment>
-            ))}
-          </CategoriesContainer>
-        )}
-        <h1 className="title">{story.title}</h1>
-        {/* <p className="summary">{story.summary}</p> */}
-        <img src={story.thumbnail || ""} alt="thumbnail" />
-        <hr />
-        <div className="info">
-          <p>By {author}</p>
-          <p>{date}</p>
-        </div>
-        <div className="prose">
-          <StoryReader value={story.content} />
-        </div>
-      </StoryContainer>
+      {loading ? (
+        <SkeletonContainer />
+      ) : (
+        <StoryContainer>
+          {story.categories.length > 0 && (
+            <CategoriesContainer>
+              <SaveButton
+                className={clsx("save-button", { saved: isSaved })}
+                onClick={handleSave}
+              >
+                <span className={clsx({ visible: clicked })}>Saved!</span>
+                {isSaved ? <FaBookmark /> : <FaRegBookmark />}
+              </SaveButton>
+              {story.categories.map((category, index) => (
+                <Fragment key={category.id}>
+                  <span>{category.name}</span>
+                  {index < story.categories.length - 1 && (
+                    <span className="divider">|</span>
+                  )}
+                </Fragment>
+              ))}
+            </CategoriesContainer>
+          )}
+          <h1 className="title">{story.title}</h1>
+          <ThumbnailContainer>
+            <Image
+              src={story.thumbnail || ""}
+              alt="thumbnail"
+              fill
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 850px) 100vw, 1200px"
+              priority
+            />
+          </ThumbnailContainer>
+          <InfoContainer>
+            <p>By {author}</p>
+            <p>{date}</p>
+          </InfoContainer>
+          <div className="prose">
+            <StoryReader value={story.content} />
+          </div>
+        </StoryContainer>
+      )}
     </StoryWrapper>
-  ) : null;
+  );
 }

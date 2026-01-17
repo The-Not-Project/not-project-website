@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { useStore } from "@/app/zustand/store";
 import Link from "next/link";
 import NextImage from "next/image";
 import {
@@ -13,6 +12,10 @@ import {
 import { FiArrowUpRight as Arrow } from "react-icons/fi";
 import clsx from "clsx";
 import { BoroughSummaries } from "@/app/constants/boroughs";
+import {
+  FaAngleRight as IconRight,
+  FaAngleLeft as IconLeft,
+} from "react-icons/fa6";
 
 const BOROUGHS = ["queens", "brooklyn", "manhattan", "bronx", "statenisland"];
 
@@ -25,8 +28,6 @@ const formatBoroughName = (slug: string) => {
 };
 
 export default function Boroughs() {
-  const isMobile = useStore((state) => state.mobileLayout.isMobile);
-
   const [data, setData] = useState({
     index: 0,
     file: "queens",
@@ -44,7 +45,7 @@ export default function Boroughs() {
         ...prev,
         active: nextSlug,
         visibleName: formatBoroughName(nextSlug),
-        file: nextSlug
+        file: nextSlug,
       }));
     }, 333);
   }, []);
@@ -64,9 +65,7 @@ export default function Boroughs() {
 
   return (
     <>
-      <BoroughsSectionContainer
-        className={clsx(data.file === "nyc" && isMobile && "secondary")}
-      >
+      <BoroughsSectionContainer>
         <div className="description" key={data.index}>
           <h2>{data.visibleName}</h2>
           <hr />
@@ -78,22 +77,34 @@ export default function Boroughs() {
 
         <Background key={data.index + 1}>
           <NextImage
-            src={`/media/boroughBackdrops/${data.file}.jpg`}
+            src={`/media/boroughBackdrops/${data.file}.webp`}
             alt={data.visibleName}
-            className="object-cover"
+            style={{objectFit: 'cover'}}
             fill
+            sizes="(max-width: 858px) 100vw, (min-width: 850px) 50vw"
           />
         </Background>
       </BoroughsSectionContainer>
 
       <BoroughSelector>
+        <div
+          className="icon"
+          onClick={() => transitionTo((data.index - 1) % BOROUGHS.length)}
+        >
+          <IconLeft />
+        </div>
         {BOROUGHS.map((borough, idx) => (
           <BoroughButton
             key={borough}
             className={clsx({ active: data.index === idx })}
-            onClick={() => transitionTo(idx)}
           />
         ))}
+        <div
+          className="icon"
+          onClick={() => transitionTo((data.index + 1) % BOROUGHS.length)}
+        >
+          <IconRight />
+        </div>
       </BoroughSelector>
     </>
   );

@@ -21,7 +21,7 @@ export default function BottomBar() {
 
   return (
     <BottomBarContainer>
-      <p>2025 © The Not Project</p>
+      <p>2026 © The Not Project</p>
       <p onClick={() => handleClick()}>Privacy Policy</p>
     </BottomBarContainer>
   );

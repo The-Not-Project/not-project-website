@@ -27,10 +27,12 @@ export default function HeaderComponent({ borough }: HeaderProps) {
       <HeaderPhotoContainer>
         <HeaderPhoto>
           <Image
-            src={`/media/boroughBackdrops/${borough.fileName}.jpg`}
+            src={`/media/boroughBackdrops/${borough.fileName}.webp`}
             alt="borough backdrop"
-            className="object-cover"
             fill
+            sizes="(max-width: 850px) 100vw, (max-width: 1200px) 45vw, 900px"
+            style={{objectFit: 'cover'}}
+            priority
           />
         </HeaderPhoto>
       </HeaderPhotoContainer>

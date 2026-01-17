@@ -26,7 +26,7 @@ export const BigTitle = styled.h2`
 export const SecondaryTitle = styled.h3`
   font-weight: normal;
   color: white;
-  font-family: "GeorgiaWeb", serif;
+  font-family: var(--font-georgia), serif;
   font-size: 2rem;
   margin-top: 10px;
 
@@ -89,7 +89,7 @@ export const RecommendationCardContainer = styled.div`
       font-size: 1.6rem;
       font-weight: normal;
       color: white;
-      font-family: "GeorgiaWeb", serif;
+      font-family: var(--font-georgia), serif;
     }
 
     .date {
@@ -237,5 +237,5 @@ export const LinkLabel = styled.p`
   width: max-content;
   color: white;
   font-size: 1.4rem;
-  font-family: "GeorgiaWeb", serif;
+  font-family: var(--font-georgia), serif;
 `;

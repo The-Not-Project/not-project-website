@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import NextLink from "next/link";
 
 const fadepulsateslow = keyframes`
   33% {
@@ -59,7 +58,7 @@ export const BoroughsSectionContainer = styled.section`
     }
 
     h2 {
-      font-family: "GeorgiaWeb", serif;
+      font-family: var(--font-georgia), serif;
       margin-top: 10px;
       font-weight: 500;
       text-transform: uppercase;
@@ -113,8 +112,8 @@ export const BoroughsSectionContainer = styled.section`
       }
 
       &:hover {
-        color: #e7e0d6;
-        background: #cf6b31;
+        color: #000;
+        background: #d4af37;
       }
     }
   }
@@ -146,74 +145,38 @@ export const Background = styled.div`
   }
 `;
 
-export const SVGContainer = styled.div`
-  height: 70%;
-  width: auto;
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  translate: -50%;
-  z-index: 2;
-`;
-
-export const Link = styled(NextLink)`
-  color: black;
-  font-size: 1.5rem;
-`;
-
 export const BoroughSelector = styled.div`
   margin: 20px auto;
   display: flex;
   justify-content: center;
-  gap: 5px;
+  align-items: center;
+  gap: 10px;
+
+  .icon {
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    display: grid;
+    place-items: center;
+    transition: 0.2s;
+
+    &:hover {
+      color: #d4af37;
+    }
+  }
 `;
 
-export const BoroughButton = styled.button`
-  height: 5px;
-  width: 15px;
-  border: none;
+export const BoroughButton = styled.span`
+  height: 9px;
+  width: 9px;
+  border: 2px solid #ffffff7a;
   outline: none;
   border-radius: 5px;
-  background: gray;
   transition: 0.2s;
   position: relative;
-
-  @media (max-width: 850px) {
-    height: 6px;
-    width: 20px;
-
-    &.active {
-      width: 35px;
-    }
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-    background: #fff;
-    transform: scaleX(0);
-    transform-origin: left;
-  }
-
-  &:hover {
-    cursor: pointer;
-    background: #fff;
-  }
-
+  
   &.active {
-    width: 30px;
-    @media (max-width: 850px) {
-      width: 35px;
-    }
-
-    &::after {
-      transition: transform 10s linear;
-      transform: scaleX(1);
-    }
+    border-color: #d4af37;
+    opacity: 1;
   }
 `;

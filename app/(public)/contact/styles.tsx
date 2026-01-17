@@ -22,13 +22,12 @@ export const HeaderImage = styled(Image)`
   }
 `;
 
-export const ContactContainer = styled.main`
+export const ContactContainer = styled.section`
   max-width: 850px;
   padding: 40px;
   margin: 0 auto;
 
   @media (max-width: 850px) {
-    padding: 20px;
-    margin-block: 20px;
+    padding-inline: 20px;
   }
 `;

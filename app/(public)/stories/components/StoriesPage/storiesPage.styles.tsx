@@ -48,7 +48,7 @@ export const SectionTitle = styled.div`
 
   h3 {
     color: white;
-    font-family: "GeorgiaWeb", serif;
+    font-family: var(--font-georgia), serif;
     font-style: italic;
     font-size: 3rem;
     font-weight: normal;

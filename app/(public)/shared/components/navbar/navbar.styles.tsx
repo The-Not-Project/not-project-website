@@ -2,7 +2,8 @@ import styled from "styled-components";
 import NextLink from "next/link";
 
 export const NavBarContainer = styled.nav`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
   align-items: center;
   padding-inline: 40px;
@@ -19,55 +20,33 @@ export const NavBarContainer = styled.nav`
   z-index: 3;
   backdrop-filter: blur(10px);
 
-  @media (max-width: 1400px) {
-    img {
-      width: 100px;
-      height: auto;
-    }
-  }
-
   @media (max-width: 850px) {
     padding-inline: 25px;
+    grid-template-columns: 1fr 1fr;
     height: 60px !important;
-
-    img {
-      width: 70px;
-    }
   }
 
-  &.isHomePage {
-    height: 100px;
+  body[data-transparent="true"] & {
     background: none;
     backdrop-filter: none;
-
-    img {
-      filter: invert(0.1);
-      flex-grow: 1;
-    }
-    &.solid {
-      background: rgb(13, 13, 13, 0.9);
-      backdrop-filter: blur(10px);
-      height: 70px;
-
-      img {
-        filter: invert(0.25);
-        @media (max-width: 850px) {
-          filter: invert(0.1);
-        }
-      }
-    }
-  }
-
-  &.shifted {
-    translate: -80%;
+    height: 100px;
   }
 `;
 
 export const ImageLink = styled(NextLink)`
-  flex-grow: 1;
+  filter: invert(0.2);
+  width: 120px;
+  aspect-ratio: 20 / 11;
+  height: auto;
+  position: relative;
+
+  @media (max-width: 1400px) {
+    width: 100px;
+  }
 
   @media (max-width: 850px) {
-    flex-grow: 0;
+    width: 70px;
+    filter: unset;
   }
 `;
 
@@ -99,7 +78,7 @@ export const Link = styled(NextLink)`
     font-size: 0.7rem;
   }
 
-  &.solid {
+  body[data-transparent="false"] & {
     color: #dbdbdb;
   }
 
@@ -109,12 +88,17 @@ export const Link = styled(NextLink)`
 `;
 
 export const AuthContainer = styled.div`
-  flex-grow: 1;
   text-align: right;
 
   @media (max-width: 850px) {
     margin-top: auto;
-    flex-grow: 0;
+    width: auto;
+  }
+
+  &.desktop {
+    @media (max-width: 850px) {
+      display: none;
+    }
   }
 `;
 
@@ -128,8 +112,9 @@ export const AuthLink = styled.a`
   padding: 5px 20px;
   border-radius: 100px;
   border: 1.4px solid hsl(0, 0%, 70%);
+  position: relative;
 
-  &.solid {
+  body[data-transparent="true"] & {
     color: #dbdbdb;
   }
 
@@ -139,23 +124,36 @@ export const AuthLink = styled.a`
   }
 
   @media (max-width: 850px) {
-    margin-top: auto;
     border: none;
+    padding: 0;
+    color: white !important;
   }
 `;
 
-export const MenuIcon = styled.svg``;
+export const MenuIcon = styled.svg`
+  justify-self: end;
+  @media (min-width: 850px) {
+    display: none;
+  }
+
+  body[data-menu-open="true"] & {
+    display: none;
+  }
+`;
 
 export const LinksList = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
-  flex-grow: 1;
   gap: 40px;
 
   @media (max-width: 1000px) {
     gap: 20px;
+  }
+
+  @media (max-width: 850px) {
+    display: none;
   }
 `;
 
@@ -165,6 +163,7 @@ export const MobileMenu = styled.aside`
   top: 0;
   right: -80%;
   height: 100dvh;
+  max-height: 100dvh;
   width: 80%;
   display: flex;
   flex-direction: column;
@@ -198,5 +197,9 @@ export const MobileMenu = styled.aside`
     right: 20px;
     font-size: 2rem;
     color: #eaeaea;
+  }
+
+  @media (min-width: 850px) {
+    display: none;
   }
 `;

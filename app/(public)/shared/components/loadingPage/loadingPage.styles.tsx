@@ -1,18 +1,14 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const slideUp = keyframes`
+  from { translate: 0 0; }
+  to { translate: 0 -100%; }
+`;
 
 export const LoadingPageContainer = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #0d0d0d;
-    color: white;
-    z-index: 999;
-    transition: translate .3s ease;
-    transition-delay: 700ms;
-    translate: 0 -100%;
-`
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0d0d0d;
+  animation: ${slideUp} 300ms ease 700ms forwards;
+`;

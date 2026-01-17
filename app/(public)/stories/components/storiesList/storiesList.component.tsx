@@ -1,5 +1,5 @@
 import { Story as StoryType } from "@/app/types/types";
-import Story from "../storyCard/storyCard.component";
+import StoryCard from "../storyCard/storyCard.component";
 import {
   FollowupMessage,
   NoStoriesMessage,
@@ -28,7 +28,7 @@ export default function StoriesList({
         <StoryPlaceholder />
         </>
       ) : stories.length > 0 ? (
-        stories.map((story) => <Story key={story.id} story={story} />)
+        stories.map((story) => <StoryCard key={story.id} story={story} />)
       ) : (
         <>
           <NoStoriesMessage>

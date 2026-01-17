@@ -14,7 +14,7 @@ export default function Popup({
     document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = ""; // cleanup on unmount
+      document.body.style.overflow = "";
     };
   }, []);
   return (

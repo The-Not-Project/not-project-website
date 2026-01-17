@@ -7,18 +7,36 @@ export const StoryContainer = styled.div`
   padding-block: 10px;
   border-bottom: 1px solid #8e8e8e50;
   margin-bottom: 10px;
+  position: relative;
 
   @media (max-width: 850px) {
     border: none;
     padding: 0;
+    height: 210px;
+    overflow: hidden;
+    border-radius: 5px;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 20px 20px 15px 20px;
   }
+  .second-row {
+    font-size: 0.7rem;
+    padding-inline: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
 
-  .image-container {
-    min-width: 350px;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    margin-block: 10px;
-    position: relative;
+    @media (min-width: 850px) {
+      display: none;
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
   }
 `;
 
@@ -28,31 +46,84 @@ export const StoryContent = styled.div`
   flex-direction: column;
   min-height: 100%;
 
+  @media (max-width: 850px) {
+    min-height: unset;
+    overflow: hidden;
+    gap: 15px;
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  }
+
   .createdAt {
     margin-top: auto;
     color: #e7e0d6;
+    @media (max-width: 850px) {
+      display: none;
+    }
   }
 
   .title {
     font-size: 2rem;
     font-weight: normal;
-    font-family: "eorgiaWeb", serif;
+    font-family: var(--font-georgia), serif;
     margin-block: 5px 10px;
     color: #e7e0d6;
+    @media (max-width: 850px) {
+      font-size: 1.5rem;
+      color: white;
+      margin: 0;
+    }
+  }
 
-    a {
-      color: unset;
-      text-decoration: none;
+  a {
+    color: unset;
+    text-decoration: none;
 
-      &:hover {
-        text-decoration: underline;
-      }
+    &:hover {
+      text-decoration: underline;
     }
   }
 
   p {
     color: rgb(231, 224, 214, 0.7);
     font-size: 0.9rem;
+
+    @media (max-width: 850px) {
+      color: #ffffffc1;
+      font-size: 0.8rem;
+    }
+  }
+`;
+
+export const StoryImageContainer = styled.div`
+  min-width: 350px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  margin-block: 10px;
+  position: relative;
+
+  @media (max-width: 850px) {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    &::after {
+      content: "";
+      color: white;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgb(13, 13, 13, 0.5) 20%,
+        rgb(13, 13, 13, 0.7) 50%,
+        rgb(13, 13, 13, 0.9) 70%
+      );
+    }
   }
 `;
 
@@ -68,73 +139,8 @@ export const CategoriesContainer = styled.div`
     scale: 0.7;
     color: gray;
   }
-`;
 
-export const MobileStoryBody = styled.div`
-  padding: 20px;
-  border-radius: 5px;
-  position: relative;
-  color: white;
-  height: 200px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  img {
-    z-index: -1;
-  }
-
-  &::after {
-    content: "";
-    color: white;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(
-      to bottom,
-      rgb(13, 13, 13, 0.5) 20%,
-      rgb(13, 13, 13, 0.7) 50%,
-      rgb(13, 13, 13, 0.9) 70%
-    );
-    z-index: -1;
-  }
-  .first-row {
-    display: flex;
-    gap: 20px;
-
-    .content {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      padding-bottom: 5px;
-
-      h2 {
-        font-size: 1.5rem;
-        font-family: "GeorgiaWeb", serif;
-        font-weight: normal;
-      }
-
-      p {
-        font-size: 0.8rem;
-        color: #ffffffc1;
-      }
-    }
-  }
-
-  .second-row {
-    font-size: 0.7rem;
-    padding-top: 15px;
-    padding-inline: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    span {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
+  @media (max-width: 850px) {
+    display: none;
   }
 `;
