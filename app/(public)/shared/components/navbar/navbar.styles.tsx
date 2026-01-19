@@ -2,22 +2,22 @@ import styled from "styled-components";
 import NextLink from "next/link";
 
 export const NavBarContainer = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: 70px;
+  color: white;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  justify-content: space-between;
   align-items: center;
   padding-inline: 40px;
   transition:
     height 0.3s,
     background 0.3s,
     translate 0.18s ease-in;
-  color: white;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  height: 70px;
-  background: rgb(13, 13, 13, 0.9);
-  z-index: 3;
+  background: rgba(13, 13, 13, 0.9);
   backdrop-filter: blur(10px);
 
   @media (max-width: 850px) {

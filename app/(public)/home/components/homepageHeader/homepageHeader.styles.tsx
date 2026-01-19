@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
   display: block;
@@ -104,15 +104,6 @@ export const HeaderBackground = styled.div`
       rgba(13, 13, 13, 1) 100%
     );
   }
-`;
-
-export const parallaxScroll = keyframes`
-from {
-  transform: translateY(0%);
-}
-to {
-  transform: translateY(50vh);
-}
 `;
 
 export const HeaderVideo = styled.video`

@@ -17,7 +17,6 @@ import { useNavbarTransparency } from "@/app/hooks/useNavbarTransparency";
 
 export default function NavBar() {
   const { user, isLoading } = useUser();
-  const [mounted, setMounted] = useState(false);
 
   const [authenticated, setAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -52,14 +51,11 @@ export default function NavBar() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    setMounted(true);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [user, isLoading]);
-
-  if (!mounted) return <div style={{ height: '70px', background: '#0d0d0d' }} />;
 
   return (
     <NavBarContainer>
