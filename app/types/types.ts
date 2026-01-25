@@ -25,6 +25,8 @@ export type Story = {
   isPublished: boolean;
 };
 
+export type CompactStory = Omit<Story, 'content'>
+
 // export type Media = {
 //   id: string;
 //   cid: string;

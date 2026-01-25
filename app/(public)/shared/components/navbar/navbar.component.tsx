@@ -126,6 +126,11 @@ export default function NavBar() {
             Profile
           </Link>
         )}
+        {isAdmin && (
+          <Link href="/admin" onClick={closeMenu}>
+            Admin
+          </Link>
+        )}
       </LinksList>
       <AuthContainer className="desktop">
         <AuthLink href={`/api/auth/${authenticated ? "logout" : "login"}`}>

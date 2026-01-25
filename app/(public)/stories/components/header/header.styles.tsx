@@ -39,6 +39,7 @@ export const HeaderPhoto = styled.div`
     border-radius: 150px 150px 0 0;
     filter: saturate(0.7);
     max-width: 800px;
+    margin-inline: auto;
   }
 `;
 

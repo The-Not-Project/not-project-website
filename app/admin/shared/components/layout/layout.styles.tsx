@@ -11,7 +11,7 @@ export const AdminContainer = styled.main`
   min-height: 100vh;
   padding-inline: 30px;
   align-items: center;
-  background: white;
+  background: #ebebeb;
   .admin-content {
     width: 100%;
     max-width: 1000px;

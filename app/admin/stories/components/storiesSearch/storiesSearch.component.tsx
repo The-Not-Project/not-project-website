@@ -1,5 +1,5 @@
 'use client';
-import type { Story } from '@/app/types/types';
+import type { CompactStory } from '@/app/types/types';
 import { Loader, SearchContainer } from './storiesSearch.styles';
 import { NoStoriesMessage } from '../storiesList/storiesList.styles';
 import {
@@ -13,13 +13,13 @@ import { FaPlus as PlusSign } from 'react-icons/fa6';
 type SearchAndResultsProps = {
   placeholder?: string;
   searchValue: string;
-  results: Story[];
+  results: CompactStory[];
   isLoading: boolean;
   onSearchChangeAction: (value: string) => void;
   onAddAction: (id: string) => void;
 };
 
-export default function RecommendationSearch({
+export default function StoriesSearch({
   searchValue,
   placeholder,
   results,

@@ -1,3 +1,4 @@
+"use server";
 import { getSession } from "@auth0/nextjs-auth0/edge";
 import { redirect } from "next/navigation";
 import { prisma } from "../prisma";
@@ -6,12 +7,13 @@ import {
   deleteStoryCategories,
   getStoryData,
   processCategories,
-  processStories,
-  processStory,
   processThumbnail,
-  STORY_INCLUDE,
+  fetchStories,
+  STORY_RELATIONS,
+  flattenCategories,
+  StoryWithRelations,
 } from "../helpers/story.helpers";
-import { Filters, RawStory, Story } from "../../types/types";
+import { CompactStory, Filters, Story } from "../../types/types";
 
 /**
  * Fetch published stories with optional filters.
@@ -25,12 +27,10 @@ import { Filters, RawStory, Story } from "../../types/types";
  * - Only `isPublished: true` stories are returned.
  * - No pagination or ordering applied; add `orderBy`, `skip`, `take` upstream if needed.
  */
-export async function getStories(filters?: Filters): Promise<Story[]> {
-  "use server";
-
+export async function getStories(filters?: Filters): Promise<CompactStory[]> {
   const { search, boroughs, categories } = filters || {};
 
-  const stories = await prisma.story.findMany({
+  return await fetchStories({
     where: {
       isPublished: true,
       ...(search ? { title: { contains: search } } : {}),
@@ -39,10 +39,8 @@ export async function getStories(filters?: Filters): Promise<Story[]> {
         ? { categories: { some: { categoryId: { in: categories } } } }
         : {}),
     },
-    include: STORY_INCLUDE,
+    omit: { content: true },
   });
-
-  return processStories(stories);
 }
 
 /**
@@ -52,15 +50,10 @@ export async function getStories(filters?: Filters): Promise<Story[]> {
  * - Useful for admin dashboards/moderation queues.
  * - No pagination or ordering applied.
  */
-export async function getHiddenStories(): Promise<Story[]> {
-  "use server";
-
-  const stories = await prisma.story.findMany({
+export async function getHiddenStories(): Promise<CompactStory[]> {
+  return await fetchStories({
     where: { isPublished: false },
-    include: STORY_INCLUDE,
   });
-
-  return processStories(stories);
 }
 
 /**
@@ -73,16 +66,15 @@ export async function getHiddenStories(): Promise<Story[]> {
  * - Returns only published stories.
  */
 export async function getStory(id: string): Promise<Story | null> {
-  "use server";
-
   const story = await prisma.story.findUnique({
     where: { id },
-    include: STORY_INCLUDE,
+    ...STORY_RELATIONS
   });
 
   if (!story || !story.isPublished) return null;
 
-  return processStory(story as RawStory);
+    return flattenCategories(story as StoryWithRelations);
+  
 }
 
 /**
@@ -102,8 +94,6 @@ export async function getStory(id: string): Promise<Story | null> {
  * - Creates StoryCategory links via `processCategories`.
  */
 export async function createStory(formData: FormData) {
-  "use server";
-
   const session = await getSession();
   if (!session) throw new Error("User not authenticated");
 
@@ -149,8 +139,6 @@ export async function createStory(formData: FormData) {
  * - Replaces all category links via `processCategories` (deletes existing, then inserts provided IDs).
  */
 export async function editStory(id: string, formData: FormData) {
-  "use server";
-
   const { title, content, borough, summary, categoryIds, thumbnail } =
     getStoryData(formData);
 
@@ -192,7 +180,6 @@ export async function editStory(id: string, formData: FormData) {
   await processCategories(id, categoryIds);
 }
 
-
 /**
  * Unpublish a story (make it hidden).
  *
@@ -200,8 +187,6 @@ export async function editStory(id: string, formData: FormData) {
  * @throws Error if the story is currently marked as Radar (cannot unpublish/delete).
  */
 export async function unpublishStory(id: string) {
-  "use server";
-
   const story = await prisma.story.findUnique({
     where: { id },
   });
@@ -222,8 +207,6 @@ export async function unpublishStory(id: string) {
  * @param id - Story ID.
  */
 export async function republishStory(id: string) {
-  "use server";
-
   await prisma.story.update({
     where: { id },
     data: { isPublished: true },
@@ -240,8 +223,6 @@ export async function republishStory(id: string) {
  * - Removes all StoryCategory joins before deleting the story.
  */
 export async function deleteStory(id: string) {
-  "use server";
-
   const story = await prisma.story.findUnique({
     where: { id },
   });

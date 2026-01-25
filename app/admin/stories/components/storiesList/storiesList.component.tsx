@@ -1,7 +1,7 @@
 import StoryCard from '../storyCard/storyCard.component';
 import { StoriesContainer, NoStoriesMessage } from './storiesList.styles';
 import LoadingPage from '@/app/admin/shared/components/loadingPage/loadingPage.component'; 
-import type { Story as StoryType } from '@/app/types/types';
+import type { CompactStory as StoryType } from '@/app/types/types';
 
 type StoriesListProps = {
   stories: StoryType[];

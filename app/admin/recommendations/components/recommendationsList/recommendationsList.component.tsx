@@ -1,6 +1,6 @@
 // components/recommendationsList/recommendationsList.component.tsx
 'use client';
-import { Story } from '@/app/types/types';
+import { CompactStory } from '@/app/types/types';
 import {
   ImageContainer,
   RecommendationContainer,
@@ -10,7 +10,7 @@ import LoadingPage from '../../../shared/components/loadingPage/loadingPage.comp
 import { FaTrash as TrashCan } from 'react-icons/fa6';
 import { NoStoriesMessage } from '@/app/admin/stories/components/storiesList/storiesList.styles'; 
 type RecommendationsListProps = {
-  recommendations: Story[];
+  recommendations: CompactStory[];
   onRemoveAction: (id: string) => void;
   isLoading: boolean;
 };

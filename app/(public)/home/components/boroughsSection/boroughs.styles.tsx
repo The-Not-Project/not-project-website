@@ -151,18 +151,20 @@ export const BoroughSelector = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
+`;
 
-  .icon {
-    color: white;
-    cursor: pointer;
-    padding: 5px;
-    display: grid;
-    place-items: center;
-    transition: 0.2s;
-
-    &:hover {
-      color: #d4af37;
-    }
+export const ArrowContainer = styled.div`
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  display: grid;
+  place-items: center;
+  transition: 0.2s;
+  border-radius: 100%;
+  
+  &:hover, &:active {
+    background: #52525243;
+    color: #d4af37;
   }
 `;
 
@@ -174,7 +176,7 @@ export const BoroughButton = styled.span`
   border-radius: 5px;
   transition: 0.2s;
   position: relative;
-  
+
   &.active {
     border-color: #d4af37;
     opacity: 1;

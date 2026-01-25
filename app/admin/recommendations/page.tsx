@@ -2,7 +2,7 @@
 
 import { PageSection, SectionTitle } from "../shared/components/layout/Section";
 import { useAdminServerActions } from "@/app/contexts/admin-server-actions";
-import { Filters, Story } from "@/app/types/types";
+import { Filters, CompactStory } from "@/app/types/types";
 import { useState, useEffect, useCallback } from "react";
 import RecommendationsList from "./components/recommendationsList/recommendationsList.component";
 import RecommendationSearch from "../stories/components/storiesSearch/storiesSearch.component";
@@ -21,8 +21,8 @@ export default function RecommendationsPage() {
     removeRecommendation,
   } = useAdminServerActions();
 
-  const [recommendations, setRecommendations] = useState<Story[]>([]);
-  const [searchResults, setSearchResults] = useState<Story[]>([]);
+  const [recommendations, setRecommendations] = useState<CompactStory[]>([]);
+  const [searchResults, setSearchResults] = useState<CompactStory[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchIsLoading, setsearchIsLoading] = useState(false);
   const [filters, setFilters] = useState<Filters>(defaultFilters);

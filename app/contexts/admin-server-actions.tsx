@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import { User, Category, Story, Filters } from "@/app/types/types";
+import { User, Category, Story, Filters, CompactStory } from "@/app/types/types";
 
 type AdminServerActions = {
   getUser: (id: string) => Promise<User | null>;
@@ -11,18 +11,18 @@ type AdminServerActions = {
   editCategory: (id: string, data: FormData) => Promise<void>;
   deleteCategory: (id: string) => Promise<void>;
   createStory: (data: FormData) => Promise<void>;
-  getStories: (filters?: Filters) => Promise<Story[]>;
+  getStories: (filters?: Filters) => Promise<CompactStory[]>;
   getStory: (id: string) => Promise<Story | null>;
   editStory: (id: string, data: FormData) => Promise<void>;
   deleteStory: (id: string) => Promise<void>;
-  getRecommendations: () => Promise<Story[]>;
+  getRecommendations: () => Promise<CompactStory[]>;
   addRecommendation: (id: string) => Promise<void>;
   removeRecommendation: (id: string) => Promise<void>;
   updateRadarStory: (id: string) => Promise<void>;
-  getRadarStory: () => Promise<Story | null>;
+  getRadarStory: () => Promise<CompactStory | null>;
   unpublishStory: (id: string) => Promise<void>;
   republishStory: (id: string) => Promise<void>;
-  getHiddenStories: () => Promise<Story[]>;
+  getHiddenStories: () => Promise<CompactStory[]>;
 };
 
 const AdminServerActionsContext = createContext<AdminServerActions | null>(

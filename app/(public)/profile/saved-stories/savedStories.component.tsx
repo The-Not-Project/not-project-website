@@ -2,13 +2,13 @@ import { usePublicServerActions } from "@/app/contexts/public-server-actions";
 import { PageSection, SectionDescription } from "../styles";
 import { StoriesContainer } from "./savedStories.styles";
 import { useEffect, useState } from "react";
-import { Story } from "@/app/types/types";
+import { CompactStory } from "@/app/types/types";
 import SavedStory from "./savedStory.component";
 
 export default function SavedStories({ userId }: { userId: string }) {
   const { getSavedStories } = usePublicServerActions();
 
-  const [savedStories, setSavedStories] = useState<Story[] | null>([]);
+  const [savedStories, setSavedStories] = useState<CompactStory[] | null>([]);
 
   useEffect(() => {
     const fetchSavedStories = async () => {

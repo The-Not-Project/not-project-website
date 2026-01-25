@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import Link from "next/link";
-import { Story } from "@/app/types/types";
+import { CompactStory } from "@/app/types/types";
 import {
   ImageContainer,
   RecommendationCardContainer,
@@ -11,7 +11,7 @@ import { FiArrowUpRight as Arrow } from "react-icons/fi";
 export default function RecommendationCard({
   recommendation,
 }: {
-  recommendation: Story;
+  recommendation: CompactStory;
 }) {
   function formatDate(date: Date) {
     const options: Intl.DateTimeFormatOptions = {

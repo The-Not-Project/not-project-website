@@ -1,4 +1,4 @@
-import { Story } from "@/app/types/types";
+import { CompactStory } from "@/app/types/types";
 import {
   RadarDescription,
   RadarPhoto,
@@ -6,7 +6,7 @@ import {
 } from "./radarStory.styles";
 
 
-export default function RadarCard({ story }: { story: Story }) {
+export default function RadarCard({ story }: { story: CompactStory }) {
 
   return (
     <>

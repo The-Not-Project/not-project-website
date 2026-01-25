@@ -1,4 +1,4 @@
-import { Story as StoryType } from "@/app/types/types";
+import { CompactStory as StoryType } from "@/app/types/types";
 import {
   ActionsContainer,
   StoryContainer,

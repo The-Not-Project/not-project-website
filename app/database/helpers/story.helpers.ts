@@ -1,6 +1,5 @@
 import { uploadToS3WithCompression } from "@/app/utils/media";
 import { prisma } from "../prisma";
-import { Category, RawStory, Story } from "@/app/types/types";
 import { Prisma } from "@prisma/client";
 
 /**
@@ -45,8 +44,6 @@ export function getStoryData(formData: FormData) {
   return { title, content, borough, summary, categoryIds, thumbnail };
 }
 
-
-
 /**
  * Replaces a story's category links with the provided list.
  *
@@ -64,7 +61,7 @@ export function getStoryData(formData: FormData) {
  */
 export async function processCategories(
   storyId: string,
-  categoryIds: string[]
+  categoryIds: string[],
 ) {
   "use server";
 
@@ -77,13 +74,12 @@ export async function processCategories(
       prisma.storyCategory.createMany({
         data: categoryIds.map((categoryId) => ({ storyId, categoryId })),
         skipDuplicates: true,
-      })
+      }),
     );
   }
 
   await prisma.$transaction(tx);
 }
-
 
 /**
  * Removes all category links for a given story.
@@ -115,54 +111,57 @@ export async function processThumbnail(file: File): Promise<string> {
   return url;
 }
 
-/**
- * Processes an array of raw story objects into fully formatted Story objects.
- *
- * @param stories - Array of RawStory objects.
- * @returns Array of Story objects with categories flattened.
- */
-export async function processStories(
-  stories: RawStory[],
-): Promise<Story[]> {
-  return Promise.all(stories.map((story) => processStory(story)));
-}
-
-/**
- * Processes a single raw story object into a formatted Story object.
- *
- * @param story - RawStory object.
- * @returns Story object with:
- *   - `categories` replaced by an array of Category objects (flattened from join data).
- */
-export async function processStory(
-  story: RawStory,
-): Promise<Story> {
-  return {
-    ...story,
-    categories: story.categories.map(
-      (sc: { category: Category }) => sc.category
-    ),
-  };
-}
-
-/**
- * Reusable Prisma `include` configuration for fetching full story data.
- *
- * Includes:
- * - categories → category details
- * - author → only `id`, `firstName`, `lastName`
- */
-export const STORY_INCLUDE = {
-  categories: {
-    include: {
-      category: true,
+export const STORY_RELATIONS = {
+  include: {
+    categories: {
+      include: {
+        category: true,
+      },
     },
-  },
-  author: {
-    select: {
-      id: true,
-      firstName: true,
-      lastName: true,
+    author: {
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+      },
     },
   },
 };
+
+const INTERNAL_FIELDS = {
+  isTrashed: true,
+  isRecommended: true,
+  isRadar: true,
+  content: true,
+  updatedAt: true,
+};
+
+export type StoryWithRelations = Prisma.StoryGetPayload<{
+  include: {
+    categories: {
+      include: {
+        category: true;
+      };
+    };
+    author: true;
+  };
+}>;
+
+export async function fetchStories<T extends Prisma.StoryFindManyArgs>(
+  args: T,
+) {
+  const stories = (await prisma.story.findMany({
+    ...STORY_RELATIONS,
+    ...args,
+    omit: { ...INTERNAL_FIELDS, ...args.omit },
+  })) as StoryWithRelations[];
+
+  return stories.map(flattenCategories);
+}
+
+export function flattenCategories(story: StoryWithRelations) {
+  return {
+    ...story,
+    categories: story.categories.map((c) => c.category),
+  };
+}

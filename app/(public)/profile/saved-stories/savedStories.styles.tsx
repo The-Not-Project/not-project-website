@@ -38,9 +38,14 @@ export const StoryContainer = styled.div`
 
 export const ThumbnailContainer = styled.div`
   position: relative;
-  width: 200px;
+  width: auto;
   height: 100%;
+  aspect-ratio: 16 / 9;
   border-radius: 3px;
+
+  img {
+    width: 100% !important;
+  }
 
   @media (max-width: 850px) {
     position: absolute;

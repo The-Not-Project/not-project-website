@@ -1,5 +1,6 @@
-import { Story } from "../../types/types";
-import { processStories, STORY_INCLUDE } from "../helpers/story.helpers";
+"use server";
+import { CompactStory } from "../../types/types";
+import { fetchStories } from "../helpers/story.helpers";
 import { prisma } from "../prisma";
 
 /**
@@ -15,16 +16,12 @@ import { prisma } from "../prisma";
  * - No explicit ordering is applied, so the DB will return results in default order.
  *   If ordering matters, add `orderBy` to the query.
  */
-export async function getRecommendations(): Promise<Story[]> {
-  "use server";
+export async function getRecommendations(): Promise<CompactStory[]> {
 
-  const recommendedStories = await prisma.story.findMany({
+  return await fetchStories({
     where: { isRecommended: true },
-    include: STORY_INCLUDE,
     take: 4,
   });
-
-  return processStories(recommendedStories);
 }
 
 /**
@@ -37,8 +34,6 @@ export async function getRecommendations(): Promise<Story[]> {
  * - Does not enforce a max of 4 recommendations — limit must be handled in application logic.
  */
 export async function addRecommendation(id: string) {
-  "use server";
-
   await prisma.story.update({
     where: { id },
     data: { isRecommended: true },
@@ -54,8 +49,6 @@ export async function addRecommendation(id: string) {
  * - Sets `isRecommended` to `false` for the given story.
  */
 export async function removeRecommendation(id: string) {
-  "use server";
-
   await prisma.story.update({
     where: { id },
     data: { isRecommended: false },

@@ -8,6 +8,7 @@ import {
   Background,
   BoroughSelector,
   BoroughButton,
+  ArrowContainer,
 } from "./boroughs.styles";
 import { FiArrowUpRight as Arrow } from "react-icons/fi";
 import clsx from "clsx";
@@ -87,24 +88,22 @@ export default function Boroughs() {
       </BoroughsSectionContainer>
 
       <BoroughSelector>
-        <div
-          className="icon"
-          onClick={() => transitionTo((data.index - 1) % BOROUGHS.length)}
+        <ArrowContainer
+          onClick={() => transitionTo(data.index === 0 ? BOROUGHS.length - 1 : data.index - 1)}
         >
           <IconLeft />
-        </div>
+        </ArrowContainer>
         {BOROUGHS.map((borough, idx) => (
           <BoroughButton
             key={borough}
             className={clsx({ active: data.index === idx })}
           />
         ))}
-        <div
-          className="icon"
+        <ArrowContainer
           onClick={() => transitionTo((data.index + 1) % BOROUGHS.length)}
         >
           <IconRight />
-        </div>
+        </ArrowContainer>
       </BoroughSelector>
     </>
   );

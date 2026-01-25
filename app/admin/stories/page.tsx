@@ -1,7 +1,7 @@
 "use client";
 
 import { useAdminServerActions } from "@/app/contexts/admin-server-actions";
-import { Filters, Story } from "@/app/types/types";
+import { CompactStory, Filters } from "@/app/types/types";
 import { useState, useEffect, useCallback } from "react";
 import {
   PageSection,
@@ -37,7 +37,7 @@ export default function StoriesPage() {
     republishStory,
   } = useAdminServerActions();
 
-  const [stories, setStories] = useState<Story[]>([]);
+  const [stories, setStories] = useState<CompactStory[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showHidden, setShowHidden] = useState(false);
 

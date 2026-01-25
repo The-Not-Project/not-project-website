@@ -3,7 +3,7 @@ import { useAdminServerActions } from "@/app/contexts/admin-server-actions";
 import { PageSection, SectionTitle } from "../shared/components/layout/Section";
 import StoriesSearch from "../stories/components/storiesSearch/storiesSearch.component";
 import { useCallback, useEffect, useState } from "react";
-import { Filters, Story } from "@/app/types/types";
+import { CompactStory, Filters } from "@/app/types/types";
 import RadarStory from "./components/radarStory/radarStory.component";
 import { NoStoriesMessage } from "@/app/admin/stories/components/storiesList/storiesList.styles";
 import LoadingPage from "../shared/components/loadingPage/loadingPage.component";
@@ -17,11 +17,11 @@ const defaultFilters = {
 export default function Page() {
   const { getRadarStory, updateRadarStory, getStories } =
     useAdminServerActions();
-  const [searchResults, setSearchResults] = useState<Story[]>([]);
+  const [searchResults, setSearchResults] = useState<CompactStory[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchIsLoading, setsearchIsLoading] = useState(false);
   const [filters, setFilters] = useState<Filters>(defaultFilters);
-  const [radarStory, setRadarStory] = useState<Story | null>(null);
+  const [radarStory, setRadarStory] = useState<CompactStory | null>(null);
 
   const fetchRadarStory = useCallback(async () => {
     setIsLoading(true);

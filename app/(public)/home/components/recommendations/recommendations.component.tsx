@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Story } from "@/app/types/types";
+import { CompactStory } from "@/app/types/types";
 import { usePublicServerActions } from "@/app/contexts/public-server-actions";
 import {
   RecommendationsContainer,
@@ -19,7 +19,7 @@ import { FiArrowUpRight as Arrow } from "react-icons/fi";
 
 export default function Recommendations() {
   const { getRecommendations } = usePublicServerActions();
-  const [recommendations, setRecommendations] = useState<Story[]>([]);
+  const [recommendations, setRecommendations] = useState<CompactStory[]>([]);
 
   const fetchRecommendations = useCallback(async () => {
     const recommendations = await getRecommendations();

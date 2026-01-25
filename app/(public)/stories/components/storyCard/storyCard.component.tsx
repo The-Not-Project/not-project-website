@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import Link from "next/link";
-import type { Story as StoryType } from "@/app/types/types";
+import type { CompactStory as StoryType } from "@/app/types/types";
 import {
   StoryContainer,
   StoryContent,
@@ -80,6 +80,7 @@ export default function StoryCard({ story }: { story: StoryType }) {
             alt="thumbnail"
             fill
             sizes="350px"
+            style={{objectFit: 'cover'}}
           />
         </StoryImageContainer>
       </>

@@ -1,4 +1,4 @@
-import { Story } from "@/app/types/types";
+import type { CompactStory } from "@/app/types/types";
 import {
   StoryContainer,
   StoryContent,
@@ -7,7 +7,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 
-export default function SavedStory({ story }: { story: Story }) {
+export default function SavedStory({ story }: { story: CompactStory }) {
   const date = new Date(story.createdAt).toLocaleDateString("en-US", {
     month: "short",
     year: "numeric",

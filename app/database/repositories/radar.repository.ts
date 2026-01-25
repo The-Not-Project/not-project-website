@@ -1,5 +1,6 @@
-import { RawStory, Story } from "../../types/types";
-import { processStory, STORY_INCLUDE } from "../helpers/story.helpers";
+"use server";
+import { CompactStory } from "../../types/types";
+import { flattenCategories, STORY_RELATIONS, StoryWithRelations } from "../helpers/story.helpers";
 import { prisma } from "../prisma";
 
 /**
@@ -17,20 +18,18 @@ import { prisma } from "../prisma";
  * Side effects:
  * - May update the `isRadar` flag in the database.
  */
-export async function getRadarStory(): Promise<Story | null> {
-  "use server";
-
+export async function getRadarStory(): Promise<CompactStory | null> {
   // Try existing radar
   let story = await prisma.story.findFirst({
     where: { isPublished: true, isRadar: true },
-    include: STORY_INCLUDE,
+    ...STORY_RELATIONS, 
   });
 
   // If no radar, try first recommended
   if (!story) {
     const recommended = await prisma.story.findFirst({
       where: { isPublished: true, isRecommended: true },
-      include: STORY_INCLUDE,
+      ...STORY_RELATIONS,
     });
 
     if (recommended) {
@@ -46,7 +45,7 @@ export async function getRadarStory(): Promise<Story | null> {
   if (!story) {
     const fallback = await prisma.story.findFirst({
       where: { isPublished: true, isRecommended: false },
-      include: STORY_INCLUDE,
+      ...STORY_RELATIONS,
     });
 
     if (fallback) {
@@ -58,11 +57,13 @@ export async function getRadarStory(): Promise<Story | null> {
     }
   }
 
+  // If absolutely no stories exist
   if (!story) {
-    throw null
+    return null; // Return null gracefully instead of throwing null
   }
 
-  return processStory(story as RawStory);
+  // Cast to your relation type and flatten
+  return flattenCategories(story as StoryWithRelations);
 }
 
 /**
@@ -77,8 +78,6 @@ export async function getRadarStory(): Promise<Story | null> {
  * - Updates the `isRadar` status for multiple stories in the database.
  */
 export async function updateRadarStory(id: string) {
-  "use server";
-
   // Remove radar flag from all stories
   await prisma.story.updateMany({
     where: { isRadar: true },

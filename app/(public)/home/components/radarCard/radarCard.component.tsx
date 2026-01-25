@@ -8,7 +8,7 @@ import {
   LocationContainer,
 } from "./radarCard.styles";
 import { useEffect, useState, useRef, useCallback } from "react";
-import { Story } from "@/app/types/types";
+import { CompactStory } from "@/app/types/types";
 import clsx from "clsx";
 import { FiArrowRight as Arrow } from "react-icons/fi";
 
@@ -18,7 +18,7 @@ import RotatingTextSVG from "./assets/rotatingTextSVG.component";
 
 export default function RadarCard() {
   const { getRadarStory } = usePublicServerActions();
-  const [radarStory, setRadarStory] = useState<Story | null>(null);
+  const [radarStory, setRadarStory] = useState<CompactStory | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const observer = useRef<IntersectionObserver | null>(null);
 

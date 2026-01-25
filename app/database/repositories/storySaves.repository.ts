@@ -1,6 +1,9 @@
-import { Story } from "@/app/types/types";
+"use server";
+import { CompactStory } from "@/app/types/types";
 import { prisma } from "../prisma";
-import { processStories, STORY_INCLUDE } from "../helpers/story.helpers";
+import {
+  fetchStories
+} from "../helpers/story.helpers";
 
 /**
  * Save (bookmark) a story for a specific user.
@@ -15,10 +18,8 @@ import { processStories, STORY_INCLUDE } from "../helpers/story.helpers";
  */
 export const createStorySave = async (
   storyId: string,
-  userId: string
+  userId: string,
 ): Promise<void> => {
-  "use server";
-
   await prisma.save.create({
     data: { storyId, userId },
   });
@@ -37,10 +38,8 @@ export const createStorySave = async (
  */
 export const isStorySaved = async (
   storyId: string,
-  userId: string
+  userId: string,
 ): Promise<boolean> => {
-  "use server";
-
   const save = await prisma.save.findFirst({
     where: { storyId, userId },
   });
@@ -63,22 +62,18 @@ export const isStorySaved = async (
  * - Returns stories in the order provided by the DB; add `orderBy` if needed.
  * - If a saved story has been deleted, it will not appear in the results.
  */
-export const getSavedStories = async (userId: string): Promise<Story[]> => {
-  "use server";
-
-  const saves = await prisma.save.findMany({
-    where: { userId },
-    select: { storyId: true },
+export const getSavedStories = async (
+  userId: string,
+): Promise<CompactStory[]> => {
+  return fetchStories({
+    where: {
+      saves: {
+        some: {
+          userId: userId,
+        },
+      },
+    },
   });
-
-  const savedStoryIds = saves.map(save => save.storyId);
-
-  const stories = await prisma.story.findMany({
-    where: { id: { in: savedStoryIds } },
-    include: STORY_INCLUDE,
-  });
-
-  return processStories(stories);
 };
 
 /**
@@ -93,10 +88,8 @@ export const getSavedStories = async (userId: string): Promise<Story[]> => {
  */
 export const deleteStorySave = async (
   storyId: string,
-  userId: string
+  userId: string,
 ): Promise<void> => {
-  "use server";
-
   await prisma.save.deleteMany({
     where: { storyId, userId },
   });

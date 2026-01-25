@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { usePublicServerActions } from "@/app/contexts/public-server-actions";
-import { Filters, Story } from "@/app/types/types";
+import { CompactStory, Filters } from "@/app/types/types";
 import StoriesList from "../storiesList/storiesList.component";
 import { SectionTitle, StoriesContainer } from "./storiesPage.styles";
 import Header from "../header/header.component";
@@ -32,7 +32,7 @@ export default function StoriesPageComponent({
 
   const { getStories } = usePublicServerActions();
   const [loading, setLoading] = useState(true);
-  const [stories, setStories] = useState<Story[]>([]);
+  const [stories, setStories] = useState<CompactStory[]>([]);
   // const [filters, setFilters] = useState<Filters>(defaultFilters);
 
   const fetchStories = useCallback(

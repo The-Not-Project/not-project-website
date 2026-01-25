@@ -1,17 +1,17 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-import { Story, Filters, User, Category } from '@/app/types/types';
+import { Story, Filters, User, Category, CompactStory } from '@/app/types/types';
 
 type PublicServerActions = {
   getUser: (id: string) => Promise<User | null>;
   UpdateUser: (data: FormData, user: User) => Promise<void>;
-  getStories: (filters?: Filters) => Promise<Story[]>;
+  getStories: (filters?: Filters) => Promise<CompactStory[]>;
   getStory: (id: string) => Promise<Story | null>;
-  getRadarStory: () => Promise<Story | null>;
-  getRecommendations: () => Promise<Story[]>;
+  getRadarStory: () => Promise<CompactStory | null>;
+  getRecommendations: () => Promise<CompactStory[]>;
   getCategories: () => Promise<Category[]>;
-  getSavedStories: (userId: string) => Promise<Story[]>;
+  getSavedStories: (userId: string) => Promise<CompactStory[]>;
   createStorySave: (storyId: string, userId: string) => Promise<void>;
   deleteStorySave: (storyId: string, userId: string) => Promise<void>;
   isStorySaved: (storyId: string, userId: string) => Promise<boolean>;

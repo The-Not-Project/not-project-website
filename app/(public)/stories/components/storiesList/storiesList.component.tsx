@@ -1,4 +1,4 @@
-import { Story as StoryType } from "@/app/types/types";
+import { CompactStory as StoryType } from "@/app/types/types";
 import StoryCard from "../storyCard/storyCard.component";
 import {
   FollowupMessage,
