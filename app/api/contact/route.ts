@@ -43,7 +43,6 @@ Email: ${email?.trim() ? email : "not provided"}
     await resend.emails.send({
       from: "The Not Project <contact@thenotproject.com>",
       to: [
-        "tariq@thenotproject.com",
         "lorenzo@thenotproject.com",
         "elghayate02@gmail.com",
         "sebastian.torres.codes@gmail.com",
