@@ -1,3 +1,5 @@
+'use client'
+
 import Swal from "sweetalert2";
 import ReactDOMServer from "react-dom/server";
 import { BottomBarContainer } from "./bottomBar.styles";

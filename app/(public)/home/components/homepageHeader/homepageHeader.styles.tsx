@@ -80,7 +80,7 @@ export const SeperatorContainer = styled.div`
   aspect-ratio: 1181 / 41;
 `;
 
-export const HeaderBackground = styled.div`
+export const HeaderBackgroundContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;

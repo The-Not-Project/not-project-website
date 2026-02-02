@@ -5,7 +5,7 @@ import { User, Category, Story, Filters, CompactStory } from "@/app/types/types"
 
 type AdminServerActions = {
   getUser: (id: string) => Promise<User | null>;
-  UpdateUser: (data: FormData, user: User) => Promise<void>;
+  updateUser: (data: FormData, user: User) => Promise<void>;
   createCategory: (data: FormData) => Promise<void>;
   getCategories: () => Promise<Category[]>;
   editCategory: (id: string, data: FormData) => Promise<void>;

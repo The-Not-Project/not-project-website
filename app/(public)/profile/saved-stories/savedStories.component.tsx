@@ -1,27 +1,11 @@
-import { usePublicServerActions } from "@/app/contexts/public-server-actions";
 import { PageSection, SectionDescription } from "../styles";
 import { StoriesContainer } from "./savedStories.styles";
-import { useEffect, useState } from "react";
-import { CompactStory } from "@/app/types/types";
 import SavedStory from "./savedStory.component";
+import { getSavedStories } from "@/app/database/repositories/storySaves.repository";
 
-export default function SavedStories({ userId }: { userId: string }) {
-  const { getSavedStories } = usePublicServerActions();
+export default async function SavedStories() {
 
-  const [savedStories, setSavedStories] = useState<CompactStory[] | null>([]);
-
-  useEffect(() => {
-    const fetchSavedStories = async () => {
-      try {
-        const stories = await getSavedStories(userId);
-        setSavedStories(stories);
-      } catch (error) {
-        console.error("Failed to fetch saved stories:", error);
-      }
-    };
-    fetchSavedStories();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId]);
+  const savedStories = await getSavedStories()
 
   return (
     <PageSection>

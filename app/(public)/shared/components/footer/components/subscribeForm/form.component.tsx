@@ -1,9 +1,13 @@
+'use client'
+
 import Swal from "sweetalert2";
-import { usePublicServerActions } from "@/app/contexts/public-server-actions";
 import { SignUpForm, SignUpSection } from "./form.styles";
 
-export default function Form() {
-  const { createSubscriber } = usePublicServerActions();
+type FormProps = {
+  submitAction: (email: string, phone?: string) => Promise<string>;
+}
+
+export default function Form({submitAction}: FormProps) {
 
   type SignUpFormFields = {
     email: { value: string };
@@ -32,7 +36,7 @@ export default function Form() {
       return;
     }
 
-    const response = await createSubscriber(email, phone ?? null);
+    const response = await submitAction(email, phone ?? null);
 
     if (response === "Email already subscribed") {
       Swal.fire({

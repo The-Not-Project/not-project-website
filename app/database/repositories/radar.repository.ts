@@ -18,7 +18,7 @@ import { prisma } from "../prisma";
  * Side effects:
  * - May update the `isRadar` flag in the database.
  */
-export async function getRadarStory(): Promise<CompactStory | null> {
+export async function getRadarStory(): Promise<CompactStory> {
   // Try existing radar
   let story = await prisma.story.findFirst({
     where: { isPublished: true, isRadar: true },
@@ -56,12 +56,6 @@ export async function getRadarStory(): Promise<CompactStory | null> {
       story = fallback;
     }
   }
-
-  // If absolutely no stories exist
-  if (!story) {
-    return null; // Return null gracefully instead of throwing null
-  }
-
   // Cast to your relation type and flatten
   return flattenCategories(story as StoryWithRelations);
 }

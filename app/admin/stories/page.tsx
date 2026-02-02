@@ -1,158 +1,57 @@
-"use client";
-
-import { useAdminServerActions } from "@/app/contexts/admin-server-actions";
-import { CompactStory, Filters } from "@/app/types/types";
-import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
+import {
+  getStories,
+  getHiddenStories,
+} from "@/app/database/repositories/story.repository";
+import { getCategories } from "@/app/database/repositories/category.repository";
+import StoriesSearch from "./components/storiesFilteredSearch/storiesFilteredSearch.component";
+import StoriesList from "./components/storiesList/storiesList.component";
 import {
   PageSection,
   SectionTitle,
   StoriesSection,
 } from "../shared/components/layout/Section";
-import StoriesList from "./components/storiesList/storiesList.component";
-// import StoryFormPopup from "./components/storyFormPopup/storyFormPopup.component";
-import StoriesSearch from "./components/storiesFilteredSearch/storiesFilteredSearch.component";
 import { Button } from "../shared/components/button/button";
 import StoriesToggle from "./components/StoriesToggle/storiesToggle.component";
-import Link from "next/link";
 
-// type FormState = {
-//   isOpen: boolean;
-//   isEditing: boolean;
-//   currentStory: Story | null;
-//   selectedCategories: Category[];
-// };
+interface PageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
 
-const defaultFilters = {
-  search: "",
-  boroughs: [],
-  categories: [],
-};
+export default async function StoriesPage({ searchParams }: PageProps) {
+  const params = await searchParams;
 
-export default function StoriesPage() {
-  const {
-    getStories,
-    // deleteStory,
-    getHiddenStories,
-    unpublishStory,
-    republishStory,
-  } = useAdminServerActions();
-
-  const [stories, setStories] = useState<CompactStory[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [showHidden, setShowHidden] = useState(false);
-
-  // const [formState, setFormState] = useState<FormState>({
-  //   isOpen: false,
-  //   isEditing: false,
-  //   currentStory: null,
-  //   selectedCategories: [],
-  // });
-
-  const [filters, setFilters] = useState<Filters>(defaultFilters);
-
-  const fetchStories = useCallback(
-    async (appliedFilters: Filters = defaultFilters) => {
-      setIsLoading(true);
-      try {
-        const data = await getStories(appliedFilters);
-        setStories(data);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [getStories]
-  );
-
-  const fetchHiddenStories = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const data = await getHiddenStories();
-      setStories(data);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [getHiddenStories]);
-
-  useEffect(() => {
-    if (showHidden) {
-      fetchHiddenStories();
-    } else {
-      fetchStories(filters);
-    }
-  }, [filters, fetchStories, showHidden, fetchHiddenStories]);
-
-  // const handleClosePopup = async () => {
-  //   setFormState((prev) => ({
-  //     ...prev,
-  //     isOpen: false,
-  //     currentStory: null,
-  //     selectedCategories: [],
-  //   }));
-  // };
-
-  // const handleSubmitSuccess = async () => {
-  //   await fetchStories();
-  //   handleClosePopup();
-  // };
-
-  const handleHideStory = async (id: string) => {
-    try {
-      await unpublishStory(id);
-      await fetchStories();
-    } catch (error) {
-      alert("Error hiding story: " + error);
-    }
+  const showHidden = params.trash === "true";
+  const filters = {
+    search: (params.search as string) || "",
+    boroughs:
+      typeof params.boroughs === "string"
+        ? [params.boroughs]
+        : (params.boroughs as string[]) || [],
+    categories:
+      typeof params.categories === "string"
+        ? [params.categories]
+        : (params.categories as string[]) || [],
   };
 
-  const handleRepublishStory = async (id: string) => {
-    try {
-      await republishStory(id);
-      await fetchHiddenStories();
-    } catch (error) {
-      alert("Error republishing story: " + error);
-    }
-  };
+  const [stories, categories] = await Promise.all([
+    showHidden ? getHiddenStories() : getStories(filters),
+    getCategories(),
+  ]);
 
   return (
     <PageSection>
       <SectionTitle>Stories</SectionTitle>
-      <StoriesToggle showHidden={showHidden} setShowHidden={setShowHidden} />
+      <StoriesToggle showHidden={showHidden} />
+
       <StoriesSection>
-        <StoriesSearch filters={filters} setFilters={setFilters} />
-        <div style={{ flexGrow: 1, marginTop: "10px" }}>
-          <StoriesList
-            isLoading={isLoading}
-            stories={stories}
-            // onDelete={handleDeleteStory}
-            onHide={handleHideStory}
-            onShow={handleRepublishStory}
-          />
+        <StoriesSearch categories={categories} initialFilters={filters} />
 
-          {/* {formState.isOpen && (
-            <StoryFormPopup
-              isOpen={formState.isOpen}
-              isEditing={formState.isEditing}
-              story={formState.currentStory}
-              selectedCategories={formState.selectedCategories}
-              onCloseAction={handleClosePopup}
-              onSubmitSuccessAction={handleSubmitSuccess}
-              onCategoriesChangeAction={(categories: Category[]) =>
-                setFormState((prev) => ({
-                  ...prev,
-                  selectedCategories: categories,
-                }))
-              }
-              createStoryAction={createStory}
-              editStoryAction={editStory}
-            />
-          )} */}
+        <div>
+          <StoriesList stories={stories} />
 
-          <Button className="cornered" 
-          // onClick={handleOpenCreate}
-          >
-            <Link href="/admin/story/create">
-              Add
-            </Link>
+          <Button className="cornered">
+            <Link href="/admin/story/create">Add</Link>
           </Button>
         </div>
       </StoriesSection>

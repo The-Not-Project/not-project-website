@@ -1,5 +1,5 @@
 "use server";
-import { getSession } from "@auth0/nextjs-auth0/edge";
+import { auth0 } from "@/app/lib/auth0";
 import { redirect } from "next/navigation";
 import { prisma } from "../prisma";
 import { getUser } from "./user.repository";
@@ -29,6 +29,8 @@ import { CompactStory, Filters, Story } from "../../types/types";
  */
 export async function getStories(filters?: Filters): Promise<CompactStory[]> {
   const { search, boroughs, categories } = filters || {};
+
+  
 
   return await fetchStories({
     where: {
@@ -94,10 +96,10 @@ export async function getStory(id: string): Promise<Story | null> {
  * - Creates StoryCategory links via `processCategories`.
  */
 export async function createStory(formData: FormData) {
-  const session = await getSession();
+  const session = await auth0.getSession();
   if (!session) throw new Error("User not authenticated");
 
-  const user = await getUser(session.user.sub);
+  const user = await getUser();
   if (!user) throw new Error("User not found");
 
   if (!user.firstName || !user.lastName) {

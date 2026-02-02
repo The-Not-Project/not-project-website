@@ -4,6 +4,7 @@ import { prisma } from "../prisma";
 import {
   fetchStories
 } from "../helpers/story.helpers";
+import { auth0 } from "@/app/lib/auth0";
 
 /**
  * Save (bookmark) a story for a specific user.
@@ -62,14 +63,19 @@ export const isStorySaved = async (
  * - Returns stories in the order provided by the DB; add `orderBy` if needed.
  * - If a saved story has been deleted, it will not appear in the results.
  */
-export const getSavedStories = async (
-  userId: string,
-): Promise<CompactStory[]> => {
+export const getSavedStories = async (): Promise<CompactStory[]> => {
+
+  const session = await auth0.getSession()
+
+  if (!session || !session.user) {
+    throw new Error("Unauthorized")
+  }
+
   return fetchStories({
     where: {
       saves: {
         some: {
-          userId: userId,
+          userId: session.user.id,
         },
       },
     },

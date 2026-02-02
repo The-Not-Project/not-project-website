@@ -1,3 +1,4 @@
+'use server';
 import { prisma } from '../prisma';
 
 /**
@@ -8,9 +9,24 @@ import { prisma } from '../prisma';
  * Note: No filtering or ordering is applied here — this will return all categories in any order.
  */
 export async function getCategories() {
-  'use server';
 
   const categories = await prisma.category.findMany();
+  return categories;
+}
+
+export async function getActiveCategories() {
+
+  const categories = await prisma.category.findMany({
+    where: {
+      stories: {
+        some: {}
+      }
+    },
+    orderBy: {
+      name: 'asc'
+    }
+  });
+
   return categories;
 }
 
@@ -24,7 +40,6 @@ export async function getCategories() {
  * If either field is missing, the function exits without creating anything.
  */
 export async function createCategory(data: FormData) {
-  'use server';
 
   const name = data.get('name');
   const description = data.get('description');
@@ -50,8 +65,7 @@ export async function createCategory(data: FormData) {
  * If there are related StoryCategory records, Prisma's referential actions will apply (check schema).
  */
 export async function deleteCategory(id: string) {
-  'use server';
-
+  
   await prisma.category.delete({
     where: {
       id,

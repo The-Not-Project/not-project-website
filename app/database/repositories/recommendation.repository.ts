@@ -17,6 +17,8 @@ import { prisma } from "../prisma";
  *   If ordering matters, add `orderBy` to the query.
  */
 export async function getRecommendations(): Promise<CompactStory[]> {
+    console.log('run');
+
 
   return await fetchStories({
     where: { isRecommended: true },

@@ -7,7 +7,7 @@ export const NavBarContainer = styled.nav`
   left: 0;
   z-index: 3;
   width: 100%;
-  height: 70px;
+  height: 100px;
   color: white;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -17,8 +17,8 @@ export const NavBarContainer = styled.nav`
     height 0.3s,
     background 0.3s,
     translate 0.18s ease-in;
-  background: rgba(13, 13, 13, 0.9);
-  backdrop-filter: blur(10px);
+  background: none;
+  /* backdrop-filter: blur(10px); */
 
   @media (max-width: 850px) {
     padding-inline: 25px;
@@ -26,10 +26,10 @@ export const NavBarContainer = styled.nav`
     height: 60px !important;
   }
 
-  body[data-transparent="true"] & {
-    background: none;
-    backdrop-filter: none;
-    height: 100px;
+  body[data-transparent="false"] & {
+    background: rgba(13, 13, 13, 0.9);
+    backdrop-filter: blur(10px);
+    height: 70px;
   }
 `;
 
@@ -74,16 +74,20 @@ export const Link = styled(NextLink)`
   letter-spacing: 2px;
   transition: 0.2s;
 
+  &:hover {
+    color: #d5a840;
+  }
+
   @media (max-width: 1400px) {
     font-size: 0.7rem;
   }
 
   body[data-transparent="false"] & {
     color: #dbdbdb;
-  }
 
-  &:hover {
-    color: #d5a840;
+    &:hover {
+      color: #d5a840;
+    }
   }
 `;
 

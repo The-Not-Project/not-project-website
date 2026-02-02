@@ -1,4 +1,6 @@
-import { User } from "../../types/types";
+'use server'
+
+import { auth0 } from "@/app/lib/auth0";
 import { prisma } from "../prisma";
 
 /**
@@ -15,23 +17,17 @@ import { prisma } from "../prisma";
  * - Intended to be called when a new Auth0 user logs in for the first time.
  * - The `id` and `email` fields must be unique (enforced by schema).
  */
-export async function createUser({
-  id,
-  email,
-}: {
-  id: string;
-  email: string;
-}) {
-  "use server";
+export async function createUser() {
+  const session = await auth0.getSession()
 
-  if (!id || !email) {
-    return;
+  if (!session || !session.user || !session.user.email) {
+    throw new Error('Unauthorized')
   }
 
   await prisma.user.create({
     data: {
-      id,
-      email,
+      id: session.user.sub,
+      email: session.user.email,
       firstName: "",
       lastName: "",
     },
@@ -44,11 +40,15 @@ export async function createUser({
  * @param id - The user's unique ID.
  * @returns The user object or `null` if not found.
  */
-export async function getUser(id: string) {
-  "use server";
+export async function getUser() {
+  const session = await auth0.getSession();
+
+  if (!session || !session.user) {
+    throw new Error("Unauthorized");
+  }
 
   const user = await prisma.user.findUnique({
-    where: { id },
+    where: { id: session.user.sub },
   });
 
   return user;
@@ -66,8 +66,12 @@ export async function getUser(id: string) {
  * - Does nothing if `firstName` or `lastName` is missing from the form data.
  * - Updates only the name fields for the given user.
  */
-export async function UpdateUser(data: FormData, user: User) {
-  "use server";
+export async function updateUser(data: FormData) {
+  const session = await auth0.getSession();
+
+  if (!session || !session.user) {
+    throw new Error("Unauthorized");
+  }
 
   const firstName = data.get("firstName");
   const lastName = data.get("lastName");
@@ -77,7 +81,7 @@ export async function UpdateUser(data: FormData, user: User) {
   }
 
   await prisma.user.update({
-    where: { id: user?.id },
+    where: { id: session.user.sub },
     data: {
       firstName: firstName.toString(),
       lastName: lastName.toString(),

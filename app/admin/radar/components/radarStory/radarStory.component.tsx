@@ -20,7 +20,6 @@ export default function RadarCard({ story }: { story: CompactStory }) {
         </RadarDescription>
         <RadarPhoto $url={encodeURI(story.thumbnail)} />
       </RadarCardContainer>
-      {/* <DeleteButton onClick={() => onDeleteAction()}>Delete</DeleteButton> */}
     </>
   );
 }

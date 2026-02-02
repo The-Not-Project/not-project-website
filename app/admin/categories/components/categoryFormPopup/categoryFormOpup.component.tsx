@@ -45,6 +45,7 @@ export default function CategoryFormPopup({
       console.error('Failed to update category:', error);
     } finally {
       setSubmitting(false);
+      onCloseAction()
     }
   };
 

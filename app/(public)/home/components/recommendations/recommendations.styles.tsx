@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const RecommendationsContainer = styled.section`
   width: 90%;
@@ -61,11 +61,9 @@ export const RecommendationsList = styled.div`
 
 export const RecommendationCardContainer = styled.div`
   min-width: 350px;
-  padding: 40px 35px;
+  padding: 50px 25px;
   display: flex;
   flex-flow: column;
-  background: transparent;
-  /* border: 1px solid #cbcbcb; */
   border-radius: 8px;
   overflow: hidden;
   position: relative;
@@ -97,12 +95,6 @@ export const RecommendationCardContainer = styled.div`
       font-size: 0.8rem;
       margin-bottom: 5px;
     }
-
-    /* .summary {
-      margin-block: 10px;
-      color: #b5b5b5;
-      line-height: 1.4em;
-    } */
 
     .second-row {
       display: flex;
@@ -140,6 +132,42 @@ export const RecommendationCardContainer = styled.div`
       }
     }
   }
+
+  // Skeleton styles
+
+  .last-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .skeleton {
+    opacity: 0.5;
+    background: linear-gradient(90deg, #e0e0e0 25%, #f2f2f2 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+    border-radius: 4px;
+    width: 100%;
+
+    &.category {
+      height: 16px;
+      width: 25%;
+      padding-block: 5px;
+    }
+
+    &.title {
+      height: 30px;
+      margin-block: 10px;
+    }
+    &.summary {
+      height: 20px;
+      margin-bottom: 5px;
+
+      &.half {
+        width: 50%;
+      }
+    }
+  }
 `;
 
 export const ImageContainer = styled.figure`
@@ -173,40 +201,6 @@ export const ImageContainer = styled.figure`
   }
 `;
 
-export const PlaceholderContainer = styled(RecommendationCardContainer)`
-  .skeleton {
-    opacity: 0.5;
-    background: linear-gradient(90deg, #e0e0e0 25%, #f2f2f2 50%, #e0e0e0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 3s infinite;
-    border-radius: 4px;
-    width: 100%;
-
-    &.category-skeleton {
-      height: 16px;
-      width: 30%;
-      padding-block: 5px;
-    }
-
-    &.image {
-      height: 225px;
-      margin-bottom: 15px;
-    }
-
-    &.title {
-      height: 30px;
-      margin-block: 10px;
-    }
-    &.summary {
-      height: 20px;
-      margin-bottom: 5px;
-
-      &.half {
-        width: 50%;
-      }
-    }
-  }
-`;
 
 export const StoriesPageLinkContainer = styled.div`
   display: flex;

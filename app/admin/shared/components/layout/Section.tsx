@@ -17,7 +17,8 @@ export const SectionTitle = styled.h2`
 `;
 
 export const StoriesSection = styled(PageSection)`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
   gap: 20px;
   border: none;
   padding: 0;

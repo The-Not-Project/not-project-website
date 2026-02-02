@@ -3,7 +3,7 @@ export type User = {
   firstName: string;
   lastName: string;
   email: string;
-} | null;
+};
 
 export type Category = {
   id: string;

@@ -1,4 +1,7 @@
-import { useAdminServerActions } from "@/app/contexts/admin-server-actions";
+"use client";
+
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { Category, Filters } from "@/app/types/types";
 import {
   StoriesSearchContainer,
@@ -9,37 +12,36 @@ import {
   FilterOption,
   ApplyFiltersButton,
 } from "./storiesFilteredSearch.styles";
-import { useEffect, useState } from "react";
 
-type StoriesSearchProps = {
-  filters: Filters;
-  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
-};
+const boroughs = ["brooklyn", "manhattan", "queens", "staten island", "bronx"];
 
 export default function StoriesSearch({
-  filters,
-  setFilters,
-}: StoriesSearchProps) {
-  const { getCategories } = useAdminServerActions();
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [localFilters, setLocalFilters] = useState<Filters>(filters);
+  categories,
+  initialFilters,
+}: {
+  categories: Category[];
+  initialFilters: Filters;
+}) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const boroughs = [
-    "brooklyn",
-    "manhattan",
-    "queens",
-    "staten island",
-    "bronx",
-  ];
+  const [localFilters, setLocalFilters] = useState<Filters>(initialFilters);
 
-  useEffect(() => {
-    async function fetchCategories() {
-      const data = await getCategories();
-      setCategories(data);
-    }
+  const applyFilters = () => {
+    const params = new URLSearchParams(searchParams.toString());
 
-    fetchCategories();
-  }, [getCategories]);
+    if (localFilters.search) params.set("search", localFilters.search);
+    else params.delete("search");
+
+    params.delete("boroughs");
+    localFilters.boroughs.forEach((b) => params.append("boroughs", b));
+
+    params.delete("categories");
+    localFilters.categories.forEach((c) => params.append("categories", c));
+
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
   function handleSearchChange(e: React.ChangeEvent<HTMLInputElement>) {
     setLocalFilters({ ...localFilters, search: e.target.value });
@@ -104,7 +106,7 @@ export default function StoriesSearch({
           </FilterOption>
         ))}
       </FilterOptionsContainer>
-      <ApplyFiltersButton onClick={() => setFilters(localFilters)}>
+      <ApplyFiltersButton onClick={applyFilters}>
         Apply Filters
       </ApplyFiltersButton>
     </StoriesSearchContainer>

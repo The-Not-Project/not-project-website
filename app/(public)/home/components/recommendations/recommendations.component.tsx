@@ -1,8 +1,4 @@
-"use client";
-
-import { useCallback, useEffect, useState } from "react";
-import { CompactStory } from "@/app/types/types";
-import { usePublicServerActions } from "@/app/contexts/public-server-actions";
+import { getRecommendations } from "@/app/database/repositories/recommendation.repository";
 import {
   RecommendationsContainer,
   BigTitle,
@@ -13,22 +9,13 @@ import {
   LinkLabel,
 } from "./recommendations.styles";
 import RecommendationCard from "./recommendationCard.component";
-import RecommendationPlaceholder from "./recommendation.placeholder";
 import { FiArrowUpRight as Arrow } from "react-icons/fi";
+import RecommendationsPlaceholder from "./recommendation.placeholder";
 
 
-export default function Recommendations() {
-  const { getRecommendations } = usePublicServerActions();
-  const [recommendations, setRecommendations] = useState<CompactStory[]>([]);
+export default async function Recommendations() {
 
-  const fetchRecommendations = useCallback(async () => {
-    const recommendations = await getRecommendations();
-    setRecommendations(recommendations);
-  }, [getRecommendations]);
-
-  useEffect(() => {
-    fetchRecommendations();
-  }, [fetchRecommendations]);
+  const recommendations = await getRecommendations()
 
   return (
     <RecommendationsContainer>
@@ -41,12 +28,7 @@ export default function Recommendations() {
               recommendation={recommendation}
             />
           )) : (
-            <>
-              <RecommendationPlaceholder />
-              <RecommendationPlaceholder />
-              <RecommendationPlaceholder />
-              <RecommendationPlaceholder />
-            </>
+            <RecommendationsPlaceholder />
           )}
           <StoriesPageLinkContainer>
             <StoriesPageLink href='/stories'>

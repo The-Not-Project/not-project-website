@@ -1,21 +1,41 @@
-import { PlaceholderContainer } from "./recommendations.styles";
+import {
+  BigTitle,
+  RecommendationCardContainer,
+  RecommendationsContainer,
+  RecommendationsList,
+  SecondaryTitle,
+} from "./recommendations.styles";
 
-export default function RecommendationPlaceholder() {
+export function RecommendationPlaceholder() {
   return (
-    <PlaceholderContainer>
-      <div className="first-row">
-        <p className="skeleton category-skeleton"></p>
-        <p className="skeleton category-skeleton"></p>
-      </div>
-      <div className="skeleton image"></div>
+    <RecommendationCardContainer>
       <div className="content">
-        <h3 className="skeleton title"></h3>
         <h3 className="skeleton title"></h3>
         <br />
         <p className=" skeleton summary"></p>
         <p className=" skeleton summary"></p>
         <p className=" skeleton summary half"></p>
       </div>
-    </PlaceholderContainer>
+            <div className="last-row">
+        <p className="skeleton category"></p>
+        <p className="skeleton category"></p>
+      </div>
+    </RecommendationCardContainer>
+  );
+}
+
+export default function RecommendationsPlaceholder() {
+  return (
+    <RecommendationsContainer>
+      <BigTitle>The collection</BigTitle>
+      <SecondaryTitle>Stories we think you&apos;ll like.</SecondaryTitle>
+
+      <RecommendationsList>
+        <RecommendationPlaceholder />
+        <RecommendationPlaceholder />
+        <RecommendationPlaceholder />
+        <RecommendationPlaceholder />
+      </RecommendationsList>
+    </RecommendationsContainer>
   );
 }

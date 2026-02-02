@@ -1,5 +1,4 @@
-"use client";
-
+import { createSubscriber } from "@/app/database/repositories/subscriber.repository";
 import Link from "next/link";
 import SubscribeForm from "./components/subscribeForm/form.component";
 import BottomBar from "./components/bottomBar/bottomBar.component";
@@ -61,7 +60,7 @@ export default function Footer() {
           </FooterSection>
           <FooterSection>
             <SectionTitle>Subscribe</SectionTitle>
-            <SubscribeForm />
+            <SubscribeForm submitAction={createSubscriber} />
           </FooterSection>
         </FooterContent>
 

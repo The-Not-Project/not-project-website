@@ -1,14 +1,13 @@
-import { UserProvider } from "@auth0/nextjs-auth0/client";
-import AuthSyncer from "./(public)/shared/components/auth/AuthSyncer";
+import { Auth0Provider } from "@auth0/nextjs-auth0/client";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import projectMetadata from "./constants/metadata";
 import { Manrope } from "next/font/google";
 import { georgia } from "./utils/font";
-import { styles } from "./utils/styles";
 import "./globals.css";
-import { preload } from "react-dom";
+import { auth0 } from "./lib/auth0";
+import { createUser, getUser } from "./database/repositories/user.repository";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -18,34 +17,33 @@ export const viewport: Viewport = {
 export const metadata: Metadata = projectMetadata;
 
 const manrope = Manrope({ weight: "400", subsets: ["latin"] });
-const BOROUGHS = ["manhattan", "brooklyn", "queens", "bronx", "statenisland"];
+
+const initialStyles = ".loader{display:grid;place-items:center;}";
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  BOROUGHS.forEach((borough) => {
-    preload(
-      `/_next/image?url=%2Fmedia%2FboroughBackdrops%2F${borough}.webp&w=3840&q=75`,
-      {
-        as: "image",
-        fetchPriority: "high",
-      },
-    );
-  });
+  const session = await auth0.getSession();
+  if (session && session.user) {
+    const existingUser = await getUser();
+
+    if (!existingUser) {
+      await createUser();
+    }
+  }
   return (
     <html lang="en">
       <head>
-        <style>{styles}</style>
+        <style>{initialStyles}</style>
       </head>
       <body className={`${manrope.className} ${georgia.variable}`}>
-        <UserProvider>
-          <AuthSyncer />
+        <Auth0Provider>
           {children}
           <Analytics />
           <SpeedInsights />
-        </UserProvider>
+        </Auth0Provider>
       </body>
     </html>
   );

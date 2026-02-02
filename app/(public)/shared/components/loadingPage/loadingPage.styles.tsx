@@ -8,7 +8,7 @@ const slideUp = keyframes`
 export const LoadingPageContainer = styled.div`
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 999;
   background: #0d0d0d;
-  animation: ${slideUp} 300ms ease 700ms forwards;
+  animation: ${slideUp} 300ms ease 500ms forwards;
 `;

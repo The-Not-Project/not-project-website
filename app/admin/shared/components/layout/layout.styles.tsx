@@ -14,7 +14,7 @@ export const AdminContainer = styled.main`
   background: #ebebeb;
   .admin-content {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1200px;
 
     h1 {
       font-size: 1.8rem;

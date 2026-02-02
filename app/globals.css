@@ -17,9 +17,6 @@ footer {
   transition: translate 0.18s ease-in !important;
 }
 
-body[data-menu-open="true"] {
-  overflow: hidden;
-}
 body[data-menu-open="true"] nav,
 body[data-menu-open="true"] main,
 body[data-menu-open="true"] footer {
@@ -61,4 +58,14 @@ body[data-menu-open="true"] footer {
 
 .grecaptcha-badge {
   visibility: hidden;
+}
+
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }

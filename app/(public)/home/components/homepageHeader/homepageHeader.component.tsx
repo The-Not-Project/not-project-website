@@ -1,36 +1,17 @@
-"use client";
-
 import Image from "next/image";
+import HeaderBackground from './components/headerBackground.component'
 import {
   CenterTitle,
-  HeaderBackground,
   HeaderContainer,
-  HeaderVideo,
   SeperatorContainer,
 } from "./homepageHeader.styles";
-import useHeaderScroll from "@/app/hooks/useHeaderScroll";
-import { useRef } from "react";
 
 export default function HomePageHeader() {
-  const videoRef = useRef<HTMLVideoElement>(null);
 
-  useHeaderScroll(videoRef);
 
   return (
     <HeaderContainer>
-      <HeaderBackground>
-        <HeaderVideo
-          ref={videoRef}
-          preload="auto"
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/media/firstframe.webp"
-        >
-          <source src="/media/hero.mp4" type="video/mp4" />
-        </HeaderVideo>
-      </HeaderBackground>
+      <HeaderBackground />
       {/* <div className='quote'>“Not who they expected, exactly who I am”</div> */}
       <CenterTitle>
         <h2>Unbridled Stories, Untamed Voices.</h2>
@@ -41,7 +22,7 @@ export default function HomePageHeader() {
             alt="Logo"
             fill
             sizes="800px"
-            unoptimized={false}
+            priority
           />
         </SeperatorContainer>
         <h1>PROJECT</h1>
