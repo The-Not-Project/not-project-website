@@ -22,18 +22,20 @@ import {
   FilterOptionsContainer as BoroughsContainer,
   FilterOption as BoroughOption,
 } from "../../../stories/components/storiesFilteredSearch/storiesFilteredSearch.styles";
+import { getCategories } from "@/app/database/repositories/category.repository";
 
 type FormProps = {
-    story: Story
-    editAction: (id: string, formData: FormData) => Promise<void>
-}
-export default function EditStoryPage({story, editAction}: FormProps) {
-
+  story: Story;
+  editAction: (id: string, formData: FormData) => Promise<void>;
+};
+export default function EditStoryPage({ story, editAction }: FormProps) {
   const [editorContent, setEditorContent] = useState(story.content);
-  const [selectedCategories, setSelectedCategories] = useState<Category[]>(story.categories);
+  const [selectedCategories, setSelectedCategories] = useState<Category[]>(
+    story.categories,
+  );
   const [selectedBorough, setSelectedBorough] = useState<string>(story.borough);
-    const [isPending, startTransition] = useTransition();
-    const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const handleBoroughClick = (borough: string) => {
     if (selectedBorough !== borough) {
@@ -41,8 +43,7 @@ export default function EditStoryPage({story, editAction}: FormProps) {
     }
   };
 
-  const formAction =  (formData: FormData) => {
-
+  const formAction = (formData: FormData) => {
     formData.append("content", editorContent);
     formData.append("borough", selectedBorough);
 
@@ -119,6 +120,7 @@ export default function EditStoryPage({story, editAction}: FormProps) {
 
         <FormLabel>Categories</FormLabel>
         <CategoriesSearch
+          getCategories={getCategories}
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
         />

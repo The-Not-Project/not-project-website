@@ -22,6 +22,7 @@ import {
   FilterOptionsContainer as BoroughsContainer,
   FilterOption as BoroughOption,
 } from "../../stories/components/storiesFilteredSearch/storiesFilteredSearch.styles";
+import { getCategories } from "@/app/database/repositories/category.repository";
 
 export default function CreateStoryForm({
   createAction,
@@ -107,6 +108,7 @@ export default function CreateStoryForm({
 
         <FormLabel>Categories</FormLabel>
         <CategoriesSearch
+          getCategories={getCategories}
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
         />
