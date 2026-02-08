@@ -7,13 +7,15 @@ export const InstagramContainer = styled.section`
   color: white;
 
   @media (max-width: 850px) {
-    padding-inline: 20px;
+    padding: 0;
+    margin-block: 30px 50px;
   }
 `;
 
 export const InstagramInfo = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 1.1rem;
   margin-bottom: 50px;
 
@@ -25,6 +27,12 @@ export const InstagramInfo = styled.div`
     text-decoration: none;
     border: 1px solid white;
     padding: 5px 20px;
+  }
+
+  @media (max-width: 850px) {
+    padding-inline: 10px;
+    font-size: 1rem;
+    margin-bottom: 20px;
   }
 `;
 
@@ -84,12 +92,13 @@ export const InstagramContent = styled.div`
     }
   }
 
-@media (max-width: 1400px) {
-  grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 1400px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
 
-  div:nth-child(n) {
-    grid-column: auto;
-    grid-row: auto;
+    div:nth-child(n) {
+      grid-column: auto;
+      grid-row: auto;
+    }
   }
-}
 `;
