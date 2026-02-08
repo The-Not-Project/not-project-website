@@ -23,4 +23,13 @@ export const Banner = styled.div`
     font-size: 2.5rem;
     text-align: center;
   }
+
+  @media (max-width: 850px) {
+    aspect-ratio: 4 / 2;
+
+    h2 {
+      font-size: 1.5rem;
+      width: 100%;
+    }
+  }
 `;

@@ -5,6 +5,10 @@ export const InstagramContainer = styled.section`
   margin: 50px auto;
   padding-inline: 50px;
   color: white;
+
+  @media (max-width: 850px) {
+    padding-inline: 20px;
+  }
 `;
 
 export const InstagramInfo = styled.div`
