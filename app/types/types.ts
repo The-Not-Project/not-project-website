@@ -27,14 +27,6 @@ export type Story = {
 
 export type CompactStory = Omit<Story, 'content'>
 
-// export type Media = {
-//   id: string;
-//   cid: string;
-//   url: string;
-//   storyId: string;
-//   isThumbnail: boolean;
-// };
-
 type Author = {
   id: string;
   firstName: string;
@@ -46,30 +38,6 @@ export type Filters = {
   boroughs: string[];
   categories: string[];
 };
-
-export type RawStory = {
-  title: string;
-  id: string;
-  content: string;
-  summary: string;
-  borough: string;
-  author: {
-    id: string;
-    firstName: string;
-    lastName: string;
-  };
-  categories: { category: Category }[];
-  createdAt: Date;
-  thumbnail: string;
-  isPublished: boolean;
-};
-
-// export type RawMedia = {
-//   id: string;
-//   cid: string;
-//   storyId: string;
-//   isThumbnail: boolean;
-// };
 
 export type StorySave = {
   id: string;

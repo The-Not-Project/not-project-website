@@ -2,7 +2,7 @@ import { CompactStory } from "@/app/types/types";
 import { RecommendationsListContainer } from "./recommendationsList.styles";
 import { NoStoriesMessage } from "@/app/admin/stories/components/storiesList/storiesList.styles";
 import RecommendationCard from "../recommendationCard/recommendationCard.component";
-import { removeRecommendation } from "@/app/database/repositories/recommendation.repository";
+import { removeRecommendation } from "@/lib/prisma/repositories/recommendation.repository";
 type RecommendationsListProps = {
   recommendations: CompactStory[];
 };

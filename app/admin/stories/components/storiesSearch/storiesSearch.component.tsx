@@ -9,7 +9,7 @@ import {
 } from "../../../recommendations/components/recommendationsList/recommendationsList.styles";
 import { FaPlus as PlusSign } from "react-icons/fa6";
 import { useCallback, useState, useTransition } from "react";
-import { getStories } from "@/app/database/repositories/story.repository";
+import { getStories } from "@/lib/prisma/repositories/story.repository";
 
 const defaultFilters = {
   search: "",

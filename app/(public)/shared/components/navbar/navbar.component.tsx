@@ -8,7 +8,7 @@ import {
   AuthLink,
   ImageLink,
 } from "./navbar.styles";
-import { auth0 } from "@/app/lib/auth0";
+import { auth0 } from "@/lib/auth0/auth0";
 import NavBarClient from "./navbarClient/navbar.client";
 
 export default async function NavBar() {

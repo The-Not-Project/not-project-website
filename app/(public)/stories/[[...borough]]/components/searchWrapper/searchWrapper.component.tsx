@@ -1,4 +1,4 @@
-import { getActiveCategories } from "@/app/database/repositories/category.repository";
+import { getActiveCategories } from "@/lib/prisma/repositories/category.repository";
 import StoriesSearch from "../storiesSearch/storiesSearch.component";
 
 export default async function SearchWrapper({ filters }: { filters: any }) {

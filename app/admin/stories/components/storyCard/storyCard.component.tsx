@@ -8,7 +8,7 @@ import StoryActions from "../storyActions/storyActions.component";
 import {
   unpublishStory,
   republishStory,
-} from "@/app/database/repositories/story.repository";
+} from "@/lib/prisma/repositories/story.repository";
 
 export default function StoryCard({ story }: { story: CompactStory }) {
 

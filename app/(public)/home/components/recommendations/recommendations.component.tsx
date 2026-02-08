@@ -1,4 +1,4 @@
-import { getRecommendations } from "@/app/database/repositories/recommendation.repository";
+import { getRecommendations } from "@/lib/prisma/repositories/recommendation.repository";
 import {
   RecommendationsContainer,
   BigTitle,

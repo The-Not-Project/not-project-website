@@ -1,4 +1,4 @@
-import { getStory } from "@/app/database/repositories/story.repository";
+import { getStory } from "@/lib/prisma/repositories/story.repository";
 import { getStoryMetadata } from "@/app/constants/metadata";
 import {
   StoryWrapper,

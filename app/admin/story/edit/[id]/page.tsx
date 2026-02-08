@@ -1,7 +1,7 @@
 import {
   editStory,
   getStory,
-} from "@/app/database/repositories/story.repository";
+} from "@/lib/prisma/repositories/story.repository";
 import EditStoryForm from "./editForm";
 
 export default async function Page({

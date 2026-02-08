@@ -22,7 +22,7 @@ import {
   FilterOptionsContainer as BoroughsContainer,
   FilterOption as BoroughOption,
 } from "../../stories/components/storiesFilteredSearch/storiesFilteredSearch.styles";
-import { getCategories } from "@/app/database/repositories/category.repository";
+import { getCategories } from "@/lib/prisma/repositories/category.repository";
 
 export default function CreateStoryForm({
   createAction,

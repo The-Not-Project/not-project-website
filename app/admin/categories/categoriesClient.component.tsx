@@ -6,7 +6,7 @@ import { Button } from '../shared/components/button/button';
 import CategoriesTable from './components/categoriesTable/categoriesTable.component';
 import { useState } from 'react';
 import CategoryFormPopup from './components/categoryFormPopup/categoryFormOpup.component';
-import { createCategory, editCategory, deleteCategory, getCategories } from '@/app/database/repositories/category.repository'
+import { createCategory, editCategory, deleteCategory, getCategories } from '@/lib/prisma/repositories/category.repository'
 
 export default function CategoriesClient({ initialCategories }: { initialCategories: Category[] }) {
   const [categories, setCategories] = useState<Category[]>(initialCategories);

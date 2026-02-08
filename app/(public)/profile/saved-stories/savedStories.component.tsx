@@ -1,7 +1,7 @@
+import { getSavedStories } from "@/lib/prisma/repositories/storySaves.repository";
 import { PageSection, SectionDescription } from "../styles";
 import { StoriesContainer } from "./savedStories.styles";
 import SavedStory from "./savedStory.component";
-import { getSavedStories } from "@/app/database/repositories/storySaves.repository";
 
 export default async function SavedStories() {
 

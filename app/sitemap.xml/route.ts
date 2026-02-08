@@ -1,4 +1,4 @@
-import { getStories } from "@/app/database/repositories/story.repository";
+import { getStories } from "@/lib/prisma/repositories/story.repository";
 
 export async function GET() {
   const baseUrl = "https://www.thenotproject.com";

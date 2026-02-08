@@ -1,4 +1,3 @@
-import { createSubscriber } from "@/app/database/repositories/subscriber.repository";
 import Link from "next/link";
 import SubscribeForm from "./components/subscribeForm/form.component";
 import BottomBar from "./components/bottomBar/bottomBar.component";
@@ -11,6 +10,7 @@ import {
   Headline,
   SectionTitle,
 } from "./footer.styles";
+import { createSubscriber } from "@/lib/prisma/repositories/subscriber.repository";
 
 export default function Footer() {
   return (

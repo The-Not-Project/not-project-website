@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import { SaveButton } from "./saveButton.styles";
-import { createStorySave, deleteStorySave } from "@/app/database/repositories/storySaves.repository";
+import { createStorySave, deleteStorySave } from "@/lib/prisma/repositories/storySaves.repository"
 import clsx from "clsx";
 
 export default function SaveButtonClient({ 

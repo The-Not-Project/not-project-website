@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 export function useNavbarTransparency() {
   const pathname = usePathname();
-  const isHomePage = pathname === "/";
+  const isHomePage = pathname === "/" || pathname === '/contact';
 
   useEffect(() => {
     const body = document.body;

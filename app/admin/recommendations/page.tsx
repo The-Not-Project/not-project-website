@@ -4,7 +4,7 @@ import RecommendationSearch from "../stories/components/storiesSearch/storiesSea
 import {
   addRecommendation,
   getRecommendations,
-} from "@/app/database/repositories/recommendation.repository";
+} from "@/lib/prisma/repositories/recommendation.repository";
 
 export default async function RecommendationsPage() {
 

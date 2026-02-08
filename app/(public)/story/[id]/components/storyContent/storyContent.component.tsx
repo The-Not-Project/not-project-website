@@ -1,12 +1,12 @@
-import { getStory } from "@/app/database/repositories/story.repository";
-import { auth0 } from "@/app/lib/auth0";
+import { getStory } from "@/lib/prisma/repositories/story.repository";
+import { auth0 } from "@/lib/auth0/auth0";
 import {
   CategoriesContainer,
   InfoContainer,
   NotFound,
   ThumbnailContainer,
 } from "../style";
-import { isStorySaved } from "@/app/database/repositories/storySaves.repository";
+import { isStorySaved } from "@/lib/prisma/repositories/storySaves.repository";
 import SaveButton from "../saveButton/saveButton.component";
 import { Fragment } from "react";
 import Image from "next/image";

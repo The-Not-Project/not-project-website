@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { profilePageMetadata } from "@/app/constants/metadata";
-import { auth0 } from "@/app/lib/auth0";
+import { auth0 } from "@/lib/auth0/auth0";
 import PersonalInformation from "./personal-info/personalInfo.component";
 import SavedStories from "./saved-stories/savedStories.component";
 import { ProfileContainer, ProfileWrapper } from "./styles";

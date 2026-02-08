@@ -27,6 +27,11 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/images/**",
       },
+       {
+        protocol: "https",
+        hostname: "scontent-lga3-3.cdninstagram.com",
+        pathname: "/**",
+      },
     ],
   },
   async headers() {

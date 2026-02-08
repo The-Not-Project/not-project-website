@@ -1,4 +1,4 @@
-import { getCategories } from "@/app/database/repositories/category.repository";
+import { getCategories } from "@/lib/prisma/repositories/category.repository";
 import CategoriesClient from "./categoriesClient.component";
 
 export default async function CategoriesPage() {

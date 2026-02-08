@@ -6,8 +6,8 @@ import projectMetadata from "./constants/metadata";
 import { Manrope } from "next/font/google";
 import { georgia } from "./utils/font";
 import "./globals.css";
-import { auth0 } from "./lib/auth0";
-import { createUser, getUser } from "./database/repositories/user.repository";
+import { auth0 } from "../lib/auth0/auth0";
+import { createUser, getUser } from "@/lib/prisma/repositories/user.repository";
 
 export const viewport: Viewport = {
   width: "device-width",

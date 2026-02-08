@@ -2,8 +2,8 @@ import Link from "next/link";
 import {
   getStories,
   getHiddenStories,
-} from "@/app/database/repositories/story.repository";
-import { getCategories } from "@/app/database/repositories/category.repository";
+} from "@/lib/prisma/repositories/story.repository";
+import { getCategories } from "@/lib/prisma/repositories/category.repository";
 import StoriesSearch from "./components/storiesFilteredSearch/storiesFilteredSearch.component";
 import StoriesList from "./components/storiesList/storiesList.component";
 import {

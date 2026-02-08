@@ -1,4 +1,4 @@
-import { getUser, updateUser } from "@/app/database/repositories/user.repository";
+import { getUser, updateUser } from "@/lib/prisma/repositories/user.repository";
 import { PageSection, SectionTitle } from "../shared/components/layout/Section";
 import PersonalInformationForm from "./personalInfoForm.component";
 

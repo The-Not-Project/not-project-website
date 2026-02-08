@@ -1,4 +1,4 @@
-import { getUser, updateUser } from "@/app/database/repositories/user.repository";
+import { getUser, updateUser } from "@/lib/prisma/repositories/user.repository";
 import PersonalInfoForm from "./personalInfoForm.component";
 
 export default async function PersonalInformation() {
