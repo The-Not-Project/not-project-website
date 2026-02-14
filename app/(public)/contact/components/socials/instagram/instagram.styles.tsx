@@ -90,6 +90,17 @@ export const InstagramContent = styled.div`
       grid-column: 5 / 6;
       grid-row: 3 / 4;
     }
+
+    &:hover::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff2a;
+      pointer-events: none;
+    }
   }
 
   @media (max-width: 1400px) {

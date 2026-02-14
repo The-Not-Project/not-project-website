@@ -6,6 +6,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Keeps Auth0 away from your PWA service worker and static files
   matcher: ["/((?!_next/static|_next/image|favicon.ico|sw.js|workbox-).*)"],
 };
