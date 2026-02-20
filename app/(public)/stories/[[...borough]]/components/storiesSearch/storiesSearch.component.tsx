@@ -38,10 +38,8 @@ export default function StoriesSearch({
 
     if (tempSearch) params.set("q", tempSearch);
 
-    // Append each category id as a 'cat' parameter
     tempCats.forEach((id) => params.append("cat", id));
 
-    // This updates the URL, triggering the Server Component to re-render
     router.push(`${pathname}?${params.toString()}`);
   };
 

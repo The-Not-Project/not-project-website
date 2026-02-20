@@ -5,10 +5,8 @@ import {
   StoryImageContainer,
 } from "./storyCard.styles";
 import StoryActions from "../storyActions/storyActions.component";
-import {
-  unpublishStory,
-  republishStory,
-} from "@/lib/prisma/repositories/story.repository";
+import { unpublishStoryAction, republishStoryAction } from "@/lib/internal-api/actions/story.actions";
+
 
 export default function StoryCard({ story }: { story: CompactStory }) {
 
@@ -33,8 +31,8 @@ export default function StoryCard({ story }: { story: CompactStory }) {
       <StoryActions
         id={story.id}
         isPublished={story.isPublished}
-        unpublishAction={unpublishStory}
-        republishAction={republishStory}
+        unpublishAction={unpublishStoryAction}
+        republishAction={republishStoryAction}
       />
     </StoryContainer>
   );

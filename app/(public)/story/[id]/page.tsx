@@ -1,12 +1,9 @@
-import { getStory } from "@/lib/prisma/repositories/story.repository";
 import { getStoryMetadata } from "@/app/constants/metadata";
-import {
-  StoryWrapper,
-  StoryContainer
-} from "./components/style";
+import { StoryWrapper, StoryContainer } from "./components/style";
 import { Suspense } from "react";
 import StoryContent from "./components/storyContent/storyContent.component";
 import StorySkeleton from "./components/storySkeleton/story.skeleton";
+import { getStoryAction } from "@/lib/internal-api/actions/story.actions";
 
 export async function generateMetadata({
   params,
@@ -16,7 +13,14 @@ export async function generateMetadata({
   const { id } = await params;
   if (!id) return getStoryMetadata(null);
 
-  const story = await getStory(id);
+  const { story, success } = await getStoryAction(id);
+
+  if (!success || !story) {
+    return {
+      title: "Story Not Found",
+      description: "The requested story could not be located.",
+    };
+  }
   return getStoryMetadata(story);
 }
 
@@ -30,7 +34,7 @@ export default async function Page({
   return (
     <StoryWrapper>
       <StoryContainer>
-       <Suspense fallback={<StorySkeleton />}>
+        <Suspense fallback={<StorySkeleton />}>
           <StoryContent id={id} />
         </Suspense>
       </StoryContainer>

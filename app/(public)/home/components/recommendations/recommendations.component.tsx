@@ -1,4 +1,3 @@
-import { getRecommendations } from "@/lib/prisma/repositories/recommendation.repository";
 import {
   RecommendationsContainer,
   BigTitle,
@@ -11,31 +10,37 @@ import {
 import RecommendationCard from "./recommendationCard.component";
 import { FiArrowUpRight as Arrow } from "react-icons/fi";
 import RecommendationsPlaceholder from "./recommendation.placeholder";
-
+import { getRecommendationsAction } from "@/lib/internal-api/actions/recommendations.actions";
 
 export default async function Recommendations() {
+  const { stories: recommendations, success } =
+    await getRecommendationsAction();
 
-  const recommendations = await getRecommendations()
+  if (!recommendations || !success) {
+    return null;
+  }
 
   return (
     <RecommendationsContainer>
       <BigTitle>The collection</BigTitle>
       <SecondaryTitle>Stories we think you&apos;ll like.</SecondaryTitle>
       <RecommendationsList>
-          {recommendations.length > 0 ? recommendations.map((recommendation) => (
+        {recommendations.length > 0 ? (
+          recommendations.map((recommendation) => (
             <RecommendationCard
               key={recommendation.id}
               recommendation={recommendation}
             />
-          )) : (
-            <RecommendationsPlaceholder />
-          )}
-          <StoriesPageLinkContainer>
-            <StoriesPageLink href='/stories'>
-                <Arrow />
-            </StoriesPageLink>
-            <LinkLabel>View All Stories</LinkLabel>
-          </StoriesPageLinkContainer>
+          ))
+        ) : (
+          <RecommendationsPlaceholder />
+        )}
+        <StoriesPageLinkContainer>
+          <StoriesPageLink href="/stories">
+            <Arrow />
+          </StoriesPageLink>
+          <LinkLabel>View All Stories</LinkLabel>
+        </StoriesPageLinkContainer>
       </RecommendationsList>
     </RecommendationsContainer>
   );

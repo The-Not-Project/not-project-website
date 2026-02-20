@@ -22,13 +22,13 @@ import {
   FilterOptionsContainer as BoroughsContainer,
   FilterOption as BoroughOption,
 } from "../../../stories/components/storiesFilteredSearch/storiesFilteredSearch.styles";
-import { getCategories } from "@/lib/prisma/repositories/category.repository"
+import { getCategoriesAction } from "@/lib/internal-api/actions/categories.actions";
 
 type FormProps = {
   story: Story;
-  editAction: (id: string, formData: FormData) => Promise<void>;
+  updateAction: (id: string, formData: FormData) => Promise<{ success: boolean; message: string }>;
 };
-export default function EditStoryPage({ story, editAction }: FormProps) {
+export default function EditStoryPage({ story, updateAction }: FormProps) {
   const [editorContent, setEditorContent] = useState(story.content);
   const [selectedCategories, setSelectedCategories] = useState<Category[]>(
     story.categories,
@@ -53,7 +53,7 @@ export default function EditStoryPage({ story, editAction }: FormProps) {
 
     startTransition(async () => {
       try {
-        await editAction(story.id, formData);
+        await updateAction(story.id, formData);
         router.push("/admin/stories");
       } catch (error) {
         console.error(error);
@@ -120,7 +120,7 @@ export default function EditStoryPage({ story, editAction }: FormProps) {
 
         <FormLabel>Categories</FormLabel>
         <CategoriesSearch
-          getCategories={getCategories}
+          getCategories={getCategoriesAction}
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
         />

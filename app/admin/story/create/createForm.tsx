@@ -22,12 +22,12 @@ import {
   FilterOptionsContainer as BoroughsContainer,
   FilterOption as BoroughOption,
 } from "../../stories/components/storiesFilteredSearch/storiesFilteredSearch.styles";
-import { getCategories } from "@/lib/prisma/repositories/category.repository";
+import { getCategoriesAction } from "@/lib/internal-api/actions/categories.actions";
 
 export default function CreateStoryForm({
   createAction,
 }: {
-  createAction: (formData: FormData) => Promise<void>;
+  createAction: (formData: FormData) => Promise<{ success: boolean; message: string }>;
 }) {
   const [editorContent, setEditorContent] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
@@ -108,7 +108,7 @@ export default function CreateStoryForm({
 
         <FormLabel>Categories</FormLabel>
         <CategoriesSearch
-          getCategories={getCategories}
+          getCategories={getCategoriesAction}
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
         />

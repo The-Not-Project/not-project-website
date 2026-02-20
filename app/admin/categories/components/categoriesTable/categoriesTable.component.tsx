@@ -1,29 +1,9 @@
-import {
-  Button,
-  ButtonsContainer,
-} from "../../../shared/components/button/button";
 import { Table } from "../../../shared/components/layout/Table";
+import { ButtonsContainer } from "../../../shared/components/button/button";
+import { EditButton, DeleteButton } from "./tableButtons"; 
 import { Category } from "@/app/types/types";
 
-type CategoriesTableProps = {
-  categories: Category[];
-  onEdit: (category: Category) => void;
-  onDelete: (id: string) => Promise<void>;
-};
-
-export default function CategoriesTable({
-  categories,
-  onEdit,
-  onDelete,
-}: CategoriesTableProps) {
-  const handleDelete = async (id: string) => {
-    try {
-      await onDelete(id);
-    } catch (error) {
-      console.error("Failed to delete category:", error);
-    }
-  };
-
+export default function CategoriesTable({ categories }: { categories: Category[] }) {
   return (
     <Table>
       <thead>
@@ -40,10 +20,8 @@ export default function CategoriesTable({
             <td>{category.description}</td>
             <td className="justify-right">
               <ButtonsContainer>
-                <Button onClick={() => onEdit(category)}>Edit</Button>
-                <Button onClick={() => handleDelete(category.id)}>
-                  Delete
-                </Button>
+                <EditButton id={category.id} />
+                <DeleteButton id={category.id} />
               </ButtonsContainer>
             </td>
           </tr>

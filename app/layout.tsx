@@ -7,7 +7,7 @@ import { Manrope } from "next/font/google";
 import { georgia } from "./utils/font";
 import "./globals.css";
 import { auth0 } from "../lib/auth0/auth0";
-import { createUser, getUser } from "@/lib/prisma/repositories/user.repository";
+import { createUserAction, getUserAction } from "../lib/internal-api/actions/user.actions";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -18,8 +18,6 @@ export const metadata: Metadata = projectMetadata;
 
 const manrope = Manrope({ weight: "400", subsets: ["latin"] });
 
-const initialStyles = ".loader{display:grid;place-items:center;}";
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -27,17 +25,14 @@ export default async function RootLayout({
 }>) {
   const session = await auth0.getSession();
   if (session && session.user) {
-    const existingUser = await getUser();
+    const { user: existingUser } = await getUserAction();
 
     if (!existingUser) {
-      await createUser();
+      await createUserAction();
     }
   }
   return (
     <html lang="en">
-      <head>
-        <style>{initialStyles}</style>
-      </head>
       <body className={`${manrope.className} ${georgia.variable}`}>
         <Auth0Provider>
           {children}

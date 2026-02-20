@@ -7,8 +7,8 @@ import Link from "next/link";
 type ActionProps = {
   id: string;
   isPublished: boolean;
-  unpublishAction: (id: string) => Promise<void>;
-  republishAction: (id: string) => Promise<void>;
+  unpublishAction: (id: string) => Promise<{ success: boolean; message: string }>;
+  republishAction: (id: string) => Promise<{ success: boolean; message: string }>;
 };
 
 export default function storyActions({

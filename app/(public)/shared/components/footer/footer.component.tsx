@@ -10,7 +10,7 @@ import {
   Headline,
   SectionTitle,
 } from "./footer.styles";
-import { createSubscriber } from "@/lib/prisma/repositories/subscriber.repository";
+import { createSubscriberAction } from "@/lib/internal-api/actions/user.actions";
 
 export default function Footer() {
   return (
@@ -60,7 +60,7 @@ export default function Footer() {
           </FooterSection>
           <FooterSection>
             <SectionTitle>Subscribe</SectionTitle>
-            <SubscribeForm submitAction={createSubscriber} />
+            <SubscribeForm submitAction={createSubscriberAction} />
           </FooterSection>
         </FooterContent>
 

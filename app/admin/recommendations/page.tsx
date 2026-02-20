@@ -1,14 +1,11 @@
 import { PageSection, SectionTitle } from "../shared/components/layout/Section";
 import RecommendationsList from "./components/recommendationsList/recommendationsList.component";
 import RecommendationSearch from "../stories/components/storiesSearch/storiesSearch.component";
-import {
-  addRecommendation,
-  getRecommendations,
-} from "@/lib/prisma/repositories/recommendation.repository";
+import { addRecommendationAction, getRecommendationsAction } from "@/lib/internal-api/actions/recommendations.actions";
 
 export default async function RecommendationsPage() {
 
-  const recommendations = await getRecommendations();
+  const {stories: recommendations} = await getRecommendationsAction();
 
   return (
     <PageSection>
@@ -18,7 +15,7 @@ export default async function RecommendationsPage() {
       />
       {recommendations.length < 4 && (
         <RecommendationSearch
-          onAddAction={addRecommendation}
+          onAddAction={addRecommendationAction}
           skippedStoryIds={recommendations.map(rec => rec.id)}
         />
       )}

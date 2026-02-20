@@ -1,11 +1,14 @@
-import { getSavedStories } from "@/lib/prisma/repositories/storySaves.repository";
+import { getSavedStoriesAction } from "@/lib/internal-api/actions/story.actions";
 import { PageSection, SectionDescription } from "../styles";
 import { StoriesContainer } from "./savedStories.styles";
 import SavedStory from "./savedStory.component";
 
 export default async function SavedStories() {
+  const { stories: savedStories, success } = await getSavedStoriesAction();
 
-  const savedStories = await getSavedStories()
+  if (!success) {
+    return null;
+  }
 
   return (
     <PageSection>

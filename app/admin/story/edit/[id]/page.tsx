@@ -1,8 +1,5 @@
-import {
-  editStory,
-  getStory,
-} from "@/lib/prisma/repositories/story.repository";
 import EditStoryForm from "./editForm";
+import { getStoryAction, updateStoryAction } from "@/lib/internal-api/actions/story.actions";
 
 export default async function Page({
   params,
@@ -10,9 +7,9 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const story = await getStory(id);
+  const { story } = await getStoryAction(id);
 
-  if (!story) return <div>story not found.</div>
+  if (!story) return <div>story not found.</div>;
 
-  return <EditStoryForm story={story} editAction={editStory} />;
+  return <EditStoryForm story={story} updateAction={updateStoryAction} />;
 }

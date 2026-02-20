@@ -18,7 +18,7 @@ type FormProps = {
     firstName: string,
     lastName: string
   };
-  updateAction: (formData: FormData) => Promise<void>;
+  updateAction: (formData: FormData) => Promise<{ success: boolean; message: string; }>;
 }
 
 export default function PersonalInfoForm({ userInfo, updateAction }: FormProps) {

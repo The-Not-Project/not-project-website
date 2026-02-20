@@ -116,7 +116,7 @@ export const Skeleton = styled.div`
   }
 `;
 
-export const NotFound = styled.h1`
+export const ErrorMessage = styled.h1`
   text-align: center;
   height: 100vh;
   display: grid;

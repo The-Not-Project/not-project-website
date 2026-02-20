@@ -1,4 +1,4 @@
-import { getStories } from "@/lib/prisma/repositories/story.repository";
+import { getStoriesAction } from "@/lib/internal-api/actions/story.actions";
 
 export async function GET() {
   const baseUrl = "https://www.thenotproject.com";
@@ -37,7 +37,7 @@ export async function GET() {
   );
 
   // Dynamic story routes
-  const stories = await getStories();
+  const { stories } = await getStoriesAction();
   const storyUrls = stories.map(
     (story) => `
   <url>

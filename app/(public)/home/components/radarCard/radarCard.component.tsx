@@ -1,10 +1,10 @@
-import { getRadarStory } from "@/lib/prisma/repositories/radar.repository";
+import { getRadarStoryAction } from "@/lib/internal-api/actions/radar.actions";
 import RadarCardClient from "./components/radarCardClient.component"
 
 export default async function RadarCard() {
-  const radarStory = await getRadarStory();
+  const { story, success } = await getRadarStoryAction();
 
-  if (!radarStory) return null;
+  if (!story || !success) return null;
 
-  return <RadarCardClient radarStory={radarStory} />;
+  return <RadarCardClient radarStory={story} />;
 }

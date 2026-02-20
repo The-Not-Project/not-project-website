@@ -19,7 +19,7 @@ export default function RecommendationCard({
       month: "long",
       day: "numeric",
     };
-    return date.toLocaleDateString("en-US", options);
+    return new Date(date).toLocaleDateString("en-US", options);
   }
 
   const formattedDate = useMemo(

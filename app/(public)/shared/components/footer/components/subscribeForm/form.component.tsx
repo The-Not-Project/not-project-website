@@ -1,26 +1,16 @@
-'use client'
+"use client";
 
 import Swal from "sweetalert2";
 import { SignUpForm, SignUpSection } from "./form.styles";
 
 type FormProps = {
   submitAction: (email: string, phone?: string) => Promise<string>;
-}
+};
 
-export default function Form({submitAction}: FormProps) {
-
-  type SignUpFormFields = {
-    email: { value: string };
-    phone: { value: string };
-  };
-
-  async function handleSignUp(
-    event: React.FormEvent<HTMLFormElement>
-  ): Promise<void> {
-    event.preventDefault();
-    const form = event.target as HTMLFormElement & SignUpFormFields;
-    const email: string = form.email.value;
-    const phone: string = form.phone.value;
+export default function Form({ submitAction }: FormProps) {
+  async function handleSignUp(formData: FormData): Promise<void> {
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
 
     if (!email) {
       Swal.fire({
@@ -63,25 +53,22 @@ export default function Form({submitAction}: FormProps) {
       },
       buttonsStyling: false,
     });
-
-    form.reset();
   }
 
   return (
     <SignUpSection>
-      <SignUpForm onSubmit={(e) => handleSignUp(e)}>
+      <SignUpForm action={handleSignUp}>
         <p>Be the first to know about our new stories.</p>
-     
-          <input type="email" name="email" placeholder="example@domain.com" required />
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Phone number (optional)"
-          />
-          <button type="submit">Sign Up</button>
-      
+
+        <input
+          type="email"
+          name="email"
+          placeholder="example@domain.com"
+          required
+        />
+        <input type="tel" name="phone" placeholder="Phone number (optional)" />
+        <button type="submit">Sign Up</button>
       </SignUpForm>
-      
     </SignUpSection>
   );
 }

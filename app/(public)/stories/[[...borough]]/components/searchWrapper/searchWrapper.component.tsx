@@ -1,7 +1,10 @@
-import { getActiveCategories } from "@/lib/prisma/repositories/category.repository";
+import { getActiveCategoriesAction } from "@/lib/internal-api/actions/categories.actions";
 import StoriesSearch from "../storiesSearch/storiesSearch.component";
+import { Filters } from "@/app/types/types";
 
-export default async function SearchWrapper({ filters }: { filters: any }) {
-  const categories = await getActiveCategories();
-  return <StoriesSearch initialFilters={filters} availableCategories={categories} />;
+export default async function SearchWrapper({ filters }: { filters: Filters }) {
+  const { categories } = await getActiveCategoriesAction();
+  return (
+    <StoriesSearch initialFilters={filters} availableCategories={categories} />
+  );
 }

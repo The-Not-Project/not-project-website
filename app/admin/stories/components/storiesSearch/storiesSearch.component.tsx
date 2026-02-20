@@ -9,7 +9,7 @@ import {
 } from "../../../recommendations/components/recommendationsList/recommendationsList.styles";
 import { FaPlus as PlusSign } from "react-icons/fa6";
 import { useCallback, useState, useTransition } from "react";
-import { getStories } from "@/lib/prisma/repositories/story.repository";
+import { getStoriesAction } from "@/lib/internal-api/actions/story.actions";
 
 const defaultFilters = {
   search: "",
@@ -19,7 +19,7 @@ const defaultFilters = {
 
 type SearchAndResultsProps = {
   placeholder?: string;
-  onAddAction: (id: string) => Promise<void>;
+  onAddAction: (id: string) => Promise<{ success: boolean; message?: string }>;
   skippedStoryIds: string[];
 };
 
@@ -49,7 +49,7 @@ export default function StoriesSearch({
         return;
       }
 
-      const data = await getStories({
+      const {stories: data} = await getStoriesAction({
         ...filters,
         search: searchValue,
       });

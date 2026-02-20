@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 type RecommendationCardProps = {
   recommendation: CompactStory;
-  onRemoveAction: (id: string) => Promise<void>;
+  onRemoveAction: (id: string) => Promise<{ success: boolean; message?: string }>;
 };
 
 export default function RecommendationCard({

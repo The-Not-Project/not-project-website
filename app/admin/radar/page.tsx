@@ -1,11 +1,20 @@
+import { getRadarStoryAction, updateRadarStoryAction } from "@/lib/internal-api/actions/radar.actions";
 import { PageSection, SectionTitle } from "../shared/components/layout/Section";
 import StoriesSearch from "../stories/components/storiesSearch/storiesSearch.component";
 import RadarStory from "./components/radarStory/radarStory.component";
-import { getRadarStory, updateRadarStory } from "@/lib/prisma/repositories/radar.repository";
 
 export default async function Page() {
 
-  const radarStory = await getRadarStory()
+  const {story: radarStory} = await getRadarStoryAction()
+
+  if (!radarStory) {
+    return (
+      <PageSection>
+        <SectionTitle>Radar Story</SectionTitle>
+        <p>Could not load radar story.</p>
+      </PageSection>
+    );
+  }
 
 
   return (
@@ -16,7 +25,7 @@ export default async function Page() {
           />
           <StoriesSearch
             placeholder="Replace radar story"
-            onAddAction={updateRadarStory}
+            onAddAction={updateRadarStoryAction}
             skippedStoryIds={[radarStory.id]}
           />
     </PageSection>

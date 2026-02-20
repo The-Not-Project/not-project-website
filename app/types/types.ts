@@ -23,6 +23,7 @@ export type Story = {
   updatedAt?: Date;
   thumbnail: string;
   isPublished: boolean;
+  isSaved: boolean;
 };
 
 export type CompactStory = Omit<Story, 'content'>

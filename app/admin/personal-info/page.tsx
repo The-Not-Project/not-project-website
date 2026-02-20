@@ -1,9 +1,9 @@
-import { getUser, updateUser } from "@/lib/prisma/repositories/user.repository";
 import { PageSection, SectionTitle } from "../shared/components/layout/Section";
 import PersonalInformationForm from "./personalInfoForm.component";
+import { getUserAction, updateUserAction } from "@/lib/internal-api/actions/user.actions";
 
 export default async function PersonalInformation() {
-  const currentUser = await getUser();
+  const {user: currentUser} = await getUserAction();
 
   if (!currentUser) return <div>User not found</div>;
 
@@ -12,7 +12,7 @@ export default async function PersonalInformation() {
   return (
     <PageSection>
       <SectionTitle>Basic Information</SectionTitle>
-      <PersonalInformationForm userInfo={userInfo} updateAction={updateUser}/>
+      <PersonalInformationForm userInfo={userInfo} updateAction={updateUserAction}/>
     </PageSection>
   );
 }

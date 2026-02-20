@@ -4,8 +4,10 @@ import styled from 'styled-components';
 
 export const RadarCardContainer = styled.section`
   display: flex;
-  margin: 40px;
+  margin: 40px auto;
   height: 450px;
+  width: auto;
+  aspect-ratio: 2 / 1;
   overflow: hidden;
 `;
 

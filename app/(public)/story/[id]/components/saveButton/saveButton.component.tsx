@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import { SaveButton } from "./saveButton.styles";
-import { createStorySave, deleteStorySave } from "@/lib/prisma/repositories/storySaves.repository"
 import clsx from "clsx";
+import { createStorySaveAction, deleteStorySaveAction } from "@/lib/internal-api/actions/story.actions";
 
 export default function SaveButtonClient({ 
   storyId, initialSaved, userId 
@@ -26,9 +26,9 @@ export default function SaveButtonClient({
     if (newStatus) {
       setClicked(true);
       setTimeout(() => setClicked(false), 2000);
-      await createStorySave(storyId, userId);
+      await createStorySaveAction(storyId, userId);
     } else {
-      await deleteStorySave(storyId, userId);
+      await deleteStorySaveAction(storyId, userId);
     }
   };
 
