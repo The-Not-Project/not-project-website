@@ -11,7 +11,7 @@ export const StoryContainer = styled.div`
 
   @media (max-width: 850px) {
     width: 100%;
-    padding: 10px 20px 20px;
+    padding: 80px 20px;
   }
 
   .title {
@@ -19,7 +19,6 @@ export const StoryContainer = styled.div`
     font-size: 4rem;
     font-family: var(--font-georgia), serif;
     @media (max-width: 850px) {
-      margin-top: 70px;
       font-size: 2.4rem;
     }
   }
