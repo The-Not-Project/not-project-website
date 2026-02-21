@@ -18,7 +18,6 @@ export const NavBarContainer = styled.nav`
     background 0.3s,
     translate 0.18s ease-in;
   background: none;
-  /* backdrop-filter: blur(10px); */
 
   @media (max-width: 850px) {
     padding-inline: 25px;
@@ -172,7 +171,7 @@ export const MobileMenu = styled.aside`
   display: flex;
   flex-direction: column;
   gap: 40px;
-  background: url("/media/boroughBackdrops/nyc.jpg") no-repeat center
+  background: url("/media/boroughBackdrops/nyc.webp") no-repeat center
     center/cover;
   backdrop-filter: blur(15px);
   padding: 150px 20px 50px 30px;

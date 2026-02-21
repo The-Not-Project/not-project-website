@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const RecommendationsContainer = styled.section`
   width: 90%;
@@ -51,7 +51,7 @@ export const RecommendationsList = styled.div`
   @media (max-width: 850px) {
     gap: 20px;
     overflow-x: scroll;
-    /* scroll-snap-type: x mandatory; */
+    scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     justify-content: flex-start;
@@ -61,19 +61,18 @@ export const RecommendationsList = styled.div`
 
 export const RecommendationCardContainer = styled.div`
   min-width: 350px;
-  padding: 50px 25px;
+  padding: 50px 20px;
   display: flex;
   flex-flow: column;
   border-radius: 8px;
   overflow: hidden;
   position: relative;
-  aspect-ratio: 2/3;
+  aspect-ratio: 2 / 3;
 
   @media (max-width: 850px) {
     scroll-snap-align: center;
     flex: 0 0 100%;
-    padding: 25px 25px;
-    width: 90%;
+    padding: 30px 15px;
     min-width: unset;
   }
 
@@ -106,8 +105,7 @@ export const RecommendationCardContainer = styled.div`
 
       .category {
         color: #d4af37;
-        font-size: 0.7rem;
-        padding: 2px 7px;
+        font-size: 0.8rem;
         border-radius: 50px;
       }
 
@@ -116,7 +114,7 @@ export const RecommendationCardContainer = styled.div`
         color: #e7e0d6;
         border: #e7e0d6 1px solid;
         margin-top: auto;
-        font-size: 0.9em;
+        font-size: 0.9rem;
         text-decoration: none;
         padding: 5px 10px;
         border-radius: 20px;
@@ -209,6 +207,11 @@ export const StoriesPageLinkContainer = styled.div`
   align-items: center;
   gap: 20px;
   padding: 20px;
+
+  @media (max-width: 850px) {
+    scroll-snap-align: center;
+    flex: 0 0 75%;
+  }
 `;
 
 export const StoriesPageLink = styled(Link)`
