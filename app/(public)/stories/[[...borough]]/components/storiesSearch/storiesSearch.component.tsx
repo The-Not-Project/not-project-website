@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
-import { useState } from "react";
 import { Category, Filters } from "@/app/types/types";
 import {
   ApplyFiltersButton,
@@ -29,22 +28,20 @@ export default function StoriesSearch({
   const router = useRouter();
   const pathname = usePathname();
 
-  const [tempSearch, setTempSearch] = useState<string>(initialFilters.search);
-  const [tempCats, setTempCats] = useState<string[]>(initialFilters.categories);
-
-  const applyFilters = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleAction = (formData: FormData) => {
     const params = new URLSearchParams();
+    
+    const search = formData.get("q") as string;
+    const cats = formData.getAll("cat") as string[]; 
 
-    if (tempSearch) params.set("q", tempSearch);
+    if (search) params.set("q", search);
+    cats.forEach((id) => params.append("cat", id));
 
-    tempCats.forEach((id) => params.append("cat", id));
-
-    router.push(`${pathname}?${params.toString()}`);
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   return (
-    <form onSubmit={applyFilters}>
+    <form action={handleAction}>
       <SearchTitle>
         <FilterIcon />
         Filter Stories
@@ -54,9 +51,9 @@ export default function StoriesSearch({
           <SearchIcon />
           <SearchInput
             id="search"
+            name="q" 
             placeholder="Search..."
-            value={tempSearch}
-            onChange={(e) => setTempSearch(e.target.value)}
+            defaultValue={initialFilters.search}
           />
         </SearchContainer>
         <hr />
@@ -67,15 +64,10 @@ export default function StoriesSearch({
               <div key={category.id} className="checkbox-wrapper-47">
                 <FilterCheckbox
                   type="checkbox"
-                  name="cb"
+                  name="cat"
                   id={`category-${category.id}`}
-                  checked={tempCats.includes(category.id)}
-                  onChange={() => {
-                    const next = tempCats.includes(category.id)
-                      ? tempCats.filter((id) => id !== category.id)
-                      : [...tempCats, category.id];
-                    setTempCats(next);
-                  }}
+                  value={category.id}
+                  defaultChecked={initialFilters.categories.includes(category.id)}
                 />
                 <FilterLabel htmlFor={`category-${category.id}`}>
                   {category.name}
@@ -84,7 +76,7 @@ export default function StoriesSearch({
             ))}
           </FilterOptionsContainer>
         </div>
-        <ApplyFiltersButton>
+        <ApplyFiltersButton type="submit">
           <span>Look Up</span> <SearchIcon />
         </ApplyFiltersButton>
       </StoriesSearchContainer>

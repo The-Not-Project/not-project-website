@@ -1,6 +1,7 @@
 "use server";
 
 import { internalApiFetch } from "@/lib/internal-api";
+import { updateTag } from "next/cache";
 
 export async function getCategoriesAction() {
   const { data, error, status } = await internalApiFetch<any[]>("/categories", {
@@ -30,7 +31,11 @@ export async function getActiveCategoriesAction() {
   const { data, error, status } = await internalApiFetch<any[]>(
     "/categories/active",
     {
-      method: "GET"
+      method: "GET",
+      next: {
+        revalidate: 300,
+        tags: ["categories"],
+      },
     },
   );
 
@@ -50,6 +55,7 @@ export async function getActiveCategoriesAction() {
 }
 
 export async function createCategoryAction(formData: FormData) {
+  updateTag("categories");
   const name = formData.get("name");
   const description = formData.get("description");
 
@@ -85,6 +91,7 @@ export async function createCategoryAction(formData: FormData) {
 }
 
 export async function editCategoryAction(id: string, formData: FormData) {
+  updateTag("categories");
   const name = formData.get("name");
   const description = formData.get("description");
 
@@ -127,6 +134,7 @@ export async function editCategoryAction(id: string, formData: FormData) {
 }
 
 export async function deleteCategoryAction(id: string) {
+  updateTag("categories");
   try {
     const { error, status } = await internalApiFetch(`/categories/${id}`, {
       method: "DELETE",

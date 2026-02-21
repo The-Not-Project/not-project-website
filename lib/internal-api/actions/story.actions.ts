@@ -9,6 +9,7 @@ import {
 } from "@/lib/internal-api/helpers/story.helpers";
 import { redirect } from "next/navigation";
 import { getUserAction } from "./user.actions";
+import { updateTag } from "next/cache";
 
 export async function getStoriesAction(filters?: Filters) {
   const { data, error } = await internalApiFetch<CompactStory[]>("/stories", {
@@ -19,7 +20,7 @@ export async function getStoriesAction(filters?: Filters) {
       categories: filters?.categories,
     },
     next: {
-      revalidate: 60,
+      revalidate: 300,
       tags: ["stories"],
     },
   });
@@ -44,8 +45,8 @@ export async function getHiddenStoriesAction() {
     {
       method: "GET",
       next: {
-        revalidate: 60,
-        tags: ["hidden-stories"],
+        revalidate: 300,
+        tags: ["stories"],
       },
     },
   );
@@ -74,7 +75,7 @@ export async function getStoryAction(id: string) {
       method: "GET",
       params: { userId },
       next: {
-        revalidate: 60,
+        revalidate: 300,
         tags: [`story-${id}`],
       },
     },
@@ -146,6 +147,8 @@ export const getSavedStoriesAction = async () => {
 export async function createStoryAction(formData: FormData) {
   let userRecord;
 
+  updateTag("stories");
+
   try {
     const { user, success } = await getUserAction();
 
@@ -157,11 +160,7 @@ export async function createStoryAction(formData: FormData) {
       };
     }
 
-    if (!user.firstName || !user.lastName) {
-      userRecord = user; // Store for redirect logic below
-    } else {
-      userRecord = user;
-    }
+    userRecord = user;
   } catch (err) {
     return {
       success: false,
@@ -201,7 +200,6 @@ export async function createStoryAction(formData: FormData) {
       return { success: false, message: error, status };
     }
 
-
     return {
       success: true,
       message: "Story created successfully!",
@@ -217,13 +215,15 @@ export async function createStoryAction(formData: FormData) {
 }
 
 export async function updateStoryAction(id: string, formData: FormData) {
+  updateTag("stories");
+  updateTag(`story-${id}`);
+
   try {
     const { title, content, borough, summary, categoryIds, thumbnail } =
       getStoryData(formData);
 
     let thumbnailUrl: string | undefined;
 
-    // Only process the thumbnail if a valid new file is present
     if (
       thumbnail &&
       thumbnail instanceof File &&
@@ -265,6 +265,8 @@ export async function updateStoryAction(id: string, formData: FormData) {
 }
 
 export async function unpublishStoryAction(id: string) {
+  updateTag("stories");
+
   try {
     const { error, status } = await internalApiFetch(
       `/stories/unpublish/${id}`,
@@ -296,6 +298,8 @@ export async function unpublishStoryAction(id: string) {
 }
 
 export async function republishStoryAction(id: string) {
+  updateTag("stories");
+
   try {
     const { error, status } = await internalApiFetch(
       `/stories/republish/${id}`,
@@ -327,6 +331,7 @@ export async function republishStoryAction(id: string) {
 }
 
 export async function createStorySaveAction(storyId: string, userId: string) {
+  updateTag(`story-${storyId}`);
   try {
     const { error, status } = await internalApiFetch("/stories/save", {
       method: "POST",
@@ -344,7 +349,6 @@ export async function createStorySaveAction(storyId: string, userId: string) {
       };
     }
 
-
     return {
       success: true,
       message: "Story saved to your collection!",
@@ -360,6 +364,7 @@ export async function createStorySaveAction(storyId: string, userId: string) {
 }
 
 export async function deleteStorySaveAction(storyId: string, userId: string) {
+  updateTag(`story-${storyId}`);
   try {
     const { error, status } = await internalApiFetch("/stories/save", {
       method: "DELETE",
@@ -376,7 +381,6 @@ export async function deleteStorySaveAction(storyId: string, userId: string) {
         status,
       };
     }
-
 
     return {
       success: true,

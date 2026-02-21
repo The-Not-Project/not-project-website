@@ -113,9 +113,9 @@ export async function compressImage(
  */
 function getApiUrl(path: string) {
   if (typeof window === "undefined") {
-    const base = process.env.PUBLIC_API_BASE_URL;
+    const base = `${process.env.APP_BASE_URL}/api`;
     if (!base) {
-      throw new Error("PUBLIC_API_BASE_URL is not set for server-side uploads");
+      throw new Error("APP_BASE_URL is not set for server-side uploads");
     }
     return `${base.replace(/\/$/, "")}${path}`;
   } else {

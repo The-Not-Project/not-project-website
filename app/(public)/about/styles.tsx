@@ -14,6 +14,21 @@ export const HeaderContainer = styled.div`
   max-height: auto;
   width: 100%;
   color: white;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: radial-gradient(
+      ellipse 70% 40% at 50% 0%,
+      rgba(13, 13, 13, 0.8) 5%,
+      rgba(13, 13, 13, 0.6) 20%,
+      transparent 70%
+    );
+  }
 `;
 
 export const HeaderImage = styled(Image)`

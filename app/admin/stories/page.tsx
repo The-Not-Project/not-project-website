@@ -47,12 +47,12 @@ export default async function StoriesPage({ searchParams }: PageProps) {
 
       <StoriesSection>
         <StoriesSearch categories={categories} initialFilters={filters} />
-        <>
+        <div>
           <StoriesList stories={stories} />
           <Button className="cornered">
             <Link href="/admin/story/create">Add</Link>
           </Button>
-        </>
+        </div>
       </StoriesSection>
     </PageSection>
   );

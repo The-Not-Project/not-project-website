@@ -2,11 +2,15 @@
 
 import { internalApiFetch } from "@/lib/internal-api";
 import { CompactStory } from "../../../app/types/types";
+import { updateTag } from "next/cache";
 
 export async function getRadarStoryAction() {
   const { data, error, status } = await internalApiFetch<CompactStory>("/stories/radar", {
     method: "GET",
-    next: { revalidate: 0 },
+    next: { 
+      revalidate: 3600,
+      tags: ["radar"],
+    },
   });
 
   if (error || !data) {
@@ -25,6 +29,7 @@ export async function getRadarStoryAction() {
 }
 
 export async function updateRadarStoryAction(id: string) {
+  updateTag("radar");
   try {
     const { error, status } = await internalApiFetch(`/stories/radar/${id}`, {
       method: "PATCH",

@@ -4,8 +4,22 @@ export const HeaderContainer = styled.div`
   position: relative;
   aspect-ratio: 21 / 9;
   height: auto;
-  position: grid;
-  place-items: center;
+
+  &:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse 100% 100% at 100% 0%, 
+    rgba(13, 13, 13, 0.8) 5%, 
+    rgba(13, 13, 13, 0.6) 25%, 
+    transparent 60%
+  );
+  z-index: 1;
+}
 
   @media (max-width: 850px) {
     aspect-ratio: 3 / 4;

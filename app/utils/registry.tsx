@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { usePathname, useServerInsertedHTML } from 'next/navigation';
 import { StyleSheetManager, ServerStyleSheet } from 'styled-components';
 
@@ -15,6 +15,7 @@ export default function StyledComponentsRegistry({ children }: { children: React
   // Initialize the ServerStyleSheet once to collect styles during the render lifecycle.
   const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
   const pathname = usePathname();
+  const savedPathnameRef = useRef(pathname);
 
   /**
    * Server-Side Style Injection
@@ -33,9 +34,12 @@ export default function StyledComponentsRegistry({ children }: { children: React
    * * Triggers an immediate (instant) scroll to the top of the page whenever 
    * the URL pathname changes, ensuring a fresh view for the user.
    */
-  useEffect(() => {
+useEffect(() => {
+  if (savedPathnameRef.current !== pathname) {
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [pathname]);
+    savedPathnameRef.current = pathname;
+  }
+}, [pathname]);
 
   // On the client-side (browser), we simply return the children 
   // as the registry logic is only required during the initial server render.

@@ -214,7 +214,6 @@ export function SimpleEditor({
       Image,
       Typography,
       Superscript,
-
       Selection,
       ImageUploadNode.configure({
         accept: "image/*",

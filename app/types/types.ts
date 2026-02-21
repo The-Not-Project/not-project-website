@@ -1,10 +1,3 @@
-export type User = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-};
-
 export type Category = {
   id: string;
   name: string;
@@ -38,11 +31,4 @@ export type Filters = {
   search: string;
   boroughs: string[];
   categories: string[];
-};
-
-export type StorySave = {
-  id: string;
-  storyId: string;
-  userId: string;
-  createdAt: Date;
 };

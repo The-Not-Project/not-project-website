@@ -4,7 +4,11 @@ import { Filters } from "@/app/types/types";
 
 export default async function SearchWrapper({ filters }: { filters: Filters }) {
   const { categories } = await getActiveCategoriesAction();
+  
   return (
-    <StoriesSearch initialFilters={filters} availableCategories={categories} />
+    <StoriesSearch 
+      initialFilters={filters} 
+      availableCategories={categories} 
+    />
   );
 }

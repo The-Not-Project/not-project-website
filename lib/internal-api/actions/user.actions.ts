@@ -2,6 +2,7 @@
 
 import { auth0 } from "@/lib/auth0/auth0";
 import { internalApiFetch } from "@/lib/internal-api";
+import { updateTag } from "next/cache";
 
 export async function getUserAction() {
 
@@ -22,7 +23,11 @@ export async function getUserAction() {
     const { data, error, status } = await internalApiFetch<any>(
       `/user/${userId}`,
       {
-        method: "GET"
+        method: "GET",
+        next: {
+          revalidate: 3600,
+          tags: ["user"]
+        }
       },
     );
 
@@ -51,6 +56,7 @@ export async function getUserAction() {
 }
 
 export async function createUserAction() {
+  updateTag("user")
   try {
     const session = await auth0.getSession();
 
@@ -83,6 +89,7 @@ export async function createUserAction() {
 }
 
 export async function updateUserAction(formData: FormData) {
+  updateTag("user");
   try {
     const session = await auth0.getSession();
 
