@@ -10,6 +10,7 @@ import { Fragment } from "react";
 import Image from "next/image";
 import { StoryReader } from "../storyReader/storyReader";
 import { getStoryAction } from "@/lib/internal-api/actions/story.actions";
+import Link from "next/link";
 
 export default async function StoryContent({ id }: { id: string }) {
   const session = await auth0.getSession();
@@ -25,11 +26,7 @@ export default async function StoryContent({ id }: { id: string }) {
         </ErrorMessage>
       );
     } else {
-      return (
-        <ErrorMessage>
-          {message}
-        </ErrorMessage>
-      );
+      return <ErrorMessage>{message}</ErrorMessage>;
     }
   }
 
@@ -39,7 +36,7 @@ export default async function StoryContent({ id }: { id: string }) {
     day: "numeric",
     year: "numeric",
   });
-    
+
   return (
     <>
       <CategoriesContainer>
@@ -50,7 +47,7 @@ export default async function StoryContent({ id }: { id: string }) {
         />
         {story.categories.map((category, index) => (
           <Fragment key={category.id}>
-            <span>{category.name}</span>
+            <Link href={`/stories?cat=${category.id}`}>{category.name}</Link>
             {index < story.categories.length - 1 && (
               <span className="divider">|</span>
             )}

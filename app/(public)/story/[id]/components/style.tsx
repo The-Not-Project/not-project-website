@@ -81,8 +81,8 @@ export const CategoriesContainer = styled.div`
     color: gray;
   }
 
-  span {
-    text-decoration: underline;
+  a {
+   color: inherit !important;
   }
 `;
 
