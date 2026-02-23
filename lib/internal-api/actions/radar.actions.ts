@@ -30,6 +30,7 @@ export async function getRadarStoryAction() {
 
 export async function updateRadarStoryAction(id: string) {
   updateTag("radar");
+  updateTag("stories");
   try {
     const { error, status } = await internalApiFetch(`/stories/radar/${id}`, {
       method: "PATCH",

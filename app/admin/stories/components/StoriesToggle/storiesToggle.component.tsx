@@ -28,7 +28,7 @@ export default function StoriesToggle({ showHidden }: { showHidden: boolean }) {
         height={20}
         width={40}
       />
-      <span>Trash</span>
+      <span>Hidden</span>
     </ToggleContainer>
   );
 }

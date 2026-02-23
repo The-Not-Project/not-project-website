@@ -17,6 +17,7 @@ export type Story = {
   thumbnail: string;
   isPublished: boolean;
   isSaved: boolean;
+  isRadar: boolean;
 };
 
 export type CompactStory = Omit<Story, 'content'>

@@ -24,13 +24,17 @@ export default function StoryCard({ story }: { story: CompactStory }) {
         height={100}
       />
       <StoryContentContainer>
-        <h2>{story.title}</h2>
+        <h2>
+          {story.title}
+          {story.isRadar && <span>Radar</span>}
+        </h2>
         <p>By {`${story.author.firstName} ${story.author.lastName}`}</p>
         <p>Created At {date}</p>
       </StoryContentContainer>
       <StoryActions
         id={story.id}
         isPublished={story.isPublished}
+        isRadar={story.isRadar}
         unpublishAction={unpublishStoryAction}
         republishAction={republishStoryAction}
       />

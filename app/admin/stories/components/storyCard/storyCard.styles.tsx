@@ -17,6 +17,20 @@ export const StoryImageContainer = styled(Image)`
 export const StoryContentContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  h2 {
+    display: flex;
+    align-items: center;
+  }
+
+  span {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: gray;
+    margin-left: 10px;
+    letter-spacing: 1px;
+
+  }
 `;
 
 export const ActionsContainer = styled.div`

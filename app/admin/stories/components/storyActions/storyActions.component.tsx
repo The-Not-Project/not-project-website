@@ -7,6 +7,7 @@ import Link from "next/link";
 type ActionProps = {
   id: string;
   isPublished: boolean;
+  isRadar: boolean;
   unpublishAction: (id: string) => Promise<{ success: boolean; message: string }>;
   republishAction: (id: string) => Promise<{ success: boolean; message: string }>;
 };
@@ -14,6 +15,7 @@ type ActionProps = {
 export default function storyActions({
   id,
   isPublished,
+  isRadar,
   unpublishAction,
   republishAction,
 }: ActionProps) {
@@ -39,7 +41,9 @@ export default function storyActions({
           <Button className="inverted">
             <Link href={`/admin/story/edit/${id}`}>Edit</Link>
           </Button>
-          <Button onClick={handleUnpublish}>Hide</Button>
+          {!isRadar && (
+            <Button onClick={handleUnpublish}>Hide</Button>
+          )}
         </>
       ) : (
         <>
