@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import { Category } from "@/app/types/types";
-import { SimpleEditor } from "@/app/tiptap/components/tiptap-templates/simple/simple-editor";
+import { SimpleEditor, SimpleEditorHandle } from "@/app/tiptap/components/tiptap-templates/simple/simple-editor";
 import {
   FormInput,
   FormLabel,
@@ -29,6 +29,7 @@ export default function CreateStoryForm({
 }: {
   createAction: (formData: FormData) => Promise<{ success: boolean; message: string }>;
 }) {
+  const editorRef = useRef<SimpleEditorHandle>(null);
   const [editorContent, setEditorContent] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
   const [selectedBorough, setSelectedBorough] = useState<string>("new york");
@@ -48,6 +49,13 @@ export default function CreateStoryForm({
     selectedCategories.forEach((category) => {
       formData.append("categories", category.id);
     });
+
+    const editorFiles = editorRef.current?.getPendingFiles()
+    if (editorFiles) {
+      editorFiles.forEach((file, blobUrl) => {
+        formData.append("editor_images", file, blobUrl)
+      })
+    }
 
     startTransition(async () => {
       try {
@@ -79,7 +87,7 @@ export default function CreateStoryForm({
 
         <FormLabel htmlFor="content">Content</FormLabel>
         <EditorContainer>
-          <SimpleEditor value={editorContent} onChange={setEditorContent} />
+          <SimpleEditor ref={editorRef} value={editorContent} onChange={setEditorContent} />
         </EditorContainer>
         <Separator />
 

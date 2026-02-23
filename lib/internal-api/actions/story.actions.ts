@@ -3,10 +3,6 @@
 import { internalApiFetch } from "@/lib/internal-api";
 import { CompactStory, Filters, Story } from "../../../app/types/types";
 import { auth0 } from "@/lib/auth0/auth0";
-import {
-  getStoryData,
-  processThumbnail,
-} from "@/lib/internal-api/helpers/story.helpers";
 import { redirect } from "next/navigation";
 import { getUserAction } from "./user.actions";
 import { updateTag } from "next/cache";
@@ -145,65 +141,28 @@ export const getSavedStoriesAction = async () => {
 };
 
 export async function createStoryAction(formData: FormData) {
-  let userRecord;
-
   updateTag("stories");
 
-  try {
-    const { user, success } = await getUserAction();
+  const { user, success } = await getUserAction();
 
-    if (!success || !user) {
-      return {
-        success: false,
-        message: "User not found or authenticated",
-        status: 401,
-      };
-    }
-
-    userRecord = user;
-  } catch (err) {
-    return {
-      success: false,
-      message: "Authentication check failed",
-      status: 500,
-    };
+  if (!success || !user) {
+    return { success: false, message: "Unauthorized", status: 401 };
   }
 
-  if (!userRecord?.firstName || !userRecord?.lastName) {
+  if (!user?.firstName || !user?.lastName) {
     redirect("/admin/personal-info");
   }
 
   try {
-    const { title, content, borough, summary, categoryIds, thumbnail } =
-      getStoryData(formData);
-
-    if (!thumbnail) {
-      return { success: false, message: "Thumbnail is required" };
-    }
-
-    const thumbnailUrl = await processThumbnail(thumbnail as File);
-
-    const { error, status } = await internalApiFetch("/stories", {
+    formData.append("authorId", user.id);    
+    const {error, status} = await internalApiFetch("/stories", {
       method: "POST",
-      body: {
-        title,
-        content,
-        borough,
-        summary,
-        thumbnailUrl,
-        categoryIds,
-        authorId: userRecord.id,
-      },
+      body: formData,
     });
 
-    if (error) {
-      return { success: false, message: error, status };
-    }
+    if (error) return { success: false, message: error, status };
 
-    return {
-      success: true,
-      message: "Story created successfully!",
-    };
+    return { success: true, message: "Story created successfully!" };
   } catch (err: any) {
     console.error("CREATE_STORY_ERROR:", err);
     return {
@@ -218,31 +177,13 @@ export async function updateStoryAction(id: string, formData: FormData) {
   updateTag("stories");
   updateTag(`story-${id}`);
 
+  console.log(formData);
+  
+
   try {
-    const { title, content, borough, summary, categoryIds, thumbnail } =
-      getStoryData(formData);
-
-    let thumbnailUrl: string | undefined;
-
-    if (
-      thumbnail &&
-      thumbnail instanceof File &&
-      thumbnail.size > 0 &&
-      thumbnail.name !== "undefined"
-    ) {
-      thumbnailUrl = await processThumbnail(thumbnail as File);
-    }
-
     const { error, status } = await internalApiFetch(`/stories/${id}`, {
       method: "PATCH",
-      body: {
-        title,
-        content,
-        borough,
-        summary,
-        categoryIds,
-        thumbnailUrl,
-      },
+      body: formData,
     });
 
     if (error) {

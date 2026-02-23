@@ -29,7 +29,7 @@ import {
 
 // --- Tiptap Node ---
 import { ImageUploadNode } from "@/app/tiptap/components/tiptap-node/image-upload-node/image-upload-node-extension";
-import "@/app/tiptap/components/tiptap-node/code-block-node/code-block-node.scss"
+import "@/app/tiptap/components/tiptap-node/code-block-node/code-block-node.scss";
 import "@/app/tiptap/components/tiptap-node/list-node/list-node.scss";
 import "@/app/tiptap/components/tiptap-node/image-node/image-node.scss";
 import "@/app/tiptap/components/tiptap-node/paragraph-node/paragraph-node.scss";
@@ -72,7 +72,7 @@ import { MAX_FILE_SIZE } from "@/app/tiptap/lib/tiptap-utils";
 
 // --- Styles ---
 import "@/app/tiptap/components/tiptap-templates/simple/simple-editor.scss";
-import { uploadToS3WithCompression } from "@/app/utils/media";
+import { useRef, forwardRef, useImperativeHandle, useState } from "react";
 
 // import content from "@/components/tiptap-templates/simple/data/content.json";
 
@@ -181,18 +181,28 @@ const MobileToolbarContent = ({
   </>
 );
 
-export function SimpleEditor({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange: (html: string) => void;
-}) {
+export type SimpleEditorHandle = {
+  getPendingFiles: () => Map<string, File>;
+};
+
+export const SimpleEditor = forwardRef<
+  SimpleEditorHandle,
+  {
+    value: string;
+    onChange: (html: string) => void;
+  }
+>(({ value, onChange }, ref) => {
+  const pendingFilesRef = useRef<Map<string, File>>(new Map());
+
+  useImperativeHandle(ref, () => ({
+    getPendingFiles: () => pendingFilesRef.current,
+  }));
+
   const isMobile = useMobile();
   const windowSize = useWindowSize();
-  const [mobileView, setMobileView] = React.useState<
-    "main" | "highlighter" | "link"
-  >("main");
+  const [mobileView, setMobileView] = useState<"main" | "highlighter" | "link">(
+    "main",
+  );
   const toolbarRef = React.useRef<HTMLDivElement>(null);
 
   const editor = useEditor({
@@ -219,14 +229,29 @@ export function SimpleEditor({
         accept: "image/*",
         maxSize: MAX_FILE_SIZE,
         limit: 3,
-        upload: uploadToS3WithCompression,
+        upload: async (file: File) => {
+          const url = URL.createObjectURL(file);
+          pendingFilesRef.current.set(url, file); 
+          return url; 
+        },
         onError: (error) => console.error("Upload failed:", error),
       }),
       Link.configure({ openOnClick: false }),
     ],
     content: value,
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      const html = editor.getHTML();
+
+      const currentBlobUrls = Array.from(pendingFilesRef.current.keys())
+
+      currentBlobUrls.forEach(url => {
+        if (!html.includes(url)) {
+          pendingFilesRef.current.delete(url)
+          URL.revokeObjectURL(url)
+        }
+      })
+
+      onChange(html)
     },
   });
 
@@ -276,4 +301,4 @@ export function SimpleEditor({
       </div>
     </EditorContext.Provider>
   );
-}
+});

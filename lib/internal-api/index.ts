@@ -33,10 +33,11 @@ export async function internalApiFetch<T>(
   }
 
   const headers = new Headers(options.headers);
-  
+
   headers.set("x-api-key", apiKey);
 
-  if (body && !headers.has("Content-Type")) {
+
+  if (body && !(body instanceof FormData) && !headers.has("Content-Type")) {
     headers.set("Content-Type", "application/json");
   }
 
@@ -44,7 +45,7 @@ export async function internalApiFetch<T>(
     const response = await fetch(url.toString(), {
       ...options,
       headers,
-      body: body ? JSON.stringify(body) : undefined,
+      body: !body ? undefined : (body instanceof FormData ? body : JSON.stringify(body)),
     });
 
     const status = response.status;
@@ -57,7 +58,7 @@ export async function internalApiFetch<T>(
         status,
       };
     }
-    
+
     const data = await response.json();
     return { data, error: null, status };
   } catch (err) {
