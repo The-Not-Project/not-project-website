@@ -16,7 +16,7 @@ export const FormInput = styled.input`
   font-size: 1.2rem;
   outline: none;
   border: none;
-  border-bottom: 3px gray solid;
+  border-bottom: 2px gray solid;
   background: hsl(0, 0%, 98%);
 
   &:disabled {
@@ -25,6 +25,10 @@ export const FormInput = styled.input`
   }
 
   &.wide {
+    width: 100%;
+  }
+
+  @media (max-width: 850px) {
     width: 100%;
   }
 `;

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import StoriesSearch from "./components/storiesFilteredSearch/storiesFilteredSearch.component";
 import StoriesList from "./components/storiesList/storiesList.component";
 import {
@@ -6,7 +5,6 @@ import {
   SectionTitle,
   StoriesSection,
 } from "../shared/components/layout/Section";
-import { Button } from "../shared/components/button/button";
 import StoriesToggle from "./components/StoriesToggle/storiesToggle.component";
 import {
   getHiddenStoriesAction,
@@ -47,12 +45,7 @@ export default async function StoriesPage({ searchParams }: PageProps) {
 
       <StoriesSection>
         <StoriesSearch categories={categories} initialFilters={filters} />
-        <div>
-          <StoriesList stories={stories} />
-          <Button className="cornered">
-            <Link href="/admin/story/create">Add</Link>
-          </Button>
-        </div>
+        <StoriesList stories={stories} />
       </StoriesSection>
     </PageSection>
   );

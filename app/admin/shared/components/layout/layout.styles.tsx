@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const AdminContainer = styled.main`
   display: flex;
@@ -16,10 +16,17 @@ export const AdminContainer = styled.main`
     width: 100%;
     max-width: 1200px;
 
-    h1 {
+    .page-title {
       font-size: 1.8rem;
       margin-bottom: 20px;
+
+      @media (max-width: 850px) {
+        font-size: 1.5rem;
+      }
     }
+
+  }
+  @media (max-width: 850px) {
+    padding: 70px 15px;
   }
 `;
-

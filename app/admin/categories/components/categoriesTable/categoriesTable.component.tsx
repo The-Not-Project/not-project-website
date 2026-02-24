@@ -9,15 +9,15 @@ export default function CategoriesTable({ categories }: { categories: Category[]
       <thead>
         <tr>
           <th>Category</th>
-          <th>Description</th>
-          <th>Actions</th>
+          <th className="hide-mobile">Description</th>
+          <th className="justify-right-mobile">Actions</th>
         </tr>
       </thead>
       <tbody>
         {categories.map((category) => (
           <tr key={category.id}>
             <td>{category.name}</td>
-            <td>{category.description}</td>
+            <td className="hide-mobile">{category.description}</td>
             <td className="justify-right">
               <ButtonsContainer>
                 <EditButton id={category.id} />

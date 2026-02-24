@@ -2,14 +2,14 @@
 
 import { useRef, useState, useTransition } from "react";
 import { Category } from "@/app/types/types";
-import { SimpleEditor, SimpleEditorHandle } from "@/app/tiptap/components/tiptap-templates/simple/simple-editor";
+import { SimpleEditor, SimpleEditorHandle } from "@/lib/tiptap/components/tiptap-templates/simple/simple-editor";
 import {
   FormInput,
   FormLabel,
   FormTextArea,
   EditorContainer,
 } from "../../shared/components/form/FormElements";
-import FileInputContainer from "@/app/admin/shared/components/fileInput/fileInput.component";
+import FileInputContainer from "@/app/admin/story/components/fileInput/fileInput.component";
 import CategoriesSearch from "../../stories/components/categoriesSearch/categoriesSearch.component";
 import {
   PageSection,

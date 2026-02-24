@@ -16,7 +16,7 @@ export function OpenCreateButton() {
 
 export function EditButton({ id }: { id: string }) {
   const router = useRouter();
-  return <Button onClick={() => router.push(`?edit=${id}`)}>Edit</Button>;
+  return <Button className="inverted" onClick={() => router.push(`?edit=${id}`)}>Edit</Button>;
 }
 
 export function DeleteButton({ id }: { id: string }) {

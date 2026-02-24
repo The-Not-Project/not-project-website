@@ -1,7 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StoriesSearchContainer = styled.div`
   margin-bottom: 20px;
+
+  @media (max-width: 850px) {
+    display: none;
+  }
 `;
 
 export const SearchInput = styled.input`

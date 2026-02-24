@@ -29,8 +29,6 @@ export default function PersonalInformationForm({userInfo, updateAction}: FormPr
   };
 
   return (
-    <PageSection>
-      <SectionTitle>Basic Information</SectionTitle>
       <form action={handleAction}>
         <FormLabel htmlFor='firstName'>First Name</FormLabel>
         <FormInput
@@ -76,6 +74,5 @@ export default function PersonalInformationForm({userInfo, updateAction}: FormPr
           </ButtonsContainer>
         )}
       </form>
-    </PageSection>
   );
 }

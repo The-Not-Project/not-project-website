@@ -1,10 +1,19 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const RecommendationsListContainer = styled.div`
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
   justify-content: center;
+
+  @media (max-width: 850px) {
+    gap: 15px;
+    flex-wrap: nowrap;
+    padding: 20px 0;
+    width: 100%;
+    overflow-x: scroll;
+    justify-content: left;
+  }
 `;
 
 export const RecommendationContainer = styled.div`
@@ -19,8 +28,8 @@ export const RecommendationContainer = styled.div`
   }
   h4 {
     font-weight: normal;
-    font-size: .8rem;
-    line-height: .8rem;
+    font-size: 0.8rem;
+    line-height: 0.8rem;
     color: #525252;
     padding-left: 10px;
     margin-bottom: 7px;
@@ -37,7 +46,6 @@ export const RecommendationContainer = styled.div`
       color: green;
     }
   }
-
 `;
 
 export const ImageContainer = styled.img`

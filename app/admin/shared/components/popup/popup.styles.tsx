@@ -7,29 +7,16 @@ export const PopupContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
-  margin: 0;
-  overflow: hidden;
+  display: grid;
+  place-items: center;
 `;
 
 export const Popup = styled.div`
-  position: absolute;
   background-color: #f7f7f7;
-  width: min-content;
-  height: max-content;
-  max-height: 90%;
-  overflow-y: overlay;
-  left: 50%;
-  top: 50%;
-  translate: -50% -50%;
   border-radius: 20px;
-  padding: 3px;
-  border: 30px solid transparent;
+  padding: 30px;  
 
-
-  &::-webkit-scrollbar {
-    display: none;
+  @media (max-width: 850px) {
+    width: calc(100% - 40px);
   }
-
-  -ms-overflow-style: none;  
-  scrollbar-width: none;    
 `;

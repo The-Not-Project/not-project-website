@@ -9,6 +9,12 @@ export const NavBarContainer = styled.nav`
     margin: 0;
     border-bottom: 1px lightgrey solid;
     gap: 30px;
+    width: 100%;
+    overflow: scroll;
+
+    @media (max-width: 850px) {
+      gap: 15px;
+    }
 
     a {
       text-decoration: none;
@@ -16,13 +22,18 @@ export const NavBarContainer = styled.nav`
       display: block;
       padding: 5px 3px;
       font-size: 1.1rem;
+      width: max-content;
 
       &.active {
         border-bottom: 2px black solid;
-        text-shadow: -0.02ex 0 0 black, 0.02ex 0 0 black;
+        text-shadow:
+          -0.02ex 0 0 black,
+          0.02ex 0 0 black;
+      }
+
+      @media (max-width: 850px) {
+        font-size: 1rem;
       }
     }
   }
-
-
 `;

@@ -3,14 +3,14 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Category, Story } from "@/app/types/types";
-import { SimpleEditor } from "@/app/tiptap/components/tiptap-templates/simple/simple-editor";
+import { SimpleEditor } from "@/lib/tiptap/components/tiptap-templates/simple/simple-editor";
 import {
   FormInput,
   FormLabel,
   FormTextArea,
   EditorContainer,
 } from "../../../shared/components/form/FormElements";
-import FileInputContainer from "@/app/admin/shared/components/fileInput/fileInput.component";
+import FileInputContainer from "@/app/admin/story/components/fileInput/fileInput.component";
 import CategoriesSearch from "../../../stories/components/categoriesSearch/categoriesSearch.component";
 import {
   PageSection,

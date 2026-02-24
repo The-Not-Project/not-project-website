@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StoriesContainer = styled.ul`
   list-style: none;
@@ -10,5 +10,4 @@ export const StoriesContainer = styled.ul`
 export const NoStoriesMessage = styled.p`
   text-align: center;
   font-size: 1.5rem;
-
-`
+`;

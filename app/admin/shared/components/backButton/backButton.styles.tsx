@@ -55,4 +55,9 @@ export const BackButton = styled.p`
       }
     }
   }
+
+  @media (max-width: 850px) {
+    top: 10px;
+    left: 5px;
+  }
 `;

@@ -8,4 +8,9 @@ export const ToggleContainer = styled.div`
   position: absolute;
   top: 30px;
   right: 40px;
+
+  @media (max-width: 850px) {
+    right: 0px;
+    top: 8px;
+  }
 `;
