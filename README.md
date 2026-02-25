@@ -18,10 +18,10 @@ This repository contains the complete source code for the web platform. It is bu
 
 ## 🛠️ Tech Stack
 
-- **Frontend & Framework:** Next.js (App Router), TypeScript, Styled Components, SCSS
-- **Backend:** REST API @api.thenotproject.com
-- **Hosting:** Vercel
+- **Frontend & Framework:** Next.js 16 (App Router), TypeScript, Styled Components, SCSS
+- **Backend:** Live REST API at `https://api.thenotproject.com` (Managed internally)
 - **Authentication & Authorization:** Auth0
+- **Deployment:** Vercel
 - **Version Control:** Git (private repo)
 
 ---
@@ -29,6 +29,13 @@ This repository contains the complete source code for the web platform. It is bu
 ## 🚀 Setup
 
 The project is intended for internal use. Local development is straightforward.
+
+### Prerequisites
+
+Before starting, make sure you have the following installed:
+
+- Git
+- Node.js 20.9x
 
 ### 1. Clone the repository
 
@@ -57,13 +64,20 @@ Create a `.env.local` file in the root directory. **Refer to Tariq** to obtain t
 - `INTERNAL_API_URL`
 - `INTERNAL_API_KEY`
 
-### 4. Run the development server
+### 4. Development & Build
+
+To run the local development server:
 
 ```bash
 npm run dev
 ```
+To test a production build locally:
 
-The app should now be running locally.
+```bash
+npm run build
+npm start
+```
+---
 
 ## 📁 Folder Structure
 
