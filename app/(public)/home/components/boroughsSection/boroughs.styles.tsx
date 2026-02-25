@@ -3,7 +3,17 @@ import styled, { keyframes } from "styled-components";
 const fadepulsateslow = keyframes`
   33% {
     opacity: 0;
+    translate: 0;
   }
+  
+  34% {
+    translate: -2%;
+  }
+
+  75% {
+    translate: 0;
+  }
+
   100% {
     opacity: 1;
   }
@@ -48,7 +58,10 @@ export const BoroughsSectionContainer = styled.section`
     justify-content: center;
     padding: 50px;
     color: #e7e0d6;
-    animation: ${fadepulsateslow} 1s;
+
+    &.active {
+      animation: ${fadepulsateslow} 1s;
+    }
 
     @media (max-width: 850px) {
       width: 100%;
@@ -121,12 +134,14 @@ export const BoroughsSectionContainer = styled.section`
 
 const fadepulsatefast = keyframes`
   50% {
-    filter: blur(50px);
+    filter: blur(20px);
     opacity: 0;
+    scale: 1.05;
   }
   100% {
     filter: none;
     opacity: 1;
+    scale: 1;
   }
 `;
 
@@ -135,8 +150,11 @@ export const Background = styled.div`
   overflow: hidden;
   height: 100%;
   width: 50%;
-  animation: ${fadepulsatefast} 0.66s;
   position: relative;
+
+  &.active {
+    animation: ${fadepulsatefast} 0.66s;
+  }
 
   @media (max-width: 850px) {
     width: 100%;
@@ -161,8 +179,9 @@ export const ArrowContainer = styled.div`
   place-items: center;
   transition: 0.2s;
   border-radius: 100%;
-  
-  &:hover, &:active {
+
+  &:hover,
+  &:active {
     background: #52525243;
     color: #d4af37;
   }

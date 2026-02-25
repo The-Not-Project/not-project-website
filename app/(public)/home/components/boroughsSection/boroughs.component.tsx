@@ -29,24 +29,34 @@ const formatBoroughName = (slug: string) => {
 };
 
 export default function Boroughs() {
-  const [data, setData] = useState({
+  const [data, setData] = useState<{
+    index: number;
+    active: string;
+    status: "idle" | "active";
+  }>({
     index: 0,
     active: "queens",
-    visibleName: "Queens",
+    status: "idle",
   });
 
   const transitionTo = useCallback((nextIndex: number) => {
     const nextSlug = BOROUGHS[nextIndex];
 
-    setData((prev) => ({ ...prev, index: nextIndex }));
+    setData((prev) => ({ ...prev, index: nextIndex, status: "active" }));
 
     setTimeout(() => {
       setData((prev) => ({
         ...prev,
-        active: nextSlug,
-        visibleName: formatBoroughName(nextSlug),
+        active: nextSlug
       }));
     }, 333);
+
+        setTimeout(() => {
+      setData((prev) => ({
+        ...prev,
+        status: "idle",
+      }));
+    }, 1000);
   }, []);
 
   useEffect(() => {
@@ -65,8 +75,8 @@ export default function Boroughs() {
   return (
     <>
       <BoroughsSectionContainer>
-        <div className="description" key={data.index}>
-          <h2>{data.visibleName}</h2>
+        <div className={`description ${data.status}`}>
+          <h2>{formatBoroughName(data.active)}</h2>
           <hr />
           <p>{summary.description}</p>
           <Link href={`stories/${data.active}`}>
@@ -74,7 +84,7 @@ export default function Boroughs() {
           </Link>
         </div>
 
-        <Background key={data.index + 1}>
+        <Background className={data.status}>
           {BOROUGHS.map((borough) => (
             <Image
               key={borough}

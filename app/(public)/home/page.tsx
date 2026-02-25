@@ -6,7 +6,6 @@ import { Suspense } from "react";
 import RadarPlaceholder from "./components/radarCard/components/radarPlaceholder.component";
 import RecommendationsPlaceholder from "./components/recommendations/recommendation.placeholder";
 
-
 export default function HomePage() {
   return (
     <main>
