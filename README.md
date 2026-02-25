@@ -1,7 +1,5 @@
 # The Not Project
 
-![Vercel Deploy](https://deploy-badge.vercel.app/vercel/not-project-website-git-master-the-not-project?style=flat-square)
-
 **Live site:** [www.thenotproject.com](https://www.thenotproject.com)
 
 The Not Project is a storytelling platform based in New York City. Its goal is to share stories we believe are meaningful, whether they are discovered by us or submitted by completely random people. There's no rigid format or genre restriction. Whether it's a blog post, article, photo series, interview, short film, or even a music clip, if it carries value, it has a place on the platform.
