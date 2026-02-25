@@ -1,5 +1,7 @@
 # The Not Project
 
+![Vercel Deploy](https://deploy-badge.vercel.app/vercel/not-project-website-git-master-the-not-project?style=flat-square)
+
 **Live site:** [www.thenotproject.com](https://www.thenotproject.com)
 
 The Not Project is a storytelling platform based in New York City. Its goal is to share stories we believe are meaningful, whether they are discovered by us or submitted by completely random people. There's no rigid format or genre restriction. Whether it's a blog post, article, photo series, interview, short film, or even a music clip, if it carries value, it has a place on the platform.
@@ -21,7 +23,7 @@ This repository contains the complete source code for the web platform. It is bu
 - **Frontend & Framework:** Next.js 16 (App Router), TypeScript, Styled Components, SCSS
 - **Backend:** Live REST API at `https://api.thenotproject.com` (Managed internally)
 - **Authentication & Authorization:** Auth0
-- **Deployment:** Vercel
+- **Deployment:** Vercel (Auto-deploys from `master`)
 - **Version Control:** Git (private repo)
 
 ---
@@ -52,17 +54,14 @@ npm install
 
 ### 3. Environment variables
 
-Create a `.env.local` file in the root directory. **Refer to Tariq** to obtain the current values for these keys:
+Copy the example environment file and fill in the values:
 
-- `APP_BASE_URL`
-- `AUTH0_SECRET`
-- `AUTH0_DOMAIN`
-- `AUTH0_MANAGEMENT_API_DOMAIN`
-- `AUTH0_CLIENT_ID`
-- `AUTH0_CLIENT_SECRET`
-- `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`
-- `INTERNAL_API_URL`
-- `INTERNAL_API_KEY`
+```bash
+cp .env.example .env.local
+```
+
+> [!IMPORTANT]
+> **Refer to Tariq** to obtain the current values for the keys in .env.local. Make sure all keys are populated before starting the development server to avoid authentication or API errors.
 
 ### 4. Development & Build
 
@@ -110,3 +109,6 @@ lib/
 public/
 └── media/                       # Static assets (images, clips, etc.)
 ```
+
+## 🌐 Deployment
+Pushes to `master` are automatically deployed to Vercel (Production). 
