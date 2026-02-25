@@ -72,7 +72,7 @@ export const FormContainer = styled.form`
     margin-bottom: 40px;
     color: inherit;
 
-        @media (max-width: 850px) {
+    @media (max-width: 850px) {
       width: 100%;
     }
   }
@@ -91,7 +91,7 @@ export const FormContainer = styled.form`
     resize: none;
     color: inherit;
 
-        @media (max-width: 850px) {
+    @media (max-width: 850px) {
       width: 100%;
     }
   }
@@ -99,15 +99,17 @@ export const FormContainer = styled.form`
   button {
     background: #dbdbdb;
     border: none;
-    border-radius: 100px;
-    box-sizing: border-box;
+    border-radius: 20px;
     color: #000;
     cursor: pointer;
     font-size: 1rem;
     padding: 10px 40px;
     transition: 0.2s;
     &:hover {
-      background: #d4d4d4;
+      background: #b8b8b8;
+    }
+    &:active {
+      background: #7e7e7e;
     }
   }
 `;

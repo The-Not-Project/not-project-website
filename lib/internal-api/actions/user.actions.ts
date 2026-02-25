@@ -1,7 +1,7 @@
 "use server";
 
-import { auth0 } from "@/lib/auth0/auth0";
-import { internalApiFetch } from "@/lib/internal-api";
+import { auth0 } from "@/lib/auth0";
+import { internalApiFetch } from "..";
 import { updateTag } from "next/cache";
 
 export async function getUserAction() {

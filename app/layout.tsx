@@ -6,7 +6,7 @@ import projectMetadata from "./constants/metadata";
 import { Manrope } from "next/font/google";
 import { georgia } from "./constants/font";
 import "./globals.css";
-import { auth0 } from "../lib/auth0/auth0";
+import { auth0 } from "../lib/auth0";
 import { createUserAction, getUserAction } from "../lib/internal-api/actions/user.actions";
 
 export const viewport: Viewport = {

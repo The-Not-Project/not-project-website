@@ -15,6 +15,15 @@ export default function SavedStory({ story }: { story: CompactStory }) {
 
   return (
     <StoryContainer>
+      <ThumbnailContainer>
+        <Image
+          src={story.thumbnail}
+          alt="thumbnail"
+          fill
+          style={{ objectFit: "cover" }}
+          sizes="(max-width: 850px) 100vw, 250px"
+        />
+      </ThumbnailContainer>
       <StoryContent>
         <h2 className="title">
           <Link href={`/story/${story.id}`}>{story.title}</Link>
@@ -27,15 +36,6 @@ export default function SavedStory({ story }: { story: CompactStory }) {
           )}
         </div>
       </StoryContent>
-      <ThumbnailContainer>
-        <Image
-          src={story.thumbnail}
-          alt="thumbnail"
-          fill
-          style={{objectFit: 'cover'}}
-          sizes="(max-width: 850px) 100vw, 250px"
-        />
-      </ThumbnailContainer>
     </StoryContainer>
   );
 }

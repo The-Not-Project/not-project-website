@@ -1,6 +1,6 @@
 "use server";
 
-import { internalApiFetch } from "@/lib/internal-api";
+import { internalApiFetch } from "..";
 import { updateTag } from "next/cache";
 
 export async function getCategoriesAction() {

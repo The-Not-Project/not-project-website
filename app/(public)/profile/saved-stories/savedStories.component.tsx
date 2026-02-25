@@ -11,10 +11,10 @@ export default async function SavedStories() {
   }
 
   return (
-    <PageSection>
+    <PageSection className="saves">
       <SectionDescription>
         <h2>Saved Stories</h2>
-        <p>Here you can find all the stories you have saved.</p>
+        <p>All the stories you have saved.</p>
       </SectionDescription>
 
       <StoriesContainer>

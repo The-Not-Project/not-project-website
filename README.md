@@ -22,7 +22,6 @@ This repository contains the complete source code for the web platform. It is bu
 - **Backend:** REST API @api.thenotproject.com
 - **Hosting:** Vercel
 - **Authentication & Authorization:** Auth0
-- **Email:** Resend
 - **Version Control:** Git (private repo)
 
 ---
@@ -36,7 +35,7 @@ app/
 │   ├── contact/
 │   ├── donate/
 │   ├── profile/
-│   ├── stories/[[...borough]]/  # All or ugh-specificstory lists
+│   ├── stories/[[...borough]]/  # All or borough-specific stories
 │   └── story/[id]/              # Individual story pages
 ├── admin/                       # Admin dashboard sections
 │   ├── categories/
@@ -44,14 +43,7 @@ app/
 │   ├── radar/
 │   ├── recommendations/
 │   └── stories/
-├── api/                         # API routes
-│   └── contact/
-├── auth-actions/                # Server actions related to auth
 ├── constants/                   # Shared constants
-├── database/                    # Prisma client and repo helpers
-│   ├── prisma.ts
-│   ├── helpers/
-│   └── repositories/
 ├── hooks/                       # Custom React hooks
 ├── types/                       # Shared TypeScript types
 └── utils/                       # Utility functions

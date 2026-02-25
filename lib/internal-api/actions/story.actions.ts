@@ -1,8 +1,8 @@
 "use server";
 
-import { internalApiFetch } from "@/lib/internal-api";
-import { CompactStory, Filters, Story } from "../../../app/types/types";
-import { auth0 } from "@/lib/auth0/auth0";
+import { internalApiFetch } from "..";
+import { CompactStory, Filters, Story } from "@/app/types/types";
+import { auth0 } from "@/lib/auth0";
 import { redirect } from "next/navigation";
 import { getUserAction } from "./user.actions";
 import { updateTag } from "next/cache";

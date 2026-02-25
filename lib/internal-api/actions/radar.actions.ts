@@ -1,7 +1,7 @@
 'use server'
 
-import { internalApiFetch } from "@/lib/internal-api";
-import { CompactStory } from "../../../app/types/types";
+import { internalApiFetch } from "..";
+import { CompactStory } from "@/app/types/types";
 import { updateTag } from "next/cache";
 
 export async function getRadarStoryAction() {

@@ -1,4 +1,4 @@
-import { auth0 } from "../../lib/auth0/auth0";
+import { auth0 } from "../../lib/auth0";
 import { redirect } from "next/navigation";
 import NavBar from "./shared/components/navbar/navbar.component";
 import { AdminContainer } from "./shared/components/layout/layout.styles";

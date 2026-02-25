@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
 export const StoriesContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  @media (max-width: 850px) {
-    margin-block: 20px;
-  }
 `;
 
 export const StoryContainer = styled.div`
@@ -61,7 +59,6 @@ export const StoryContent = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  order: 1;
   justify-content: center;
   gap: 10px;
   z-index: 1;
@@ -71,7 +68,7 @@ export const StoryContent = styled.div`
     font-weight: normal;
 
     a {
-      color: black;
+      color: inherit;
       text-decoration: none;
 
       &:hover {
@@ -93,7 +90,7 @@ export const StoryContent = styled.div`
     display: flex;
     align-items: center;
     font-size: 0.9rem;
-    color: #3b3b3b;
+    color: #bababa;
 
     .divider {
       translate: 0 2px;

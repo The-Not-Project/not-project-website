@@ -3,25 +3,30 @@
 import { useState } from "react";
 import {
   ButtonsContainer,
+  Disabled,
   FormButton,
   FormButtonOutlined,
   FormInput,
   FormLabel,
-  InputsContainer,
   StyledForm,
-} from "./personalInfo.styles";
+} from "./personal-info.styles";
 import { PageSection, PageSectionTitle, SectionDescription } from "../styles";
 
 type FormProps = {
   userInfo: {
-    email: string,
-    firstName: string,
-    lastName: string
+    email: string;
+    firstName: string;
+    lastName: string;
   };
-  updateAction: (formData: FormData) => Promise<{ success: boolean; message: string; }>;
-}
+  updateAction: (
+    formData: FormData,
+  ) => Promise<{ success: boolean; message: string }>;
+};
 
-export default function PersonalInfoForm({ userInfo, updateAction }: FormProps) {
+export default function PersonalInfoForm({
+  userInfo,
+  updateAction,
+}: FormProps) {
   const [disabled, setDisabled] = useState(true);
 
   async function handleAction(formData: FormData) {
@@ -42,38 +47,39 @@ export default function PersonalInfoForm({ userInfo, updateAction }: FormProps) 
           <p>Provide your Personal Info</p>
         </SectionDescription>
         <StyledForm action={handleAction}>
-          <FormLabel htmlFor="email">Email</FormLabel>
-          <FormInput
-            type="text"
-            id="email"
-            name="email"
-            defaultValue={userInfo.email}
-            disabled 
-          />
+          <FormLabel htmlFor="email" className="email">
+            Email
+            <FormInput
+              type="text"
+              name="email"
+              defaultValue={userInfo.email}
+              disabled
+            />
+            <Disabled />
+          </FormLabel>
 
-          <InputsContainer>
-            <div>
-              <FormLabel htmlFor="firstName">First name</FormLabel>
-              <FormInput
-                type="text"
-                name="firstName"
-                defaultValue={userInfo.firstName}
-                disabled={disabled}
-                required
-              />
-            </div>
-            <div>
-              <FormLabel htmlFor="lastName">Last name</FormLabel>
-              <FormInput
-                type="text"
-                name="lastName"
-                defaultValue={userInfo.lastName}
-                disabled={disabled}
-                required
-              />
-            </div>
-          </InputsContainer>
-
+          <FormLabel htmlFor="firstName">
+            First name
+            <FormInput
+              type="text"
+              name="firstName"
+              defaultValue={userInfo.firstName}
+              disabled={disabled}
+              required
+            />
+            {disabled && <Disabled />}
+          </FormLabel>
+          <FormLabel htmlFor="lastName">
+            Last name
+            <FormInput
+              type="text"
+              name="lastName"
+              defaultValue={userInfo.lastName}
+              disabled={disabled}
+              required
+            />
+            {disabled && <Disabled />}
+          </FormLabel>
           <ButtonsContainer>
             {disabled ? (
               <FormButton type="button" onClick={() => setDisabled(false)}>

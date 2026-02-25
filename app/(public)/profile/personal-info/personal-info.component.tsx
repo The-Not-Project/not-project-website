@@ -1,4 +1,4 @@
-import PersonalInfoForm from "./personalInfoForm.component";
+import PersonalInfoForm from "./form.component";
 import { getUserAction, updateUserAction } from "@/lib/internal-api/actions/user.actions";
 
 export default async function PersonalInformation() {

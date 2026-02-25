@@ -10,6 +10,7 @@ import {
   FormContainer,
 } from "./form.styles";
 import Link from "next/link";
+import { sendContactEmailAction } from "@/lib/internal-api/actions/contact.actions";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
@@ -18,25 +19,30 @@ export default function ContactForm() {
   const [type, setType] = useState<"feedback" | "collab">("feedback");
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  async function handleSubmit(formData: FormData) {
+async function handleClientAction(formData: FormData) {
+    if (!executeRecaptcha) {
+        setStatus("error");
+        return;
+    }
+
     setStatus("sending");
 
-    const token = executeRecaptcha
-      ? await executeRecaptcha("contact_form")
-      : null;
+    try {
+      const token = await executeRecaptcha("contact_form");
+      
+      formData.append("token", token);
+      formData.append("type", type);
 
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type,
-        token,
-        email: formData.get("email"),
-        message: formData.get("message"),
-      }),
-    });
+      const result = await sendContactEmailAction(formData);
 
-    setStatus(res.ok ? "sent" : "error");
+      if (result.success) {
+        setStatus("sent");
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      setStatus("error");
+    }
   }
 
   return (
@@ -53,43 +59,43 @@ export default function ContactForm() {
         </p>
       </ContactInfo>
 
-        <FormContainer action={handleSubmit}>
-          <label htmlFor="subject">Subject</label>
-          <select
-            id="subject"
-            value={type}
-            onChange={(e) => setType(e.target.value as any)}
-          >
-            <option value="feedback">Feedback</option>
-            <option value="collab">Collaboration</option>
-          </select>
+      <FormContainer action={handleClientAction}>
+        <label htmlFor="subject">Subject</label>
+        <select
+          id="subject"
+          value={type}
+          onChange={(e) => setType(e.target.value as any)}
+        >
+          <option value="feedback">Feedback</option>
+          <option value="collab">Collaboration</option>
+        </select>
 
-          <label htmlFor="email">
-            Email{type === "collab" ? "*" : " (optional)"}
-          </label>
-          <input
-            name="email"
-            type="email"
-            id="email"
-            required={type === "collab"}
-          />
+        <label htmlFor="email">
+          Email{type === "collab" ? "*" : " (optional)"}
+        </label>
+        <input
+          name="email"
+          type="email"
+          id="email"
+          required={type === "collab"}
+        />
 
-          <label htmlFor="message">Write a message</label>
-          <textarea name="message" id="message" required />
+        <label htmlFor="message">Write a message</label>
+        <textarea name="message" id="message" required />
 
-          <CaptchaNotice>
-            This site is protected by reCAPTCHA; the Google{" "}
-            <a href="https://policies.google.com/privacy">Privacy Policy</a> and{" "}
-            <a href="https://policies.google.com/terms">Terms</a> apply.
-          </CaptchaNotice>
+        <CaptchaNotice>
+          This site is protected by reCAPTCHA; the Google{" "}
+          <a href="https://policies.google.com/privacy">Privacy Policy</a> and{" "}
+          <a href="https://policies.google.com/terms">Terms</a> apply.
+        </CaptchaNotice>
 
-          <button type="submit" disabled={status === "sending"}>
-            {status === "sending" ? "Sending..." : "Send"}
-          </button>
+        <button type="submit" disabled={status === "sending"}>
+          {status === "sending" ? "Sending..." : "Send"}
+        </button>
 
-          {status === "sent" && <p>Message sent!</p>}
-          {status === "error" && <p>Something went wrong.</p>}
-        </FormContainer>
+        {status === "sent" && <p>Message sent!</p>}
+        {status === "error" && <p>Something went wrong.</p>}
+      </FormContainer>
     </ContactContainer>
   );
 }
