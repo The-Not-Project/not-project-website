@@ -33,7 +33,7 @@ The project is intended for internal use. Local development is straightforward.
 ### 1. Clone the repository
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/The-Not-Project/not-project-website
 cd not-project-website
 ```
 
