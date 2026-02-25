@@ -11,9 +11,13 @@ export const PageContainer = styled.main`
 
 export const HeaderContainer = styled.div`
   display: block;
-  max-height: auto;
-  width: 100%;
   color: white;
+  width: 100%;
+  height: 400px;
+  position: relative;
+  @media (max-width: 1200px) {
+    height: 40vh;
+  }
 
   &:before {
     content: "";
@@ -33,11 +37,6 @@ export const HeaderContainer = styled.div`
 
 export const HeaderImage = styled(Image)`
   object-fit: cover;
-  width: 100%;
-  height: 40vh;
-  @media (max-width: 1000px) {
-    max-height: none;
-  }
 `;
 
 export const AboutContainer = styled.div`
