@@ -21,7 +21,7 @@ This repository contains the complete source code for the web platform. It is bu
 - **Frontend & Framework:** Next.js 16 (App Router), TypeScript, Styled Components, SCSS
 - **Backend:** Live REST API at `https://api.thenotproject.com` (Managed internally)
 - **Authentication & Authorization:** Auth0
-- **Deployment:** Vercel (Auto-deploys from `master`)
+- **Deployment:** Vercel
 - **Version Control:** Git (private repo)
 
 ---
@@ -109,4 +109,6 @@ public/
 ```
 
 ## 🌐 Deployment
-Pushes to `master` are automatically deployed to Vercel (Production). 
+
+- **Production:** Every push to master is automatically built and deployed to [thenotproject.com](https://www.thenotproject.com).
+- **Previews:** Pushes to develop (and all open pull requests) trigger a Preview Deployment for testing before merging to production.
