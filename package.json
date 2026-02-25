@@ -1,8 +1,9 @@
 {
   "name": "the-not-project",
-  "version": "2.1",
+  "version": "2.2",
   "private": true,
   "scripts": {
+    "predev": "node -e \"const v=process.versions.node.split('.'); if(v[0]<20 || (v[0]==20 && v[1]<9)) { console.error('Error: Node 20.9.0 or higher is required'); process.exit(1); }\"",
     "dev": "next dev --turbopack",
     "build": "next build --webpack",
     "start": "next start",
@@ -62,5 +63,8 @@
     "ajv": "^8.18.0",
     "minimatch": "^10.2.1",
     "bn.js": "5.2.3"
+  },
+  "engines": {
+    "node": ">=20.9.0"
   }
 }
