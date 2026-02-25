@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
-import NextImage from "next/image";
+import Image from "next/image";
 import {
   BoroughsSectionContainer,
   Background,
@@ -77,12 +77,13 @@ export default function Boroughs() {
         </div>
 
         <Background key={data.index + 1}>
-          <NextImage
+          <Image
             src={`/media/boroughBackdrops/${data.file}.webp`}
             alt={data.visibleName}
             style={{objectFit: 'cover'}}
             fill
             sizes="(max-width: 858px) 100vw, (min-width: 850px) 50vw"
+            preload={true}
           />
         </Background>
       </BoroughsSectionContainer>

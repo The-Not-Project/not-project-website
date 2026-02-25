@@ -13,27 +13,28 @@ export const HeaderContainer = styled.div`
   display: block;
   color: white;
   width: 100%;
-  height: 400px;
+  height: 40vh;
   position: relative;
-  @media (max-width: 1200px) {
-    height: 40vh;
-  }
 
-  &:before {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background: radial-gradient(
-      ellipse 70% 40% at 50% 0%,
-      rgba(13, 13, 13, 0.8) 5%,
-      rgba(13, 13, 13, 0.6) 20%,
-      transparent 70%
-    );
+&:before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: radial-gradient(
+    ellipse 80vw 40vh at 50% 0%, 
+    rgba(13, 13, 13, 0.8) 5%,
+    rgba(13, 13, 13, 0.6) 20%,
+    transparent 70%
+  );
+
+  @media (max-width: 850px) {
+    display: none;
   }
+}
 `;
 
 export const HeaderImage = styled(Image)`

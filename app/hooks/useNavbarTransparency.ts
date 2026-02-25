@@ -3,8 +3,7 @@ import { useEffect } from "react";
 
 export function useNavbarTransparency() {
   const pathname = usePathname();
-  const transparentPaths = ["/", "/contact", "/about"];
-  const isSpecialPage = transparentPaths.includes(pathname);
+  const isSpecialPage = !pathname.startsWith("/stories")
 
   useEffect(() => {
     const body = document.body;

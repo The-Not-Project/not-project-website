@@ -4,7 +4,7 @@ export const HeaderContainer = styled.header`
   min-height: 100dvh;
   max-height: 80vw;
   display: flex;
-  padding-top: 70px;
+  margin-top: 70px;
   background: #e3e0d8;
   
   @media (max-width: 1100px) {

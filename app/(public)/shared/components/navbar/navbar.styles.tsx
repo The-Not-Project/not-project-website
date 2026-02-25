@@ -15,7 +15,6 @@ export const NavBarContainer = styled.nav`
   padding-inline: 40px;
   transition:
     height 0.3s,
-    background 0.3s,
     translate 0.18s ease-in;
   background: none;
 
@@ -29,6 +28,7 @@ export const NavBarContainer = styled.nav`
     background: rgba(13, 13, 13, 0.9);
     backdrop-filter: blur(10px);
     height: 70px;
+    transition-property: translate, height;
   }
 `;
 

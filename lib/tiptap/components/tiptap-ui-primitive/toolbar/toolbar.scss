@@ -25,9 +25,14 @@
     gap: 0.125rem;
   }
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
+  @media (max-width: 850) {
+    width: 100vw !important;
+    max-width: none;
+    translate: -15px;
+    border-radius: 0;
+  }
 }
