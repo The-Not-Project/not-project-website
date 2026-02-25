@@ -22,6 +22,7 @@ export const HeaderContainer = styled.div`
   &:before {
     content: "";
     position: absolute;
+    z-index: 2;
     top: 0;
     left: 0;
     right: 0;
