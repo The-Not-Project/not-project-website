@@ -26,6 +26,45 @@ This repository contains the complete source code for the web platform. It is bu
 
 ---
 
+## 🚀 Setup
+
+The project is intended for internal use. Local development is straightforward.
+
+### 1. Clone the repository
+
+```bash
+git clone <repo-url>
+cd not-project-website
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Environment variables
+
+Create a `.env.local` file in the root directory. **Refer to Tariq** to obtain the current values for these keys:
+
+- `APP_BASE_URL`
+- `AUTH0_SECRET`
+- `AUTH0_DOMAIN`
+- `AUTH0_MANAGEMENT_API_DOMAIN`
+- `AUTH0_CLIENT_ID`
+- `AUTH0_CLIENT_SECRET`
+- `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`
+- `INTERNAL_API_URL`
+- `INTERNAL_API_KEY`
+
+### 4. Run the development server
+
+```bash
+npm run dev
+```
+
+The app should now be running locally.
+
 ## 📁 Folder Structure
 
 ```bash
@@ -49,10 +88,10 @@ app/
 └── utils/                       # Utility functions
 
 lib/
-├── auth0/
-├── internal-api/          
-│   └── actions/
-└── tiptap/
+├── auth0/                       # Auth0 configuration and SDK setup
+├── internal-api/                # Core communication layer with Express REST API
+│   └── actions/                 # Next.js Server Actions (bridge between UI and API)
+└── tiptap/                      # Rich-text editor configuration for story creation
 
 public/
 └── media/                       # Static assets (images, clips, etc.)
