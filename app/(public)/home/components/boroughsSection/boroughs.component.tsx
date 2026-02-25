@@ -31,7 +31,6 @@ const formatBoroughName = (slug: string) => {
 export default function Boroughs() {
   const [data, setData] = useState({
     index: 0,
-    file: "queens",
     active: "queens",
     visibleName: "Queens",
   });
@@ -46,7 +45,6 @@ export default function Boroughs() {
         ...prev,
         active: nextSlug,
         visibleName: formatBoroughName(nextSlug),
-        file: nextSlug,
       }));
     }, 333);
   }, []);
@@ -77,20 +75,30 @@ export default function Boroughs() {
         </div>
 
         <Background key={data.index + 1}>
-          <Image
-            src={`/media/boroughBackdrops/${data.file}.webp`}
-            alt={data.visibleName}
-            style={{objectFit: 'cover'}}
-            fill
-            sizes="(max-width: 858px) 100vw, (min-width: 850px) 50vw"
-            preload={true}
-          />
+          {BOROUGHS.map((borough) => (
+            <Image
+              key={borough}
+              src={`/media/boroughBackdrops/${borough}.webp`}
+              alt={borough}
+              style={{
+                objectFit: "cover",
+                display: data.active === borough ? "block" : "none",
+              }}
+              fill
+              sizes="(max-width: 858px) 100vw, (min-width: 850px) 50vw"
+              preload={true}
+            />
+          ))}
         </Background>
       </BoroughsSectionContainer>
 
       <BoroughSelector>
         <ArrowContainer
-          onClick={() => transitionTo(data.index === 0 ? BOROUGHS.length - 1 : data.index - 1)}
+          onClick={() =>
+            transitionTo(
+              data.index === 0 ? BOROUGHS.length - 1 : data.index - 1,
+            )
+          }
         >
           <IconLeft />
         </ArrowContainer>
