@@ -35,7 +35,7 @@ The project is intended for internal use. Local development is straightforward.
 Before starting, make sure you have the following installed:
 
 - Git
-- Node.js 20.9x
+- Node.js ^20.9x (LTS recommended)
 
 ### 1. Clone the repository
 
