@@ -34,6 +34,7 @@ export const FormInput = styled.input`
 `;
 
 export const FormTextArea = styled.textarea<{ height?: string }>`
+  font-family: inherit;
   display: block;
   margin-block: 10px 20px;
   padding: 10px;

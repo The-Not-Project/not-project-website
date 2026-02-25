@@ -90,9 +90,16 @@ export const FilterOptionsContainer = styled.div`
   flex-flow: column nowrap;
   gap: 10px;
 
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   @media (max-width: 1500px) {
     flex-flow: row;
-    overflow-x: scroll;
+    overflow-x: auto;
     max-width: 100%;
     gap: 3px;
     margin-top: 10px;

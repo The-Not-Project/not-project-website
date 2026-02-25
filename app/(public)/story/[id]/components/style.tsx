@@ -22,24 +22,6 @@ export const StoryContainer = styled.div`
       font-size: 2.4rem;
     }
   }
-
-  img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    margin-block: 20px;
-  }
-
-  sup,
-  sub {
-    display: block;
-    translate: 0 -20px;
-    color: #3a3a3a;
-  }
-
-  a {
-    color: #5a3a2a !important;
-  }
 `;
 
 export const ThumbnailContainer = styled.div`

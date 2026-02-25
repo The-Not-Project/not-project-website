@@ -8,9 +8,10 @@ import {
 import SaveButton from "../saveButton/saveButton.component";
 import { Fragment } from "react";
 import Image from "next/image";
-import { StoryReader } from "../storyReader/storyReader";
 import { getStoryAction } from "@/lib/internal-api/actions/story.actions";
 import Link from "next/link";
+import "@/lib/tiptap/components/tiptap-node/paragraph-node/paragraph-node.scss"
+import "@/lib/tiptap/components/tiptap-node/image-node/image-node.scss"
 
 export default async function StoryContent({ id }: { id: string }) {
   const session = await auth0.getSession();
@@ -65,9 +66,7 @@ export default async function StoryContent({ id }: { id: string }) {
         <p>{date}</p>
       </InfoContainer>
 
-      <div className="prose">
-        <StoryReader value={story.content} />
-      </div>
+      <div className="tiptap ProseMirror readonly" dangerouslySetInnerHTML={{__html: story.content}} />
     </>
   );
 }

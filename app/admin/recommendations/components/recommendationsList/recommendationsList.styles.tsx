@@ -6,6 +6,13 @@ export const RecommendationsListContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   @media (max-width: 850px) {
     gap: 15px;
     flex-wrap: nowrap;

@@ -10,7 +10,13 @@ export const NavBarContainer = styled.nav`
     border-bottom: 1px lightgrey solid;
     gap: 30px;
     width: 100%;
-    overflow: scroll;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     @media (max-width: 850px) {
       gap: 15px;
