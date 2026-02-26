@@ -19,6 +19,8 @@ export const StoryContainer = styled.div`
     flex-direction: column;
     justify-content: end;
     padding: 20px;
+    max-width: 400px;
+    margin-inline: auto;
 
     &:after {
       content: "";
@@ -27,7 +29,7 @@ export const StoryContainer = styled.div`
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgba(0, 0, 0, 0.4);
       border-radius: 3px;
       z-index: 0;
     }

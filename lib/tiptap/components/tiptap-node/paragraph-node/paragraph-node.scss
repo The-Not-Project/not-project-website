@@ -26,11 +26,15 @@
     margin-top: 20px;
     position: relative;
 
+    &:has(sup) {
+      line-height: 1em;
+    }
+
     sup {
-      vertical-align: baseline;
+      vertical-align: bottom;
     }
   }
-  
+
   &::selection {
     background-color: burlywood;
   }

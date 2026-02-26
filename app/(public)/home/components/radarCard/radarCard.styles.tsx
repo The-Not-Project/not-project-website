@@ -10,7 +10,12 @@ export const RadarCardContainer = styled.section`
   position: relative;
   color: #040605;
 
-  @media (max-width: 600px) {
+  @media (max-width: 1200px) {
+    min-height: fit-content;
+    aspect-ratio: unset;
+  }
+
+  @media (max-width: 850px) {
     margin-block: 30px;
     aspect-ratio: 3 / 4;
   }

@@ -19,6 +19,7 @@ export const StoryContainer = styled.div`
     gap: 10px;
     justify-content: space-between;
     padding: 20px 20px 15px 20px;
+    max-width: 400px;
   }
   .second-row {
     font-size: 0.7rem;

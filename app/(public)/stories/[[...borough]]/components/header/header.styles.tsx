@@ -8,7 +8,7 @@ export const HeaderContainer = styled.header`
   background: #e3e0d8;
   
   @media (max-width: 1100px) {
-    padding-top: 60px;
+    margin-top: 60px;
     flex-direction: column;
     height: auto;
     max-height: none;

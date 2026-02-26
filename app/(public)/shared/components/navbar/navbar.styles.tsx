@@ -14,6 +14,7 @@ export const NavBarContainer = styled.nav`
   align-items: center;
   padding-inline: 40px;
   transition:
+    background 0.3s,
     height 0.3s,
     translate 0.18s ease-in;
   background: none;
@@ -28,7 +29,10 @@ export const NavBarContainer = styled.nav`
     background: rgba(13, 13, 13, 0.9);
     backdrop-filter: blur(10px);
     height: 70px;
-    transition-property: translate, height;
+  }
+
+  body[data-no-transition="true"] & {
+    transition-property: height, translate;
   }
 `;
 
