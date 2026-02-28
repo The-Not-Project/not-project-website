@@ -44,7 +44,7 @@ export default function Page() {
               src={`/media/${aboutData.whatWeDo.img}`}
               alt="What We Do"
               fill
-              sizes="(max-width: 850px) 100vw, 50vw"
+              sizes="100vw"
             />
           </ImageContainer>
         </AboutSection>
@@ -54,7 +54,7 @@ export default function Page() {
               src={`/media/${aboutData.whatsDifferent.img}`}
               alt="What We Do Differently"
               fill
-              sizes="(max-width: 850px) 100vw, 50vw"
+              sizes="100vw"
             />
           </ImageContainer>
           <ContentContainer>
