@@ -12,6 +12,11 @@ export const BottomBarContainer = styled.section`
 
   p {
     cursor: pointer;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
   }
   
   @media (max-width: 1000px) {

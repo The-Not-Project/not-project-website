@@ -1,14 +1,4 @@
 import type { NextConfig } from "next";
-import withPWAInit from "next-pwa";
-
-const isDev = process.env.NODE_ENV === "development";
-
-const withPWA = withPWAInit({
-  dest: 'public',
-  register: true,
-  skipWaiting: true,
-  disable: isDev
-});
 
 const nextConfig: NextConfig = {
   compiler: {
@@ -27,7 +17,7 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/images/**",
       },
-       {
+      {
         protocol: "https",
         hostname: "scontent-lga3-3.cdninstagram.com",
         pathname: "/**",
@@ -77,4 +67,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default isDev ? nextConfig : withPWA(nextConfig);
+export default nextConfig;

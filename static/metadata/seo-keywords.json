@@ -1,5 +1,5 @@
-const seoKeywords = {
-  home: [
+{
+  "home": [
     "The Not Project",
     "NYC storytelling",
     "independent journalism",
@@ -18,7 +18,7 @@ const seoKeywords = {
     "community documentary project"
   ],
 
-  stories: [
+  "stories": [
     "NYC borough stories",
     "Brooklyn community stories",
     "Queens life narratives",
@@ -36,7 +36,7 @@ const seoKeywords = {
     "real New York perspectives"
   ],
 
-  story: [
+  "story": [
     "individual NYC stories",
     "true urban story",
     "personal NYC experience",
@@ -54,7 +54,7 @@ const seoKeywords = {
     "documented NYC lives"
   ],
 
-  contact: [
+  "contact": [
     "contact The Not Project",
     "submit a story",
     "NYC story submission",
@@ -71,7 +71,7 @@ const seoKeywords = {
     "share untold stories"
   ],
 
-  donate: [
+  "donate": [
     "support The Not Project",
     "donate to community journalism",
     "fund independent storytelling",
@@ -89,7 +89,7 @@ const seoKeywords = {
     "community-funded media project"
   ],
 
-  about: [
+  "about": [
     "about The Not Project",
     "our mission and vision",
     "who we are",
@@ -106,7 +106,7 @@ const seoKeywords = {
     "community storytelling origin"
   ],
 
-  profile: [
+  "profile": [
     "user dashboard The Not Project",
     "your NYC stories",
     "contributor profile",
@@ -122,6 +122,4 @@ const seoKeywords = {
     "your storytelling journey",
     "urban storyteller dashboard"
   ]
-};
-
-export default seoKeywords;
+}

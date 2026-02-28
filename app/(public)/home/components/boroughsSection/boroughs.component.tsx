@@ -1,8 +1,9 @@
 "use client";
-
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import clsx from "clsx";
+import boroughs from "@/static/boroughs/boroughs.json";
 import {
   BoroughsSectionContainer,
   Background,
@@ -11,8 +12,6 @@ import {
   ArrowContainer,
 } from "./boroughs.styles";
 import { FiArrowUpRight as Arrow } from "react-icons/fi";
-import clsx from "clsx";
-import { BoroughSummaries } from "@/app/constants/boroughs";
 import {
   FaAngleRight as IconRight,
   FaAngleLeft as IconLeft,
@@ -20,39 +19,35 @@ import {
 
 const BOROUGHS = ["queens", "brooklyn", "manhattan", "bronx", "statenisland"];
 
-const formatBoroughName = (slug: string) => {
-  const overrides: Record<string, string> = {
-    bronx: "The Bronx",
-    statenisland: "Staten Island",
-  };
-  return overrides[slug] || slug.charAt(0).toUpperCase() + slug.slice(1);
-};
-
 export default function Boroughs() {
-  const [data, setData] = useState<{
+  const [activeBorough, setActiveBorough] = useState<{
     index: number;
-    active: string;
+    key: string;
     status: "idle" | "active";
   }>({
     index: 0,
-    active: "queens",
+    key: "queens",
     status: "idle",
   });
 
   const transitionTo = useCallback((nextIndex: number) => {
     const nextSlug = BOROUGHS[nextIndex];
 
-    setData((prev) => ({ ...prev, index: nextIndex, status: "active" }));
+    setActiveBorough((prev) => ({
+      ...prev,
+      index: nextIndex,
+      status: "active",
+    }));
 
     setTimeout(() => {
-      setData((prev) => ({
+      setActiveBorough((prev) => ({
         ...prev,
-        active: nextSlug
+        key: nextSlug,
       }));
     }, 333);
 
-        setTimeout(() => {
-      setData((prev) => ({
+    setTimeout(() => {
+      setActiveBorough((prev) => ({
         ...prev,
         status: "idle",
       }));
@@ -61,30 +56,28 @@ export default function Boroughs() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      transitionTo((data.index + 1) % BOROUGHS.length);
+      transitionTo((activeBorough.index + 1) % BOROUGHS.length);
     }, 10000);
 
     return () => clearInterval(interval);
-  }, [data.index, transitionTo]);
+  }, [activeBorough.index, transitionTo]);
 
-  const summary =
-    BoroughSummaries[
-      data.active.toLowerCase() as keyof typeof BoroughSummaries
-    ];
+  const { name, description } =
+    boroughs[activeBorough.key.toLowerCase() as keyof typeof boroughs];
 
   return (
     <>
       <BoroughsSectionContainer>
-        <div className={`description ${data.status}`}>
-          <h2>{formatBoroughName(data.active)}</h2>
+        <div className={`description ${activeBorough.status}`}>
+          <h2>{name}</h2>
           <hr />
-          <p>{summary.description}</p>
-          <Link href={`stories/${data.active}`}>
+          <p>{description}</p>
+          <Link href={`stories/${activeBorough.key}`}>
             Visit <Arrow />
           </Link>
         </div>
 
-        <Background className={data.status}>
+        <Background className={activeBorough.status}>
           {BOROUGHS.map((borough) => (
             <Image
               key={borough}
@@ -92,7 +85,7 @@ export default function Boroughs() {
               alt={borough}
               style={{
                 objectFit: "cover",
-                display: data.active === borough ? "block" : "none",
+                display: activeBorough.key === borough ? "block" : "none",
               }}
               fill
               sizes="(max-width: 858px) 100vw, (min-width: 850px) 50vw"
@@ -106,7 +99,9 @@ export default function Boroughs() {
         <ArrowContainer
           onClick={() =>
             transitionTo(
-              data.index === 0 ? BOROUGHS.length - 1 : data.index - 1,
+              activeBorough.index === 0
+                ? BOROUGHS.length - 1
+                : activeBorough.index - 1,
             )
           }
         >
@@ -115,11 +110,13 @@ export default function Boroughs() {
         {BOROUGHS.map((borough, idx) => (
           <BoroughButton
             key={borough}
-            className={clsx({ active: data.index === idx })}
+            className={clsx({ active: activeBorough.index === idx })}
           />
         ))}
         <ArrowContainer
-          onClick={() => transitionTo((data.index + 1) % BOROUGHS.length)}
+          onClick={() =>
+            transitionTo((activeBorough.index + 1) % BOROUGHS.length)
+          }
         >
           <IconRight />
         </ArrowContainer>

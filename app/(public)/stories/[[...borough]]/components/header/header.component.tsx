@@ -10,13 +10,9 @@ import Link from "next/link";
 
 type HeaderProps = {
   borough: {
-    fileName: string;
-    boroughName: string;
+    key: string;
+    name: string;
     description: string;
-    quote: {
-      text: string;
-      author: string;
-    };
   };
 };
 
@@ -27,7 +23,7 @@ export default function HeaderComponent({ borough }: HeaderProps) {
       <HeaderPhotoContainer>
         <HeaderPhoto>
           <Image
-            src={`/media/boroughBackdrops/${borough.fileName}.webp`}
+            src={`/media/boroughBackdrops/${borough.key}.webp`}
             alt="borough backdrop"
             fill
             sizes="(max-width: 850px) 100vw, (max-width: 1200px) 45vw, 900px"
@@ -38,7 +34,7 @@ export default function HeaderComponent({ borough }: HeaderProps) {
       </HeaderPhotoContainer>
       <HeaderDescriptionContainer>
         <h1>
-          The {borough.fileName == 'nyc' ? 'City' : 'Borough'} Of <br /> <span>{borough.boroughName}</span>
+          The {borough.key == 'nyc' ? 'City' : 'Borough'} Of <br /> <span>{borough.name}</span>
         </h1>
 
         <p>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styled from "styled-components";
 
 export const OurTeamContainer = styled.div`
@@ -24,7 +25,7 @@ export const TeamBanner = styled.div`
   justify-content: center;
   align-items: center;
   padding: 50px 60px;
-  background-color: #e7e0d6;
+  background-color: #dadada;
 
   @media (max-width: 1100px) {
     padding: 30px 0px;
@@ -73,13 +74,11 @@ export const TeamMemberCard = styled.div`
 export const ProfileImageContainer = styled.figure`
   margin-bottom: 1.2rem;
   overflow: hidden;
-  width: 100%;
   aspect-ratio: 6 / 7;
+  position: relative;
 `;
 
-export const ProfileImage = styled.img`
-  width: 100%;
-  height: 100%;
+export const ProfileImage = styled(Image)`
   object-fit: cover;
   transition: 0.4s ease;
   filter: grayscale(100%);

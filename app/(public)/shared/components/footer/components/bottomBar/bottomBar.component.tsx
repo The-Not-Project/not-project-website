@@ -1,30 +1,12 @@
-'use client'
-
-import Swal from "sweetalert2";
-import ReactDOMServer from "react-dom/server";
 import { BottomBarContainer } from "./bottomBar.styles";
-import PrivacyPolicy from "@/app/constants/privacyPolicy";
+import Link from "next/link";
 
 export default function BottomBar() {
-  const handleClick = () => {
-    const content = ReactDOMServer.renderToString(<PrivacyPolicy />)
-
-    Swal.fire({
-      title: "Privacy Policy",
-      html: content,
-      showCloseButton: true,
-      showConfirmButton: false,
-      allowOutsideClick: true,
-      customClass: {
-        popup: "privacy-popup",
-      },
-    });
-  };
 
   return (
     <BottomBarContainer>
       <p>2026 © The Not Project</p>
-      <p onClick={() => handleClick()}>Privacy Policy</p>
+      <p><Link href="/privacy">Privacy Policy</Link></p>
     </BottomBarContainer>
   );
 }

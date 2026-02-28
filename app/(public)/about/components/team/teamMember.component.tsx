@@ -7,14 +7,19 @@ import {
 type TeamMemberProps = {
   name: string;
   role: string;
-  imageSrc: string;
+  img: string;
 };
 
-export default function TeamMember({ name, role, imageSrc }: TeamMemberProps) {
+export default function TeamMember({ name, role, img }: TeamMemberProps) {
   return (
     <TeamMemberCard>
       <ProfileImageContainer>
-        <ProfileImage src={`/media/${imageSrc}.jpg`} alt={name}/>
+        <ProfileImage
+          src={`/media/${img}`}
+          alt={name}
+          fill
+          sizes="(max-width: 850px) 80vw, 25vw"
+        />
       </ProfileImageContainer>
       <h2>{name}</h2>
       <p>{role}</p>

@@ -1,0 +1,26 @@
+{
+  "bronx": {
+    "name": "The Bronx",
+    "description": "The birthplace of hip-hop, the Bronx pulses with unmatched energy and pride. Here, creativity and community shape a distinct identity. Its streets echo stories of resilience and unwavering spirit. The Bronx stands as a living testament to the power of culture and perseverance."
+  },
+  "manhattan": {
+    "name": "Manhattan",
+    "description": "The pulse of the world beats in Manhattan, a global stage where history and innovation meet. Each street holds stories of ambition and resilience. This borough is a testament to New York’s spirit and influence. Manhattan is NYC’s relentless heart, always evolving, always iconic."
+  },
+  "queens": {
+    "name": "Queens",
+    "description": "A borough defined by resilience, diversity, and ambition. Home to The Not Project, and countless voices that shape NYC’s culture. Queens bridges legacies and dreams, where every street corner holds a promise. It’s where the world comes together, a story waiting to be told."
+  },
+  "brooklyn": {
+    "name": "Brooklyn",
+    "description": "A borough that moves with grit, ambition, and an unshakable sense of identity. From the pulse of its streets to the soul of its art, Brooklyn defines culture instead of chasing it. Where legacy meets evolution. Brooklyn is NYC’s boldest statement. Timeless, unapologetic, and always ahead of the curve."
+  },
+  "statenisland": {
+    "name": "Staten Island",
+    "description": "The city’s quietest borough, but its spirit is anything but subdued. Known affectionately as “Shaolin,” Staten Island blends old-school values with modern energy. Here, strength comes from unity and a deep love for the place called home. NYC’s underdog that is loyal, resilient, and full of heart."
+  },
+  "nyc": {
+    "name": "New York",
+    "description": "NYC is more than just five boroughs—it’s an idea, a heartbeat, a movement. It’s where cultures collide, resilience thrives, and history is made every single day. This is New York, the greatest city in the world."
+  }
+}

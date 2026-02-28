@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { profilePageMetadata } from "@/app/constants/metadata";
+import { profilePageMetadata } from "@/static/metadata/metadata";
 import { auth0 } from "@/lib/auth0";
 import PersonalInformation from "./personal-info/personal-info.component";
 import SavedStories from "./saved-stories/savedStories.component";

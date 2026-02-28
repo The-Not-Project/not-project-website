@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import DonatePage from "./donatePage";
-import { donatePageMetadata } from "@/app/constants/metadata";
+import { donatePageMetadata } from "@/static/metadata/metadata";
 
 export const metadata : Metadata = donatePageMetadata
 

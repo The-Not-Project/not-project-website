@@ -11,6 +11,7 @@ export async function GET() {
     "/donate",
     "/profile",
     "/stories",
+    "/privacy"
   ];
   const staticUrls = staticRoutes.map(
     (route) => `

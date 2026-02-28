@@ -1,4 +1,4 @@
-import { getStoryMetadata } from "@/app/constants/metadata";
+import { getStoryMetadata } from "@/static/metadata/metadata";
 import { StoryWrapper, StoryContainer } from "./components/style";
 import { Suspense } from "react";
 import StoryContent from "./components/storyContent/storyContent.component";

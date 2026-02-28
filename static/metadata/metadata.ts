@@ -1,5 +1,5 @@
-import { Story } from "../types/types";
-import seoKeywords from "./seoKeywords";
+import { Story } from "@/app/types/types";
+import seoKeywords from "./seo-keywords.json";
 
 const getImageUrl = (path: string) => {
   const version = "v=2.0"; 

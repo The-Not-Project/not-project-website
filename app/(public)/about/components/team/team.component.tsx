@@ -1,25 +1,10 @@
 import { OurTeamContainer, TeamList, TeamBanner } from "./team.styles";
 import TeamMember from "./teamMember.component";
+import teamMembers from "@/static/about/team.json"
 
 export default function Team() {
 
-  const teamMembers = [
-    {
-      name: "Lorenzo Gonzalez",
-      role: "Founder",
-      imageSrc: "lorenzowithShades"
-    },
-    {
-      name: "Tariq El Ghayate",
-      role: "Co Founder",
-      imageSrc: "tariqWithHeadphones"
-    },
-    {
-      name: "Sebastian Torres",
-      role: "Co Founder",
-      imageSrc: "SebastianSideProf"
-    }
-  ];
+
 
   return (
     <OurTeamContainer>
@@ -32,7 +17,7 @@ export default function Team() {
               key={member.name}
               name={member.name}
               role={member.role}
-              imageSrc={member.imageSrc}
+              img={member.img}
             />
           ))}
         </TeamList>

@@ -1,3 +1,5 @@
+import { getVercelOidcToken } from "@vercel/oidc";
+
 type ApiResponse<T> = {
   data: T | null;
   error: string | null;
@@ -13,12 +15,11 @@ export async function internalApiFetch<T>(
   endpoint: string,
   { params, body, ...options }: FetchOptions = {},
 ): Promise<ApiResponse<T>> {
-  const baseUrl = process.env.INTERNAL_API_URL;
-  const apiKey = process.env.INTERNAL_API_KEY;
+  const baseUrl = "https://api.thenotproject.com";
 
-  if (!apiKey) {
-    return { data: null, error: "Internal Configuration Error: Missing API Key", status: 500 };
-  }
+  const token = await getVercelOidcToken();
+
+  if (!token) throw new Error("No OIDC token");
 
   const url = new URL(
     `${baseUrl}${endpoint.startsWith("/") ? "" : "/"}${endpoint}`,
@@ -34,8 +35,7 @@ export async function internalApiFetch<T>(
 
   const headers = new Headers(options.headers);
 
-  headers.set("x-api-key", apiKey);
-
+  headers.set("Authorization", `Bearer ${token}`);
 
   if (body && !(body instanceof FormData) && !headers.has("Content-Type")) {
     headers.set("Content-Type", "application/json");
@@ -45,10 +45,14 @@ export async function internalApiFetch<T>(
     const response = await fetch(url.toString(), {
       ...options,
       headers,
-      body: !body ? undefined : (body instanceof FormData ? body : JSON.stringify(body)),
+      body: !body
+        ? undefined
+        : body instanceof FormData
+          ? body
+          : JSON.stringify(body),
     });
 
-    const status = response.status;
+    const status = response.status;    
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));

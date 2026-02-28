@@ -1,4 +1,4 @@
-import { BoroughSummaries } from "@/app/constants/boroughs";
+import boroughs from "@/static/boroughs/boroughs.json";
 import HeaderComponent from "./components/header/header.component";
 import { SectionTitle, StoriesContainer } from "./components/style";
 import SearchWrapper from "./components/searchWrapper/searchWrapper.component";
@@ -6,7 +6,7 @@ import { Suspense } from "react";
 import StoriesWrapper from "./components/storiesWrapper/storiesWrapper.component";
 import StoriesSearchSkeleton from "./components/storiesSearch/storiesSearch..skeleton";
 import { Metadata } from "next";
-import { storiesPageMetadata } from "@/app/constants/metadata";
+import { storiesPageMetadata } from "@/static/metadata/metadata";
 import StoriesListSkeleton from "./components/storiesList/storiesList.skeleton";
 
 export const metadata : Metadata = storiesPageMetadata
@@ -21,9 +21,8 @@ export default async function Page({ params, searchParams }: PageProps) {
 
   const boroughSlug = borough?.[0];
 
-  const boroughKey = (boroughSlug?.toLowerCase() ||
-    "nyc") as keyof typeof BoroughSummaries;
-  const currentBorough = BoroughSummaries[boroughKey] || BoroughSummaries.nyc;
+  const boroughKey = (boroughSlug?.toLowerCase() as keyof typeof boroughs) ?? "nyc"
+  const currentBorough = boroughs[boroughKey] ?? boroughs.nyc;
 
   const selectedCategories = Array.isArray(cat) ? cat : cat ? [cat] : [];
 
@@ -35,10 +34,10 @@ export default async function Page({ params, searchParams }: PageProps) {
 
   return (
     <main>
-      <HeaderComponent borough={currentBorough} />
+      <HeaderComponent borough={{...currentBorough, key: boroughKey}} />
       <SectionTitle>
         <h2>OUR ORIGINAL WORK</h2>
-        <h3>Stories Of {currentBorough.boroughName}</h3>
+        <h3>Stories Of {currentBorough.name}</h3>
       </SectionTitle>
       <StoriesContainer>
         <Suspense fallback={<StoriesSearchSkeleton />}>
@@ -47,7 +46,7 @@ export default async function Page({ params, searchParams }: PageProps) {
         <Suspense fallback={<StoriesListSkeleton />}>
           <StoriesWrapper
             filters={filters}
-            boroughName={currentBorough.boroughName}
+            boroughName={currentBorough.name}
           />
         </Suspense>
       </StoriesContainer>

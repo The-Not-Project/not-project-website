@@ -1,4 +1,4 @@
-import StyledComponentsRegistry from "../utils/registry";
+import StyledComponentsRegistry from "@/lib/styled-registry";
 import NavBar from "./shared/components/navbar/navbar.component";
 import Footer from "./shared/components/footer/footer.component";
 
