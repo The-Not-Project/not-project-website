@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "scontent-lga3-3.cdninstagram.com",
+        hostname: "i.postimg.cc",
         pathname: "/**",
       },
     ],
