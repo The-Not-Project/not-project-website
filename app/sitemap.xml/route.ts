@@ -1,4 +1,4 @@
-import { getStoriesAction } from "@/lib/internal-api/actions/story.actions";
+import { getStoriesAction } from "@/lib/core-api/actions/story.actions";
 
 export async function GET() {
   const baseUrl = "https://www.thenotproject.com";

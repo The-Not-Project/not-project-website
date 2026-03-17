@@ -1,5 +1,5 @@
 // app/your-page/StoriesWrapper.tsx
-import { getStoriesAction } from "@/lib/internal-api/actions/story.actions";
+import { getStoriesAction } from "@/lib/core-api/actions/story.actions";
 import StoriesList from "../storiesList/storiesList.component";
 import { Filters } from "@/app/types/types";
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Fragment } from "react";
 import { getSession } from "@/lib/auth/actions/getSession";
-import { getStoryAction } from "@/lib/internal-api/actions/story.actions";
+import { getStoryAction } from "@/lib/core-api/actions/story.actions";
 import {
   CategoriesContainer,
   ErrorMessage,

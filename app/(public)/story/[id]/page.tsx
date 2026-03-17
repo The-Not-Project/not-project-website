@@ -3,7 +3,7 @@ import { StoryWrapper, StoryContainer } from "./components/style";
 import { Suspense } from "react";
 import StoryContent from "./components/storyContent/storyContent.component";
 import StorySkeleton from "./components/storySkeleton/story.skeleton";
-import { getStoryAction } from "@/lib/internal-api/actions/story.actions";
+import { getStoryAction } from "@/lib/core-api/actions/story.actions";
 
 export async function generateMetadata({
   params,

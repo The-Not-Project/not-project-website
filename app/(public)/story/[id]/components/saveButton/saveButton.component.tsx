@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
 import { SaveButton } from "./saveButton.styles";
 import clsx from "clsx";
-import { createStorySaveAction, deleteStorySaveAction } from "@/lib/internal-api/actions/story.actions";
+import { createStorySaveAction, deleteStorySaveAction } from "@/lib/core-api/actions/story.actions";
 
 export default function SaveButtonClient({ 
   storyId, initialSaved, userId 

@@ -22,7 +22,7 @@ import {
   FilterOptionsContainer as BoroughsContainer,
   FilterOption as BoroughOption,
 } from "../../../stories/components/storiesFilteredSearch/storiesFilteredSearch.styles";
-import { getCategoriesAction } from "@/lib/internal-api/actions/categories.actions";
+import { getCategoriesAction } from "@/lib/core-api/actions/categories.actions";
 
 type FormProps = {
   story: Story;

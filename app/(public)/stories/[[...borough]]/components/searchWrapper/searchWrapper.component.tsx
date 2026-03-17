@@ -1,4 +1,4 @@
-import { getActiveCategoriesAction } from "@/lib/internal-api/actions/categories.actions";
+import { getActiveCategoriesAction } from "@/lib/core-api/actions/categories.actions";
 import StoriesSearch from "../storiesSearch/storiesSearch.component";
 import { Filters } from "@/app/types/types";
 

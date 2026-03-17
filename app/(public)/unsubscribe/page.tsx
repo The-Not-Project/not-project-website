@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { deleteSubscriberAction } from "@/lib/internal-api/actions/user.actions";
+import { deleteSubscriberAction } from "@/lib/core-api/actions/user.actions";
 import { PageContainer, UnsubscribeButton, UnsubscribeInput } from "./styles";
 import { FormLabel } from "../profile/personal-info/personal-info.styles";
 

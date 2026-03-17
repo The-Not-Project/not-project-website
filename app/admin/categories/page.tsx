@@ -1,4 +1,4 @@
-import { getCategoriesAction } from "@/lib/internal-api/actions/categories.actions";
+import { getCategoriesAction } from "@/lib/core-api/actions/categories.actions";
 import { PageSection, SectionTitle } from "../shared/components/layout/Section";
 import CategoriesTable from "./components/categoriesTable/categoriesTable.component";
 import CategoryFormPopup from "./components/categoryFormPopup/categoryFormOpup.component";
@@ -6,7 +6,7 @@ import { OpenCreateButton } from "./components/categoriesTable/tableButtons";
 import {
   createCategoryAction,
   editCategoryAction,
-} from "@/lib/internal-api/actions/categories.actions";
+} from "@/lib/core-api/actions/categories.actions";
 
 export default async function CategoriesPage({
   searchParams,

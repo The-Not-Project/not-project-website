@@ -9,7 +9,7 @@ import {
 } from "../../../recommendations/components/recommendationsList/recommendationsList.styles";
 import { FaPlus as PlusSign } from "react-icons/fa6";
 import { useCallback, useState, useTransition } from "react";
-import { getStoriesAction } from "@/lib/internal-api/actions/story.actions";
+import { getStoriesAction } from "@/lib/core-api/actions/story.actions";
 
 const defaultFilters = {
   search: "",

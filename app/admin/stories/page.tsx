@@ -9,8 +9,8 @@ import StoriesToggle from "./components/StoriesToggle/storiesToggle.component";
 import {
   getHiddenStoriesAction,
   getStoriesAction,
-} from "@/lib/internal-api/actions/story.actions";
-import { getCategoriesAction } from "@/lib/internal-api/actions/categories.actions";
+} from "@/lib/core-api/actions/story.actions";
+import { getCategoriesAction } from "@/lib/core-api/actions/categories.actions";
 
 interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

@@ -10,7 +10,7 @@ import {
   FormContainer,
 } from "./form.styles";
 import Link from "next/link";
-import { sendContactEmailAction } from "@/lib/internal-api/actions/contact.actions";
+import { sendContactEmailAction } from "@/lib/core-api/actions/contact.actions";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(

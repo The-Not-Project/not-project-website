@@ -1,42 +1,40 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useTransition } from "react";
 import { authClient } from "@/lib/auth";
-import {
-  ErrorMessage,
-  Notice,
-  SocialsHeader,
-} from "../styles";
+import { ErrorMessage, Notice, SocialsHeader } from "../styles";
 import { FaGoogle } from "react-icons/fa6";
-import { useState } from "react";
-
+import Loader from "@/app/(public)/shared/components/loader/loader";
 
 export default function Page() {
   const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   async function handleLogin(formData: FormData) {
-    setError(null);
+    startTransition(async () => {
+      setError(null);
+      const email = formData.get("email") as string;
+      const password = formData.get("password") as string;
 
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
+      const { error: authError } = await authClient.signIn.email({
+        email,
+        password,
+        callbackURL: "/",
+      });
 
-    const { error: authError } = await authClient.signIn.email({
-      email,
-      password,
-      callbackURL: "/",
+      if (authError) {
+        setError(authError.message || "An unexpected error occured.");
+      } else {
+        window.location.href = "/";
+      }
     });
-
-    if (authError) {
-      setError(authError.message || "An unexpected error occured.");
-    } else {
-      window.location.href = "/";
-    }
   }
 
   const loginWithGoogle = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "https://www.thenotproject.com",
+      callbackURL: process.env.NEXT_PUBLIC_APP_BASE_URL,
     });
   };
 
@@ -56,10 +54,18 @@ export default function Page() {
         <label htmlFor="password">
           Password <Link href="/forgot-password"> Forgot your password?</Link>
         </label>
-        <input id="password" name="password" type="password" placeholder="●●●●●●●" required />
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="●●●●●●●"
+          required
+        />
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
-        <button type="submit">Sign In</button>
+        <button type="submit" disabled={isPending}>
+          {isPending ? <Loader /> : "Sign In"}
+        </button>
       </form>
 
       <p className="redirect">

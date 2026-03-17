@@ -1,5 +1,5 @@
 import EditStoryForm from "./editForm";
-import { getStoryAction, updateStoryAction } from "@/lib/internal-api/actions/story.actions";
+import { getStoryAction, updateStoryAction } from "@/lib/core-api/actions/story.actions";
 
 export default async function Page({
   params,

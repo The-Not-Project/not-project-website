@@ -1,7 +1,7 @@
 import { PageSection, SectionTitle } from "../shared/components/layout/Section";
 import RecommendationsList from "./components/recommendationsList/recommendationsList.component";
 import RecommendationSearch from "../stories/components/storiesSearch/storiesSearch.component";
-import { addRecommendationAction, getRecommendationsAction } from "@/lib/internal-api/actions/recommendations.actions";
+import { addRecommendationAction, getRecommendationsAction } from "@/lib/core-api/actions/recommendations.actions";
 
 export default async function RecommendationsPage() {
 

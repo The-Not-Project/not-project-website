@@ -3,7 +3,7 @@
 
 import { useRouter } from "next/navigation";
 import { Button } from "../../../shared/components/button/button";
-import { deleteCategoryAction } from "@/lib/internal-api/actions/categories.actions";
+import { deleteCategoryAction } from "@/lib/core-api/actions/categories.actions";
 
 export function OpenCreateButton() {
   const router = useRouter();

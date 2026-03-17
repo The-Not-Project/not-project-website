@@ -10,7 +10,7 @@ import {
   Headline,
   SectionTitle,
 } from "./footer.styles";
-import { createSubscriberAction } from "@/lib/internal-api/actions/user.actions";
+import { createSubscriberAction } from "@/lib/core-api/actions/user.actions";
 
 export default function Footer() {
   return (

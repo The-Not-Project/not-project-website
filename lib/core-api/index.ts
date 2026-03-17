@@ -15,7 +15,7 @@ export async function internalApiFetch<T>(
   endpoint: string,
   { params, body, ...options }: FetchOptions = {},
 ): Promise<ApiResponse<T>> {
-  const baseUrl = process.env.INTERNAL_API_URL;
+  const baseUrl = process.env.CORE_API_URL;
 
   const token = await getVercelOidcToken();
 

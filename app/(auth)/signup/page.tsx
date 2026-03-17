@@ -1,41 +1,46 @@
 "use client";
 
+import { useState, useTransition } from "react";
+import Link from "next/link";
 import { authClient } from "@/lib/auth";
 import { ErrorMessage, Notice, SocialsHeader } from "../styles";
-import Link from "next/link";
 import { FaGoogle } from "react-icons/fa6";
-import { useState } from "react";
+import Loader from "@/app/(public)/shared/components/loader/loader";
 
 export default function SignUp() {
   const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
   const handleSignUp = async (formData: FormData) => {
-    setError(null);
-    const firstName = formData.get("firstName") as string;
-    const lastName = formData.get("lastName") as string;
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
+    startTransition(async () => {
+      setError(null);
+      const firstName = formData.get("firstName") as string;
+      const lastName = formData.get("lastName") as string;
+      const email = formData.get("email") as string;
+      const password = formData.get("password") as string;
 
-    const { error: authError } = await authClient.signUp.email({
-      email,
-      password,
-      name: `${firstName} ${lastName}`,
-      firstName,
-      lastName,
-      role: "user",
-      callbackURL: "/",
+      const { error: authError } = await authClient.signUp.email({
+        email,
+        password,
+        name: `${firstName} ${lastName}`,
+        firstName,
+        lastName,
+        role: "user",
+        callbackURL: "/",
+      });
+
+      if (authError) {
+        setError(authError.message || "An unexpected error occured.");
+      } else {
+        window.location.href = "/";
+      }
     });
-
-    if (authError) {
-      setError(authError.message || "An unexpected error occured.");
-    } else {
-      window.location.href = "/";
-    }
   };
 
   const loginWithGoogle = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "https://www.thenotproject.com",
+      callbackURL: process.env.NEXT_PUBLIC_APP_BASE_URL,
     });
   };
 
@@ -68,7 +73,9 @@ export default function SignUp() {
         />
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={isPending}>
+          {isPending ? <Loader /> : "Sign Up"}
+        </button>
       </form>
       <p className="redirect">
         Already have an account? <Link href="/signin">Sign in</Link>

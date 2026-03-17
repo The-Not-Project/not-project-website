@@ -1,4 +1,4 @@
-import { getSavedStoriesAction } from "@/lib/internal-api/actions/story.actions";
+import { getSavedStoriesAction } from "@/lib/core-api/actions/story.actions";
 import { PageSection, SectionDescription } from "../styles";
 import { StoriesContainer } from "./savedStories.styles";
 import SavedStory from "./savedStory.component";

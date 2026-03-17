@@ -1,4 +1,4 @@
-import { getRadarStoryAction, updateRadarStoryAction } from "@/lib/internal-api/actions/radar.actions";
+import { getRadarStoryAction, updateRadarStoryAction } from "@/lib/core-api/actions/radar.actions";
 import { PageSection, SectionTitle } from "../shared/components/layout/Section";
 import StoriesSearch from "../stories/components/storiesSearch/storiesSearch.component";
 import RadarStory from "./components/radarStory/radarStory.component";

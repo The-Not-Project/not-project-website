@@ -22,7 +22,7 @@ import {
   FilterOptionsContainer as BoroughsContainer,
   FilterOption as BoroughOption,
 } from "../../stories/components/storiesFilteredSearch/storiesFilteredSearch.styles";
-import { getCategoriesAction } from "@/lib/internal-api/actions/categories.actions";
+import { getCategoriesAction } from "@/lib/core-api/actions/categories.actions";
 
 export default function CreateStoryForm({
   createAction,

@@ -1,4 +1,4 @@
-import { getRadarStoryAction } from "@/lib/internal-api/actions/radar.actions";
+import { getRadarStoryAction } from "@/lib/core-api/actions/radar.actions";
 import RadarCardClient from "./components/radarCardClient.component"
 
 export default async function RadarCard() {

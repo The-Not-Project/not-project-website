@@ -5,7 +5,7 @@ import {
   StoryImageContainer,
 } from "./storyCard.styles";
 import StoryActions from "../storyActions/storyActions.component";
-import { unpublishStoryAction, republishStoryAction } from "@/lib/internal-api/actions/story.actions";
+import { unpublishStoryAction, republishStoryAction } from "@/lib/core-api/actions/story.actions";
 
 
 export default function StoryCard({ story }: { story: CompactStory }) {

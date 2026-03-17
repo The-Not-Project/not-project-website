@@ -10,7 +10,7 @@ import {
 import RecommendationCard from "./recommendationCard.component";
 import { FiArrowUpRight as Arrow } from "react-icons/fi";
 import RecommendationsPlaceholder from "./recommendation.placeholder";
-import { getRecommendationsAction } from "@/lib/internal-api/actions/recommendations.actions";
+import { getRecommendationsAction } from "@/lib/core-api/actions/recommendations.actions";
 
 export default async function Recommendations() {
   const { stories: recommendations, success } =

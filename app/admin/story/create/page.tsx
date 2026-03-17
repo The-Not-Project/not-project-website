@@ -1,4 +1,4 @@
-import { createStoryAction } from "@/lib/internal-api/actions/story.actions";
+import { createStoryAction } from "@/lib/core-api/actions/story.actions";
 import CreateStoryForm from "./createForm";
 
 export default function Page() {
