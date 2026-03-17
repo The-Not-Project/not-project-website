@@ -35,7 +35,7 @@ export default function SignUp() {
   const loginWithGoogle = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/",
+      callbackURL: "https://thenotproject.com",
     });
   };
 
