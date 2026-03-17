@@ -10,6 +10,7 @@ import {
 } from "./navbar.styles";
 import NavBarClient from "./navbarClient/navbar.client";
 import { getSession } from "@/lib/auth/actions/getSession";
+import SignOutButton from "./navbarClient/signoutButton.component";
 
 export default async function NavBar() {
   const session = await getSession();
@@ -38,11 +39,7 @@ export default async function NavBar() {
         {isAdmin && <Link href="/admin">Admin</Link>}
       </LinksList>
 
-      <AuthContainer className="desktop">
-        <AuthLink href={`/${authenticated ? "signout" : "signin"}`}>
-          {authenticated ? "Sign Out" : "Sign In"}
-        </AuthLink>
-      </AuthContainer>
+      <SignOutButton authenticated={authenticated} isMobile={false} />
     </NavBarContainer>
   );
 }

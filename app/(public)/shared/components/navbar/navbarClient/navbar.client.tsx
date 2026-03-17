@@ -10,13 +10,17 @@ import {
   AuthContainer,
   AuthLink,
 } from "../navbar.styles";
+import SignOutButton from "./signoutButton.component";
 
 interface NavBarClientProps {
   authenticated: boolean;
   isAdmin: boolean;
 }
 
-export default function NavBarClient({ authenticated, isAdmin }: NavBarClientProps) {
+export default function NavBarClient({
+  authenticated,
+  isAdmin,
+}: NavBarClientProps) {
   useNavbarTransparency();
 
   const openMenu = () => (document.body.dataset.menuOpen = String(true));
@@ -50,17 +54,29 @@ export default function NavBarClient({ authenticated, isAdmin }: NavBarClientPro
 
       <MobileMenu>
         <X className="close" onClick={closeMenu} />
-        <Link href="/" onClick={closeMenu}>Home</Link>
-        {isAdmin && <Link href="/admin" onClick={closeMenu}>Admin</Link>}
-        {authenticated && <Link href="/profile" onClick={closeMenu}>Profile</Link>}
-        <Link href="/stories" onClick={closeMenu}>Stories</Link>
-        <Link href="/about" onClick={closeMenu}>About</Link>
-        <Link href="/contact" onClick={closeMenu}>Contact</Link>
-        <AuthContainer>
-          <AuthLink href={`/${authenticated ? "signout" : "signin"}`}>
-            {authenticated ? "Sign Out" : "Sign In"}
-          </AuthLink>
-        </AuthContainer>
+        <Link href="/" onClick={closeMenu}>
+          Home
+        </Link>
+        {isAdmin && (
+          <Link href="/admin" onClick={closeMenu}>
+            Admin
+          </Link>
+        )}
+        {authenticated && (
+          <Link href="/profile" onClick={closeMenu}>
+            Profile
+          </Link>
+        )}
+        <Link href="/stories" onClick={closeMenu}>
+          Stories
+        </Link>
+        <Link href="/about" onClick={closeMenu}>
+          About
+        </Link>
+        <Link href="/contact" onClick={closeMenu}>
+          Contact
+        </Link>
+        <SignOutButton authenticated={authenticated} isMobile={true} />
       </MobileMenu>
     </>
   );
