@@ -65,6 +65,18 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: "/callback/google",
+        destination: `${process.env.AUTH_API_URL}/callback/google`,
+      },
+      {
+        source: "/api/auth/:path*",
+        destination: `${process.env.AUTH_API_URL}/:path*`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

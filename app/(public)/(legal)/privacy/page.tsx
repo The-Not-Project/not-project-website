@@ -1,9 +1,14 @@
 import privacyData from "@/static/legal/privacy-data.json";
-import { PrivacyContainer } from "./styles";
+import { LegalContainer } from "../styles";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy | The Not Project',
+};
 
 export default function page() {
   return (
-    <PrivacyContainer>
+    <LegalContainer>
       <h1>The Not Project Privacy Policy</h1>
       {privacyData.sections.map((section) => (
         <div key={section.id}>
@@ -12,6 +17,6 @@ export default function page() {
         </div>
       ))}
       <p className="date">Last Updated: {privacyData.lastUpdated}</p>
-    </PrivacyContainer>
+    </LegalContainer>
   );
 }

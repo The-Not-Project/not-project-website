@@ -25,7 +25,7 @@ export default function StoriesList({
             />
           ))}
           <Button className="cornered">
-            <Link href="/admin/story/create">Add</Link>
+            <Link href="/admin/story/create">Create</Link>
           </Button>
         </StoriesContainer>
       )}

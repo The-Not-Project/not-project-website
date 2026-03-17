@@ -33,6 +33,7 @@ export const ThumbnailContainer = styled.div`
 
   img {
     margin: 0;
+    object-fit: cover;
   }
 
     @media (max-width: 850px) {

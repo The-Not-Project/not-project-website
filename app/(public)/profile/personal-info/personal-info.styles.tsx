@@ -8,6 +8,32 @@ export const Disabled = styled(FaBan)`
   opacity: 0.8;
 `;
 
+export const VerifiedStatus = styled.div`
+  position: absolute;
+  bottom: 50px;
+  right: 5px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    color: #84a59d;
+  }
+
+  button {
+    background: none;
+    color: #ffffff;
+    border: none;
+    font-size: inherit;
+    cursor: pointer;
+    text-transform: inherit;
+    letter-spacing: inherit;
+  }
+`;
+
 export const StyledForm = styled.form`
   width: 100%;
   display: grid;
@@ -94,3 +120,21 @@ export const ButtonsContainer = styled.div`
     margin-top: 5px;
   }
 `;
+
+export const FallbackNotice = styled.div`
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: #838383;
+  margin-top: -10px;
+  margin-bottom: 10px;
+`;
+
+export const SuccessMessage = styled.p`
+  grid-column: 1 / -1;
+  margin-block: -35px 20px;
+  font-size: 0.9rem;
+  color: #84a59d;
+`

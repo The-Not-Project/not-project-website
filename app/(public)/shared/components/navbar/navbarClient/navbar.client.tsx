@@ -57,7 +57,7 @@ export default function NavBarClient({ authenticated, isAdmin }: NavBarClientPro
         <Link href="/about" onClick={closeMenu}>About</Link>
         <Link href="/contact" onClick={closeMenu}>Contact</Link>
         <AuthContainer>
-          <AuthLink href={`/auth/${authenticated ? "logout" : "login"}`}>
+          <AuthLink href={`/${authenticated ? "signout" : "signin"}`}>
             {authenticated ? "Sign Out" : "Sign In"}
           </AuthLink>
         </AuthContainer>

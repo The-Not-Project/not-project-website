@@ -8,14 +8,13 @@ import {
   AuthLink,
   ImageLink,
 } from "./navbar.styles";
-import { auth0 } from "@/lib/auth0";
 import NavBarClient from "./navbarClient/navbar.client";
+import { getSession } from "@/lib/auth/actions/getSession";
 
 export default async function NavBar() {
-  const session = await auth0.getSession();
-  
+  const session = await getSession();
   const authenticated = !!session;
-  const isAdmin = session?.user?.roles.includes('admin'); 
+  const isAdmin = session?.user?.role === "admin";
 
   return (
     <NavBarContainer>
@@ -25,7 +24,7 @@ export default async function NavBar() {
           alt="The Not Project Logo"
           fill
           sizes="120px"
-          priority 
+          priority
         />
       </ImageLink>
 
@@ -40,7 +39,7 @@ export default async function NavBar() {
       </LinksList>
 
       <AuthContainer className="desktop">
-        <AuthLink href={`/auth/${authenticated ? "logout" : "login"}`}>
+        <AuthLink href={`/${authenticated ? "signout" : "signin"}`}>
           {authenticated ? "Sign Out" : "Sign In"}
         </AuthLink>
       </AuthContainer>

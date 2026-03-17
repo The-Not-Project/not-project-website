@@ -1,6 +1,4 @@
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
-import { auth0 } from "../../lib/auth0";
 import { AdminContainer } from "./shared/components/layout/layout.styles";
 import NavBar from "./shared/components/navbar/navbar.component";
 import Back from "./shared/components/backButton/backButton.component";
@@ -16,12 +14,6 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth0.getSession();
-
-  if (!session?.user.roles.includes("admin")) {
-    redirect("/auth/login");
-  }
-
   return (
     <AdminContainer>
       <Back />

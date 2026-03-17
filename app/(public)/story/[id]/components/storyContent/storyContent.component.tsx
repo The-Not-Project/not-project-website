@@ -1,4 +1,8 @@
-import { auth0 } from "@/lib/auth0";
+import Link from "next/link";
+import Image from "next/image";
+import { Fragment } from "react";
+import { getSession } from "@/lib/auth/actions/getSession";
+import { getStoryAction } from "@/lib/internal-api/actions/story.actions";
 import {
   CategoriesContainer,
   ErrorMessage,
@@ -6,16 +10,12 @@ import {
   ThumbnailContainer,
 } from "../style";
 import SaveButton from "../saveButton/saveButton.component";
-import { Fragment } from "react";
-import Image from "next/image";
-import { getStoryAction } from "@/lib/internal-api/actions/story.actions";
-import Link from "next/link";
 import "@/lib/tiptap/components/tiptap-node/paragraph-node/paragraph-node.scss"
 import "@/lib/tiptap/components/tiptap-node/image-node/image-node.scss"
 
 export default async function StoryContent({ id }: { id: string }) {
-  const session = await auth0.getSession();
-  const user = session?.user;
+  const session = await getSession();
+  const user = session?.user;  
 
   const { story, success, status, message } = await getStoryAction(id);
 
@@ -44,7 +44,7 @@ export default async function StoryContent({ id }: { id: string }) {
         <SaveButton
           storyId={id}
           initialSaved={story.isSaved}
-          userId={user?.sub}
+          userId={user?.id}
         />
         {story.categories.map((category, index) => (
           <Fragment key={category.id}>

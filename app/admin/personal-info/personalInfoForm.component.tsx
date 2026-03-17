@@ -1,78 +1,84 @@
-'use client';
-import { PageSection, SectionTitle } from '../shared/components/layout/Section';
-import { FormLabel, FormInput } from '../shared/components/form/FormElements';
-import { Button, ButtonsContainer } from '../shared/components/button/button';
-import { useState } from 'react';
+"use client";
+import { FormLabel, FormInput } from "../shared/components/form/FormElements";
+import { Button, ButtonsContainer } from "../shared/components/button/button";
+import { useState } from "react";
+import { authClient } from "@/lib/auth";
+import { useRouter } from "next/navigation";
 
 type FormProps = {
-  userInfo: {
-    email: string,
-    firstName: string,
-    lastName: string
+  user: {
+    email: string;
+    firstName: string;
+    lastName: string;
   };
-  updateAction: (formData: FormData) => Promise<{ success: boolean; message: string; }>;
-}
+};
 
-export default function PersonalInformationForm({userInfo, updateAction}: FormProps) {
-
+export default function PersonalInformationForm({ user }: FormProps) {
+  const router = useRouter()
   const [disabled, setDisabled] = useState(true);
 
-
-
-  const handleAction = async (formData: FormData) => {
+  async function handleUpdate(formData: FormData) {
+    const firstName = formData.get("firstName");
+    const lastName = formData.get("lastName");
     try {
-      await updateAction(formData);
+      const {error} = await authClient.updateUser({
+        firstName: firstName as string,
+        lastName: lastName as string,
+        name: `${firstName} ${lastName}`,
+      });
+
+      if (!error) router.refresh()
       setDisabled(true);
     } catch (error) {
-      console.error('Failed to update user:', error);
+      console.error("Update failed:", error);
     }
-  };
+  }
 
   return (
-      <form action={handleAction}>
-        <FormLabel htmlFor='firstName'>First Name</FormLabel>
-        <FormInput
-          type='text'
-          id='firstName'
-          name='firstName'
-          defaultValue={userInfo.firstName}
-          disabled={disabled}
-          required
-        />
-        <FormLabel htmlFor='lastName'>Last Name</FormLabel>
-        <FormInput
-          type='text'
-          id='lastName'
-          name='lastName'
-          defaultValue={userInfo.lastName}
-          disabled={disabled}
-          required
-        />
-        <FormLabel htmlFor='email'>Email</FormLabel>
-        <FormInput
-          type='text'
-          id='email'
-          name='email'
-          defaultValue={userInfo.email}
-          disabled
-          required
-        />
-        {disabled ? (
-          <Button type='button' onClick={() => setDisabled(false)}>
-            Edit
+    <form action={handleUpdate}>
+      <FormLabel htmlFor="firstName">First Name</FormLabel>
+      <FormInput
+        type="text"
+        id="firstName"
+        name="firstName"
+        defaultValue={user.firstName}
+        disabled={disabled}
+        required
+      />
+      <FormLabel htmlFor="lastName">Last Name</FormLabel>
+      <FormInput
+        type="text"
+        id="lastName"
+        name="lastName"
+        defaultValue={user.lastName}
+        disabled={disabled}
+        required
+      />
+      <FormLabel htmlFor="email">Email</FormLabel>
+      <FormInput
+        type="text"
+        id="email"
+        name="email"
+        defaultValue={user.email}
+        disabled
+        required
+      />
+      {disabled ? (
+        <Button type="button" onClick={() => setDisabled(false)}>
+          Edit
+        </Button>
+      ) : (
+        <ButtonsContainer>
+          <Button
+            type="button"
+            className="inverted"
+            onClick={() => setDisabled(true)}
+          >
+            Cancel
           </Button>
-        ) : (
-          <ButtonsContainer>
-            <Button
-              type='button'
-              className='inverted'
-              onClick={() => setDisabled(true)}
-            >
-              Cancel
-            </Button>
-            <Button type='submit'>Save</Button>
-          </ButtonsContainer>
-        )}
-      </form>
+          <Button type="submit">Save</Button>
+        </ButtonsContainer>
+      )}
+    </form>
   );
 }

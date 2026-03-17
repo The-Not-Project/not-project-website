@@ -2,10 +2,8 @@
 
 import { internalApiFetch } from "..";
 import { CompactStory, Filters, Story } from "@/app/types/types";
-import { auth0 } from "@/lib/auth0";
-import { redirect } from "next/navigation";
-import { getUserAction } from "./user.actions";
 import { updateTag } from "next/cache";
+import { headers } from "next/headers";
 
 export async function getStoriesAction(filters?: Filters) {
   const { data, error } = await internalApiFetch<CompactStory[]>("/stories", {
@@ -62,14 +60,14 @@ export async function getHiddenStoriesAction() {
 }
 
 export async function getStoryAction(id: string) {
-  const session = await auth0.getSession();
-  const userId = session?.user?.sub || undefined;
+  const headerList = await headers();
+  const userId = headerList.get("x-user-id") ?? undefined;
 
   const { data, error, status } = await internalApiFetch<Story>(
     `/stories/s/${id}`,
     {
       method: "GET",
-      params: { userId },
+      params: userId ? { userId } : {},
       next: {
         revalidate: 300,
         tags: [`story-${id}`],
@@ -95,18 +93,8 @@ export async function getStoryAction(id: string) {
 
 export const getSavedStoriesAction = async () => {
   try {
-    const session = await auth0.getSession();
-
-    if (!session || !session.user) {
-      return {
-        success: false,
-        message: "You must be logged in to view saved stories.",
-        status: 401,
-        stories: [],
-      };
-    }
-
-    const userId = session.user.sub;
+    const headerList = await headers();
+    const userId = headerList.get("x-user-id") ?? undefined;
 
     const { data, error, status } = await internalApiFetch<CompactStory[]>(
       `/stories/saved/${userId}`,
@@ -142,20 +130,16 @@ export const getSavedStoriesAction = async () => {
 
 export async function createStoryAction(formData: FormData) {
   updateTag("stories");
+  const headerList = await headers();
+  const userId = headerList.get("x-user-id");
 
-  const { user, success } = await getUserAction();
-
-  if (!success || !user) {
-    return { success: false, message: "Unauthorized", status: 401 };
-  }
-
-  if (!user?.firstName || !user?.lastName) {
-    redirect("/admin/personal-info");
+  if (!userId) {
+    throw new Error("NO_USER_SESSION_DETECTED");
   }
 
   try {
-    formData.append("authorId", user.id);    
-    const {error, status} = await internalApiFetch("/stories", {
+    formData.append("authorId", userId);
+    const { error, status } = await internalApiFetch("/stories", {
       method: "POST",
       body: formData,
     });
@@ -176,9 +160,6 @@ export async function createStoryAction(formData: FormData) {
 export async function updateStoryAction(id: string, formData: FormData) {
   updateTag("stories");
   updateTag(`story-${id}`);
-
-  console.log(formData);
-  
 
   try {
     const { error, status } = await internalApiFetch(`/stories/${id}`, {

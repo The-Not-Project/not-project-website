@@ -1,18 +1,14 @@
 import { PageSection, SectionTitle } from "../shared/components/layout/Section";
 import PersonalInformationForm from "./personalInfoForm.component";
-import { getUserAction, updateUserAction } from "@/lib/internal-api/actions/user.actions";
+import { getSession } from "@/lib/auth/actions/getSession";
 
 export default async function PersonalInformation() {
-  const {user: currentUser} = await getUserAction();
-
-  if (!currentUser) return <div>User not found</div>;
-
-  const {id, ...userInfo} = currentUser
+  const { user } = await getSession();
 
   return (
     <PageSection>
       <SectionTitle>Basic Information</SectionTitle>
-      <PersonalInformationForm userInfo={userInfo} updateAction={updateUserAction}/>
+      <PersonalInformationForm user={user} />
     </PageSection>
   );
 }
