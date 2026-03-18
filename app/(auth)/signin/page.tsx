@@ -2,26 +2,23 @@
 
 import Link from "next/link";
 import { useState, useTransition } from "react";
-import { authClient } from "@/lib/auth";
-import { ErrorMessage, Notice, SocialsHeader } from "../styles";
-import { FaGoogle } from "react-icons/fa6";
+import { ErrorMessage } from "../styles";
 import Loader from "@/app/(public)/shared/components/loader/loader";
+import { signInAction } from "@/lib/auth/actions/signIn";
+import LegalNotice from "../shared/components/legal-notice/legal-notice.component";
+import SocialSignIn from "../shared/components/social-signin/social-signin.component";
+import AuthRedirect from "../shared/components/auth-redirect/auth-redirect.component";
+import { FormInput } from "../shared/components/form-elements/form-elements";
 
 export default function Page() {
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
-  async function handleLogin(formData: FormData) {
+  async function handleSignIn(formData: FormData) {
     startTransition(async () => {
       setError(null);
-      const email = formData.get("email") as string;
-      const password = formData.get("password") as string;
 
-      const { error: authError } = await authClient.signIn.email({
-        email,
-        password,
-        callbackURL: "/",
-      });
+      const { error: authError } = await signInAction(formData);
 
       if (authError) {
         setError(authError.message || "An unexpected error occured.");
@@ -31,36 +28,18 @@ export default function Page() {
     });
   }
 
-  const loginWithGoogle = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-      callbackURL: process.env.NEXT_PUBLIC_APP_BASE_URL,
-    });
-  };
-
   return (
     <>
       <h1>Sign in to your account</h1>
-      <form action={handleLogin}>
+      <form action={handleSignIn}>
         <label htmlFor="email">Email address</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="hello@johndoe.com"
-          required
-        />
+        <FormInput name="email" type="email" placeholder="hello@johndoe.com" />
 
         <label htmlFor="password">
           Password <Link href="/forgot-password"> Forgot your password?</Link>
         </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="●●●●●●●"
-          required
-        />
+        <FormInput name="password" type="password" placeholder="●●●●●●●" />
+
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
         <button type="submit" disabled={isPending}>
@@ -68,25 +47,9 @@ export default function Page() {
         </button>
       </form>
 
-      <p className="redirect">
-        Don't have an account? <Link href="/signup">Sign up</Link>
-      </p>
-
-      <SocialsHeader>
-        <hr />
-        <p>Or continue with</p>
-      </SocialsHeader>
-
-      <button type="button" onClick={loginWithGoogle}>
-        <FaGoogle />
-        Google
-      </button>
-
-      <Notice>
-        By clicking on sign in, you agree to our{" "}
-        <Link href="/terms">Terms of Service</Link> and{" "}
-        <Link href="/privacy">Privacy Policy</Link>
-      </Notice>
+      <AuthRedirect href="/signup" />
+      <SocialSignIn />
+      <LegalNotice />
     </>
   );
 }

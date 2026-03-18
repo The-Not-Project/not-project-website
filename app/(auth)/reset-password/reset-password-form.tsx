@@ -1,17 +1,17 @@
 "use client";
-
-import { authClient } from "@/lib/auth";
 import { useState, useTransition } from "react";
 import { ErrorMessage } from "../styles";
 import { useRouter, useSearchParams } from "next/navigation";
 import Loader from "@/app/(public)/shared/components/loader/loader";
+import { resetPasswordAction } from "@/lib/auth/actions/resetPassword";
+import { FormInput } from "../shared/components/form-elements/form-elements";
 
 export default function ResetPasswordForm() {
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   const token = searchParams.get("token");
 
   const handleResetPassword = async (formData: FormData) => {
@@ -30,10 +30,10 @@ export default function ResetPasswordForm() {
         return;
       }
 
-      const { error: authError } = await authClient.resetPassword({
+      const { error: authError } = await resetPasswordAction(
         newPassword,
         token,
-      });
+      );
 
       if (authError) {
         setError(authError.message || "An unexpected error occurred.");
@@ -46,25 +46,17 @@ export default function ResetPasswordForm() {
   return (
     <form action={handleResetPassword}>
       <label htmlFor="password">Password</label>
-      <input
-        id="password"
-        type="password"
-        name="password"
-        placeholder="●●●●●●●"
-        required
-      />
-      
+      <FormInput name="password" type="password" placeholder="●●●●●●●" />
+
       <label htmlFor="confirm-password">Confirm password</label>
-      <input
-        id="confirm-password"
+      <FormInput
         type="password"
         name="confirm-password"
         placeholder="●●●●●●●"
-        required
       />
-      
+
       {error && <ErrorMessage>{error}</ErrorMessage>}
-      
+
       <button type="submit" disabled={isPending}>
         {isPending ? <Loader /> : "Reset password"}
       </button>

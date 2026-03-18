@@ -1,33 +1,22 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import Link from "next/link";
-import { authClient } from "@/lib/auth";
-import { ErrorMessage, Notice, SocialsHeader } from "../styles";
-import { FaGoogle } from "react-icons/fa6";
+import { ErrorMessage } from "../styles";
 import Loader from "@/app/(public)/shared/components/loader/loader";
+import { signUpAction } from "@/lib/auth/actions/signUp";
+import LegalNotice from "../shared/components/legal-notice/legal-notice.component";
+import SocialSignIn from "../shared/components/social-signin/social-signin.component";
+import AuthRedirect from "../shared/components/auth-redirect/auth-redirect.component";
+import { FormInput } from "../shared/components/form-elements/form-elements";
 
-export default function SignUp() {
+export default function Page() {
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   const handleSignUp = async (formData: FormData) => {
     startTransition(async () => {
       setError(null);
-      const firstName = formData.get("firstName") as string;
-      const lastName = formData.get("lastName") as string;
-      const email = formData.get("email") as string;
-      const password = formData.get("password") as string;
-
-      const { error: authError } = await authClient.signUp.email({
-        email,
-        password,
-        name: `${firstName} ${lastName}`,
-        firstName,
-        lastName,
-        role: "user",
-        callbackURL: "/",
-      });
+      const { error: authError } = await signUpAction(formData);
 
       if (authError) {
         setError(authError.message || "An unexpected error occured.");
@@ -37,62 +26,32 @@ export default function SignUp() {
     });
   };
 
-  const loginWithGoogle = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-      callbackURL: process.env.NEXT_PUBLIC_APP_BASE_URL,
-    });
-  };
-
   return (
     <>
       <h1>Sign up for an account</h1>
       <form action={handleSignUp}>
         <label htmlFor="firstName">First Name</label>
-        <input id="firstName" name="firstName" placeholder="John" required />
+        <FormInput name="firstName" placeholder="John" />
 
         <label htmlFor="lastName">Last Name</label>
-        <input id="lastName" name="lastName" placeholder="Doe" required />
+        <FormInput name="lastName" placeholder="Doe" />
 
         <label htmlFor="email">Email address</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="hello@johndoe.com"
-          required
-        />
+        <FormInput name="email" type="email" placeholder="hello@johndoe.com" />
 
         <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="●●●●●●●"
-          required
-        />
+        <FormInput name="password" type="password" placeholder="●●●●●●●" />
+
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
         <button type="submit" disabled={isPending}>
           {isPending ? <Loader /> : "Sign Up"}
         </button>
       </form>
-      <p className="redirect">
-        Already have an account? <Link href="/signin">Sign in</Link>
-      </p>
-      <SocialsHeader>
-        <hr />
-        <p>Or continue with</p>
-      </SocialsHeader>
-      <button type="button" onClick={loginWithGoogle}>
-        <FaGoogle />
-        Google
-      </button>
-      <Notice>
-        By clicking on sign up, you agree to our{" "}
-        <Link href="/terms">Terms of Service</Link> and{" "}
-        <Link href="/privacy">Privacy Policy</Link>
-      </Notice>
+
+      <AuthRedirect href="/signin" />
+      <SocialSignIn />
+      <LegalNotice />
     </>
   );
 }

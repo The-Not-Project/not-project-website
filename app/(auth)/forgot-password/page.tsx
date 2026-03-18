@@ -1,11 +1,19 @@
 "use client";
-
-import { authClient } from "@/lib/auth";
-import { validateCooldownAction, setCooldownAction } from "@/lib/auth/actions/setLinkTimeout";
-import { ErrorMessage, PasswordRecoveryForm, SuccessMessage, Timer } from "../styles";
+import {
+  validateCooldownAction,
+  setCooldownAction,
+} from "@/lib/auth/actions/setLinkTimeout";
+import {
+  ErrorMessage,
+  PasswordRecoveryForm,
+  SuccessMessage,
+  Timer,
+} from "../styles";
 import { PiEnvelopeLight } from "react-icons/pi";
 import { useState, useTransition, useEffect } from "react";
 import Loader from "@/app/(public)/shared/components/loader/loader";
+import { requestPasswordResetAction } from "@/lib/auth/actions/requestPasswordReset";
+import { FormInput } from "../shared/components/form-elements/form-elements";
 
 export default function Page() {
   const [error, setError] = useState<string | null>(null);
@@ -36,18 +44,15 @@ export default function Page() {
 
   const handleFormSubmit = async (formData: FormData) => {
     if (timeLeft > 0) return;
-    const email = formData.get("email") as string;
 
     startTransition(async () => {
       setError(null);
+      const email = formData.get("email") as string;
 
       const { error: cooldownError } = await validateCooldownAction();
       if (cooldownError) return setError(cooldownError);
 
-      const { error: authError } = await authClient.requestPasswordReset({
-        email,
-        redirectTo: "/reset-password",
-      });
+      const { error: authError } = await requestPasswordResetAction(email);
 
       if (authError) {
         setError(authError.message || "Failed to send reset email.");
@@ -60,7 +65,8 @@ export default function Page() {
     });
   };
 
-  const formatTime = (s: number) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
+  const formatTime = (s: number) =>
+    `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
 
   return (
     <>
@@ -69,16 +75,17 @@ export default function Page() {
       <form action={handleFormSubmit}>
         <PasswordRecoveryForm>
           <PiEnvelopeLight size={20} color="#afafaf" />
-          <input 
-            type="email" 
-            name="email" 
-            placeholder="Enter your email" 
-            required 
-            disabled={timeLeft > 0} 
+          <FormInput
+            name="email"
+            type="email"
+            placeholder="Enter your email"
+            disabled={timeLeft > 0}
           />
         </PasswordRecoveryForm>
 
-        {success && <SuccessMessage>Email sent to {emailSentTo}</SuccessMessage>}
+        {success && (
+          <SuccessMessage>Email sent to {emailSentTo}</SuccessMessage>
+        )}
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
         <button type="submit" disabled={isPending || timeLeft > 0}>
