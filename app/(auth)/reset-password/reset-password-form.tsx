@@ -2,9 +2,8 @@
 import { useState, useTransition } from "react";
 import { ErrorMessage } from "../styles";
 import { useRouter, useSearchParams } from "next/navigation";
-import Loader from "@/app/(public)/shared/components/loader/loader";
 import { resetPasswordAction } from "@/lib/auth/actions/resetPassword";
-import { FormInput } from "../shared/components/form-elements/form-elements";
+import { FormButton, FormInput } from "../shared/components/form-elements/form-elements";
 
 export default function ResetPasswordForm() {
   const [error, setError] = useState<string | null>(null);
@@ -57,9 +56,7 @@ export default function ResetPasswordForm() {
 
       {error && <ErrorMessage>{error}</ErrorMessage>}
 
-      <button type="submit" disabled={isPending}>
-        {isPending ? <Loader /> : "Reset password"}
-      </button>
+      <FormButton isPending={isPending} name="Reset Password" />
     </form>
   );
 }

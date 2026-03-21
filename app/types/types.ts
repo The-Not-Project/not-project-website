@@ -1,8 +1,11 @@
-export type Category = {
-  id: string;
-  name: string;
-  description: string;
-};
+export type User = {
+  id: string
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+  emailVerified: boolean
+}
 
 export type Story = {
   title: string;
@@ -21,6 +24,12 @@ export type Story = {
 };
 
 export type CompactStory = Omit<Story, 'content'>
+
+export type Category = {
+  id: string;
+  name: string;
+  description: string;
+};
 
 type Author = {
   id: string;

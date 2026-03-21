@@ -62,5 +62,6 @@ export const config = {
     "/reset-password",
     "/profile",
     "/admin/:path*",
+    "/story/:id"
   ],
 };

@@ -7,7 +7,7 @@ import { signUpAction } from "@/lib/auth/actions/signUp";
 import LegalNotice from "../shared/components/legal-notice/legal-notice.component";
 import SocialSignIn from "../shared/components/social-signin/social-signin.component";
 import AuthRedirect from "../shared/components/auth-redirect/auth-redirect.component";
-import { FormInput } from "../shared/components/form-elements/form-elements";
+import { FormButton, FormInput } from "../shared/components/form-elements/form-elements";
 
 export default function Page() {
   const [error, setError] = useState<string | null>(null);
@@ -44,9 +44,8 @@ export default function Page() {
 
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
-        <button type="submit" disabled={isPending}>
-          {isPending ? <Loader /> : "Sign Up"}
-        </button>
+        <FormButton name="Sign Up" isPending={isPending} />
+
       </form>
 
       <AuthRedirect href="/signin" />

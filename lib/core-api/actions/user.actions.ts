@@ -2,6 +2,26 @@
 
 import { cookies } from "next/headers";
 import { internalApiFetch } from "..";
+import { User } from "@/app/types/types";
+
+export async function getUsersAction() {
+  const { data, error } = await internalApiFetch<User[]>("/user", {
+    method: "GET",
+  });
+
+  if (error) {
+    return {
+      success: false,
+      message: error,
+      users: [],
+    };
+  }
+
+  return {
+    success: true,
+    users: data || [],
+  };
+}
 
 export async function createSubscriberAction(
   email: string,
@@ -16,9 +36,7 @@ export async function createSubscriberAction(
       },
     );
 
-    if (error) {
-      throw new Error(error);
-    }
+    if (error) throw new Error(error);
 
     return data?.message || "";
   } catch (err) {
@@ -26,7 +44,6 @@ export async function createSubscriberAction(
     throw new Error("Failed to subscribe");
   }
 }
-
 
 export async function deleteSubscriberAction(email: string): Promise<string> {
   try {
@@ -38,10 +55,10 @@ export async function deleteSubscriberAction(email: string): Promise<string> {
     if (error) throw new Error(error);
 
     const cookieStore = await cookies();
-    cookieStore.set("unsub_success", "true", { 
-      maxAge: 30, 
-      httpOnly: true, 
-      path: "/unsubscribe/success" 
+    cookieStore.set("unsub_success", "true", {
+      maxAge: 30,
+      httpOnly: true,
+      path: "/unsubscribe/success",
     });
 
     return data?.message || "Unsubscribed";

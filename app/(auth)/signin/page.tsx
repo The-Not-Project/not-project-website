@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { ErrorMessage } from "../styles";
-import Loader from "@/app/(public)/shared/components/loader/loader";
 import { signInAction } from "@/lib/auth/actions/signIn";
 import LegalNotice from "../shared/components/legal-notice/legal-notice.component";
 import SocialSignIn from "../shared/components/social-signin/social-signin.component";
 import AuthRedirect from "../shared/components/auth-redirect/auth-redirect.component";
-import { FormInput } from "../shared/components/form-elements/form-elements";
+import {
+  FormButton,
+  FormInput,
+} from "../shared/components/form-elements/form-elements";
 
 export default function Page() {
   const [error, setError] = useState<string | null>(null);
@@ -42,9 +44,7 @@ export default function Page() {
 
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
-        <button type="submit" disabled={isPending}>
-          {isPending ? <Loader /> : "Sign In"}
-        </button>
+        <FormButton name="Sign In" isPending={isPending} />
       </form>
 
       <AuthRedirect href="/signup" />

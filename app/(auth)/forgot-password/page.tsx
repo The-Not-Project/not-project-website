@@ -13,7 +13,10 @@ import { PiEnvelopeLight } from "react-icons/pi";
 import { useState, useTransition, useEffect } from "react";
 import Loader from "@/app/(public)/shared/components/loader/loader";
 import { requestPasswordResetAction } from "@/lib/auth/actions/requestPasswordReset";
-import { FormInput } from "../shared/components/form-elements/form-elements";
+import {
+  FormButton,
+  FormInput,
+} from "../shared/components/form-elements/form-elements";
 
 export default function Page() {
   const [error, setError] = useState<string | null>(null);
@@ -88,9 +91,11 @@ export default function Page() {
         )}
         {error && <ErrorMessage>{error}</ErrorMessage>}
 
-        <button type="submit" disabled={isPending || timeLeft > 0}>
-          {isPending ? <Loader /> : "Request password reset"}
-        </button>
+        <FormButton
+          name="Request password reset"
+          isPending={isPending}
+          disabled={timeLeft > 0}
+        />
 
         {timeLeft > 0 && <Timer>Try again in {formatTime(timeLeft)}</Timer>}
       </form>
