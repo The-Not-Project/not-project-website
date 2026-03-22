@@ -10,14 +10,17 @@ import {
   ThumbnailContainer,
 } from "../style";
 import SaveButton from "../saveButton/saveButton.component";
-import "@/lib/tiptap/components/tiptap-node/paragraph-node/paragraph-node.scss"
-import "@/lib/tiptap/components/tiptap-node/image-node/image-node.scss"
+import "@/lib/tiptap/components/tiptap-node/paragraph-node/paragraph-node.scss";
+import "@/lib/tiptap/components/tiptap-node/image-node/image-node.scss";
 
 export default async function StoryContent({ id }: { id: string }) {
   const session = await getSession();
-  const user = session?.user;  
+  const user = session?.user;
 
-  const { story, success, status, message } = await getStoryAction(id);
+  const { story, success, status, message } = await getStoryAction(
+    id,
+    user?.id,
+  );
 
   if (!success || !story) {
     if (status === 404) {
@@ -66,7 +69,10 @@ export default async function StoryContent({ id }: { id: string }) {
         <p>{date}</p>
       </InfoContainer>
 
-      <div className="tiptap ProseMirror readonly" dangerouslySetInnerHTML={{__html: story.content}} />
+      <div
+        className="tiptap ProseMirror readonly"
+        dangerouslySetInnerHTML={{ __html: story.content }}
+      />
     </>
   );
 }

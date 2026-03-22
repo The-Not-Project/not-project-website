@@ -196,7 +196,7 @@ export const SimpleEditor = forwardRef<
       },
     },
     extensions: [
-      StarterKit.configure({code: false, codeBlock: false}),
+      StarterKit.configure({code: false, codeBlock: false, link: {openOnClick: false}}),
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       TaskItem.configure({ nested: true }),
       Highlight.configure({ multicolor: true }),
@@ -215,7 +215,6 @@ export const SimpleEditor = forwardRef<
         },
         onError: (error) => console.error("Upload failed:", error),
       }),
-      Link.configure({ openOnClick: false }),
     ],
     content: value,
     onUpdate: ({ editor }) => {

@@ -9,6 +9,10 @@ export const StoryContainer = styled.div`
   margin: 0 auto;
   padding: 100px 100px 70px;
 
+  @media (max-width: 1100px) {
+    padding-inline: 50px;
+  }
+
   @media (max-width: 850px) {
     width: 100%;
     padding: 80px 20px;
@@ -29,14 +33,14 @@ export const ThumbnailContainer = styled.div`
   height: auto;
   aspect-ratio: 5 / 3;
   position: relative;
-  margin-block:40px 20px;
+  margin-block: 40px 20px;
 
   img {
     margin: 0;
     object-fit: cover;
   }
 
-    @media (max-width: 850px) {
+  @media (max-width: 850px) {
     margin-block: 20px 15px;
   }
 `;
@@ -65,7 +69,7 @@ export const CategoriesContainer = styled.div`
   }
 
   a {
-   color: inherit !important;
+    color: inherit !important;
   }
 `;
 

@@ -59,19 +59,17 @@ export async function getHiddenStoriesAction() {
   };
 }
 
-export async function getStoryAction(id: string) {
-  const headerList = await headers();
-  const userId = headerList.get("x-user-id") ?? undefined;
+export async function getStoryAction(id: string, userId?: string) {  
 
   const { data, error, status } = await internalApiFetch<Story>(
     `/stories/s/${id}`,
     {
       method: "GET",
       params: userId ? { userId } : {},
-      next: {
-        revalidate: 300,
-        tags: [`story-${id}`],
-      },
+      // next: {
+      //   revalidate: 300,
+      //   tags: [`story-${id}`],
+      // },
     },
   );
 
